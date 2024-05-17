@@ -32,9 +32,10 @@ H.nmap('gD', vim.lsp.buf.declaration)
 
 H.nmap('m;', ":BookmarksListAll<CR>")
 -- H.nmap(',,q', function() b=require'nvim-possession'.update() print(1,b) if b then vim.cmd[[wqa]] end end )
--- H.nmap(',,q', function() require'nvim-possession'.update()   end )
--- H.nmap(',,s', function() print('todo__') end )
-H.nmap(',,z', function() require'nvim-possession'.list() end)
+H.nmap(',po', function() require'nvim-possession'.update() end )
+H.nmap(',pl', function() require'nvim-possession'.list() end)
+H.nmap(',pd', function() require'nvim-possession'.delete() end)
+H.nmap(',pn', function() require'nvim-possession'.new() end)
 
 
 H.nmap('qn', vim.diagnostic.open_float)

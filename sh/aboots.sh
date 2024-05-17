@@ -27,12 +27,12 @@ mkdir -p $MYGITDIR
 
 sudo pacman -S --needed vifm fzf lsb-release wget ranger fd
 
-sudo pacman -S --needed fzf cmake unzip ninja tree-sitter curl luarocks npm python-pip ripgrep neovim
+sudo pacman -S --needed fzf cmake unzip ninja tree-sitter curl luarocks npm python-pip python-pynvim ripgrep neovim
 
 sudo pacman -S --needed base-devel
 if type -f pacman &>/dev/null; then
     if ! type -f pakku &>/dev/null ; then
-        cd $MYGITDIR
+        cd $MYGITDIR && rm -rf pakku
         git clone https://aur.archlinux.org/pakku.git
         cd pakku
         makepkg -si

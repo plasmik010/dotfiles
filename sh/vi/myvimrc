@@ -354,6 +354,7 @@ nnoremap dx 0"_D
 nnoremap dX ^"_D
 nnoremap dc "_d$
 nnoremap d. "_dd
+nnoremap dA ggdG
 nnoremap d<space> :call DelSpace()<CR>
 " add this line to the next line
 nnoremap al ddpkJ

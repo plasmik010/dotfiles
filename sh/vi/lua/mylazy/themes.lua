@@ -89,7 +89,7 @@ return {
   -- 'AlessandroYorba/Sierra', -- softgray
   -- 'AlessandroYorba/Despacio', -- softdarkgrey
   -- 'dracula/vim', -- funky
-  -- 'ajh17/Spacegray.vim', -- darker fruity
+  'vim-scripts/Spacegray.vim', -- darker
   -- 'jlund3/colorschemer', -- semibroken 'lucid
   -- 'srcery-colors/srcery-vim', -- fresh-dark consbroken HUGE
   -- 'dfrunza/vim', -- borland,muratori,pencil,vc6

@@ -133,7 +133,6 @@ if has("nvim")
     Plug 'saadparwaiz1/cmp_luasnip'
     Plug 'chentoast/marks.nvim' " okay
     " Plug 'norcalli/nvim-colorizer.lua'
-    " Plug 'kwkarlwang/bufjump.nvim'
     Plug 'hoschi/yode-nvim'
     Plug 'nvim-neo-tree/neo-tree.nvim'
     Plug 'nvim-tree/nvim-web-devicons'
@@ -143,7 +142,6 @@ if has("nvim")
     Plug 'karb94/neoscroll.nvim'
     Plug 'akinsho/toggleterm.nvim'
     Plug 'windwp/nvim-autopairs'
-    " Plug 'lukas-reineke/indent-blankline.nvim'
     " Plug 'luissimas/eval.nvim'
     Plug 'booperlv/nvim-gomove'
     " Themes
@@ -180,11 +178,10 @@ Plug 'romainl/Apprentice' "nostrain
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'JarrodCTaylor/spartan' " 'spartan,immortals
 Plug 'pbrisbin/vim-colors-off'
-Plug 'jakwings/vim-colors' "'moody,garden,messy
 Plug 'bf4/vim-dark_eyes' "NIGHT
 Plug 'MPiccinato/wombat256' "good dark
 Plug 'sonph/onehalf', {'rtp': 'vim'} "Nice good tone HUGE
-Plug 'ajh17/Spacegray.vim' "darker misty
+Plug 'vim-scripts/Spacegray.vim' "darker misty
 Plug 'beigebrucewayne/Turtles' "funky
 Plug 'vim-scripts/sift' "underwater_fantasy
 Plug 'whatyouhide/vim-gotham' "neon/green

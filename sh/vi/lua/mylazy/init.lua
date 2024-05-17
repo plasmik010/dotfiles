@@ -372,6 +372,44 @@ return {
     },
   },
 
+  -- { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+
+  -- local highlightL = {
+  --     "CursorColumn",
+  --     "Whitespace",
+  -- }
+
+  --[[ {
+    'lukas-reineke/indent-blankline.nvim', -- broken
+    main = "ibl",
+    opts = {
+      char = '|',
+      show_trailing_blankline_indent = false, 
+    },
+    -- opts = {}
+    -- enabled = false,
+    -- exclude = { filetypes = {'dashboard'}},
+    -- indent = { highlight = highlightL, char = "░" },
+    -- whitespace = { highlight = highlightL, remove_blankline_trail = false },
+    -- scope = { enabled = true },
+    -- }
+  }, ]]
+
+  -- filetype_exclude = {'lspinfo', 'checkhealth', 'help', 'man', '', 'startify'},
+  -- show_end_of_line = false,
+  -- show_current_context = true,
+  -- show_current_context_start = true,
+  -- show_trailing_blankline_indent = false,
+  -- char_blankline = "",
+  -- context_char_blankline = "⋅",
+  -- space_char_blankline = ' ',
+  -- context_char = '│',
+  -- ┊ ⋮ ⋅ ░ ∷
+  -- let g:indent_blankline_buftype_exclude = ['terminal', 'nofile', 'quickfix', 'prompt', 'startify']
+  -- let g:indent_blankline_filetype_exclude = {'terminal', 'nofile', 'quickfix', 'prompt', 'help', 'startify'}
+
+
+
   'folke/which-key.nvim',
 
   'norcalli/nvim-colorizer.lua',
@@ -450,12 +488,15 @@ return {
 
   {
     'kwkarlwang/bufjump.nvim', -- good --- jump in history a buffer at once
-    config = true,
-    opts = {
-      forward = "<A-i>",
-      backward = "<A-o>",
-      on_success = nil
-    }
+    -- mapping problem!
+    enabled = false,
+    config = function()
+      require'bufjump'.setup {
+        forward = "<A-i>",
+        backward = "<A-o>",
+        on_success = nil
+      }
+    end
   },
 
   'sindrets/diffview.nvim', -- great --- cycle through diffs
@@ -791,6 +832,7 @@ return {
 
   {
     'nvimdev/dashboard-nvim',
+    -- enabled = false,
     event = 'VimEnter',
     config =  true,
     dependencies = 'kyazdani42/nvim-web-devicons',
@@ -921,18 +963,10 @@ return {
     },
     init = function()
       local possession = require("nvim-possession")
-      vim.keymap.set("n", ",i", function()
-        possession.list()
-      end)
-      vim.keymap.set("n", ",O", function()
-        possession.new()
-      end)
-      vim.keymap.set("n", ",o", function()
-        possession.update()
-      end)
-      vim.keymap.set("n", ",k", function()
-        possession.delete()
-      end)
+      -- vim.keymap.set("n", ",pl", function() possession.list() end)
+      -- vim.keymap.set("n", ",pn", function() possession.new() end)
+      -- vim.keymap.set("n", ",po", function() possession.update() end)
+      -- vim.keymap.set("n", ",pd", function() possession.delete() end)
     end,
   },
 

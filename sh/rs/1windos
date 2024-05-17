@@ -59,6 +59,7 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
     DISM /Online /Enable-Feature /All /FeatureName:Microsoft-Hyper-V
     get and run 'wsl_update_x64.msi' from https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
 wsl --update
+scoop install archwsl
 wsl --list --verbose
 wsl --set-version <Distro> 2
 wsl --set-default-version 2
