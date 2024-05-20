@@ -129,6 +129,7 @@ nnoremap qft :! $TERMINAL $EDITOR %c<cr>
 nnoremap qfx :! xdg-open %c &>/dev/null &<cr>
 nnoremap qfb :! bash -x xdg-open %c<cr>
 nnoremap qf/ :! bash -lc "ARG=DMENUSAVE xdgsane %c"
+nnoremap qf/ :! bash -lc "ARG=DMENURUN xdgsane %c"
 
 " Calc space "
 nnoremap ,f :! echo; echo %c: ; file -b %c ; [[ -d %c ]] && tree -ia %c | tail -1 ; du -sh %c | cut -f1 ; ls -dla %c ; df -h --output=source,fstype,avail,pcent %c ; read -rsn1 <cr>

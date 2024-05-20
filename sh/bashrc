@@ -128,7 +128,7 @@ xdgsane() {
             source "$sh"/dmenurc
             app=$(grep $type /usr/share/applications/mimeinfo.cache | cut -d '=' -f2- | tr ';' '\n' | tr -s '\n' | dmenuy -p "Choose default app for $type")
             [[ $ARG =~ SAVE ]] && ! [[ -z $app ]] && xdg-mime default $app $type
-            [[ $ARG =~ RUN ]] && ! [[ -z $app ]] && xdg-open "$1"
+            [[ $ARG =~ RUN ]] && ! [[ -z $app ]] && xdg-open "$1" &
         fi
     fi
 }
