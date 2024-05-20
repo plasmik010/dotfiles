@@ -375,33 +375,32 @@ return {
   -- { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 
 
-  {
-    'lukas-reineke/indent-blankline.nvim', -- broken
-    main = "ibl",
-    enabled = true,
-    config = function()
-      -- local lochl = { "CursorColumn", "Whitespace" }
-      local lochl = { "CursorColumn", "CursorColumn", "WildMenu" }
-      require'ibl'.setup {
-        exclude = { filetypes = {'dashboard'}},
-        -- {'lspinfo', 'checkhealth', 'help', 'man', '', 'startify'}
-        -- {'terminal', 'nofile', 'quickfix', 'prompt', 'help', 'startify'}
-        indent = {
-          highlight = { "CursorColumn", "WildMenu" },
-          -- highlight = lochl,
-          char = " ",
-          -- ┊ │ ⋮ ⋅ ░ ∷
-        },
-        scope = {
-          highlight = lochl,
-          char = "│",
-        },
-      }
-    end,
-    -- whitespace = { highlight = highlightL, remove_blankline_trail = false },
-    -- scope = { enabled = true },
-  },
-
+  -- {
+  --   'lukas-reineke/indent-blankline.nvim', -- broken
+  --   main = "ibl",
+  --   enabled = true,
+  --   config = function()
+  --     -- local lochl = { "CursorColumn", "Whitespace", "WildMenu" }
+  --     local lochl = { "CursorColumn", "CursorColumn", "WildMenu" }
+  --     require'ibl'.setup {
+  --       exclude = { filetypes = {'dashboard'}},
+  --       -- {'lspinfo', 'checkhealth', 'help', 'man', '', 'startify'}
+  --       -- {'terminal', 'nofile', 'quickfix', 'prompt', 'help', 'startify'}
+  --       indent = {
+  --         highlight = { "WildMenu", "WildMenu" },
+  --         -- highlight = lochl,
+  --         char = " ",
+  --         -- ┊ │ ⋮ ⋅ ░ ∷
+  --       },
+  --       scope = {
+  --         highlight = lochl,
+  --         char = "│",
+  --       },
+  --       -- whitespace = { highlight = highlightL, remove_blankline_trail = false },
+  --     }
+  --   end,
+  -- },
+  --
   'folke/which-key.nvim',
 
   'norcalli/nvim-colorizer.lua',
