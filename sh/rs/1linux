@@ -247,6 +247,7 @@ zstdcat root.zst >/dev/nvme0n1p6 # restore zst archived image
 zip -r -1 arc.zip Dir Dir2 #create zip
 
 ==GIT {{{}}}
+git log --tags --pretty="%h %d %s"
 git config --list --show-origin
 git switch -c newbranch # create new branch
 git checkout -b newbranch # same

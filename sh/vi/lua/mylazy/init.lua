@@ -303,7 +303,7 @@ return {
 
   {
     'akinsho/bufferline.nvim',
-    version='v3.*',
+    version='*',
     dependencies='kyazdani42/nvim-web-devicons',
     opts = {
       options = {
@@ -374,41 +374,33 @@ return {
 
   -- { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 
-  -- local highlightL = {
-  --     "CursorColumn",
-  --     "Whitespace",
-  -- }
 
-  --[[ {
+  {
     'lukas-reineke/indent-blankline.nvim', -- broken
     main = "ibl",
-    opts = {
-      char = '|',
-      show_trailing_blankline_indent = false, 
-    },
-    -- opts = {}
-    -- enabled = false,
-    -- exclude = { filetypes = {'dashboard'}},
-    -- indent = { highlight = highlightL, char = "░" },
+    enabled = true,
+    config = function()
+      -- local lochl = { "CursorColumn", "Whitespace" }
+      local lochl = { "CursorColumn", "CursorColumn", "WildMenu" }
+      require'ibl'.setup {
+        exclude = { filetypes = {'dashboard'}},
+        -- {'lspinfo', 'checkhealth', 'help', 'man', '', 'startify'}
+        -- {'terminal', 'nofile', 'quickfix', 'prompt', 'help', 'startify'}
+        indent = {
+          highlight = { "CursorColumn", "WildMenu" },
+          -- highlight = lochl,
+          char = " ",
+          -- ┊ │ ⋮ ⋅ ░ ∷
+        },
+        scope = {
+          highlight = lochl,
+          char = "│",
+        },
+      }
+    end,
     -- whitespace = { highlight = highlightL, remove_blankline_trail = false },
     -- scope = { enabled = true },
-    -- }
-  }, ]]
-
-  -- filetype_exclude = {'lspinfo', 'checkhealth', 'help', 'man', '', 'startify'},
-  -- show_end_of_line = false,
-  -- show_current_context = true,
-  -- show_current_context_start = true,
-  -- show_trailing_blankline_indent = false,
-  -- char_blankline = "",
-  -- context_char_blankline = "⋅",
-  -- space_char_blankline = ' ',
-  -- context_char = '│',
-  -- ┊ ⋮ ⋅ ░ ∷
-  -- let g:indent_blankline_buftype_exclude = ['terminal', 'nofile', 'quickfix', 'prompt', 'startify']
-  -- let g:indent_blankline_filetype_exclude = {'terminal', 'nofile', 'quickfix', 'prompt', 'help', 'startify'}
-
-
+  },
 
   'folke/which-key.nvim',
 
@@ -863,34 +855,57 @@ return {
         },
 
         shortcut = {
-          -- 󰅏 󰅐 
-          { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
+          -- 󰅏 󰅐   
+          {
+            icon = '󰅏 ',
+            icon_hl = '@variable',
+            desc = 'Sess',
+            group = 'Number',
+            -- desc_hl = 'String',
+            action = "require'nvim-possession'.list()",
+            key = 's',
+          },
+          {
+            icon = '󰊳 ',
+            icon_hl = '@variable',
+            desc = 'Update',
+            group = '@property',
+            action = 'Lazy update',
+            key = 'u',
+          },
           {
             icon = ' ',
             icon_hl = '@variable',
             desc = 'Files',
-            group = 'Label',
+            group = 'Number',
+            -- group = 'Label',
             action = 'Telescope find_files',
             key = 'f',
           },
           -- { desc = ' Apps', group = 'DiagnosticHint', action = 'Telescope app', key = 'a' },
           {
-            desc = ' Recent',
+            icon = ' ',
+            icon_hl = '@variable',
+            desc = 'Recent',
+            group = 'Number',
             action = 'Telescope oldfiles',
             key = 'o',
           },
           {
-            desc = ' dotfiles',
+            icon = ' ',
+            icon_hl = '@variable',
+            desc = 'dotfiles',
             group = 'Number',
             action = 'require"telescope.builtin".find_files({ search_dirs={ os.getenv("loc"), os.getenv("sh"), os.getenv("tt") } }) ',
             key = 'd',
           },
+          -- {
+          --   desc = 'Exit',
+          --   action = 'vim.cmd([[q!]])',
+          --   key = 'q',
+          -- },
           {
-            desc = 'Exit',
-            action = 'vim.cmd([[q!]])',
-            key = 'q',
-          },
-          {
+            icon = ' ',
             desc = 'New',
             action = 'vim.cmd.enew()',
             key = 'e',
