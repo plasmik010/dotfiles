@@ -118,7 +118,6 @@ if [[ $bakdev != '' ]]; then
     bakusbdir=$(compgen -G /ln/mo/*AMV/bak)
     if [[ -d $bakusbdir ]]; then
         devlabel=$(echo $bakusbdir | tr / \\n | grep AMV)
-        echo --bak.port
         mkdir -p "$bakusbdir/${space}_$MON"
         cp -rf "$DEST_WEKLY/"*tar* "$bakusbdir/${space}_$MON"
     else
