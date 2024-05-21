@@ -1,7 +1,7 @@
 return  {
     'lukas-reineke/indent-blankline.nvim', -- broken
     main = "ibl",
-    enabled = false,
+    enabled = true,
     config = function()
         -- local lochl = { "CursorColumn", "Whitespace", "WildMenu" }
         local lochl = { "CursorColumn", "CursorColumn", "WildMenu" }

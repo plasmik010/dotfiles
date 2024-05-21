@@ -905,6 +905,7 @@ return {
           {
             icon = ' ',
             desc = 'New',
+            group = 'Number',
             action = 'vim.cmd.enew()',
             key = 'q',
           },
