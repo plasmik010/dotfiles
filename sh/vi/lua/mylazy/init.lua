@@ -906,7 +906,7 @@ return {
             icon = ' ',
             desc = 'New',
             action = 'vim.cmd.enew()',
-            key = 'e',
+            key = 'q',
           },
         },
         packages = { enable = true },
