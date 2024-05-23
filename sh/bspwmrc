@@ -30,6 +30,7 @@ bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a org.remmina.Remmina desktop='^3'
 bspc rule -a feh state=floating
 bspc rule -a feh:*:DUMMY state=tiled
+bspc rule -a PyCalibr state=floating
 bspc rule -a Lxappearance state=floating
 bspc rule -a SpeedCrunch state=floating
 bspc rule -a Gpick state=floating

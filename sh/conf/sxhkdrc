@@ -19,7 +19,7 @@ super + { q, Q, D, F, t, v, s, y, r, R, z, g, slash }
   ror.sh { \
   '' scroff, '' 'sus 1', windowswitcher.sh, '' 'rofi -show window', \
   'xterm\|urxvt\|kitty', \
-  ' - VIMSERV\|VIM$\|VIM @ \| - NVIM$\|nvim $\|QtCreator\| tmux\|tm$' 'USE_CURRENT_TERM=1 $TERMINAL_BIGER -e vinew', \
+  ' - VIMSERV\|VIM$\|VIM @ \| - NVIM$\|nvim $\|pycharm\|QtCreator\| tmux\|tm$' 'USE_CURRENT_TERM=1 $TERMINAL_BIGER -e vinew', \
   'chromium\|Firefox\|Remmina' 'firefox', \
   'Thunar\|Caja\|pcmanfm\| YouTube \|office.libreoffice\|Abiword\|sis.ko' 'notify-send not\ found', \
   'sioyek\|zathura' listzathura.sh, evince, FBReader, \
