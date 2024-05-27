@@ -1,4 +1,4 @@
-return  {
+return {
     'lukas-reineke/indent-blankline.nvim', -- broken
     main = "ibl",
     enabled = true,

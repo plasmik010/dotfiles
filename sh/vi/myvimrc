@@ -1665,7 +1665,7 @@ function! ExPut(cmd)
   if empty(message)
     echoerr "no output"
   else
-   " use "new" instead of "tabnew" below if you prefer split windows instead of tabs
+    " use "new" instead of "tabnew" below if you prefer split windows instead of tabs
     " tabnew
     " setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
     silent put=message

@@ -6,6 +6,7 @@
 local M = {}
 
 function M.dummy()
+  print(12321)
   return '000'
 end
 
@@ -21,6 +22,28 @@ function M.auxfun1()
 end
 
 M.vidir = os.getenv('sh') .. '/vi/'
+
+function M.is_git_repo()
+  local is_repo = vim.fn.system("git rev-parse --is-inside-work-tree")
+  return vim.v.shell_error == 0
+end
+
+function M.get_git_root(path)
+  -- pre_cmd = ""
+  if not path then
+    -- path = vim.api.nvim_buf_get_name(0)
+    path = vim.fn.expand("%:p:h")
+  end
+  pre_cmd = "cd " .. path .. " ; "
+  local git_root = vim.fn.system(pre_cmd .. "git rev-parse --show-toplevel")
+  if
+    vim.v.shell_error ~= 0
+  then
+    return nil
+  else
+    return string.gsub(git_root, "[\n\r]", '')
+  end
+end
 
 function M.condMkdir(base,dir)
   local targ = base .. M.path_separator .. dir

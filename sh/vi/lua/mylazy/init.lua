@@ -89,8 +89,8 @@ return {
       require("nvim-treesitter.configs").setup {
         ensure_installed = { 'c', 'cpp', 'lua', 'python', 'vim', 'bash', 'markdown' },
         highlight = { enable = true },
-        indent = { enable = true },
-        -- indent = { enable = true, disable = { 'python' } },
+        -- indent = { enable = true },
+        indent = { enable = true, disable = { 'python' } },
         rainbow = {
           enable = false,
           -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
@@ -101,7 +101,7 @@ return {
         },
         incremental_selection = {
           enable = true,
-          keymaps = { -- todo
+          keymaps = {
             init_selection =    '<c-space>',
             node_incremental =  '<c-space>',
             node_decremental =  '<c-backspace>',
@@ -339,22 +339,6 @@ return {
   },
 
   {
-    'nvim-neo-tree/neo-tree.nvim', -- almost great
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'kyazdani42/nvim-web-devicons',
-      'MunifTanjim/nui.nvim',
-    },
-    opts = {
-      filesystem = {
-        hijack_netrw_behavior = "open_default",
-        -- "open_current",
-        -- "disabled",
-      }
-    }
-  },
-
-  {
     'numToStr/Comment.nvim', -- good --- hit 'gcc' to comment
     config = true
   },
@@ -373,34 +357,6 @@ return {
     },
   },
 
-  -- { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
-
-  -- {
-  --   'lukas-reineke/indent-blankline.nvim', -- broken
-  --   main = "ibl",
-  --   enabled = true,
-  --   config = function()
-  --     -- local lochl = { "CursorColumn", "Whitespace", "WildMenu" }
-  --     local lochl = { "CursorColumn", "CursorColumn", "WildMenu" }
-  --     require'ibl'.setup {
-  --       exclude = { filetypes = {'dashboard'}},
-  --       -- {'lspinfo', 'checkhealth', 'help', 'man', '', 'startify'}
-  --       -- {'terminal', 'nofile', 'quickfix', 'prompt', 'help', 'startify'}
-  --       indent = {
-  --         highlight = { "WildMenu", "WildMenu" },
-  --         -- highlight = lochl,
-  --         char = " ",
-  --         -- ┊ │ ⋮ ⋅ ░ ∷
-  --       },
-  --       scope = {
-  --         highlight = lochl,
-  --         char = "│",
-  --       },
-  --       -- whitespace = { highlight = highlightL, remove_blankline_trail = false },
-  --     }
-  --   end,
-  -- },
-  --
   'folke/which-key.nvim',
 
   'norcalli/nvim-colorizer.lua',

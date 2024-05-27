@@ -1,11 +1,10 @@
--- vim: ts=2 sw=2
 
 --------------------------------
 --      Update Keymaps        --
 --------------------------{{{}}}
 
 vim.api.nvim_command('\
-  nnoremap <silent> gh <cmd>ClangdSwitchSourceHeader<CR>|\
+    nnoremap <silent> gh <cmd>ClangdSwitchSourceHeader<CR>|\
 ')
 
 H.nmap('<C-h>', H.teles_ff)
@@ -84,7 +83,7 @@ H.nmap(',vn', function()  if vim.o.winbar=='' then vim.o.winbar = "%{%v:lua.requ
 
 local tele_ivy = require'telescope.themes'.get_ivy{ sort_mru = true, layout_config = { height = vim.opt.lines:get() - 10 } }
 local tele_ivy_cwd = function()
-  return require'telescope.themes'.get_ivy{ sort_mru = true, layout_config = { height = vim.opt.lines:get() - 10 }, cwd = require'telescope.utils'.buffer_dir() }
+    return require'telescope.themes'.get_ivy{ sort_mru = true, layout_config = { height = vim.opt.lines:get() - 10 }, cwd = require'telescope.utils'.buffer_dir() }
 end
 function Tele_buff_ivy() require("telescope.builtin").buffers( tele_ivy ) end
 local tele_drop = require("telescope.themes").get_dropdown{ sort_mru=true, winblend=9, layout_config = { height=21 } }
@@ -97,12 +96,36 @@ H.nmap(',fh', require("telescope.builtin").help_tags, "Telescope [F]ind [H]elp_t
 H.nmap(',fz', require("telescope.builtin").diagnostics, "Telescope [F]ind Diagnostics")
 H.nmap(',fo', require("telescope.builtin").oldfiles, "Telescope [F]ind [O]ld files")
 H.nmap(',fr', require("telescope.builtin").lsp_references, "Telescope [F]ind [R]eferences")
+H.nmap(',f,', require'telescope.builtin'.git_files, "Telescope Git Files")
 H.nmap('qf', "<cmd> call GetProjDir() <bar> exec 'Telescope find_files cwd=' . expand(b:proj_dir)<CR>", "[F]ind my text [F]iles")
--- H.nmap(',/',  ":Telescope find_files search_dirs=$sh,$tt,$loc<CR>")
-H.nmap(',/', function() require'telescope.builtin'.find_files({ search_dirs={ os.getenv("loc"), os.getenv("sh"), os.getenv("tt") } }) end )
+
+H.nmap(
+    ',/',
+    function() require'telescope.builtin'.find_files({
+        search_dirs={ os.getenv("loc"), os.getenv("sh"), os.getenv("tt") },
+    }) end,
+    "Find files in Favourite dirs"
+)
+
+H.nmap(
+    ',fg',
+    function()
+        git_root = H.get_git_root()
+        print("gr", git_root)
+        if git_root then
+            require'telescope.builtin'.find_files{ cwd=git_root }
+            -- require'telescope.builtin'.find_files({ cwd="/mnt/d/proj/PITON" })
+        else
+            print(vim.api.nvim_buf_get_name(0) .. " has no git in path!")
+        end
+    end,
+    "Find files in git root dir for current path"
+)
+
+
 -- H.nmap(',,/', ":Telescope find_files theme=ivy search_dirs=$sh,$PWD")
 -- H.nmap(',,/', function() require'telescope.builtin'.find_files({ search_dirs={ os.getenv("sh"), os.getenv("tt"), vim.fn.getcwd() } }) end )
-H.nmap(',fg', ":Telescope live_grep theme=ivy<CR>")
+H.nmap(',fa', ":Telescope live_grep theme=ivy<CR>")
 H.nmap(',fd', ":Telescope live_grep theme=ivy search_dirs=%<CR>")
 H.nmap(',fd', function() require'telescope.builtin'.live_grep( tele_ivy_cwd() ) end)
 H.nmap(',fc', ":Telescope current_buffer_fuzzy_find theme=ivy<CR>")
