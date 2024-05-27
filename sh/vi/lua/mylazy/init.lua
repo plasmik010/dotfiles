@@ -89,7 +89,8 @@ return {
       require("nvim-treesitter.configs").setup {
         ensure_installed = { 'c', 'cpp', 'lua', 'python', 'vim', 'bash', 'markdown' },
         highlight = { enable = true },
-        indent = { enable = true, disable = { 'python' } },
+        indent = { enable = true },
+        -- indent = { enable = true, disable = { 'python' } },
         rainbow = {
           enable = false,
           -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
@@ -101,10 +102,10 @@ return {
         incremental_selection = {
           enable = true,
           keymaps = { -- todo
-            -- init_selection =    '<c-space>',
-            -- node_incremental =  '<c-space>',
-            scope_incremental = '<c-s>',
+            init_selection =    '<c-space>',
+            node_incremental =  '<c-space>',
             node_decremental =  '<c-backspace>',
+            scope_incremental = '<c-s>',
           },
         },
         textobjects = {
@@ -992,7 +993,7 @@ return {
   -- 'freddiehaddad/feline.nvim', -- on watch
   'CKolkey/ts-node-action',
   'Wansmer/sibling-swap.nvim',
-  'smzm/hydrovim', --- eval python
+  -- 'smzm/hydrovim', --- eval python
   'luukvbaal/statuscol.nvim', -- ambitious
   'mrjones2014/legendary.nvim',
   'RaafatTurki/hex.nvim',
