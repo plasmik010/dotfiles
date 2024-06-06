@@ -96,7 +96,6 @@ H.nmap(',fh', require("telescope.builtin").help_tags, "Telescope [F]ind [H]elp_t
 H.nmap(',fz', require("telescope.builtin").diagnostics, "Telescope [F]ind Diagnostics")
 H.nmap(',fo', require("telescope.builtin").oldfiles, "Telescope [F]ind [O]ld files")
 H.nmap(',fr', require("telescope.builtin").lsp_references, "Telescope [F]ind [R]eferences")
-H.nmap(',f,', require'telescope.builtin'.git_files, "Telescope Git Files")
 H.nmap('qf', "<cmd> call GetProjDir() <bar> exec 'Telescope find_files cwd=' . expand(b:proj_dir)<CR>", "[F]ind my text [F]iles")
 
 H.nmap(
@@ -108,6 +107,13 @@ H.nmap(
 )
 
 H.nmap(
+    ',f,',
+    function()
+        require'telescope.builtin'.git_files{ use_git_root=false }
+    end,
+    "Telescope Git Files in Current Path"
+)
+H.nmap(
     ',fg',
     function()
         git_root = H.get_git_root()
@@ -118,7 +124,7 @@ H.nmap(
             print(vim.api.nvim_buf_get_name(0) .. " has no git in path!")
         end
     end,
-    "Find files in git root dir for current path"
+    "Telesope Files at git root level for current file"
 )
 
 -- H.nmap(',,/', ":Telescope find_files theme=ivy search_dirs=$sh,$PWD")

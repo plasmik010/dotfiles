@@ -454,13 +454,12 @@ nnoremap ,D :tabclose<CR>
 nnoremap ,q :qa<CR>
 nnoremap aq :qa<CR>
 nnoremap ,bd :bd!<CR>
-nnoremap ,d :BDnJump<CR>
 nnoremap ,] :bnext<CR>
 nnoremap ,[ :bprev<CR>
+nnoremap ,d :BufDelAndJump<CR>
 nnoremap ,bi :diffthis \| wincmd w<CR>
 nnoremap ,bo :diffoff  \| wincmd w<CR>
 nnoremap ,, :echo expand ('%') '.@.' getcwd()<CR>
-nnoremap ,\ :echo expand ('%') '.@.' getcwd()<CR>
 " nnoremap ,c. :exec "lcd! %:p:h" <bar> echo 'lcd2file @' getcwd()<CR>
 nnoremap ,cf :exec "lcd %:p:h"<CR>:echo 'lcd2file @' getcwd()<CR>
 nnoremap ,c. :exec "lcd .."<CR>:echo 'lcd2file @' getcwd()<CR>
@@ -538,6 +537,8 @@ nnoremap <C-PageDown> gt
 nnoremap gz gT
 nnoremap q] gt
 nnoremap q[ gT
+nnoremap a] :bnext<CR>
+nnoremap a[ :bprev<CR>
 nnoremap <A-.> gt
 nnoremap <A-,> gT
 nnoremap q{ :tabmove -1<CR>
@@ -649,7 +650,7 @@ map ,,g :call LGsync()<CR>
 if v:version >= 801
   tmap oo <C-w>N:set nonumber<CR>
   tmap o<C-o> <C-w>N :e #<CR>
-  tmap <C-x> <C-w>N :BDnJump<CR>
+  tmap <C-x> <C-w>N :BufDelAndJump<CR>
   tnoremap <C-PageUp> <C-w>:tabprev<CR>
   tnoremap <C-PageDown> <C-w>:tabnext<CR>
   tnoremap g<tab> <C-w>:exe "tabn ".g:lasttab<CR>
@@ -659,7 +660,7 @@ endif
 if has("nvim")
   tnoremap oo <C-\><C-n>
   tnoremap o<C-o> <C-\><C-n>:e #<CR>
-  tnoremap <C-x> <C-\><C-n>:BDnJump<CR>
+  tnoremap <C-x> <C-\><C-n>:BufDelAndJump<CR>
   tnoremap <C-PageUp> <C-\><C-n>:tabprev<CR>
   tnoremap <C-PageDown> <C-\><C-n>:tabnext<CR>
   tnoremap g<tab> <C-\><C-n>:exe "tabn ".g:lasttab<CR>
@@ -1681,7 +1682,7 @@ endfunction
 command! -nargs=+ -complete=command ExPut call ExPut(<q-args>)
 
 " Delete buffer and load previous buffer, or just any other
-function! BDnJump()
+function! BufDelAndJump()
   "" if ( ( expand('#') == '' ) || ( expand('#') =~ '!/bin/bash' ) ) "" if ( expand('%') =~ '!/bin/bash' ) && ( expand('%') == expand('#') ) """ Current and prev buffers are terminals
   if ( bufexists(bufnr('#')) ) " Previous buffer is unset
     let cbn = bufnr('%')
@@ -1693,7 +1694,7 @@ function! BDnJump()
     exec  'bd!' . cbn
   endif
 endfunction
-command! BDnJump call BDnJump()
+command! BufDelAndJump call BufDelAndJump()
 
 function! SortParagraphs() range
   exec a:firstline . "," . a:lastline . 'd'

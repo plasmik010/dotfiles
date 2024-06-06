@@ -547,6 +547,7 @@ return {
 
   {
     'gaoDean/autolist.nvim', --- Bullets
+    enabled = false,
     priority = 80,
     ft = { "markdown", "text", "" },
     opts = {
@@ -628,7 +629,7 @@ return {
   {
     'michaelb/sniprun', -- maybe --- REPL
     build = 'sh ./install.sh',
-    enabled = "false",
+    enabled = false,
     opts = {
       display = {
         "Classic",
