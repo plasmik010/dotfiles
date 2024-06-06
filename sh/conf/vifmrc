@@ -27,10 +27,10 @@ command! flac :! cd %c && conv_any2flac.sh . %D &>/dev/null ; notify-send "%c co
 command! mpiii :! ffmpeg -i %c -qscale:a 2 %D/%c.mp3 &>/dev/null &
 " command! respic :! echo $PWD && respic.sh 50%%%%
 command! respic :! echo $PWD ; respic.sh %a
-command! rescol :! convert %c -quality 95%%  -sampling-factor '2x2,1x1,1x1' %c.jpg
+command! rescol :! magick %c -quality 95%%  -sampling-factor '2x2,1x1,1x1' %c.jpg
 """""""" command! md5 :! bash -c "md5sum %f; echo hit.any.key; read -rsn1"
-command! respng :! mkdir res ; for f in *.png; do d=${f%%%%.*} ; convert "$f" -quality 95%%%% -sampling-factor 4:4:4  jpg:res/"$d"".jpg" ; done # png to jpg
-map re :! for f in %f; do d=${f%%.*} ; convert "$f" -resize 50%% -sampling-factor 4:4:4 -quality 95%% jpg:"$d"".R.jpg" ; done
+command! respng :! mkdir res ; for f in *.png; do d=${f%%%%.*} ; magick "$f" -quality 95%%%% -sampling-factor 4:4:4  jpg:res/"$d"".jpg" ; done # png to jpg
+map re :! for f in %f; do d=${f%%.*} ; magick "$f" -resize 50%% -sampling-factor 4:4:4 -quality 95%% jpg:"$d"".R.jpg" ; done
 command! resmusAll :! mkdir resampled orig ; for flac in *.flac; do sox -S "${flac}" -G -b 16 ./resampled/"${flac}" rate -v -L 44100 dither ; mv "${flac}" orig/ ; done
 " sox input.flac -G -b 16 output.flac rate -v -L 44100 dither
 command! resmusBit :! mkdir resampled orig ; for flac in *.flac; do sox -S "${flac}" -b 16 ./resampled/"${flac}"; mv "${flac}" orig/ ; done
@@ -65,8 +65,8 @@ nnoremap av :vsplit <CR>
 nnoremap ,<BS> :colo <CR>
 nnoremap qw :wincmd o<CR>
 nnoremap qq :wincmd =<CR>
-nnoremap a, 8<c-w><
-nnoremap a. 8<c-w>>
+nnoremap a] 7<c-w><
+nnoremap a[ 7<c-w>>
 nnoremap qt :tree!<CR>
 nnoremap g<Down> hjl
 nnoremap g<Up> hkl
@@ -380,7 +380,9 @@ command! vimdiff vim -d %f %F
 command! vimdiffpane vim -d %f
 command! diff ! echo; diff %c %C && echo "files identical"; read -rsn1
 command! diffpane ! echo; diff %f && echo "files identical"; read -rsn1
-command! zip zip -r %f.zip %f
+" command! zip zip -r %f.zip %f
+command! zip  7z a %f.zip %f
+" nnoremap zp :! 7z a -mx=6 -xr!tags %c.7z %f<cr>
 command! run !! ./%f
 command! make !!make %a
 command! mkcd :mkdir %a | cd %a

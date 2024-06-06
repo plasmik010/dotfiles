@@ -28,11 +28,11 @@ for fi in *.{png,jpg,jpeg}; do
         *".jpg"  ) fo="$fi";;
         *".jpeg" ) fo=${fi%.jpeg}.jpg;;
     esac
-    convert "$fi" $res_opt -sampling-factor 4:2:0  -quality 95%  jpg:respic/"$fo";
+    magick "$fi" $res_opt -sampling-factor 4:2:0  -quality 95%  jpg:respic/"$fo";
 done
 }
 
 # for f in *.jpg; do
-#     convert "$f" -resize "$1" -sampling-factor 4:2:0  -quality 95%  jpg:respic/"$f";
+#     magick "$f" -resize "$1" -sampling-factor 4:2:0  -quality 95%  jpg:respic/"$f";
 # done
 
