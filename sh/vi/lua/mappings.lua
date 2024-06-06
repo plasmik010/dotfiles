@@ -113,15 +113,13 @@ H.nmap(
         git_root = H.get_git_root()
         print("gr", git_root)
         if git_root then
-            require'telescope.builtin'.find_files{ cwd=git_root }
-            -- require'telescope.builtin'.find_files({ cwd="/mnt/d/proj/PITON" })
+            require'telescope.builtin'.find_files({ cwd=git_root, hidden=true })
         else
             print(vim.api.nvim_buf_get_name(0) .. " has no git in path!")
         end
     end,
     "Find files in git root dir for current path"
 )
-
 
 -- H.nmap(',,/', ":Telescope find_files theme=ivy search_dirs=$sh,$PWD")
 -- H.nmap(',,/', function() require'telescope.builtin'.find_files({ search_dirs={ os.getenv("sh"), os.getenv("tt"), vim.fn.getcwd() } }) end )

@@ -82,11 +82,13 @@ set guicursor=n-v-c:block,i-ci:block,r-cr-o:hor20
 " set iminsert=0
 " set imsearch=0
 " set nofoldenable    " disable folding
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab smartindent
+set tabstop=4 softtabstop=4 shiftwidth=4
+set expandtab smarttab smartindent noautoindent
 set textwidth=0 wrapmargin=0
-set invlinebreak
-set breakindent
-set breakindentopt=shift:2
+" set invlinebreak
+" set breakindent
+" set breakindentopt=shift:2
+
 set showbreak=↳
 set sidescroll=24
 " set list lcs=tab:\┆\۰
@@ -287,7 +289,7 @@ endfunction
 ""         Mappings:          ""
 """"""""""""""""""""""""""{{{}}}
 
-set timeoutlen=330
+set timeoutlen=420
 set ttimeoutlen=20 " do not let <esc>x act as <a-x>
 let g:AutoClosePumvisible = {"ENTER": '', "ESC": ''}
 let mapleader = ""
@@ -448,14 +450,15 @@ nnoremap <C-s> :w<CR>
 nnoremap ,,w :wa<CR>
 nnoremap ax :q<CR>
 nnoremap ,x :q<CR>
-nnoremap ,dt :tabclose<CR>
-nnoremap ,e :tabclose<CR>
+nnoremap ,D :tabclose<CR>
 nnoremap ,q :qa<CR>
 nnoremap aq :qa<CR>
-nnoremap ,dd :bd!<CR>
-nnoremap ,bd :BDnJump<CR>
-nnoremap ,di :diffthis \| wincmd w<CR>
-nnoremap ,do :diffoff  \| wincmd w<CR>
+nnoremap ,bd :bd!<CR>
+nnoremap ,d :BDnJump<CR>
+nnoremap ,] :bnext<CR>
+nnoremap ,[ :bprev<CR>
+nnoremap ,bi :diffthis \| wincmd w<CR>
+nnoremap ,bo :diffoff  \| wincmd w<CR>
 nnoremap ,, :echo expand ('%') '.@.' getcwd()<CR>
 nnoremap ,\ :echo expand ('%') '.@.' getcwd()<CR>
 " nnoremap ,c. :exec "lcd! %:p:h" <bar> echo 'lcd2file @' getcwd()<CR>
@@ -554,9 +557,9 @@ nnoremap g8 8gt
 nnoremap g9 9gt
 
 " Find buffers/files
-nnoremap ,bj :Unite buffer file<CR>
-nnoremap ,bi :Unite buffer file<CR>i
-nnoremap ,bk :Denite buffer -mode=normal -immediately-1<CR>
+" nnoremap ,bj :Unite buffer file<CR>
+" nnoremap ,bi :Unite buffer file<CR>i
+" nnoremap ,bk :Denite buffer -mode=normal -immediately-1<CR>
 nnoremap ,be :BufExplorer<CR>
 nnoremap ,,e :BufExplorer<CR>
 nnoremap ,zf :Files<CR>
@@ -1589,6 +1592,10 @@ function! InsertSpacy()
     put = ''
     put! = ''
     startinsert
+    " exec "normal! o"
+    normal o
+    normal o
+    normal o
   else
     put = ''
     put! = ''
