@@ -87,7 +87,16 @@ return {
     build = ':TSUpdate',
     config = function()
       require("nvim-treesitter.configs").setup {
-        ensure_installed = { 'c', 'cpp', 'lua', 'python', 'vim', 'bash', 'markdown' },
+        ensure_installed = {
+          'c',
+          'cpp',
+          'lua',
+          'python',
+          'vim',
+          'vimdoc',
+          'bash',
+          'markdown',
+        },
         highlight = { enable = true },
         indent = { enable = false },
         -- indent = { enable = true, disable = { 'python' } },
