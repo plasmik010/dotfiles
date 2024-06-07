@@ -1593,10 +1593,6 @@ function! InsertSpacy()
     put = ''
     put! = ''
     startinsert
-    " exec "normal! o"
-    normal o
-    normal o
-    normal o
   else
     put = ''
     put! = ''
