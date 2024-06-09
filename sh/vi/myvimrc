@@ -486,8 +486,8 @@ nnoremap a-s :wincmd s \| e %:p:h<CR>
 nnoremap a-v :wincmd v \| e %:p:h<CR>
 nnoremap a_ :wincmd s \| e %:p:h<CR>
 nnoremap a- :wincmd v \| e %:p:h<CR>
-nnoremap as  :new<CR>
-nnoremap av  :vnew<CR>
+" nnoremap as  :new<CR>
+" nnoremap av  :vnew<CR>
 " nnoremap as  :new      \| lcd #:p:h \| echo expand ('%') '.@.' getcwd()<CR>
 " nnoremap av  :vnew     \| lcd #:p:h \| echo expand ('%') '.@.' getcwd()<CR>
 " nnoremap a-  : split <bar> exec "normal -"<CR>
@@ -738,17 +738,14 @@ nnoremap yq :@"<CR>
 " Add Plug entry
 nnoremap ,vp :put + <bar> exec "normal dfmxIPlug 'A'"<CR>==
 " Evaluate one line as Vimscript
-nnoremap ,v. yy:@"<CR>
+" nnoremap ,v. yy:@"<CR>
 " Evaluate a paragraph as Vimscript and re-run last command
-nnoremap ,v<CR> yap:@"<CR>:<up><CR>
+" nnoremap ,v<CR> yap:@"<CR>:<up><CR>
+nnoremap ,v; :EvalParagraphVims<CR>
+nnoremap ,vl :EvalParagraphLua<CR>
+nnoremap ,vL :EvalLineLua<CR>
 " Evaluate current line or next paragraph as Vimscript
 nnoremap ,v, :call EvalVimsHere()<CR>
-" Evaluate paragraph as Vimscript
-nnoremap ,v; :EvalVimsParagraph<CR>
-" Evaluate a paragraph as Lua
-nnoremap ,vl :EvalLuaParagraph<CR>
-" Evaluate current line as Lua
-nnoremap ,vL yy:exec 'lua ' . expand(@")<CR>
 
 if !has('nvim')
   " Open current location with vifm within vim
@@ -757,8 +754,8 @@ if !has('nvim')
   nnoremap a; :terminal ++kill=term ++curwin ++close bash -c "INVIM=1 vifm %:p:h"<CR>
   nnoremap a: :tabe \| terminal ++kill=term ++curwin bash -c "INVIM=1 vifm #:p:h"<CR>
   " Split open terminal at current location
-  nnoremap ab : new \| if isdirectory(expand('#:p:h')) \| lcd #:p:h \| endif \| terminal ++kill=term ++curwin ++norestore<CR>
-  nnoremap aB : vnew \| if isdirectory(expand('#:p:h')) \| lcd #:p:h \| endif \| terminal ++kill=term ++curwin ++norestore<CR>
+  " nnoremap ab : new \| if isdirectory(expand('#:p:h')) \| lcd #:p:h \| endif \| terminal ++kill=term ++curwin ++norestore<CR>
+  " nnoremap aB : vnew \| if isdirectory(expand('#:p:h')) \| lcd #:p:h \| endif \| terminal ++kill=term ++curwin ++norestore<CR>
   " Open terminal at current location
   nnoremap qB : if isdirectory(expand('%:p:h')) \| lcd %:p:h \| endif \| terminal ++kill=term ++curwin ++norestore<CR>
 endif
@@ -839,9 +836,11 @@ nnoremap ,zl : silent exec '! echo -e "\n$(pwd):"; ls -la . ; echo \. ; ls -la %
 ""         Commands:          ""
 """"""""""""""""""""""""""""""""
 
-command! EvalVimsParagraph  let lastpos=line('.') | silent exec "normal yap" | @\" | exec lastpos | echo "Evaluated current paragraph as VimScript."
+command! EvalParagraphVims  let lastpos=line('.') | silent exec "normal yap" | @\" | exec lastpos | echo "Evaluated current paragraph as VimScript."
 
-command! EvalLuaParagraph  let lastpos=line('.') | silent exec "normal yap" | exec 'lua ' . expand(@") | exec lastpos | echo "Evaluated current paragraph as Lua."
+command! EvalParagraphLua  let lastpos=line('.') | silent exec "normal yap" | exec 'lua ' . expand(@") | exec lastpos | echo "Evaluated current paragraph as Lua."
+
+command! EvalLineLua  let lastpos=line('.') | silent exec "normal yy" | exec 'lua ' . expand(@") | exec lastpos | echo "Evaluated current line as Lua."
 
 command! -nargs=1 Silent exec 'silent !' . <q-args> | exec 'redraw!'
   "Usage : Silent ls; read -rsn1 -p "//hit.anykey"; echo;

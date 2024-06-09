@@ -22,10 +22,16 @@ H.nmap('gr', vim.lsp.buf.references)
 H.nmap('gw', vim.lsp.buf.workspace_symbol)
 H.nmap('gy', vim.lsp.buf.type_definition)
 H.nmap('gI', vim.lsp.buf.implementation)
-H.nmap('z<down>', vim.diagnostic.goto_next)
-H.nmap('z<up>', vim.diagnostic.goto_prev)
+
+local next_diag = {vim.diagnostic.jump, {count=1}}
+H.nmap('z<Down>', next_diag )
+
+local prev_diag = {vim.diagnostic.jump, {count=-1}}
+H.nmap('z<Up>', prev_diag )
+
+-- H.nmap('z<up>', vim.diagnostic.goto_prev)
 H.nmap(',R', vim.lsp.buf.rename)
-H.nmap(',a', vim.lsp.buf.code_action)
+-- H.nmap(',a', vim.lsp.buf.code_action)
 H.nmap('gd', vim.lsp.buf.definition)
 H.nmap('gD', vim.lsp.buf.declaration)
 

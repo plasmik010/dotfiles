@@ -5,7 +5,7 @@
 
 local M = {}
 
-function M.dummy()
+function M.sayhello()
   print(12321)
   return '000'
 end
@@ -219,10 +219,33 @@ M.Bmap = function (a_key, a_map, a_opts )
   vim.api.nvim_set_keymap('n', a_key, a_map, a_opts)
 end
 
+M.mapfuncwrap = function(input)
+  local funcname
+  local args
+  if type(input) == "string" then
+    -- it is an old Vim command string
+    return input
+  elseif type(input) == "table" then
+    funcname = table.remove(input, 1)
+    args = input
+    -- print("args_size", #args)
+    -- print("funcname", funcname)
+    -- print("args", table.unpack(args))
+    return function()
+      funcname(table.unpack(args))
+    end
+  elseif type(input) == "function" then
+    return input
+  else
+    print("wtf is that map action?")
+  end
+end
+
 M.nmap = function(keys, func, desc)
   desc = desc or " "
-  vim.keymap.set('n', keys, func, { desc = desc, noremap = true })
+  vim.keymap.set('n', keys, M.mapfuncwrap(func), { desc = desc, noremap = true })
 end
+
 M.snmap = function(keys, func, desc)
   vim.keymap.set('n', keys, func, { desc = desc, noremap = true, silent = true })
 end

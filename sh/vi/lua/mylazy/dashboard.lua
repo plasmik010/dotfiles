@@ -1,0 +1,110 @@
+return {
+    'nvimdev/dashboard-nvim',
+    -- enabled = false,
+    event = 'VimEnter',
+    config =  true,
+    dependencies = 'kyazdani42/nvim-web-devicons',
+    opts = {
+        theme = 'hyper',
+        -- preview = { file_path = H.vidir .. 'logo/neovim2.cat', file_height = 11, file_width = 75, command = 'cat | lolcat -F .08' },
+        config = {
+            -- week_header = { enable = false },
+            -- header = {'iiii'},
+            header = {
+
+                -- ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+                -- ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+                -- ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+                -- ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+                -- ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+                -- ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+
+                '                                                                         ',
+                '          ███████████          █████      ██                       ',
+                '         ███████████            █████                               ',
+                '         ███████████████████████████ ███   ███████       ',
+                '        ████████████████████████████ █████ ██████████████     ',
+                '       ██████████████   █████████████ █████ █████ ████ █████     ',
+                '    ██████████████████████████████████ █████ █████ ████ █████    ',
+                '   ██████  ███ █████████████████ ████ █████ █████ ████ ██████   ',
+                '   ',
+            },
+
+            shortcut = {
+                -- 󰅏 󰅐   
+                {
+                    icon = '󰅏 ',
+                    icon_hl = '@variable',
+                    desc = 'Sess',
+                    group = 'Number',
+                    -- desc_hl = 'String',
+                    action = "require'nvim-possession'.list()",
+                    key = 's',
+                },
+                {
+                    icon = '󰊳 ',
+                    icon_hl = '@variable',
+                    desc = 'Update',
+                    group = '@property',
+                    action = 'Lazy update',
+                    key = 'u',
+                },
+                {
+                    icon = ' ',
+                    icon_hl = '@variable',
+                    desc = 'Files',
+                    group = 'Number',
+                    -- group = 'Label',
+                    action = 'Telescope find_files',
+                    key = 'f',
+                },
+                -- { desc = ' Apps', group = 'DiagnosticHint', action = 'Telescope app', key = 'a' },
+                {
+                    icon = ' ',
+                    icon_hl = '@variable',
+                    desc = 'Recent',
+                    group = 'Number',
+                    action = 'Telescope oldfiles',
+                    key = 'o',
+                },
+                -- {
+                --     icon = ' ',
+                --     icon_hl = '@variable',
+                --     desc = 'dotfiles',
+                --     group = 'Number',
+                --     action = 'require"telescope.builtin".find_files({ search_dirs={ os.getenv("loc"), os.getenv("sh"), os.getenv("tt") } }) ',
+                --     key = 'd',
+                -- },
+                {
+                    icon = ' ',
+                    desc = 'New',
+                    group = 'Number',
+                    action = 'vim.cmd.enew()',
+                    key = 'e',
+                },
+                {
+                    desc = 'Exit',
+                    group = 'Number',
+                    action = 'vim.cmd([[q!]])',
+                    key = 'q',
+                },
+            },
+            packages = { enable = true },
+            project = {
+                enable = true,
+                limit = 4,
+                -- icon = ' ',
+                -- label = '',
+                action = 'Telescope find_files cwd=',
+            },
+            mru = {
+                enable = true,
+                limit = 12,
+                icon = ' ',
+                -- label = '',
+            },
+            footer = {'',' Do one thing, do it well'},
+        },
+    }
+}
+
