@@ -15,7 +15,7 @@ read_key() {
     [[ $key == 'n' ]] && return
     [[ $key == 's' ]] && bash
 }
-if ($suc) ; then
+if ($suc); then
     echo success
 fi
 

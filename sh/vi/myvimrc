@@ -741,12 +741,12 @@ nnoremap ,vp :put + <bar> exec "normal dfmxIPlug 'A'"<CR>==
 nnoremap ,v. yy:@"<CR>
 " Evaluate a paragraph as Vimscript and re-run last command
 nnoremap ,v<CR> yap:@"<CR>:<up><CR>
-" Evaluate one line or one paragraph as Vimscript
-nnoremap ,v, :call EvalThis()<CR>
-" Evaluate a paragraph as Vimscript
-nnoremap ,v; :let lastpos=line('.') <bar> exec "normal yap" <bar> @\" <bar> exec lastpos<CR>:echo "Evaluated current paragraph."<CR>
+" Evaluate current line or next paragraph as Vimscript
+nnoremap ,v, :call EvalVimsHere()<CR>
+" Evaluate paragraph as Vimscript
+nnoremap ,v; :EvalVimsParagraph<CR>
 " Evaluate a paragraph as Lua
-nnoremap ,vl :let lastpos=line('.') <bar> exec "normal yap" <bar> exec 'lua ' . expand(@") <bar> exec lastpos<CR>:echo "Evaluated current paragraph as Lua."<CR>
+nnoremap ,vl :EvalLuaParagraph<CR>
 " Evaluate current line as Lua
 nnoremap ,vL yy:exec 'lua ' . expand(@")<CR>
 
@@ -838,6 +838,10 @@ nnoremap ,zl : silent exec '! echo -e "\n$(pwd):"; ls -la . ; echo \. ; ls -la %
 """"""""""""""""""""""""""""""""
 ""         Commands:          ""
 """"""""""""""""""""""""""""""""
+
+command! EvalVimsParagraph  let lastpos=line('.') | silent exec "normal yap" | @\" | exec lastpos | echo "Evaluated current paragraph as VimScript."
+
+command! EvalLuaParagraph  let lastpos=line('.') | silent exec "normal yap" | exec 'lua ' . expand(@") | exec lastpos | echo "Evaluated current paragraph as Lua."
 
 command! -nargs=1 Silent exec 'silent !' . <q-args> | exec 'redraw!'
   "Usage : Silent ls; read -rsn1 -p "//hit.anykey"; echo;
@@ -1643,21 +1647,21 @@ function! DoOnKey(keycode,command)
   endif
 endfunction
 
-function! EvalThis()
-    " echom "beginin"
+function! EvalVimsHere()
   if getline(line('.')) =~ "^$"
     " If cursor is on a blank line, Eval next paragraph
     exec "normal! yap:@\"\<CR>"
-    " echom "whole par"
+    echom "Evaluated current paragraph as Vimscript."
   else
     " Eval current line
-    " echom "one line"
     if getline(line('.')) =~ '^\%[\s]*["].*'
       " Ignore the comment sign <"> if it was detected
-      exec "normal! 0^wy$:@\"\<CR>"
+      silent exec "normal! 0^wy$"
     else
-      exec "normal! yy:@\"\<CR>"
+      silent exec "normal! yy"
     endif
+    exec @"
+    echom "Evaluated current line as Vimscript."
   endif
 endfunction
 

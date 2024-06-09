@@ -146,7 +146,7 @@ H.nmap(',<Esc>', ":Dashboard<CR>")
 
 H.nvmap('qe', ":SnipRun<CR>", "Evaluate code")
 
-H.nmap('s', ":HopAnywhere<CR>")
+H.nmap('s', ":HopWord<CR>")
 -- H.nmap(',vh', ":LocalHighlightToggle<CR>")
 H.nmap(',vh', ":IlluminateToggle<CR>")
 
