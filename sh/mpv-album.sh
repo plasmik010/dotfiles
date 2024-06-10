@@ -1,6 +1,6 @@
 #!/bin/bash
 # This is how I listen to music albums with mpv
-# Usage: mpv-album /path/dir DESIRED-TERMINAL-TITLE
+# Usage: mpv-album.sh /path/dir DESIRED-TERMINAL-TITLE
 
 HIST="$HOME/.mus-history"
 # Ignore '..' target
@@ -13,12 +13,12 @@ export TARG="$1"
 # Check if target (directory) is readable
 if [[ -n $TARG ]] ; then
     if [[ -e $TARG ]] ; then
-        [[ -f $TARG ]] && TARG=$(dirname "$TARG") # directory is wanted, not file
+        [[ -f $TARG ]] && TARG=$(dirname "$TARG") # assign directory, not file
         TARGREAL=$(realpath "$TARG")
         echo "$TARG" @ $(realpath .)
         export TARG
     else
-        echo mpv-album says !No such directory!
+        echo mpv-album.sh says !No such directory!
         read -rs -n1 -p "hit any key.."
         [[ $ASK == 1 ]] && ask_album.sh ; exit
     fi
@@ -65,4 +65,5 @@ else
     mpv $PAUSE --no-video "$TARG"/*.{flac,mp3,ogg,ape,wv}
 fi
 [[ $ASK == 1 ]] && ask_album.sh
+
 

@@ -72,8 +72,12 @@ H.nmap(',,b', ":IndentBlanklineToggle<CR>")
 H.nmap('c<BS>', ":call ReloadStyle(1)<CR>")
 H.nmap(',gr', ":call FocusBufOrDo('mylazy/init.lua','e $mylua/mylazy/init.lua')<CR>")
 H.nmap(',gm', ":call FocusBufOrDo('mappings.lua','e $mylua/mappings.lua')<CR>")
--- H.nmap(',vp', function() vim.api.nvim_exec([[:put +| normal dfmxI'A',==]], false) end)
-H.nmap(',vp', function() vim.api.nvim_exec([[:put +| normal 3df/^v$S}ysi}'A,==]], false) end)
+H.nmap(
+    ',vp',
+    function() vim.api.nvim_exec2([[:put +| normal 3df/^v$S}ysi}'A,==]], {}) end,
+    "Put plugin url as new entry"
+)
+
 H.nmap(',vt', function() require'tint'.toggle() end )
 -- H.nmap(',vt', require'tint'.toggle)
 H.nmap(',t', ":SymbolsOutline<CR>")
@@ -122,7 +126,7 @@ H.nmap(
 H.nmap(
     ',fg',
     function()
-        git_root = H.get_git_root()
+        local git_root = H.get_git_root()
         print("gr", git_root)
         if git_root then
             require'telescope.builtin'.find_files({ cwd=git_root, hidden=true })
@@ -149,6 +153,7 @@ H.nmap('qt', ":HiMyWordsToggle<CR>")
 H.nmap('qT', ":HiMyWordsClear<CR>")
 H.nmap(',r', ":RnvimrToggle<CR>")
 H.nmap(',<Esc>', ":Dashboard<CR>")
+H.nmap(',v,', H.eval_paragraph, "Evaluate code for Neovim")
 
 H.nvmap('qe', ":SnipRun<CR>", "Evaluate code")
 

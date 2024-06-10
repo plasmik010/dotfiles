@@ -1,20 +1,31 @@
 #!/bin/bash
-# Ask what to do in current directory
+# Ask what to do/play next in target directory
 
 clear
 echo What would you like to do next?
 echo
 
+# Prefer $1 for TARG
+if [[ -n $1 ]]; then
+    TARG="$1"
+fi
+
+# We want directory, not file
+[[ -e $TARG ]] && [[ -f $TARG ]] && TARG=$(dirname "$TARG")
+
 # If TARG not provided, use PWD
-[[ -n $TARG ]] || TARG=$(pwd)
+[[ -z $TARG ]] && TARG=$(pwd)
+
+[[ -z $ONCE ]] && ONCE=0
 
 if ! [[ -d $TARG ]]; then
     echo "(non-existent)" "$TARG" @ $(realpath .)
     TARGREAL=
 else
-    echo "$TARG" @ $(realpath .)
+    echo "$TARG"
+    echo @ $(realpath .)
     TARGREAL=$(realpath "$TARG")
-    echo "(exact)" "$TARGREAL"
+    echo "really" "$TARGREAL"
 fi
 
 [[ -z $LIBRARY ]] && LIBRARY=$HOME/.mus-library
@@ -30,14 +41,14 @@ fi
 
 if [[ ! -z $TARGREAL ]]; then
     if [[ $( grep -F -c "$TARGREAL" "$FAVS" ) -gt 0 ]]; then
-        echo -- it is in favourites list
+        echo -- it is in Favourites
         INFAVS=1
     else
         INFAVS=0
     fi
 else
     if [[ $( grep -F -c "$TARG" "$FAVS" ) -gt 0 ]]; then
-        echo -- it FORMALLY is in favourites list
+        echo -- it FORMALLY is in Favourites
         INFAVS=1
     else
         INFAVS=0
@@ -46,14 +57,14 @@ fi
 
 if [[ ! -z $TARGREAL ]]; then
     if [[ $( grep -F -c "$TARGREAL" "$LIST" ) -gt 0 ]]; then
-        echo -- it is in play list
+        echo -- it is in Playlist
         INPLIST=1
     else
         INPLIST=0
     fi
 else
     if [[ $( grep -F -c "$TARG" "$LIST" ) -gt 0 ]]; then
-        echo -- it FORMALLY is in play list
+        echo -- it FORMALLY is in Playlist
         INPLIST=1
     else
         INPLIST=0
@@ -67,7 +78,7 @@ echo
 [[ $INVIFM != 1 ]] && \
     echo "c - inspect directory with Vifm"
 [[ $INPLIST == 1 ]] && \
-    echo "d - Delete from playlist"
+    echo "d - Delete from Playlist"
 [[ $INPLIST == 0 && ! -z $TARGREAL ]] && \
     echo "a - Add to Playlist"
 [[ $INFAVS == 0 && ! -z $TARGREAL ]] && \
@@ -98,46 +109,67 @@ if [[ $prompt == "q" ]]; then
     exit
 elif [[ $INPLIST != 1 && $prompt == "a" ]]; then
     echo "$TARGREAL" >> "$LIST"
+    echo $TARGREAL  saved to Playlist.
+    sleep .4
     RUNAGAIN=1
 elif [[ $INPLIST == 1 && $prompt == "d" ]]; then
-    echo deleting $TARGREAL from list
-    grep -vF "$TARGREAL" "$LIST" > /tmp/tmplist && mv /tmp/tmplist "$LIST"
+    # if [[ $( grep -F -c "$TARG" "$FAVS" ) -gt 0 ]]; then
+    echo deleting  $TARG  from Playlist
+    grep -vF "$TARG" "$LIST" > /tmp/tmplist && mv /tmp/tmplist "$LIST"
+    if [[ $TARG != $TARGREAL ]]; then
+        echo deleting  $TARGREAL  from Playlist
+        grep -vF "$TARGREAL" "$LIST" > /tmp/tmplist && mv /tmp/tmplist "$LIST"
+    fi
     sleep 1
     RUNAGAIN=1
 elif [[ $INFAVS == 1 && $prompt == "S" ]]; then
-    echo deleting $TARG from favs
+    echo deleting  $TARG  from Favourites
     grep -vF "$TARG" "$FAVS" > /tmp/tmplist && mv /tmp/tmplist "$FAVS"
+    if [[ $TARG != $TARGREAL ]]; then
+        echo deleting  $TARGREAL  from Playlist
+        grep -vF "$TARGREAL" "$FAVS" > /tmp/tmplist && mv /tmp/tmplist "$FAVS"
+    fi
     sleep 1
     RUNAGAIN=1
 elif [[ $INFAVS == 0 && $prompt == "s" ]]; then
     echo "$TARGREAL" >> "$FAVS"
+    echo $TARGREAL  saved to Favourites.
+    sleep .4
     RUNAGAIN=1
 elif [[ $prompt == "c" && $INVIFM != 1 ]]; then
     vifm "$TARGREAL" -c "wincmd o"
 elif [[ $prompt == "" ]]; then
-    PAUSE=0 mpv-album "$TARGREAL"
+    PAUSE=0 mpv-album.sh "$TARGREAL"
     # ask_album.sh
 elif [[ -f $LIST ]] && [[ $prompt == "p" ]]; then
     SELECT=$( cat -n "$LIST" | sort -n | sort -uk2 | sort -nr | cut -f2- | $SELECTOR )
-    ASK=1 PAUSE=1 mpv-album "$SELECT"
+    ASK=1 PAUSE=1 mpv-album.sh "$SELECT"
 elif [[ -f $LIST ]] && [[ $prompt == "f" ]]; then
     SELECT=$( cat -n "$FAVS" | sort -n | sort -uk2 | sort -nr | cut -f2- | $SELECTOR )
-    ASK=1 PAUSE=1 mpv-album "$SELECT"
+    ASK=1 PAUSE=1 mpv-album.sh "$SELECT"
 elif [[ -f $LIBRARY ]] && [[ $prompt == "l" ]]; then
     # notify-send "lib is $LIBRARY"
     SELECT=$( cat "$LIBRARY" | sort -R | $SELECTOR )
-    ASK=1 PAUSE=1 mpv-album "$SELECT"
+    ASK=1 PAUSE=1 mpv-album.sh "$SELECT"
 elif [[ -f $HIST ]] && [[ $prompt == "i" ]]; then
     SELECT=$( cat -n "$HIST" | sort -n | sort -uk2 | sort -nr | cut -f2- | $SELECTOR )
-    ASK=1 PAUSE=1 mpv-album "$SELECT"
+    ASK=1 PAUSE=1 mpv-album.sh "$SELECT"
 else
     clear
     echo pwd is $(pwd)
     echo
     echo Will exit in a second..
-    sleep 0.8
+    sleep 0.4
     exit
 fi
 
-[[ $RUNAGAIN == 1 ]] && ask_album.sh
+if [[ $RUNAGAIN == 1 && $ONCE != 1 ]]; then
+    ask_album.sh
+else
+    echo "Exiting!"
+    exit
+fi
+
+echo "Exiting!"
+exit
 

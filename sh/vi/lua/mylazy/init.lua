@@ -71,9 +71,6 @@ return {
   'nvim-lua/plenary.nvim', --- library
   'powerman/vim-plugin-ruscmd', -- works
 
-  'williamboman/mason.nvim', -- base --- load lang tools
-  'williamboman/mason-lspconfig.nvim',
-
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
@@ -156,30 +153,6 @@ return {
       }
       vim.cmd("silent TSUpdate")
     end,
-  },
-
-  {
-    'neovim/nvim-lspconfig',
-    dependencies = {
-      'SmiteshP/nvim-navbuddy',
-      'nvimdev/lspsaga.nvim',
-    },
-  },
-
-  {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'}, -- dig
-  'hrsh7th/cmp-nvim-lsp',
-  'hrsh7th/nvim-cmp',
-  'amarakon/nvim-cmp-buffer-lines', -- dig
-  'hrsh7th/cmp-buffer',
-  'hrsh7th/cmp-path',
-  'hrsh7th/cmp-cmdline',
-  {
-    "jay-babu/mason-null-ls.nvim",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "jose-elias-alvarez/null-ls.nvim",
-    },
-    event = { "BufReadPre", "BufNewFile" },
   },
 
   {
@@ -689,16 +662,6 @@ return {
     'folke/flash.nvim', -- problem
     enabled = false,
     config = 'require("flash").setup()'
-  },
-
-  {
-    'nvimdev/lspsaga.nvim', -- good
-    enabled = false,
-    dependencies = {
-      "kyazdani42/nvim-web-devicons",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    config = true
   },
 
   {

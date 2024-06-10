@@ -2,7 +2,6 @@
 
 -- print('hello from helpy lua')
 
-
 local M = {}
 
 function M.sayhello()
@@ -29,12 +28,11 @@ function M.is_git_repo()
 end
 
 function M.get_git_root(path)
-  -- pre_cmd = ""
   if not path then
     -- path = vim.api.nvim_buf_get_name(0)
     path = vim.fn.expand("%:p:h")
   end
-  pre_cmd = "cd " .. path .. " ; "
+  local pre_cmd = "cd " .. path .. " ; "
   local git_root = vim.fn.system(pre_cmd .. "git rev-parse --show-toplevel")
   if
     vim.v.shell_error ~= 0
@@ -66,7 +64,7 @@ function M.condMkdir(base,dir)
     end
   end
 end
--- print( H.condMkdir(os.getenv("VICONFDIR"),"sessions_path2"))
+-- print( M.condMkdir(os.getenv("VICONFDIR"),"sessions_path2"))
 
 -- Print table
 function M.Tprint (tbl)
@@ -83,15 +81,15 @@ function M.Uprint (input, indent)
   local format = string.rep("  ", indent)
   --
   if type(input) == "table" then
-    write(format .. tostring(input) .. '\n')
+    print(format .. tostring(input) .. '\n')
     -- print(formatting .. input )
     for _,val in pairs(input) do
       M.Uprint(val,indent+1)
     end
   elseif type(input) == "function" then
-    write(format .. "func: " .. input .. '\n')
+    print(format .. "func: " .. input .. '\n')
   else
-    write(format .. type(input) .. ":  " .. input .. '\n')
+    print(format .. type(input) .. ":  " .. input .. '\n')
   end
 end
 
@@ -131,8 +129,8 @@ function M.reset (p)
   require(p).setup()
 end
 
-function M.reqAsk(m)
-  local ok, err = pcall(require, m)
+function M.try_require(a)
+  local ok, err = pcall(require, a)
   if not ok then
     return nil, err
   else
@@ -140,9 +138,9 @@ function M.reqAsk(m)
   end
 end
 
-function M.rsetup(p)
-  local res = M.reqAsk(p)
-  if res then
+function M.reqsetup(p)
+  local pl = M.try_require(p)
+  if pl then
     require(p).setup()
   else
     print('cant load that plugin..')
@@ -159,7 +157,7 @@ function M.tableMerge(t1, t2)
   for k,v in pairs(t2) do
     if type(v) == "table" then
       if type(t1[k] or false) == "table" then
-        tableMerge(t1[k] or {}, t2[k] or {})
+        M.tableMerge(t1[k] or {}, t2[k] or {})
       else
         t1[k] = v
       end
@@ -272,6 +270,27 @@ end
 -- :lua package.loaded.init = nil
 -- print("init.lua loaded once more")
 -- return hotfun
+
+M.eval_paragraph = function()
+  local filetype = vim.bo.filetype
+  local lastpos = vim.api.nvim_win_get_cursor(0)[1]
+  vim.cmd[[ silent exec "normal yap" ]]
+  vim.cmd.exec(lastpos)
+  local code = vim.fn.getreg('"')
+  print("code is", code)
+  if filetype == 'lua' then
+    assert(load(code))()
+    print("Evaluated current paragraph as Lua.")
+  elseif filetype == 'vim' then
+    -- vim.cmd[[ @" ]]
+    vim.api.nvim_exec2(code, {})
+    -- vim.api.nvim_exec2(code, {output=false})
+    print("Evaluated current paragraph as VimScript.")
+  end
+  -- print('lol')
+end
+
+vim.cmd[[ @" ]]
 
 M.mirror_buf_to_prev_window = function()
   local bufnr = vim.api.nvim_get_current_buf()

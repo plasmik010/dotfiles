@@ -1,7 +1,8 @@
 " vim: ts=2 sts=2 sw=2 ft=vim
 " vi: noswapfile
+
 " Configure the Vim editor
-" and NeoVim as well..
+" and NeoVim as well
 
 """"""""""""""""""""""""""""""""
 ""        Initializing:       ""
@@ -94,7 +95,7 @@ set sidescroll=24
 " set list lcs=tab:\┆\۰
 	" ls tab sample
 set list lcs=tab:\┆\ 
-set scrolloff=5
+set scrolloff=4
 set number
 set numberwidth=2
 set signcolumn=yes
@@ -376,7 +377,7 @@ nnoremap q= o<Esc>64A=<Esc>kJ0<Esc>60ld$0<Esc>40l
 " add horiz line
 nnoremap z- o<Esc>64A-<Esc>0<Esc>60ld$0<Esc>40l
 " add nice separator line
-nnoremap qc o<Esc>88A-<Esc>$11hR{{{}}}<Esc>$59h"_d0R<space><space><C-o>8l
+nnoremap qc o<Esc>88A-<Esc>$11hR{{{}}}<Esc>$59h"_d0R<Space><Space><C-o>8l<Space>
 
 " insert one char
 nnoremap ar :exec "normal  i".nr2char(getchar())."\e"<CR>
@@ -393,6 +394,7 @@ nmap <C-c> <C-y>
 noremap <C-e> 6<C-e>
 noremap <C-y> 6<C-y>
 nnoremap ,ze :call SwitchCE()<CR>
+
 " jump last edit edges
 nnoremap [e `[
 nnoremap ]e `]
@@ -492,9 +494,9 @@ nnoremap a- :wincmd v \| e %:p:h<CR>
 " nnoremap av  :vnew     \| lcd #:p:h \| echo expand ('%') '.@.' getcwd()<CR>
 " nnoremap a-  : split <bar> exec "normal -"<CR>
 " nnoremap a_  :vsplit <bar> exec "normal -"<CR>
-nnoremap qS :split #<CR>
-nnoremap qV :vsplit #<CR>
-nnoremap <C-W>S :vsplit<CR>
+nnoremap qs :split #  <bar> call WinSwap(0) <CR>
+nnoremap qv :vsplit # <bar> call WinSwap(0) <CR>
+nnoremap <C-w>S :vsplit<CR>
 " nnoremap ,. <C-^>
 nnoremap <silent> ,. :if bufexists(bufnr('#')) <bar> b # <bar> echo expand('%') <bar> else <bar> echo 'No prev buffer.' <bar> endif<CR>
 nnoremap ,by :call BufYank()<CR>
@@ -526,7 +528,7 @@ nnoremap ak     <C-w>W<C-w>_
 nnoremap g<space> <C-w>p
 nnoremap q<tab> <C-w>p
 " swap current and previous window
-silent nnoremap c<tab> :call WinSwap() <bar> wincmd p<CR><Esc>
+silent nnoremap c<tab> :call WinSwap(1)<CR>
 nnoremap \\     <C-w>T
 
 " Handle tabs
@@ -1402,7 +1404,7 @@ function! BufPut()
   exec "b" . g:bufnra
 endfunction
 
-function! WinSwap()
+function! WinSwap(...)
   " Swap current window with last used window
   let thiswin = winnr()
   let thisbuf = bufnr("%")
@@ -1412,6 +1414,12 @@ function! WinSwap()
         \ "buffer ". thisbuf ."|".
         \ thiswin ." wincmd w" ."|".
         \ "buffer ". lastbuf
+  if ( a:0 > 0 )
+    let retcursor = a:1 
+    if ( retcursor > 0 )
+      wincmd p
+    endif
+  endif
 endfunction
 
 function! SwitchBackground()

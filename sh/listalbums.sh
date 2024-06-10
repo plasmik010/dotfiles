@@ -18,7 +18,7 @@ else
 fi
 
 # export LIST="$1"
-PLAYER_CMD="ASK=1 mpv-album"
+PLAYER_CMD="ASK=1 mpv-album.sh"
 
 # Construct command to call new terminal window
 case $TERMINAL in
