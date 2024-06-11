@@ -31,7 +31,7 @@ H.nmap('z<Up>', prev_diag )
 
 -- H.nmap('z<up>', vim.diagnostic.goto_prev)
 H.nmap(',R', vim.lsp.buf.rename)
--- H.nmap(',a', vim.lsp.buf.code_action)
+H.nmap(',a', vim.lsp.buf.code_action)
 H.nmap('gd', vim.lsp.buf.definition)
 H.nmap('gD', vim.lsp.buf.declaration)
 

@@ -14,7 +14,7 @@ local opts = {
                 group = augroup,
                 buffer = bufnr,
             }
-            vim.api.nvim_create=autocmd("BufWritePre", {
+            vim.api.nvim_create_autocmd("BufWritePre", {
                 group = augroup,
                 buffer = bufnr,
                 callback = function()

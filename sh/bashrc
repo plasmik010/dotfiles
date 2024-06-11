@@ -141,7 +141,7 @@ gsync() {
         cd $targ_dir; pwd
     else
         echo $targ_dir " is not a directory"
-        exit
+        exit 1
     fi
     git add .
     git commit -a -m another | grep '[^[:blank:]]' --color=none

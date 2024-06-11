@@ -36,6 +36,7 @@ return
       install_root_dir = masonpath,
       -- ensure_installed = {
       --   'clang-format',
+      --   'codelldb',
       -- }
     },
   },
