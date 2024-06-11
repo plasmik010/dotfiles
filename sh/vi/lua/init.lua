@@ -6,20 +6,22 @@
 -- vim.api.nvim_command('echom 88')
 -- vim.cmd('echo 42' .. ' 101')
 
-require("set")
+require('set')
 
 package.loaded['helpy'] = nil
-H = require("helpy")
+H = require('helpy')
 local is_available = H.is_available
 
--- H.tprint(vim.opt.rtp)
+-- vim.opt.rtp:prepend(vim.env.SOME_DIR)
+-- print(vim.inspect(vim.api.nvim_list_runtime_paths()))
+-- H.Tprint(vim.opt.rtp)
 
-require("init_lazy")
+require('init_lazy')
 vim.api.nvim_command('set runtimepath+=$vi') -- Repair rtp after plugging
 
-H.reload("lsp")
+H.reload('completion')
 
-H.reload("mappings")
+H.reload('mappings')
 
 local lazy_config_avail, lazy_config = pcall(require, "lazy.core.config")
 PL = lazy_config.plugins
@@ -31,9 +33,9 @@ PL = lazy_config.plugins
 -- vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
---------------------------------
---      Configure Plugs       --
---------------------------{{{}}}
+  -------- Configure Plugs ---------------------{{{}}}------
+
+-- I went lazy....
 
 --[[ if H.is_available "themery" then
   Themes = vim.api.nvim_eval("getcompletion('','color')")

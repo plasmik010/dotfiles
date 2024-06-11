@@ -1,21 +1,3 @@
----------- Lsp-zero with Mason -----------------{{{}}}------
-
-local lsp_zero = require'lsp-zero'.preset({})
-lsp_zero.on_attach(function(client, bufnr)
-    lsp_zero.default_keymaps {
-        buffer = bufnr,
-        preserve_mappings = false,
-    }
-    -- print("lsp-zero added")
-    -- require("nvim-navbuddy").attach(client, bufnr)
-    -- require("nvim-navic").attach(client, bufnr)
-    -- print("navbuddy & navic attached!")
-end)
-
--- require'lspconfig'.lua_ls.setup(lsp_zero.nvim_lua_ls())
--- lsp_zero.setup()
-
-
   -------- Completion --------------------------{{{}}}------
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
@@ -91,27 +73,4 @@ cmp.setup {
   },
   -- sources = cmp.config.sources({ }, { { name = 'buffer' } )
 }
-
---[[ -- Set configuration for specific filetype.
-cmp.setup.filetype('gitcommit', {
-  sources = cmp.config.sources({
-    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-  }, {
-      { name = 'buffer' },
-    })
-}) ]]
-
--- -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
--- cmp.setup.cmdline('/', {
---     sources = {
---     { name = 'buffer' }
---     }
--- })
--- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
--- cmp.setup.cmdline(':', {
---     sources = cmp.config.sources({
---     { name = 'path' }
---     },
---     { { name = 'cmdline' } })
--- })
 

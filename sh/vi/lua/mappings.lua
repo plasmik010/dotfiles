@@ -70,8 +70,8 @@ H.nmap(',<BS>', ":Neotree reveal_force_cwd<CR>")
 H.nmap('-', ":Neotree reveal_force_cwd current<CR>")
 H.nmap(',,b', ":IndentBlanklineToggle<CR>")
 H.nmap('c<BS>', ":call ReloadStyle(1)<CR>")
-H.nmap(',gr', ":call FocusBufOrDo('mylazy/init.lua','e $mylua/mylazy/init.lua')<CR>")
-H.nmap(',gm', ":call FocusBufOrDo('mappings.lua','e $mylua/mappings.lua')<CR>")
+H.nmap(',gp', ":call FocusBufOrDo('mylazy/init.lua','e $vi/lua/mylazy/init.lua')<CR>")
+H.nmap(',gm', ":call FocusBufOrDo('mappings.lua','e $vi/lua/mappings.lua')<CR>")
 H.nmap(
     ',vp',
     function() vim.api.nvim_exec2([[:put +| normal 3df/^v$S}ysi}'A,==]], {}) end,
@@ -92,12 +92,18 @@ H.nmap(',vn', function()  if vim.o.winbar=='' then vim.o.winbar = "%{%v:lua.requ
   -------- Finding -----------------------------{{{}}}------
 
 local tele_ivy = require'telescope.themes'.get_ivy{ sort_mru = true, layout_config = { height = vim.opt.lines:get() - 10 } }
-local tele_ivy_cwd = function()
-    return require'telescope.themes'.get_ivy{ sort_mru = true, layout_config = { height = vim.opt.lines:get() - 10 }, cwd = require'telescope.utils'.buffer_dir() }
+local function tele_ivy_dir(dir)
+    return require'telescope.themes'.get_ivy{
+        sort_mru = true,
+        layout_config = { height = vim.opt.lines:get() - 10 },
+        cwd = dir or require'telescope.utils'.buffer_dir(),
+    }
 end
-function Tele_buff_ivy() require("telescope.builtin").buffers( tele_ivy ) end
-local tele_drop = require("telescope.themes").get_dropdown{ sort_mru=true, winblend=9, layout_config = { height=21 } }
-function Tele_buff_drop() require("telescope.builtin").buffers( tele_drop ) end
+function Tele_buff_ivy()
+    require('telescope.builtin').buffers( tele_ivy )
+end
+local tele_drop = require('telescope.themes').get_dropdown{ sort_mru=true, winblend=9, layout_config = { height=21 } }
+function Tele_buff_drop() require('telescope.builtin').buffers( tele_drop ) end
 H.nmap(',fb', Tele_buff_ivy, "Telescope [B]uffers ivy-themed")
 H.nmap(',<space>', Tele_buff_drop)
 H.nmap(',l', require("lsp_lines").toggle, "Toggle lsp_lines")
@@ -140,8 +146,10 @@ H.nmap(
 -- H.nmap(',,/', ":Telescope find_files theme=ivy search_dirs=$sh,$PWD")
 -- H.nmap(',,/', function() require'telescope.builtin'.find_files({ search_dirs={ os.getenv("sh"), os.getenv("tt"), vim.fn.getcwd() } }) end )
 H.nmap(',fa', ":Telescope live_grep theme=ivy<CR>")
-H.nmap(',fd', ":Telescope live_grep theme=ivy search_dirs=%<CR>")
-H.nmap(',fd', function() require'telescope.builtin'.live_grep( tele_ivy_cwd() ) end)
+-- H.nmap(',fd', ":Telescope live_grep theme=ivy search_dirs=%<CR>")
+-- H.nmap(',fd', function() require'telescope.builtin'.live_grep(tele_ivy_dir()) end)
+H.nmap(',fq', function() require'telescope.builtin'.live_grep(tele_ivy_dir(H.get_git_root())) end)
+
 H.nmap(',fc', ":Telescope current_buffer_fuzzy_find theme=ivy<CR>")
 H.nmap(',ff', ":Telescope find_files theme=ivy<CR>")
 H.nmap('qr',  ":Telescope lsp_references theme=ivy<CR>")
