@@ -13,6 +13,7 @@ return
 {
   {
     'VonHeikemen/lsp-zero.nvim',
+    -- event = "VimEnter",
     config = function()
       local lsp_zero = require'lsp-zero'.preset({})
       lsp_zero.extend_lspconfig()
@@ -33,11 +34,15 @@ return
     'williamboman/mason.nvim', -- base --- load lang tools
     opts = {
       install_root_dir = masonpath,
+      -- ensure_installed = {
+      --   'clang-format',
+      -- }
     },
   },
 
   {
     'williamboman/mason-lspconfig.nvim',
+    event = "VimEnter",
     opts = {
       ensure_installed = {
         'lua_ls',
@@ -68,6 +73,11 @@ return
             -- capabilities = nc_capabilities,
           }
         end,
+        clangd = function()
+          require'lspconfig'.clangd.setup {
+            on_attach = function() print("lsp client is clangd") end,
+          }
+        end,
 
         lua_ls = function()
           require('lspconfig').lua_ls.setup {
@@ -87,15 +97,24 @@ return
 
   {
     'neovim/nvim-lspconfig',
-    config = function()
+    -- config = function()
+      -- require'configs.lspconfig'
       -- H.sayhello()
       -- print(23)
       -- require'jo.joke2'
-    end,
+    -- end,
     dependencies = {
       'SmiteshP/nvim-navbuddy',
       'nvimdev/lspsaga.nvim',
     },
+  },
+
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    event = "VeryLazy",
+    opts = function()
+      return require "configs.null-ls"
+    end,
   },
 
   {

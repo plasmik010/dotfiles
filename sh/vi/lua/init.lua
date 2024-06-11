@@ -17,7 +17,6 @@ local is_available = H.is_available
 -- H.Tprint(vim.opt.rtp)
 
 require('init_lazy')
-vim.api.nvim_command('set runtimepath+=$vi') -- Repair rtp after plugging
 
 H.reload('completion')
 

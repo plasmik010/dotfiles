@@ -317,6 +317,10 @@ imap оо <ESC>
 " go to end-of-line
 imap <C-e> <C-o>A
 
+" insert above/below current line
+imap <C-Up> <C-o>O
+imap <C-Down> <C-o>o
+
 " Insert line above --> hit Alt-Shift-O
 imap <A-i> <Up><End><CR>
 
@@ -356,8 +360,12 @@ inoremap <C-U> <C-G>u<C-U>
 nnoremap dx 0"_D
 nnoremap dX ^"_D
 nnoremap dc "_d$
+" delete line to null reg
 nnoremap d. "_dd
-nnoremap dA ggdG
+" delete all text
+nnoremap da ggdG
+
+nnoremap =a :IndentAll<CR>
 nnoremap d<space> :call DelSpace()<CR>
 " add this line to the next line
 nnoremap an ddpkJ
@@ -602,7 +610,7 @@ endif
 " Jump to favourite files
 nnoremap ,gv :call FocusBufOrDo('myvimrc','e $sh/vi/myvimrc')<CR>
 if exists("g:vimplug_available")
-  nnoremap ,gr :call FocusBufOrDo('vimrc_plug','e $sh/vi/vimrc_plug')<CR>
+  nnoremap ,gp :call FocusBufOrDo('vimrc_plug','e $sh/vi/vimrc_plug')<CR>
 endif
 nnoremap ,gt :call FocusBufOrDo('vimrc_themes','e $sh/vi/vimrc_themes')<CR>
 " nnoremap ,gc :call FocusBufOrDo('$vi/lua/init.lua','e $vi/lua/init.lua')<CR>
@@ -839,6 +847,8 @@ nnoremap ,zl : silent exec '! echo -e "\n$(pwd):"; ls -la . ; echo \. ; ls -la %
 """"""""""""""""""""""""""""""""
 ""         Commands:          ""
 """"""""""""""""""""""""""""""""
+
+command! IndentAll  let lastpos=line('.') | silent exec "normal gg=G" | exec lastpos
 
 command! EvalParagraphVims  let lastpos=line('.') | silent exec "normal yap" | @\" | exec lastpos | echo "Evaluated current paragraph as VimScript."
 
