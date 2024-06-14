@@ -84,7 +84,7 @@ XF86AudioMute
 
 # bspwm hotkeys #
 
-# quit/restart bspwm
+# quit/reload bspwm
 super + f ; {Q,R}
   bspc {quit,wm -r}
 

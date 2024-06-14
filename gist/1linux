@@ -387,8 +387,8 @@ qmk compile -kb planck/rev6 -km default
 cd $git/qmk_firmware/ && make atreis:default && sudo bash flash.sh atreis_default.hex
 sudo make xd60/rev3:plasmik:dfu
 make planck/rev6:plasmik:dfu-util
-cd $git/qmk_firmware/ && cp $sh/conf/qmk_planckR6keymap.c $git/qmk_firmware/keyboards/planck/keymaps/plasmik/keymap.c && make planck/rev6_drop:plasmik:dfu-util
-cd $git/qmk_firmware/ && cp $sh/conf/qmk_planckR4keymap.c $git/qmk_firmware/keyboards/planck/keymaps/plasmik/keymap.c && make planck/rev4:plasmik:dfu
+cd $git/qmk_firmware/ && cp $dotfiles/qmk/qmk_planckR6keymap.c $git/qmk_firmware/keyboards/planck/keymaps/plasmik/keymap.c && make planck/rev6_drop:plasmik:dfu-util
+cd $git/qmk_firmware/ && cp $dotfiles/qmk/qmk_planckR4keymap.c $git/qmk_firmware/keyboards/planck/keymaps/plasmik/keymap.c && make planck/rev4:plasmik:dfu
 
 ==TMux
 tmux new -s defs # start tmux with named session

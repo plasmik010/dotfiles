@@ -22,6 +22,7 @@ set path=.,**
 ""  Useful memories  ""
 " help i_ctrl-
 " help map-which-keys
+" :delmarks a-z A-Z
 " currfile=%\ mainbin
 " let $BROWSER = 'luakit'
 " .w !bash  "exec current line with bash
@@ -36,7 +37,7 @@ set path=.,**
 " read !ls $PLUGDIR/lightline.vim/autoload/lightline/colorscheme
 " :%!xxd "re-open as hex
 " Watch log with Vim "" For Neovim use :terminal
-" call job_start("tail -f /ln/ho/iLog", {'out_io':'buffer','out_name':'dummy'})
+" call job_start("tail -f $HOME/iLog", {'out_io':'buffer','out_name':'dummy'})
 " G difftool -y HEAD~1 -- %
 
 """"""""""""""""""""""""""""""""
@@ -55,19 +56,20 @@ let g:completion_enable_auto_popup = 1
 let g:goyo_width = "66%"
 let g:goyo_height = "95%"
 
-let g:startify_bookmarks = [ {'s': '~/.sh'}, '/ln/lo/cur/' ]
-let g:startify_files_number = 8
-let g:startify_lists = [
-            \ { 'type': 'files',     'header': ['   MRU']            },
-            \ { 'type': 'sessions',  'header': ['   Sessions']       },
-            \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-            \ { 'type': 'commands',  'header': ['   Commands']       },
-            \ ]
-            " \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-let g:startify_session_dir = $VICONFDIR . "/session"
-
-if !isdirectory(g:startify_session_dir)
-  call mkdir(g:startify_session_dir, '', 0770)
+if !has("nvim")
+  let g:startify_bookmarks = [ {'s': '~/.sh'}, '/ln/lo/cur/' ]
+  let g:startify_files_number = 8
+  let g:startify_lists = [
+        \ { 'type': 'files',     'header': ['   MRU']            },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ ]
+  " \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+  let g:startify_session_dir = $VICONFDIR . "/session"
+  if !isdirectory(g:startify_session_dir)
+    call mkdir(g:startify_session_dir, '', 0770)
+  endif
 endif
 
 set encoding=UTF-8
@@ -79,11 +81,11 @@ set cursorline
 set updatetime=8000
 set noequalalways
 set winheight=7
-set guicursor=n-v-c:block,i-ci:block,r-cr-o:hor20
+set guicursor=n-v-c:block,i-ci:ver100,r-cr-o:hor20
 " set iminsert=0
 " set imsearch=0
 " set nofoldenable    " disable folding
-set tabstop=4 softtabstop=4 shiftwidth=4
+set tabstop=2 softtabstop=2 shiftwidth=2
 set expandtab smarttab smartindent noautoindent
 set textwidth=0 wrapmargin=0
 " set invlinebreak
@@ -116,18 +118,21 @@ set hidden
 " set fileformat=unix
 set title
 
-if !isdirectory($VICONFDIR) | call mkdir($VICONFDIR, '', 0770) | endif
-" Handle backups
-if !isdirectory($VICONFDIR . "/bak") | call mkdir($VICONFDIR . "/bak", '', 0700) | endif
-silent ! find $VICONFDIR/bak -type f -mtime +30 -delete
-set backupdir=$VICONFDIR/bak
-set undodir=$VICONFDIR/bak
+" Set location for backups and shada and runtime files
+let workdir = $HOME . "/.vim"
+let bakdir = $HOME . "/.vim/bak"
+if !isdirectory(workdir) | call mkdir(workdir, '', 0700) | endif
+if !isdirectory(bakdir) | call mkdir(bakdir, '', 0700) | endif
+silent exec "!find ".bakdir." -type f -mtime +30 -delete"
+" if !isdirectory($VICONFDIR) | call mkdir($VICONFDIR, '', 0770) | endif
+set backupdir=bakdir
+set undodir=bakdir
 set undofile
-set directory=$VICONFDIR/bak
+set directory=workdir
 set swapfile
 set sessionoptions+=globals
 set history=2500
-set viminfofile=$VICONFDIR/viminfo
+exec "set viminfofile=".workdir."/viminfo"
 
 set t_Co=256
 "  if $TERMINAL == 'xterm' | set term=xterm-256color | endif
@@ -315,7 +320,10 @@ imap jj <ESC>
 imap оо <ESC>
 
 " go to end-of-line
-imap <C-e> <C-o>A
+inoremap <C-e> <C-o>A
+
+" delete word ahead
+inoremap <C-d> <C-o>dw
 
 " insert above/below current line
 imap <C-Up> <C-o>O
@@ -363,7 +371,7 @@ nnoremap dc "_d$
 " delete line to null reg
 nnoremap d. "_dd
 " delete all text
-nnoremap da ggdG
+nnoremap dA ggdG
 
 nnoremap =a :IndentAll<CR>
 nnoremap d<space> :call DelSpace()<CR>
@@ -433,8 +441,8 @@ noremap <A-n> 16<c-e>
 noremap <A-p> 16<c-y>
 noremap <A-e> 16<c-e>
 noremap <A-c> 16<c-y>
-noremap <C-n> 7j
-noremap <C-p> 7k
+noremap <C-n> 6j
+noremap <C-p> 6k
 nmap q1 100G
 nmap q2 200G
 nmap q3 300G
@@ -504,11 +512,12 @@ nnoremap a- :wincmd v \| e %:p:h<CR>
 " nnoremap av  :vnew     \| lcd #:p:h \| echo expand ('%') '.@.' getcwd()<CR>
 " nnoremap a-  : split <bar> exec "normal -"<CR>
 " nnoremap a_  :vsplit <bar> exec "normal -"<CR>
-nnoremap qs :split #  <bar> call WinSwap(0) <CR>
-nnoremap qv :vsplit # <bar> call WinSwap(0) <CR>
+nnoremap as :split #  <bar> call WinSwap(0) <CR>
+nnoremap av :vsplit # <bar> call WinSwap(0) <CR>
 nnoremap <C-w>S :vsplit<CR>
 " nnoremap ,. <C-^>
-nnoremap <silent> ,. :if bufexists(bufnr('#')) <bar> b # <bar> echo expand('%') <bar> else <bar> echo 'No prev buffer.' <bar> endif<CR>
+" nnoremap <silent> ,. :if bufexists(bufnr('#')) <bar> b # <bar> echo expand('%') <bar> else <bar> echo 'No prev buffer.' <bar> endif<CR>
+nnoremap <silent> ,. :call PrevBuf()<CR>
 nnoremap ,by :call BufYank()<CR>
 nnoremap ,bp :call BufPut()<CR>
 
@@ -518,8 +527,8 @@ nnoremap qj     <C-w>j
 nnoremap qk     <C-w>k
 nnoremap ql     <C-w>l
 nnoremap <C-\>  <C-w>w
-nnoremap a[     <C-w>6<
-nnoremap a]     <C-w>6>
+nnoremap a<Left>   <C-w>6<
+nnoremap a<Right>  <C-w>6>
 nnoremap ae     <C-w>4+
 nnoremap ad     <C-w>4-
 " grow tall
@@ -540,6 +549,8 @@ nnoremap q<tab> <C-w>p
 " swap current and previous window
 silent nnoremap c<tab> :call WinSwap(1)<CR>
 nnoremap \\     <C-w>T
+nnoremap a\  :tabe #<CR>: exec "tabn ".g:lasttab<CR>
+nnoremap a\  :call PrevBufToTab()<CR>
 
 " Handle tabs
 nnoremap at :tabe<CR>
@@ -558,7 +569,7 @@ nnoremap q} :tabmove +1<CR>
 nnoremap q< :call MoveToPrevTab()<CR>
 nnoremap q> :call MoveToNextTab()<CR>
 " select previous tab
-nnoremap g<tab> :exe "tabn ".g:lasttab<CR>
+nnoremap g<tab> :exec "tabn ".g:lasttab<CR>
 nnoremap g1 1gt
 nnoremap g2 2gt
 nnoremap g3 3gt
@@ -578,7 +589,7 @@ nnoremap ,,e :BufExplorer<CR>
 nnoremap ,zf :Files<CR>
 nnoremap ,zg :GFiles<CR>
 nnoremap ,zl :Lines<CR>
-nnoremap ,zs :Files $sh<CR>
+nnoremap ,zs :Files $dotfiles<CR>
 nnoremap ,zt :Files $tt<CR>
 nnoremap ,zj :Files $jo<CR>
 command! -bang FilesProj call GetProjDir() <bar> call fzf#vim#files(expand(b:proj_dir), fzf#vim#with_preview({'options': ['--layout=reverse','--info=inline']}), <bang>0)
@@ -586,14 +597,14 @@ command! -bang MyTelescopeFilesProj call GetProjDir() <bar> exec 'Telescope find
 if has("nvim")
   nnoremap qf :MyTelescopeFilesProj<CR>
   nnoremap qF :Telescope find_files search_dirs=%:p:h<CR>
-  nnoremap ,/ :Telescope find_files search_dirs=$sh,$tt,$loc<CR>
-  nnoremap ,,/ :Telescope find_files theme=ivy search_dirs=$sh,$PWD
+  nnoremap ,/ :Telescope find_files search_dirs=$dotfiles,$tt,$loc<CR>
+  nnoremap ,,/ :Telescope find_files theme=ivy search_dirs=$dotfiles,$PWD
 else
   nnoremap qf :FilesProj<CR>
   nnoremap qF :Files %:p:h<CR>
-  nnoremap ,/ :Files $sh,$tt,$loc<CR>
-  nnoremap ,/ :Files $sh<CR>
-  nnoremap ,,/ :Files $sh
+  nnoremap ,/ :Files $dotfiles,$tt,$loc<CR>
+  nnoremap ,/ :Files $dotfiles<CR>
+  nnoremap ,,/ :Files $dotfiles
 endif
 " nnoremap ,fg :Telescope live_grep theme=ivy<CR>
 " nnoremap ,fd :Telescope live_grep theme=ivy search_dirs=%<CR>
@@ -608,19 +619,19 @@ endif
 " nnoremap ,fh :Telescope help_tags<CR>
 
 " Jump to favourite files
-nnoremap ,gv :call FocusBufOrDo('myvimrc','e $sh/vi/myvimrc')<CR>
+nnoremap ,gv :call FocusBufOrDo('myvimrc','e $vi/vs/myvimrc')<CR>
 if exists("g:vimplug_available")
-  nnoremap ,gp :call FocusBufOrDo('vimrc_plug','e $sh/vi/vimrc_plug')<CR>
+  nnoremap ,gp :call FocusBufOrDo('vimrc_plug','e $vi/vs/vimrc_plug')<CR>
 endif
-nnoremap ,gt :call FocusBufOrDo('vimrc_themes','e $sh/vi/vimrc_themes')<CR>
+nnoremap ,gt :call FocusBufOrDo('vimrc_themes','e $vi/vs/vimrc_themes')<CR>
 " nnoremap ,gc :call FocusBufOrDo('$vi/lua/init.lua','e $vi/lua/init.lua')<CR>
 " nnoremap ,ga :call FocusBufOrDo('lsp.lua','e $vi/lua/lsp.lua')<CR>
-nnoremap ,g, :call FocusBufOrDo('vimrc_main','e $sh/vi/vimrc_main')<CR>
+nnoremap ,g, :call FocusBufOrDo('vimrc_main','e $vi/vs/vimrc_main')<CR>
 nnoremap ,gb :call FocusBufOrDo('bashrc','e $sh/bashrc')<CR>
 nnoremap ,gB :call FocusBufOrDo('bashrc.local','e $loc/bashrc.local')<CR>
 nnoremap ,g2 :call FocusBufOrDo('bspwmrc','e $sh/bspwmrc')<CR>
-nnoremap ,gx :call FocusBufOrDo('sxhkd','e $sh/conf/sxhkdrc')<CR>
-nnoremap ,gk :call FocusBufOrDo('kitty.conf','e $sh/conf/kitty.conf')<CR>
+nnoremap ,gx :call FocusBufOrDo('sxhkd','e $dotfiles/conf/sxhkdrc')<CR>
+nnoremap ,gk :call FocusBufOrDo('kitty.conf','e $dotfiles/conf/kitty.conf')<CR>
 nnoremap ,gz :call FocusBufOrDo('zzzz','e $tt/zzzzzz')<CR>
 nnoremap ,gu :call FocusBufOrDo('ff','e $tt/u*/ff*')<CR>
 nnoremap ,gh :call FocusBufOrDo('sh_history','e $HOME/.bash_history')<CR>G
@@ -665,7 +676,7 @@ if v:version >= 801
   tmap <C-x> <C-w>N :BufDelAndJump<CR>
   tnoremap <C-PageUp> <C-w>:tabprev<CR>
   tnoremap <C-PageDown> <C-w>:tabnext<CR>
-  tnoremap g<tab> <C-w>:exe "tabn ".g:lasttab<CR>
+  tnoremap g<tab> <C-w>:exec "tabn ".g:lasttab<CR>
   tnoremap q<tab> <C-w>p
   tnoremap <C-\> <C-w>w
 endif
@@ -675,7 +686,7 @@ if has("nvim")
   tnoremap <C-x> <C-\><C-n>:BufDelAndJump<CR>
   tnoremap <C-PageUp> <C-\><C-n>:tabprev<CR>
   tnoremap <C-PageDown> <C-\><C-n>:tabnext<CR>
-  tnoremap g<tab> <C-\><C-n>:exe "tabn ".g:lasttab<CR>
+  tnoremap g<tab> <C-\><C-n>:exec "tabn ".g:lasttab<CR>
   tnoremap q<tab> <C-\><C-n>:wincmd p<CR>
   " tnoremap <A-Left> <C-\><C-N><C-w>h
   tnoremap <C-\> <C-\><C-n><C-w>w
@@ -744,22 +755,22 @@ cnoremap <C-a> <Home>
 cnoremap <C-b> <C-Left>
 cnoremap <C-t> <C-Right>
 
-nnoremap ,; :6mes<CR>
+nnoremap ,; :12mes<CR>
 " Eval yanked
 nnoremap yq :@"<CR>
 " Add Plug entry
 nnoremap ,vp :put + <bar> exec "normal dfmxIPlug 'A'"<CR>==
 " Evaluate one line as Vimscript
-" nnoremap ,v. yy:@"<CR>
+nnoremap ,v. yy:@"<CR>
 " Evaluate a paragraph as Vimscript and re-run last command
 " nnoremap ,v<CR> yap:@"<CR>:<up><CR>
 nnoremap ,v; :EvalParagraphVims<CR>
 nnoremap ,vl :EvalParagraphLua<CR>
 nnoremap ,vL :EvalLineLua<CR>
-" Evaluate current line or next paragraph as Vimscript
-nnoremap ,v, :call EvalVimsHere()<CR>
 
 if !has('nvim')
+  " Evaluate current line or next paragraph as Vimscript
+  nnoremap ,v, :call EvalVimsHere()<CR>
   " Open current location with vifm within vim
   nnoremap ac :terminal ++close bash -c "INVIM=1 vifm %:p:h"<CR>
   nnoremap aC :vertical terminal ++close bash -c "INVIM=1 vifm %:p:h"<CR>
@@ -846,7 +857,7 @@ nnoremap ,zl : silent exec '! echo -e "\n$(pwd):"; ls -la . ; echo \. ; ls -la %
 
 """"""""""""""""""""""""""""""""
 ""         Commands:          ""
-""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""{{{}}}
 
 command! IndentAll  let lastpos=line('.') | silent exec "normal gg=G" | exec lastpos
 
@@ -856,7 +867,7 @@ command! EvalParagraphLua  let lastpos=line('.') | silent exec "normal yap" | ex
 
 command! EvalLineLua  let lastpos=line('.') | silent exec "normal yy" | exec 'lua ' . expand(@") | exec lastpos | echo "Evaluated current line as Lua."
 
-command! -nargs=1 Silent exec 'silent !' . <q-args> | exec 'redraw!'
+command! -nargs=1 Silent exec 'silent!' . <q-args> | exec 'redraw!'
   "Usage : Silent ls; read -rsn1 -p "//hit.anykey"; echo;
 
 command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
@@ -932,10 +943,10 @@ endfunction
 " command! SessWriteA call SaveColor() | call TerminalsFuneral() | mksession! $VICONFDIR/session.vim | SaveSigns! $VICONFDIR/signs.sav
 " command! SessWriteB exec 'SessWriteA' | call BufFocusedThenDo('signs.sav','wq')
 
-command! Bash exec 'silent ! bash' | redraw!
-command! NewTerm exec 'silent ! $TERMINAL &' | redraw!
-command! NewTermHere exec 'silent ! cd "%:p:h" && $TERMINAL &' | redraw!
-command! NewVifmHere exec 'silent ! $TERMINAL -e vifm --select %:p & ' | redraw!
+command! Bash exec 'silent! bash' | redraw!
+command! NewTerm exec 'silent! $TERMINAL &' | redraw!
+command! NewTermHere exec 'silent! cd "%:p:h" && $TERMINAL &' | redraw!
+command! NewVifmHere exec 'silent! $TERMINAL -e vifm --select %:p & ' | redraw!
 command! LCDhere lcd! %:p:h | pwd
 command! LCDrealpath let b:cwd = expand("%:p:h") | let b:rcwd = system("realpath " . b:cwd) | exec "lcd! " . b:rcwd
 
@@ -960,7 +971,7 @@ if !empty($WINDIR)
   " set makeprg=\./make.bat\ -j4\ DEBUG=1
   " nnoremap qp :put +<CR>j
     command! RCbash :exec '!source /c/Users/user/.bashrc'
-    command! NewTerm exec 'silent ! mintty.exe &' | redraw!
+    command! NewTerm exec 'silent! mintty.exe &' | redraw!
     command! UpdCtags !ctags.exe -R --exclude=.git --exclude=log --exclude=wutils --c++-kinds=+p --fields=+iaS --extra=+q *
   command! Chrome :silent exec '!source /c/Users/user/.bashrc && chrome "%"' | redraw!
   command! Npp :silent exec '!source /c/Users/user/.bashrc && npp "%"' | redraw!
@@ -992,6 +1003,25 @@ let @s = "i \<Esc>ll."
 """"""""""""""""""""""""""""""""
 ""         Functions:         ""
 """"""""""""""""""""""""""{{{}}}
+
+function! PrevBuf()
+  if bufexists(bufnr('#')) 
+    " if bufname(bufnum) 
+    if buflisted(bufnr('#'))
+      b #
+      echo expand('%') 
+    else
+      echom "buf #" . bufnr('#') . " is not listed, use ':b N' to load it"
+    endif
+  else 
+    echo 'No prev buffer.' 
+  endif
+endfunction
+
+function PrevBufToTab()
+  let prevbufnr = bufnr('#')
+  exec "tab sb " . prevbufnr
+endfunction
 
 function! EditAtEdge(dir)
   " Go to edge of text/blank area and insert new line there
@@ -1366,18 +1396,18 @@ function! MoveToPrevTab()
     sp
   else
     close!
-    exe "0tabnew"
+    exec "0tabnew"
   endif
   " opening current buffer in new window
-  exe "b".cur_buf
+  exec "b".cur_buf
 endfunc
 
 function! MoveToNextTab()
-  "there is only one window
+  " there is only one window
   if tabpagenr('$') == 1 && winnr('$') == 1
     return
   endif
-  "preparing new window
+  " preparing new window
   let tab_nr = tabpagenr('$')
   let cur_buf = bufnr('%')
   if tabpagenr() < tab_nr
@@ -1390,20 +1420,20 @@ function! MoveToNextTab()
     close!
     tabnew
   endif
-  "opening current buffer in new window
-  exe "b".cur_buf
+  " opening current buffer in new window
+  exec "b".cur_buf
 endfunc
 
 " Swap content of 2 windows
 function! SwapContentPrevWin()
   let lines1 = getline(1, '$')
-  exe 'wincmd p'
+  exec 'wincmd p'
   let lines2 = getline(1, '$')
-  exe '%d_'
+  exec '%d_'
   $put=lines1
   normal ggdd
-  exe 'wincmd p'
-  exe '%d_'
+  exec 'wincmd p'
+  exec '%d_'
   $put=lines2
   normal ggdd
 endfunction
@@ -1436,11 +1466,10 @@ endfunction
 
 function! SwitchBackground()
   if (&background == "light")
-    exec "set background=dark"
+    set background=dark
   else
-    exec "set background=light"
+    set background=light
   endif
-  " exec "set background"
   " echo &background
 endfunction
 
@@ -1497,12 +1526,12 @@ function! LoadColor(...)
   if l:switch=='dunno'
     echom "Will load very default colors." | redraw
     if exists("g:colors_name") | unlet g:colors_name | endif
-    source $sh/vi/vimrc_themes
+    source $vi/vs/vimrc_themes
   elseif l:switch=='day'
     if !exists("g:ColorDayName")
       echom "NO saved colors for this phase of day! Loading defaults..(day)" | redraw
       if exists("g:colors_name") | unlet g:colors_name | endif
-      source $sh/vi/vimrc_themes
+      source $vi/vs/vimrc_themes
     else
       " exec "colo " .  g:ColorDayName
       let wanted_color = g:ColorDayName
@@ -1517,7 +1546,7 @@ function! LoadColor(...)
     if !exists("g:ColorNoxName")
       echom "NO saved colors for this phase of day! Loading defaults..(nox)" | redraw
       if exists("g:colors_name") | unlet g:colors_name | endif
-      source $sh/vi/vimrc_themes
+      source $vi/vs/vimrc_themes
     else
       " exec "colo " .  g:ColorNoxName
       let wanted_color = g:ColorNoxName
@@ -1609,18 +1638,21 @@ function! LightlineReload(arg)
 endfunction
 command! -nargs=? LineColor call LightlineReload('<args>')
 
-" Add few lines and start Insert mode
+" Add enough empty lines and start Insert mode with proper indent
 function! InsertSpacy()
-  " check if current line is empty
+  " Check if current line is empty
   if getline('.') =~ '^\s*$'
     put = ''
-    put! = ''
-    startinsert
+    exec "normal Oz"
+    exec "normal x"
+    startinsert!
   else
     put = ''
     put! = ''
-    put = ''
-    startinsert
+    exec "normal oz"
+    exec "normal x"
+    startinsert!
+    " exec "normal o"
   endif
 endfunction
 
@@ -1700,10 +1732,10 @@ function! ExPut(cmd)
 endfunction
 command! -nargs=+ -complete=command ExPut call ExPut(<q-args>)
 
-" Delete buffer and load previous buffer, or just any other
+" Delete buffer and load or any other previous buffer
 function! BufDelAndJump()
   "" if ( ( expand('#') == '' ) || ( expand('#') =~ '!/bin/bash' ) ) "" if ( expand('%') =~ '!/bin/bash' ) && ( expand('%') == expand('#') ) """ Current and prev buffers are terminals
-  if ( bufexists(bufnr('#')) ) " Previous buffer is unset
+  if ( buflisted(bufnr('#')) )
     let cbn = bufnr('%')
     b # " jump to the previous buffer
     exec  'bd!' . cbn
@@ -1776,7 +1808,7 @@ endfunction
 function! CleanEmptyBuffers()
   let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val)<0 && !getbufvar(v:val, "&mod")')
   if !empty(buffers)
-    exe 'bw ' . join(buffers, ' ')
+    exec 'bw ' . join(buffers, ' ')
   endif
 endfunction
 
@@ -1849,8 +1881,8 @@ endfunction
 "   highlight mywar ctermbg=1 ctermfg=0
 "   sign define mybookmark text=>> linehl=myboo texthl=myboo
 "   sign define mywarning  text=!> linehl=mywar texthl=mywar
-"   nnoremap <F8> :exe ":sign place 777 line=" . line(".") ." name=mywarning file=" . expand("%:p")<CR>
-"   nnoremap <F9> :exe ":sign place 666 line=" . line(".") ." name=mybookmark file=" . expand("%:p")<CR>
+"   nnoremap <F8> :exec ":sign place 777 line=" . line(".") ." name=mywarning file=" . expand("%:p")<CR>
+"   nnoremap <F9> :exec ":sign place 666 line=" . line(".") ." name=mybookmark file=" . expand("%:p")<CR>
 "   nnoremap <F10> :sign unplace<CR>
 "   if filereadable("$VICONFDIR/signs.sav")
 "     source $VICONFDIR/signs.sav

@@ -33,7 +33,7 @@ go_through ()
     echo Themes are:
     ls -x *.conf
     echo ------------
-    echo current theme is $(readlink /ln/co/kitty/current-theme.conf)
+    echo current theme is $(readlink $HOME/.config/kitty/current-theme.conf)
     echo
     #
     for t in *.conf ; do

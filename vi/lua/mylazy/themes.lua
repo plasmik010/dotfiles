@@ -7,6 +7,7 @@
 return {
 
   'AbdelrahmanDwedar/awesome-nvim-colorschemes',
+  'gbprod/nord.nvim',
 
   {
     "catppuccin/nvim",
@@ -33,7 +34,6 @@ return {
   'uloco/bluloco.nvim', -- have transprent
   '2nthony/vitesse.nvim',
   'JoosepAlviste/palenightfall.nvim',
-  'gbprod/nord.nvim',
   'Yazeed1s/oh-lucy.nvim',
   'kvrohit/mellow.nvim',
   'sam4llis/nvim-tundra', -- needs lua require()

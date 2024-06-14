@@ -9,8 +9,6 @@ vim.api.nvim_command('\
 
 H.nmap('<C-h>', H.teles_ff)
 
-H.nmap('z<Down>', function() vim.lsp.diagnostic.goto_next() end)
-H.Bmap('z<Up>', "k<cmd>vim.lsp.diagnostic.goto_prev")
 H.nmap(',S', vim.lsp.buf.signature_help)
 vim.keymap.set('n','K', vim.lsp.buf.hover, {buffer=0})
 -- H.nmap('gv', function() vim.api.nvim_open_win(true,true,{}) vim.lsp.buf.definition() end)
@@ -23,11 +21,21 @@ H.nmap('gw', vim.lsp.buf.workspace_symbol)
 H.nmap('gy', vim.lsp.buf.type_definition)
 H.nmap('gI', vim.lsp.buf.implementation)
 
-local next_diag = {vim.diagnostic.jump, {count=1}}
-H.nmap('z<Down>', next_diag )
-
-local prev_diag = {vim.diagnostic.jump, {count=-1}}
-H.nmap('z<Up>', prev_diag )
+-- H.nmap('z<Down>', function() vim.lsp.diagnostic.goto_next() end)
+-- H.Bmap('z<Up>', "k<cmd>vim.lsp.diagnostic.goto_prev")
+do
+  local next_diag, prev_diag
+  -- if vim.version().build <= "gb7782daac" then
+  if vim.version().minor <= 10 then
+    next_diag = vim.diagnostic.goto_next
+    prev_diag = vim.diagnostic.goto_prev
+  else
+    next_diag = {vim.diagnostic.jump, {count=1}}
+    prev_diag = {vim.diagnostic.jump, {count=-1}}
+  end
+  H.nmap('z<Down>', next_diag )
+  H.nmap('z<Up>', prev_diag)
+end
 
 -- H.nmap('z<up>', vim.diagnostic.goto_prev)
 H.nmap(',R', vim.lsp.buf.rename)
@@ -87,7 +95,7 @@ H.nmap(',j', require'treesj'.toggle)
 -- H.nmap('q.', ":TSJSplit<CR>")
 H.nmap('d<', "<cmd>diffget //2<CR>")
 H.nmap('d>', "<cmd>diffget //3<CR>")
-H.nmap(',vn', function()  if vim.o.winbar=='' then vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}" else vim.o.winbar='' end end )
+H.nmap(',ve', function()  if vim.o.winbar=='' then vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}" else vim.o.winbar='' end end )
 
   -------- Finding -----------------------------{{{}}}------
 
@@ -117,7 +125,7 @@ H.nmap('qf', "<cmd> call GetProjDir() <bar> exec 'Telescope find_files cwd=' . e
 H.nmap(
     ',/',
     function() require'telescope.builtin'.find_files({
-        search_dirs={ os.getenv("loc"), os.getenv("sh"), os.getenv("tt") },
+        search_dirs={ os.getenv("loc"), os.getenv("dotfiles"), os.getenv("tt") },
     }) end,
     "Find files in Favourite dirs"
 )

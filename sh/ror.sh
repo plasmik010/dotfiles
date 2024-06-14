@@ -1,6 +1,6 @@
 #!/bin/bash
 # My run-or-raise window script
-# Cycle through windows of matching class/name or run something when no desired windows are present
+# Cycle through windows of matching class/name or run something when desired windows are not present
 # Dependency : wmctrl
 #
 # Usage: 'ror.sh classname-or-windowname [run command]'

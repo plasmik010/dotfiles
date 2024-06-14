@@ -75,7 +75,7 @@ fi
 (
 killall bspc bspc_rules & sleep .4
 export FLOATING_DESKTOPS
-/ln/sh/bspc_rules
+$sh/bspc_rules
 ) &
 
 notify-send 'Bspwmrc complete'

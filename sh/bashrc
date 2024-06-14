@@ -19,18 +19,18 @@ alias sc="systemctl "
 alias ssc="sudo systemctl "
 alias bb='tty | grep -q /dev/tty && ( terminusfont; [[ -f /usr/bin/tap ]] && sudo /usr/bin/tap & startx $sh/xinitrc bspwm ) || echo This is not tty!'
 alias tf='terminusfont'
-alias v='VIMINIT="source /ln/sh/vi/vimrc_main" nvim'
+alias v='VIMINIT="source $vi/vimrc_main" nvim'
 alias vr='virpc'
 alias fm='vifm'
 #alias tm='cd; tmux new -s defs'
-alias tm='cd; tmux -Lrandom attach || tmuxp load $sh/conf/tmuxp.yaml -Lrandom -f $sh/conf/tmux.conf'
+alias tm='cd; tmux -Lrandom attach || tmuxp load $dotfiles/conf/tmuxp.yaml -Lrandom -f $sh/conf/tmux.conf'
 alias va='MODE=last nvimrpc.py'
 alias ll='ls -la'
 alias lin='less $sh/rs/1linux'
 alias gs='git status'
 alias gb='git branch -a'
 alias gl='git log -3 '
-alias ggs='( [[ -f $HOME/.env ]] && . "$HOME"/.env; gsync $sh )'
+alias ggs='( [[ -f $HOME/.env ]] && . "$HOME"/.env; gsync $dotfiles )'
 alias ggc='( [[ -f $HOME/.env ]] && . "$HOME"/.env; gsync $git/code_misc )'
 alias ggi='( [[ -f $HOME/.env ]] && . "$HOME"/.env; gsync $git/silly )'
 alias gg.='git add .; git commit -m ---; [[ $(git status | grep "our branch is ahead") ]] && git push'
@@ -133,7 +133,7 @@ xdgsane() {
     fi
 }
 
-# This does mirror my dotfiles to remote git, thanks I am the only developer in the project =))
+# Mirror files with remote git repo
 gsync() {
 (
     targ_dir=$(realpath "$1")

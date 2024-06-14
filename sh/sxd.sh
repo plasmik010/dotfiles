@@ -2,7 +2,7 @@
 # Reload sxhkd silently
 # And invoke useful stuff
 
-killall sxhkd; sxhkd -c  /ln/sh/conf/sxhkdrc 1>/dev/null &
+killall sxhkd; sxhkd -c  $dotfiles/conf/sxhkdrc 1>/dev/null &
 
 addlayout.sh
 xinputupd.sh

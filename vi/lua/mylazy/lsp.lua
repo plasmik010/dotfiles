@@ -21,10 +21,7 @@ return
       lsp_zero.on_attach(
       function(client, bufnr)
         lsp_zero.default_keymaps { buffer = bufnr, preserve_mappings = false }
-        print("lsp-zero added")
-      -- require("nvim-navbuddy").attach(client, bufnr)
-        -- require("nvim-navic").attach(client, bufnr)
-        -- print("navbuddy & navic attached!")
+        -- print("lsp-zero added")
       end
       )
     end

@@ -199,12 +199,13 @@ nnoremap aL :!ln -s  %d/%c %d/%cL
 " Compress files "
 nnoremap zu :! upk2dir.sh %c;echo<cr>
 nnoremap zU :! upk2dir.sh %c %D;echo<cr>
+nnoremap z<CR> :! APPEND= upk2dir.sh %c /tmp; echo<CR>:cd /tmp/%c<CR>
 nnoremap zp :! 7z a -mx=6 -xr!tags %c.7z %f<cr>
 nnoremap z0 :! 7z a -mx=1 -xr!tags %c.7z %f
 nnoremap zP :! 7z a -mx=6 -xr!tags %D/%c.7z %f<cr>
 let $TAR_IGNOR="--exclude='.git' --exclude='tags' --exclude='debug/*' --exclude='build/*' --exclude='~$*'"
-nnoremap zs :! tar -I 'zstd -10v -T0' -X /ln/sh/zip_exclu -cf    %c.tar.zst %f
-nnoremap zS :! tar -I 'zstd -10v -T0' -X /ln/sh/zip_exclu -cf %D/%c.tar.zst %f
+nnoremap zs :! tar -I 'zstd -10v -T0' -X $sh/zip_exclu -cf    %c.tar.zst %f
+nnoremap zS :! tar -I 'zstd -10v -T0' -X $sh/zip_exclu -cf %D/%c.tar.zst %f
 nnoremap ze :! upk.sh %c<cr>
 nnoremap zE :! cd %D; upk.sh %d/%c<cr>
 nnoremap z"e :! upk.sh %r<cr>
@@ -224,7 +225,7 @@ nnoremap g1 :cd $HOME/1<cr>
 nnoremap g2 :cd $HOME/2<cr>
 nnoremap g3 :cd $HOME/3<cr>
 nnoremap g4 :cd $HOME/4<cr>
-nnoremap gs :cd /ln/sh<cr>
+nnoremap gs :cd /ln/dots/sh<cr>
 " nnoremap ge :cd $HOME/stek<cr>
 nnoremap gw :cd /ln/wo<cr>
 nnoremap gj :cd /ln/ho/gitjob<cr>
@@ -236,7 +237,7 @@ nnoremap gf :cd /ln/fast<cr>:goto hh<cr>
 " nnoremap gf 'f
 nnoremap gi :cd /ln/hh/imgdl1<cr>
 nnoremap ge :cd /ln/hh/<cr>
-nnoremap gk :cd /ln/torrents/red/KKK<cr>:sort<cr>mh
+nnoremap gk :cd /ln/torrents/red/KKK<cr>:sort=mtime<cr>hj
 nnoremap gv :cd ~/.vim<cr>:goto plugged<cr>
 nnoremap gn :cd ~/.config/nvim<cr>:goto bak<cr>
 nnoremap gp :cd /ln/pr/<cr>:goto prwin<cr>
@@ -765,6 +766,6 @@ nnoremap <C-h> :fzfmushist<cr>
 
 source $loc/vifmrc_loc
 if (system(' [[ ! $(tty | grep -q /dev/tty) ]] && [[ $(pgrep Xorg) ]] && [[ $(echo $TERMINAL) == "kitty" ]] && echo 1'))
-    source /ln/sh/conf/favicons.vifm
+    source /ln/dots/conf/favicons.vifm
 endif
 

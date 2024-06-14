@@ -97,7 +97,7 @@ fi
 killall dunst
 (
 sleep .1
-dunst -conf /ln/sh/conf/dunstrc &
+dunst -conf $dotfiles/conf/dunstrc &
 )
 
 # resta xbanish

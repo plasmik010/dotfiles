@@ -2,32 +2,44 @@
 
 -- print('hello from helpy lua')
 
-local M = {}
+if not H then
+  H = {}
+end
 
-function M.sayhello()
+function H.sayhello()
   print(12321)
   return '000'
 end
 
-function M.logo()
+function H.get_version()
+  -- local major = vim.version().major
+  local bild = vim.version().build
+  print(vim.inspect(vim.version()))
+  -- print(bild, type(bild))
+  local bildnum = (tonumber(bild,26))
+  print(bildnum)
+  return bildnum
+end
+
+function H.logo()
   -- os.execute('echo 111')
   -- local output = vim.fn.system { 'echo', 'hi' }
-  local output = vim.fn.system { 'bash', '/ln/sh/vi/nvim-logo', '-b' }
+  local output = vim.fn.system { 'bash', '$dotfiles/vi/logo/nvim-logo', '-b' }
   return output
 end
 
-function M.auxfun1()
+function H.auxfun1()
   return require("nvim-possession").status()
 end
 
-M.vidir = os.getenv('sh') .. '/vi/'
+H.vidir = os.getenv('sh') .. '/vi/'
 
-function M.is_git_repo()
+function H.is_git_repo()
   local is_repo = vim.fn.system("git rev-parse --is-inside-work-tree")
   return vim.v.shell_error == 0
 end
 
-function M.get_git_root(path)
+function H.get_git_root(path)
   if not path then
     -- path = vim.api.nvim_buf_get_name(0)
     path = vim.fn.expand("%:p:h")
@@ -43,8 +55,8 @@ function M.get_git_root(path)
   end
 end
 
-function M.condMkdir(base,dir)
-  local targ = base .. M.path_separator .. dir
+function H.condMkdir(base,dir)
+  local targ = base .. H.path_separator .. dir
   -- print('targ is ' , targ)
   if
     vim.fn.getftype(targ) == "dir"
@@ -64,10 +76,10 @@ function M.condMkdir(base,dir)
     end
   end
 end
--- print( M.condMkdir(os.getenv("VICONFDIR"),"sessions_path2"))
+-- print( H.condMkdir(os.getenv("VICONFDIR"),"sessions_path2"))
 
 -- Print table
-function M.Tprint (tbl)
+function H.Tprint (tbl)
   if not tbl then print(tbl) return "" end
   for k,v in pairs(tbl) do
     print(k,v)
@@ -75,7 +87,7 @@ function M.Tprint (tbl)
 end
 
 -- Print almost any object
-function M.Uprint (input, indent)
+function H.Uprint (input, indent)
   if not input then print(input) return "" end
   if not indent then indent = 0 end
   local format = string.rep("  ", indent)
@@ -84,7 +96,7 @@ function M.Uprint (input, indent)
     print(format .. tostring(input) .. '\n')
     -- print(formatting .. input )
     for _,val in pairs(input) do
-      M.Uprint(val,indent+1)
+      H.Uprint(val,indent+1)
     end
   elseif type(input) == "function" then
     print(format .. "func: " .. input .. '\n')
@@ -93,7 +105,7 @@ function M.Uprint (input, indent)
   end
 end
 
---[[ function M.uprint (input, indent)
+--[[ function H.uprint (input, indent)
 --older
   if not input then print(input) return "" end
   -- if not
@@ -103,7 +115,7 @@ end
     local formatting = string.rep("  ", indent)
     if type(v) == "table" then
       print(formatting .. k .. ": ")
-      M.uprint(v, indent+1)
+      H.uprint(v, indent+1)
     elseif type(v) == "function" then
       print(formatting .. type(v) .. " " .. k )
     else
@@ -115,21 +127,21 @@ end ]]
 
 
 
-function M.unload (p)
+function H.unload (p)
   package.loaded[p] = nil
 end
 
-function M.reload (p)
+function H.reload (p)
   package.loaded[p] = nil
   require(p)
 end
 
-function M.reset (p)
+function H.reset (p)
   package.loaded[p] = nil
   require(p).setup()
 end
 
-function M.try_require(a)
+function H.try_require(a)
   local ok, err = pcall(require, a)
   if not ok then
     return nil, err
@@ -138,8 +150,8 @@ function M.try_require(a)
   end
 end
 
-function M.reqsetup(p)
-  local pl = M.try_require(p)
+function H.reqsetup(p)
+  local pl = H.try_require(p)
   if pl then
     require(p).setup()
   else
@@ -147,17 +159,17 @@ function M.reqsetup(p)
   end
 end
 
---[[ M.tableMerge = function(tSrc,tDest)
+--[[ H.tableMerge = function(tSrc,tDest)
   for k,v in pairs(tDest) do
     tSrc[k] = v
   end
 end ]]
 
-function M.tableMerge(t1, t2)
+function H.tableMerge(t1, t2)
   for k,v in pairs(t2) do
     if type(v) == "table" then
       if type(t1[k] or false) == "table" then
-        M.tableMerge(t1[k] or {}, t2[k] or {})
+        H.tableMerge(t1[k] or {}, t2[k] or {})
       else
         t1[k] = v
       end
@@ -170,16 +182,16 @@ end
 
 ---Author: cseickel
 ---The file system path separator for the current platform.
-M.path_separator = "/"
-M.is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win32unix") == 1
-if M.is_windows == true then
-  M.path_separator = "\\"
+H.path_separator = "/"
+H.is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win32unix") == 1
+if H.is_windows == true then
+  H.path_separator = "\\"
 end
 ---Split string into a table of strings using a separator.
 ---@param inputString string The string to split.
 ---@param sep string The separator to use.
 ---@return table table A table of strings.
-M.split = function(inputString, sep)
+function H.split(inputString, sep)
   local fields = {}
   local pattern = string.format("([^%s]+)", sep)
   local _ = string.gsub(inputString, pattern, function(c)
@@ -190,40 +202,41 @@ end
 ---Joins arbitrary number of paths together.
 ---@param ... string The paths to join.
 ---@return string
-M.path_join = function(...)
+function H.path_join(...)
   local args = {...}
   if #args == 0 then
     return ""
   end
   local all_parts = {}
-  if type(args[1]) =="string" and args[1]:sub(1, 1) == M.path_separator then
+  if type(args[1]) =="string" and args[1]:sub(1, 1) == H.path_separator then
     all_parts[1] = ""
   end
   for _, arg in ipairs(args) do
-    local arg_parts = M.split(arg, M.path_separator)
+    local arg_parts = H.split(arg, H.path_separator)
     vim.list_extend(all_parts, arg_parts)
   end
-  return table.concat(all_parts, M.path_separator)
+  return table.concat(all_parts, H.path_separator)
 end
 
 -- classic Vim keymap, it may take options like "silent"
-M.Bmap = function (a_key, a_map, a_opts )
+function H.Bmap (a_key, a_map, a_opts )
   if type(a_opts or false) == "table" then
-    M.tableMerge(a_opts or {}, {})
-    -- M.tableMerge(a_opts or {}, {noremap=true})
+    H.tableMerge(a_opts or {}, {})
+    -- H.tableMerge(a_opts or {}, {noremap=true})
   else
     a_opts = { noremap = true }
   end
   vim.api.nvim_set_keymap('n', a_key, a_map, a_opts)
 end
 
-M.mapfuncwrap = function(input)
+function H.mapfuncwrap(input)
   local funcname
   local args
   if type(input) == "string" then
     -- it is an old Vim command string
     return input
   elseif type(input) == "table" then
+    -- print("mpf input", vim.inspect(input))
     funcname = table.remove(input, 1)
     args = input
     -- print("args_size", #args)
@@ -239,28 +252,29 @@ M.mapfuncwrap = function(input)
   end
 end
 
-M.nmap = function(keys, func, desc)
+function H.nmap(keys, func, desc)
   desc = desc or " "
-  vim.keymap.set('n', keys, M.mapfuncwrap(func), { desc = desc, noremap = true })
+  -- print'omg'
+  vim.keymap.set('n', keys, H.mapfuncwrap(func), { desc = desc, noremap = true })
 end
 
-M.snmap = function(keys, func, desc)
+function H.snmap(keys, func, desc)
   vim.keymap.set('n', keys, func, { desc = desc, noremap = true, silent = true })
 end
-M.xnmap = function(keys, func, desc)
+function H.xnmap(keys, func, desc)
   vim.keymap.set({'n','x'}, keys, func, { desc = desc, noremap = true })
 end
-M.vmap = function(keys, func, desc)
+function H.vmap(keys, func, desc)
   vim.keymap.set({'v'}, keys, func, { desc = desc, noremap = true })
 end
-M.nvmap = function(keys, func, desc)
+function H.nvmap(keys, func, desc)
   vim.keymap.set({'n','v'}, keys, func, { desc = desc, noremap = true })
 end
 
 -- local k_opts = { silent=true, noremap=false }
 -- vim.api.nvim_set_keymap("n", "<C-p>", ":lua require('bufjump').backward()<cr>", k_opts)
 
-M.teles_ff = function()
+function H.teles_ff()
   -- local opt = require('telescope.themes').get_ivy({height=10,previewer=false,winblend=16})
   local opt = require('telescope.themes').get_ivy({height=10,previewer=false,winblend=16})
   require('telescope.builtin').current_buffer_fuzzy_find(opt)
@@ -271,7 +285,7 @@ end
 -- print("init.lua loaded once more")
 -- return hotfun
 
-M.eval_paragraph = function()
+function H.eval_paragraph()
   local filetype = vim.bo.filetype
   local lastpos = vim.api.nvim_win_get_cursor(0)[1]
   vim.cmd[[ silent exec "normal yap" ]]
@@ -292,7 +306,7 @@ end
 
 vim.cmd[[ @" ]]
 
-M.mirror_buf_to_prev_window = function()
+function H.mirror_buf_to_prev_window()
   local bufnr = vim.api.nvim_get_current_buf()
   local pos = vim.fn.getpos('.')
   if vim.fn.winnr() == vim.fn.winnr('#') then
@@ -311,11 +325,11 @@ end
 --- when a plugin is not necessarily loaded yet.
 ---@param plugin string The plugin to search for.
 ---@return boolean available # Whether the plugin is available.
-function M.is_available(plugin)
+function H.is_available(plugin)
   local lazy_config_avail, lazy_config = pcall(require, "lazy.core.config")
-  -- M.tprint(lazy_config.plugins)
+  -- H.tprint(lazy_config.plugins)
   return lazy_config_avail and lazy_config.plugins[plugin] ~= nil
 end
 
-return M
+-- return H
 

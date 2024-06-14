@@ -1,5 +1,6 @@
 #!/bin/bash
 # Locate directories with 'locate'
+# Usage: $ locatedir.sh "Rock album 2000"
 
 locatedir () {
     locate -i "$*" | while read line

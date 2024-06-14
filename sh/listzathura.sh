@@ -1,5 +1,5 @@
 #!/bin/bash
-# Choose from pdf and djvu files with dmenu. And open it with zathura
+# Choose from pdf and djvu files with dmenu. Then view it with zathura
 
 source $sh/dmenurc
 dirlist="/ln/hh /ln/mob/use /ln/dwn $HOME/.cache/luakit/viewpdf/ /ln/wo"

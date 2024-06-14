@@ -9,13 +9,14 @@ if ! [[ -d $sh ]]; then
         export sh="$HOME/.sh"
     else
         SELFDIR=$(dirname $(realpath "$BASH_SOURCE"))
-        echo rp is $SELFDIR
+        # echo rp is $SELFDIR
         if [[ -d $SELFDIR/vi && -f $SELFDIR/all ]]; then
             export sh="$SELFDIR"
         fi
     fi
+    echo \$sh is a guess at $sh
 fi
-echo \$sh is $sh
+[[ -d $sh ]] || echo "$sh is not valid!!"
 
 # [ -f $HOME/.bashrc_ORIG ] && source $HOME/.bashrc_ORIG
 [[ -f $sh/bashvars ]] &&      source "$sh/bashvars"

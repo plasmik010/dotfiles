@@ -1,11 +1,11 @@
 # Usage: startx ~/.xinitrc awesome -- :0
 session=${1:-startlxqt}
-# xrdb -merge /ln/sh/Xresources
+# xrdb -merge $sh/Xresources
 setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle,grp_led:scroll' &
 
 case $session in
     awesome           ) exec /usr/bin/awesome;;
-    bspwm             ) exec bspwm -c /ln/sh/bspwmrc;;
+    bspwm             ) exec bspwm -c $sh/bspwmrc;;
 #    catwm             ) exec catwm;;
 #    cinnamon          ) exec cinnamon-session;;
 #    dwm               ) exec dwm;;

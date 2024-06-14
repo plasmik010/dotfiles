@@ -2,6 +2,8 @@
 # vim: ts=4 sw=4 ft=sh
 # Update and tidy my Arch Linux (or Debian Linux as well)
 
+NVSD="$HOME/.nvim-session"
+
 uptime -p ; echo
 
 # Call few commands with a single 'sudo' call
@@ -25,7 +27,6 @@ updatedb
 
 # Backup vim-session cause I am known for overwriting it by accident
 [ -f $HOME/.vim/session.vim ] && cp $HOME/.vim/session.vim $HOME/.vim/session.vimBAK
-NVSD="$HOME/.config/nvim/session"
 [ -d $NVSD ] &&
     tar -czf "$NVSD/../sess.tar.gz" -C "$NVSD/../" session
 

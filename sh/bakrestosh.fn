@@ -33,7 +33,7 @@ bakport()
   if [[ $space == "wo" ]] ; then
     if [[ $FAST != 1 ]] ; then
       echo "-- Creating gitjob.tar.zst --"
-      # tar -I 'zstd -10 -T0' -X /ln/sh/zip_exclu -cf $bakdir/gitjob.tar.zst -C /ln/ho/ gitjob
+      # tar -I 'zstd -10 -T0' -X $sh/zip_exclu -cf $bakdir/gitjob.tar.zst -C /ln/ho/ gitjob
       cd $wd1 && make -s -f my_Makefile clean
       cd $wd2 && make -s clean
       # tar -I 'zstd -10 -T0' -cf $bakdir/gitjob.tar.zst -C /ln/ho gitjob

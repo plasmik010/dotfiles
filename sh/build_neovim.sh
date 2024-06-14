@@ -1,6 +1,7 @@
 #!/bin/bash
 
 url="https://github.com/neovim/neovim"
+[[ -z $tag ]] && tag="stable"
 
 flow=true
 
@@ -11,8 +12,8 @@ if [[ $flow == true && ! -d neovim ]]; then
 fi
 
 if [[ $flow == true ]]; then
-    # get "Nightly" commit
-    ( cd neovim && git checkout master && git pull && git checkout tags/nightly  ) || flow=false
+    # get commit tagged with $tag
+    ( cd neovim && git checkout master && git pull && git checkout tags/$tag  ) || flow=false
 fi
 
 if [[ $flow == true ]]; then

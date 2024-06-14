@@ -1,5 +1,8 @@
 #!/bin/bash
 
+[ -z "$APPEND" ] ||
+    APPEND="_D"
+
 echo upk2dir:
 echo args are $*
 
@@ -14,11 +17,11 @@ arcname=$(basename "$1")
 fullarcname=$(realpath "$1")
 
 if [[ "$2" ]] ; then
-    dest="$2/$arcname"D
+    dest="$2/$arcname$APPEND"
     echo --Will extract to $dest
     mkdir -p "$dest" || { echo Destination unavailable.; exit 1; }
 else
-    dest="$arcname"D
+    dest="$arcname$APPEND"
     echo --Will extract to $dest
     mkdir -p "$dest"
 fi

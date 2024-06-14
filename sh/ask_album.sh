@@ -5,6 +5,17 @@ clear
 echo What would you like to do next?
 echo
 
+QUIT_KEY='q'
+FM_KEY='c'
+GOLIB_KEY='m'
+GOPLIST_KEY='l'
+GOHIST_KEY='i'
+GOFAV_KEY='f'
+PLADD_KEY='a'
+PLDEL_KEY='x'
+FAVADD_KEY='s'
+FAVDEL_KEY='d'
+
 # Prefer $1 for TARG
 if [[ -n $1 ]]; then
     TARG="$1"
@@ -26,6 +37,7 @@ else
     echo @ $(realpath .)
     TARGREAL=$(realpath "$TARG")
     echo "really" "$TARGREAL"
+    echo ----------------------
 fi
 
 [[ -z $LIBRARY ]] && LIBRARY=$HOME/.mus-library
@@ -35,8 +47,8 @@ fi
 HIST=$HOME/.mus-history
 
 if [[ "$TARG" =~ "torrents/red/" ]]; then
-    [[ . -nt /ln/torrents/red/KKK ]] && echo --it is a new torrent
-    [[ . -ot /ln/torrents/red/KKK ]] && echo --it is an archive torrent
+    [[ . -nt /ln/torrents/red/KKK ]] && echo -- it is a new torrent
+    [[ . -ot /ln/torrents/red/KKK ]] && echo -- it is an archive torrent
 fi
 
 if [[ ! -z $TARGREAL ]]; then
@@ -73,26 +85,26 @@ fi
 echo
 
 [[ $INVIFM == 1 ]] && \
-    echo "q" - back to vifm || \
-    echo "q - quit"
+    echo "$QUIT_KEY" - back to vifm || \
+    echo "$QUIT_KEY - quit"
 [[ $INVIFM != 1 ]] && \
-    echo "c - inspect directory with Vifm"
+    echo "$FM_KEY - inspect directory with Vifm"
 [[ $INPLIST == 1 ]] && \
-    echo "d - Delete from Playlist"
+    echo "$PLDEL_KEY - Delete from Playlist"
 [[ $INPLIST == 0 && ! -z $TARGREAL ]] && \
-    echo "a - Add to Playlist"
+    echo "$PLADD_KEY - Add to Playlist"
 [[ $INFAVS == 0 && ! -z $TARGREAL ]] && \
-    echo "s - Save to Favourites"
+    echo "$FAVADD_KEY - Save to Favourites"
 [[ $INFAVS == 1 ]] && \
-    echo "S - Delete from Favourites"
+    echo "$FAVDEL_KEY - Delete from Favourites"
 [[ -f $LIST && $INVIFM != 1 ]] && \
-    echo "p - play an album from Playlist"
+    echo "$GOPLIST_KEY - play an album from Playlist"
 [[ $INVIFM != 1 ]] && \
-echo "f - play an album from Favourites"
+echo "$GOFAV_KEY - play an album from Favourites"
 [[ $INVIFM != 1 ]] && \
-echo "i - play an album from History"
+echo "$GOHIST_KEY - play an album from History"
 [[ $INVIFM != 1 ]] && \
-echo "l - play an album from Library"
+echo "$GOLIB_KEY - play an album from Library"
 echo "<Space> or <CR> - PLAY again"
 echo
 
@@ -141,17 +153,17 @@ elif [[ $prompt == "c" && $INVIFM != 1 ]]; then
 elif [[ $prompt == "" ]]; then
     PAUSE=0 mpv-album.sh "$TARGREAL"
     # ask_album.sh
-elif [[ -f $LIST ]] && [[ $prompt == "p" ]]; then
+elif [[ -f $LIST ]] && [[ $prompt == "$GOPLIST_KEY" ]]; then
     SELECT=$( cat -n "$LIST" | sort -n | sort -uk2 | sort -nr | cut -f2- | $SELECTOR )
     ASK=1 PAUSE=1 mpv-album.sh "$SELECT"
-elif [[ -f $LIST ]] && [[ $prompt == "f" ]]; then
+elif [[ -f $LIST ]] && [[ $prompt == "$GOFAV_KEY" ]]; then
     SELECT=$( cat -n "$FAVS" | sort -n | sort -uk2 | sort -nr | cut -f2- | $SELECTOR )
     ASK=1 PAUSE=1 mpv-album.sh "$SELECT"
-elif [[ -f $LIBRARY ]] && [[ $prompt == "l" ]]; then
+elif [[ -f $LIBRARY ]] && [[ $prompt == "$GOLIB_KEY" ]]; then
     # notify-send "lib is $LIBRARY"
     SELECT=$( cat "$LIBRARY" | sort -R | $SELECTOR )
     ASK=1 PAUSE=1 mpv-album.sh "$SELECT"
-elif [[ -f $HIST ]] && [[ $prompt == "i" ]]; then
+elif [[ -f $HIST ]] && [[ $prompt == "$GOHIST_KEY" ]]; then
     SELECT=$( cat -n "$HIST" | sort -n | sort -uk2 | sort -nr | cut -f2- | $SELECTOR )
     ASK=1 PAUSE=1 mpv-album.sh "$SELECT"
 else

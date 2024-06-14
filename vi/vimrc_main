@@ -1,7 +1,7 @@
 " vim: ts=4 sw=4 ft=vim
-" Top config file for Vim/Neovim
-" you must set $VIMINIT in your shell first:
-" export VIMINIT="source $sh/vi/vimrc_main"
+" This is root config file for Vim/Neovim
+" You should set $VIMINIT in your shell first:
+" export VIMINIT="source $dotfiles/vi/vimrc_main"
 
 " Vim install checklist
 " 1. get plug.vim
@@ -16,15 +16,15 @@
 " Set crucial env for this config
 " memorize basic conf dir for later, usually "~/.config/nvim"
 let $VICONFDIR=split(&runtimepath, ',')[0]
-if !empty($sh)
-    let $MYVIMRC = $sh . "/vi/vimrc_main"
+if !empty($vi)
+    let $MYVIMRC = $vi . "/vimrc_main"
 endif
 if !empty($git)
     let $PLUGDIR = $git . "/nvpl"
-else
-    if isdirectory($sh . "/../../nvpl")
-        let $PLUGDIR = resolve($sh . "/../../nvpl")
-    endif
+"else
+"    if isdirectory($sh . "/../../nvpl")
+"        let $PLUGDIR = resolve($sh . "/../../nvpl")
+"    endif
 endif
 let $MYAUTOLOAD = expand('$VICONFDIR') . "/autoload"
 
@@ -47,27 +47,22 @@ endif
 " load-if-available command
 command! -nargs=1 SSource if filereadable(expand('<args>')) | source <args> | endif
 
-if ( !isdirectory($vi) && isdirectory($sh."/vi") )
-    let $vi = $sh .  "/vi"
-endif
-
 set runtimepath+=$vi
 " echom &runtimepath
 " echom len(&runtimepath)
 
 if has("nvim")
-    SSource $vi/myvimrc
+    SSource $vi/vs/myvimrc
     SSource $vi/lua/init.lua
-    " SSource $vi/vimrc_themes
 else
-    SSource $vi/vimrc_plug
-    SSource $vi/myvimrc
+    SSource $vi/vs/vimrc_plug
+    SSource $vi/vs/myvimrc
     " SSource $vi/vimrc_themes
     SSource $loc/vimrc.local
 endif
 silent call ReloadStyle(0)
 
-" set runtimepath+=$vi
+set runtimepath+=$vi
 
 ""   TODO&ISSUES   ""
 "     try nvim-dap

@@ -26,13 +26,13 @@ fi
 echo
 
 # Conditionally update history list
-VERY_RECENT_THR=6
+VERY_RECENT_THR=8
 if ! [[ -f $HIST ]] ; then touch "$HIST" ; fi
 recent=$( tail $HIST -n100 | cat -n | sort -nr | sort -uk2 | sort -nr | head -n $VERY_RECENT_THR | cut -f2- )
 fresh=$( echo "$recent" | grep -xF "$TARGREAL" >/dev/null; echo $? )
 case $fresh in
     0)
-        echo This album has been listened to recently..
+        echo This album has been played recently..
         ;;
     1)
         echo Updating history file..

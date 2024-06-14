@@ -3,6 +3,8 @@
 
 [[ -z $MYGITDIR ]] && export MYGITDIR=$HOME/gd
 echo gitdir $MYGITDIR
+dots=$MYGITDIR/dotfiles
+echo local dots $dots
 
 suc=false
 var='v'
@@ -25,12 +27,15 @@ cd
 
 mkdir -p $MYGITDIR
 
-sudo pacman -S --needed vifm fzf lsb-release wget ranger fd mlocate
+sudo pacman -S --needed vifm fzf lsb-release wget ranger fd mlocate \
+  2>&1 | grep -v "skipping"
 
-sudo pacman -S --needed fzf cmake unzip ninja curl luarocks npm python-pip python-pynvim ripgrep neovim
+sudo pacman -S --needed fzf cmake unzip ninja curl luarocks npm python-pip python-pynvim ripgrep neovim \
+  2>&1 | grep -v "skipping"
+
 # tree-sitter
 
-sudo pacman -S --needed base-devel
+sudo pacman -S --needed base-devel  2>&1 | grep -v "skipping"
 if type -f pacman &>/dev/null; then
     if ! type -f pakku &>/dev/null ; then
         cd $MYGITDIR && rm -rf pakku
@@ -40,12 +45,12 @@ if type -f pacman &>/dev/null; then
     fi
 fi
 
-if [[ -d $MYGITDIR/dotfiles ]] ; then
+if [[ -d $dots ]] ; then
     echo -e '\n'--Gonna update my git repo
-    git -C $MYGITDIR/dotfiles/ pull
+    git -C $dots/ pull
 else
     echo -e '\n'--Gonna clone my git repo
-    git clone https://codeberg.org/plasmik/dotfiles $MYGITDIR/dotfiles
+    git clone https://codeberg.org/plasmik/dotfiles $dots
 fi
 
 (
@@ -61,6 +66,8 @@ ln -sfn /ln/ho/.lo lo
 [ -d mo ] || ln -sn  /mnt mo
 ln -sfn /ln/ho/.config co
 ln -sfn $git gd
+ln -sfn /ln/gd/dotfiles dots
+ln -sfn /ln/gd/dotfiles/vi vi
 ln -sfn /ln/mo/blink bl
 ln -sfn /ln/mo/fast fast
 ln -sfn /ln/fast/hh hh
@@ -75,7 +82,8 @@ ln -sfn /ln/mo/metal/PRAGS pr
 (
 echo -e '\n'--Gonna link config files
 cd
-! [[ -L .sh ]] && ln -sn $MYGITDIR/dotfiles/sh .sh
+! [[ -L .sh ]] && ln -sn $dots/sh .sh
+# ! [[ -L .dots ]] && ln -sn $dots .dots
 
 [[ $(bash -c '(unset BASH_IS_PLASMIFIED; source .bashrc; echo $BASH_IS_PLASMIFIED )') != true ]] && NEED_NEW_BASHRC=true
 # ( [[ -f .bashrc ]] && ! [[ -L .bashrc ]] ) &&
@@ -95,17 +103,17 @@ touch -a /ln/lo/cur/vifmrc_loc
 # ln -sf .sh/vi/vimrc_main .vimrc
 co=$(realpath /ln/co)
 mkdir -p "$co"/nvim; # ln -srf .sh/vi/vimrc_main "$co"/nvim/init.vim
-mkdir -p "$co"/kitty; ln -srf .sh/conf/kitty.conf "$co"/kitty/
-mkdir -p "$co"/tmux; ln -srf .sh/conf/tmux.conf "$co"/tmux/
-mkdir -p "$co"/feh; ln -srf .sh/conf/feh.keys "$co"/feh/keys
-mkdir -p "$co"/zathura; ln -srf .sh/conf/zathurarc "$co"/zathura/
-mkdir -p "$co"/vifm/colors; ln -srf .sh/conf/vifmrc "$co"/vifm/vifmrc
-    cp .sh/conf/vifm-colors/*.vifm "$co"/vifm/colors/
+mkdir -p "$co"/kitty; ln -srf $dots/conf/kitty.conf "$co"/kitty/
+mkdir -p "$co"/tmux; ln -srf $dots/conf/tmux.conf "$co"/tmux/
+mkdir -p "$co"/feh; ln -srf $dots/conf/feh.keys "$co"/feh/keys
+mkdir -p "$co"/zathura; ln -srf $dots/conf/zathurarc "$co"/zathura/
+mkdir -p "$co"/vifm/colors; ln -srf $dots/conf/vifmrc "$co"/vifm/vifmrc
+    cp $dots/conf/vifm-colors/*.vifm "$co"/vifm/colors/
 mkdir -p "$co"/mpv
-    ln -srf .sh/conf/mpv/input.conf "$co"/mpv/
-    ln -srf .sh/conf/mpv/mpv.conf "$co"/mpv/
-mkdir -p "$co"/deadbeef; cp .sh/conf/deadbeef.config "$co"/deadbeef/config
-mkdir -p .local/share/applications/; cp /ln/sh/conf/transmission*desktop .local/share/applications/
+    ln -srf $dots/conf/mpv/input.conf "$co"/mpv/
+    ln -srf $dots/conf/mpv/mpv.conf "$co"/mpv/
+mkdir -p "$co"/deadbeef; cp $dots/conf/deadbeef.config "$co"/deadbeef/config
+mkdir -p .local/share/applications/; cp $dots/conf/transmission*desktop .local/share/applications/
 #
 # xdg-mime default transmission-cli.desktop x-scheme-handler/magnet
 # xdg-mime default transmission-cli.desktop application/x-bittorrent
@@ -115,7 +123,7 @@ type -f xdg-mime &>/dev/null && {
     xdg-mime default FBReader.desktop application/x-mobipocket-ebook
 }
 #
-[[ -d /usr/share/X11/xorg.conf.d ]] && ! [[ -L /usr/share/X11/xorg.conf.d/99-libinput-custom.conf ]] && [[ -d /ln/sh ]] && sudo ln -sf /ln/sh/conf/99-libinput-custom.conf /usr/share/X11/xorg.conf.d/
+[[ -d /usr/share/X11/xorg.conf.d ]] && [[ -d $sh ]] && sudo ln -sf $dots/conf/98-libinput-custom.conf /usr/share/X11/xorg.conf.d/
 )
 
 echo -e '\n'--Gonna pull kitty themes

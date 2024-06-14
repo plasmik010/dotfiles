@@ -246,7 +246,7 @@ return {
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'kyazdani42/nvim-web-devicons', 'gennaro-tedesco/nvim-possession' },
-    priority = 40,
+    -- priority = 40,
     opts = {
       sections = {
         lualine_c = {
@@ -356,7 +356,15 @@ return {
 
   {
     'andrewferrier/debugprint.nvim', -- handy! --- auto insert logging lines
-    config = true
+    config = true,
+    opts = {
+      keymaps = {
+        normal = {
+          plain_below = "zp",
+          -- plain_above = "g?P",
+        }
+      }
+    }
   },
 
   'LukasPietzschmann/telescope-tabs', -- usable
@@ -522,7 +530,6 @@ return {
   {
     'gaoDean/autolist.nvim', --- Bullets
     enabled = false,
-    priority = 80,
     ft = { "markdown", "text", "" },
     opts = {
       cycle = { "-", "*", "+", "1.", "1)", "a)", "I." }
@@ -542,25 +549,18 @@ return {
   },
 
   {
-    'zaldih/themery.nvim',
-    priority = 90,
+    'zaldih/themery.nvim', -- great
+    -- event = "VeryLazy",
+    lazy = true,
+    cmd = "Themery",
     config = function()
-      function ThemeryWrapper()
-        if H.is_available "themery.nvim" then
-          if not H.Themes then
-            H.Themes = vim.api.nvim_eval("getcompletion('','color')")
-            print("Themes list updated")
-            require("themery").setup({ themes =  H.Themes  })
-          else
-            print("Themes is")
-          end
-          -- H.tprint(H.Themes)
-          vim.cmd("Themery")
-        else
-          print'no avail'
-        end
-      end
-      H.nmap(',,t', ThemeryWrapper)
+      local themlist = vim.api.nvim_eval("getcompletion('','color')")
+      -- print(vim.inspect(opts.themes))
+      require'themery'.setup {
+        themes = themlist,
+      }
+      H.nmap(',,t', "<cmd> Themery<CR>", "Themery")
+      -- vim.api.nvim_create_user_command('ThemeryWrapper', ThemeryWrapper, {})
     end
   },
 
@@ -780,7 +780,7 @@ return {
     opts = {
       autosave = false,
       sessions = {
-        sessions_path = H.condMkdir(os.getenv("VICONFDIR"),"session/"),
+        sessions_path = H.condMkdir(os.getenv("HOME"),".nvim-session/session/"),
         sessions_icon = '󰅏 '
       },
       save_hook = function() vim.cmd('call SaveColor()') end,
