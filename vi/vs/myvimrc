@@ -125,10 +125,10 @@ if !isdirectory(workdir) | call mkdir(workdir, '', 0700) | endif
 if !isdirectory(bakdir) | call mkdir(bakdir, '', 0700) | endif
 silent exec "!find ".bakdir." -type f -mtime +30 -delete"
 " if !isdirectory($VICONFDIR) | call mkdir($VICONFDIR, '', 0770) | endif
-set backupdir=bakdir
-set undodir=bakdir
+exec "set backupdir=".bakdir
+exec "set undodir=".bakdir
 set undofile
-set directory=workdir
+exec "set directory=".workdir
 set swapfile
 set sessionoptions+=globals
 set history=2500
