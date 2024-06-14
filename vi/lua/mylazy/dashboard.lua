@@ -19,6 +19,8 @@ return {
                 -- ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
                 -- ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
 
+                '                                                                           ',
+                '                                                                           ',
                 '                                                                         ',
                 '          ███████████          █████      ██                       ',
                 '         ███████████            █████                               ',
@@ -92,14 +94,14 @@ return {
             packages = { enable = true },
             project = {
                 enable = true,
-                limit = 4,
+                limit = 2,
                 -- icon = ' ',
                 -- label = '',
                 action = 'Telescope find_files cwd=',
             },
             mru = {
                 enable = true,
-                limit = 12,
+                limit = 8,
                 icon = ' ',
                 -- label = '',
             },

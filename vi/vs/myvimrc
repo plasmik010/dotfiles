@@ -375,8 +375,8 @@ nnoremap dA ggdG
 
 nnoremap =a :IndentAll<CR>
 nnoremap d<space> :call DelSpace()<CR>
-" add this line to the next line
-nnoremap an ddpkJ
+" Append current line to next one
+nnoremap cJ ddpkJ
 " break line at cursor, latter part will be put above
 nnoremap au r<CR>ddkP
 " start fat new line
@@ -395,7 +395,7 @@ nnoremap q= o<Esc>64A=<Esc>kJ0<Esc>60ld$0<Esc>40l
 " add horiz line
 nnoremap z- o<Esc>64A-<Esc>0<Esc>60ld$0<Esc>40l
 " add nice separator line
-nnoremap qc o<Esc>88A-<Esc>$11hR{{{}}}<Esc>$59h"_d0R<Space><Space><C-o>8l<Space>
+nnoremap qc o<Esc>88A-<Esc>$11hR{{{}}}<Esc>$59h"_d0R<Space><Space><C-o>8lR<Space>
 
 " insert one char
 nnoremap ar :exec "normal  i".nr2char(getchar())."\e"<CR>
@@ -470,7 +470,7 @@ nnoremap <C-s> :w<CR>
 nnoremap ,,w :wa<CR>
 nnoremap ax :q<CR>
 nnoremap ,x :q<CR>
-nnoremap ,D :tabclose<CR>
+nnoremap ,X :tabclose<CR>
 nnoremap ,q :qa<CR>
 nnoremap aq :qa<CR>
 nnoremap ,bd :bd!<CR>
@@ -490,12 +490,11 @@ nnoremap a<BS> :checktime<cr>
 " Edit blank buffer
 nnoremap q<BS> :enew<CR>
 nnoremap z<BS> :e!<CR>
+
 " :e at current file path
 nnoremap g/ :e %:p:h<tab>
 " open prev window in current window
 " nnoremap qp :exec "buffer " . winbufnr(winnr("#"))<CR>
-" open prev buffer in new tab
-nnoremap a, :exec "tabe " . expand("#")<CR>
 " split open filename under cursor
 nnoremap g.v :vsp <c-r><c-f><CR>
 nnoremap g.s :sp <c-r><c-f><CR>
@@ -515,7 +514,6 @@ nnoremap a- :wincmd v \| e %:p:h<CR>
 nnoremap as :split #  <bar> call WinSwap(0) <CR>
 nnoremap av :vsplit # <bar> call WinSwap(0) <CR>
 nnoremap <C-w>S :vsplit<CR>
-" nnoremap ,. <C-^>
 " nnoremap <silent> ,. :if bufexists(bufnr('#')) <bar> b # <bar> echo expand('%') <bar> else <bar> echo 'No prev buffer.' <bar> endif<CR>
 nnoremap <silent> ,. :call PrevBuf()<CR>
 nnoremap ,by :call BufYank()<CR>
@@ -527,8 +525,8 @@ nnoremap qj     <C-w>j
 nnoremap qk     <C-w>k
 nnoremap ql     <C-w>l
 nnoremap <C-\>  <C-w>w
-nnoremap a<Left>   <C-w>6<
-nnoremap a<Right>  <C-w>6>
+nnoremap a,     <C-w>6<
+nnoremap a.     <C-w>6>
 nnoremap ae     <C-w>4+
 nnoremap ad     <C-w>4-
 " grow tall
@@ -548,7 +546,8 @@ nnoremap g<space> <C-w>p
 nnoremap q<tab> <C-w>p
 " swap current and previous window
 silent nnoremap c<tab> :call WinSwap(1)<CR>
-nnoremap \\     <C-w>T
+
+nnoremap \\  <C-w>T
 nnoremap a\  :tabe #<CR>: exec "tabn ".g:lasttab<CR>
 nnoremap a\  :call PrevBufToTab()<CR>
 
@@ -943,10 +942,10 @@ endfunction
 " command! SessWriteA call SaveColor() | call TerminalsFuneral() | mksession! $VICONFDIR/session.vim | SaveSigns! $VICONFDIR/signs.sav
 " command! SessWriteB exec 'SessWriteA' | call BufFocusedThenDo('signs.sav','wq')
 
-command! Bash exec 'silent! bash' | redraw!
-command! NewTerm exec 'silent! $TERMINAL &' | redraw!
-command! NewTermHere exec 'silent! cd "%:p:h" && $TERMINAL &' | redraw!
-command! NewVifmHere exec 'silent! $TERMINAL -e vifm --select %:p & ' | redraw!
+command! Bash exec 'silent ! bash' | redraw!
+command! NewTerm exec 'silent ! $TERMINAL &' | redraw!
+command! NewTermHere exec 'silent ! cd "%:p:h" && $TERMINAL &' | redraw!
+command! NewVifmHere exec 'silent ! $TERMINAL -e vifm --select %:p & ' | redraw!
 command! LCDhere lcd! %:p:h | pwd
 command! LCDrealpath let b:cwd = expand("%:p:h") | let b:rcwd = system("realpath " . b:cwd) | exec "lcd! " . b:rcwd
 
@@ -971,7 +970,7 @@ if !empty($WINDIR)
   " set makeprg=\./make.bat\ -j4\ DEBUG=1
   " nnoremap qp :put +<CR>j
     command! RCbash :exec '!source /c/Users/user/.bashrc'
-    command! NewTerm exec 'silent! mintty.exe &' | redraw!
+    command! NewTerm exec 'silent ! mintty.exe &' | redraw!
     command! UpdCtags !ctags.exe -R --exclude=.git --exclude=log --exclude=wutils --c++-kinds=+p --fields=+iaS --extra=+q *
   command! Chrome :silent exec '!source /c/Users/user/.bashrc && chrome "%"' | redraw!
   command! Npp :silent exec '!source /c/Users/user/.bashrc && npp "%"' | redraw!
@@ -1005,22 +1004,30 @@ let @s = "i \<Esc>ll."
 """"""""""""""""""""""""""{{{}}}
 
 function! PrevBuf()
-  if bufexists(bufnr('#')) 
+  " With <C-^> we will swap buffers forever, so rather do this:
+  let prevbufnr = bufnr('#')
+  if bufexists(prevbufnr) 
     " if bufname(bufnum) 
-    if buflisted(bufnr('#'))
+    if buflisted(prevbufnr)
       b #
       echo expand('%') 
     else
-      echom "buf #" . bufnr('#') . " is not listed, use ':b N' to load it"
+      echom "#" . prevbufnr . " is not listed. Use ':b N' to load it."
     endif
   else 
     echo 'No prev buffer.' 
   endif
 endfunction
 
-function PrevBufToTab()
+function! PrevBufToTab()
+  " exec "tabe " . expand("#")
+  " ^ Rather naive approach ^
   let prevbufnr = bufnr('#')
-  exec "tab sb " . prevbufnr
+  if buflisted(prevbufnr)
+    exec "tab sb " . prevbufnr
+  else
+    echom "#" . prevbufnr . " is not listed. Ignoring.."
+  endif
 endfunction
 
 function! EditAtEdge(dir)

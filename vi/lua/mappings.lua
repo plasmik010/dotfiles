@@ -86,9 +86,8 @@ H.nmap(
     "Put plugin url as new entry"
 )
 
-H.nmap(',vt', function() require'tint'.toggle() end )
--- H.nmap(',vt', require'tint'.toggle)
-H.nmap(',t', ":SymbolsOutline<CR>")
+H.nmap(',vf', require'tint'.toggle, "Tint Focused window")
+H.nmap(',T', "<cmd>SymbolsOutline<CR>", "Tree like view for symbols")
 H.nmap(',j', require'treesj'.toggle)
 -- vim.keymap.set('n', ',j', require('treesj').toggle)
 -- H.nmap('q,', ":TSJJoin<CR>")

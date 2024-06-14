@@ -8,9 +8,14 @@ return {
   -- require'mylazy',
   -- { import = "mylazy" },
 
-  ---- VIM BASIC -------------------------------------------
+  -------- VIM BASIC ---------------------------{{{}}}------
+
   { 'junegunn/fzf.vim', dependencies = { 'junegunn/fzf' } }, -- fantastic
-  -- 'mhinz/vim-startify', -- great
+  {
+    'mhinz/vim-startify', -- great
+    enabled = false,
+    -- vim.g.startify_custom_header = 'startify#pad(split(system("bash $vi/nvim-logo -b"),"\n"))'
+  },
   -- 'justinmk/vim-sneak', -- good!
   -- 'tpope/vim-sensible', -- basic
   -- 'tpope/vim-endwise', -- okay
@@ -30,7 +35,7 @@ return {
   -- 'vim-scripts/QuickBuf',
   -- 'derekwyatt/vim-fswitch',
 
-  ------- NEOVIM ONLY --------------------------{{{}}}------
+  -------- NEOVIM ONLY -------------------------{{{}}}------
 
   {
     'nvim-telescope/telescope.nvim', branch = '0.1.x',
@@ -245,6 +250,7 @@ return {
 
   {
     'nvim-lualine/lualine.nvim',
+    lazy = true,
     dependencies = { 'kyazdani42/nvim-web-devicons', 'gennaro-tedesco/nvim-possession' },
     -- priority = 40,
     opts = {
@@ -578,7 +584,7 @@ return {
 
   'nullchilly/fsread.nvim', -- funky --- read fast
 
-  ------ Tryout --------------------------------{{{}}}------
+  -------- Tryout ------------------------------{{{}}}------
 
   {
     'NStefan002/speedtyper.nvim',
@@ -592,11 +598,11 @@ return {
   },
 
   {
-    'junegunn/vim-easy-align',
+    'junegunn/vim-easy-align', -- good
     config = function()
       -- H.nmap('ga', '<Plug>(EasyAlign)')
-      vim.keymap.set('n', 'ga',  '<Plug>(EasyAlign)')
-      vim.keymap.set('x', 'ga',  '<Plug>(EasyAlign)')
+      vim.keymap.set('n', 'al',  '<Plug>(EasyAlign)')
+      vim.keymap.set('x', 'al',  '<Plug>(EasyAlign)')
     end
   },
 

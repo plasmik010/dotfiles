@@ -10,7 +10,7 @@ theme.font = "16px Terminus"
 theme.fg   = "#eee"
 theme.bg   = "#444"
 
--- Genaral colours
+-- General colours
 theme.success_fg = "#0f0"
 theme.loaded_fg  = "#33AADD"
 theme.error_fg = "#FFF"

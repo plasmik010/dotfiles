@@ -12,16 +12,16 @@ super + x ; { space,  z,  i, f, p, q, l, c,  d, b, Up, Down }
 
 super + n ; { n, b, M, m, c, v, r, o, s, a }
   { \
-  $TERMINAL, $TERMINAL_BIGER, momkitty.sh, thunar & notify-send 'new Thunar', $TERMINAL -e vifm, USE_CURRENT_TERM=1 $TERMINAL_BIGER -e vinew, listzathura.sh, $TERMINAL_BIGER -c /ln/co/kitty/kitty.conf -c /ln/co/kitty-themes/themes/Ciapre.conf -e rtorrent, scrotfeh, $TERMINAL_BIGER -e tremc -c localhost:9090
+  $TERMINAL, $TERMINAL_BIGER, momkitty.sh, thunar & notify-send "new Thunar", $TERMINAL -e vifm, USE_CURRENT_TERM=1 $TERMINAL_BIGER -e vinew, listzathura.sh, $TERMINAL_BIGER -c /ln/co/kitty/kitty.conf -c /ln/co/kitty-themes/themes/Ciapre.conf -e rtorrent, scrotfeh, $TERMINAL_BIGER -e tremc -c localhost:9090
   }
 
 super + { q, Q, D, F, t, v, s, y, r, R, z, g, slash }
   ror.sh { \
   '' scroff, '' 'sus 1', windowswitcher.sh, '' 'rofi -show window', \
   'xterm\|urxvt\|kitty', \
-  ' - VIMSERV\|VIM$\|VIM @ \| - NVIM$\|nvim $\|pycharm\|QtCreator\| tmux\|tm$' 'USE_CURRENT_TERM=1 $TERMINAL_BIGER -e vinew', \
+  ' - VIMSERV\|VIM$\|VIM @ \| - NVIM$\|nvim $\|pycharm\|QtCreator\| tmux\|tm$' 'notify-send "Editor not running"', \
   'chromium\|Firefox\|Remmina' 'firefox', \
-  'Thunar\|Caja\|pcmanfm\| YouTube \|office.libreoffice\|Abiword\|sis.ko' 'notify-send not\ found', \
+  'Thunar\|Caja\|pcmanfm\| YouTube \|office.libreoffice\|Abiword\|sis.ko' 'notify-send "Not found"', \
   'sioyek\|zathura' listzathura.sh, evince, FBReader, \
   'Telegram\|Pidgin\|Git\|Audacity\|TuxGuitar\|hydrogen\|VirtualBox' '', \
   '' listmenu.sh }
@@ -31,10 +31,10 @@ super + { Return, e, d, X, semicolon }
 
 super + { c, a, A, b, m }
   ror.sh { \
-  'VIFM\|Thunar\|Nemo\|pcmanfm' 'raiseterm.sh & notify-send "no vifm found"', \
+  'VIFM\|Thunar\|Nemo\|pcmanfm' 'raiseterm.sh & notify-send "vifm not running"', \
   'mpv$\|MPV\|deadbeed\|transmission-remote\|tremc\|rtorrent\|qbittorrent' '$TERMINAL_BIGER -e tremc -c localhost:9090', \
   'tremc-pi' '$TERMINAL_BIGER -c /ln/co/kitty/kitty.conf -c /ln/co/kitty-themes/themes/Broadcast.conf -T tremc-pi -e tremc -c 192.168.1.78:9090', \
-  ' Browser\|Noita' 'noti echo starting TorBro... ; torbrowser-launcher', \
+  ' Browser\|Noita' 'notify-send "starting TorBro..." ; torbrowser-launcher', \
   'btop\|htop' 'bspc desktop -f 1; $TERMINAL_BIGER -e btop' }
 
 super + { T, V, C, B }
@@ -47,11 +47,11 @@ super + f ; { v, Up }
   }
 
 super + alt + space
-  ror.sh 'deadbeef\|MPV \|mpv$' 'noti echo no player instance found'
+  ror.sh 'deadbeef\|MPV \|mpv$' 'notify-send "No player instance found"'
 super + backslash
-  ror.sh 'deadbeef\|MPV \|mpv$' 'noti echo no player instance found'
+  ror.sh 'deadbeef\|MPV \|mpv$' 'notify-send "No player instance found"'
 super + space
-  (setxkbmap -query | grep -q "layout:\s\+us") && setxkbmap ru || setxkbmap us && notify-send "$( setxkbmap -query | grep layout | tr -s ' ' )" -t 600
+  (setxkbmap -query | grep -q "layout:\s\+us") && setxkbmap ru || setxkbmap us && notify-send "layout is $( setxkbmap -query | grep layout | cut -d ':' -f2 | tr -s ' ' | tr 'enrus' 'ENRUS' )" -t 600
 alt + { Prior, Next, BackSpace }
   dunstctl { history-pop, close, close-all }
 ctrl + 7

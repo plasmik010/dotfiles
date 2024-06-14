@@ -36,15 +36,4 @@ local lazy_config_avail, lazy_config = pcall(require, "lazy.core.config")
 PL = lazy_config.plugins
 
 
-  -------- Configure Plugs ---------------------{{{}}}------
-
--- I went lazy....
-
---[[ if H.is_available'themery' then
-  Themes = vim.api.nvim_eval("getcompletion('','color')")
-  H.tprint(Themes)
-  require("themery").setup({ themes =  Themes  })
-end ]]
-
--- vim.g.startify_custom_header = 'startify#pad(split(system("bash $vi/nvim-logo -b"),"\n"))'
 
