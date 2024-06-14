@@ -635,8 +635,8 @@ nnoremap ,gk :call FocusBufOrDo('kitty.conf','e $dotfiles/conf/kitty.conf')<CR>
 nnoremap ,gz :call FocusBufOrDo('zzzz','e $tt/zzzzzz')<CR>
 nnoremap ,gu :call FocusBufOrDo('ff','e $tt/u*/ff*')<CR>
 nnoremap ,gh :call FocusBufOrDo('sh_history','e $HOME/.bash_history')<CR>G
-nnoremap ,gl :call FocusBufOrDo('1linux','e $sh/rs/1linux')<CR>
-nnoremap ,ge :call FocusBufOrDo('memo','e $sh/rs/1code.c')<CR>
+nnoremap ,gl :call FocusBufOrDo('1linux','e $dotfiles/gist/1linux')<CR>
+nnoremap ,ge :call FocusBufOrDo('memo','e $dotfiles/gist/1code.c')<CR>
 " nnoremap q/  :call FocusWindowOrDo('silly.txt','1tabn \| wincmd b \| e $tbuf')<CR>
 nnoremap ,gs :call FocusBufOrDo('silly.txt','e $tbuf')<CR>
 nnoremap ,gw :call FocusBufOrDo('work.txt','e $wbuf')<CR>

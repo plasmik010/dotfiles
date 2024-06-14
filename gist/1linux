@@ -307,8 +307,11 @@ git restore --source=master '*.vcxproj'
 [remote "origin"]
   url = git@github.com:ACCOUNT/PROJECT.git
   fetch = +refs/heads/*:refs/remotes/origin/*
+# have colored less listings:
+git config color.status always && (git status | less -r)
 
-
+# Clang: generate config
+clang-format --style Chromium --dump-config > .clang-format 
 
 ==NET
 ip link

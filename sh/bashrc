@@ -26,7 +26,7 @@ alias fm='vifm'
 alias tm='cd; tmux -Lrandom attach || tmuxp load $dotfiles/conf/tmuxp.yaml -Lrandom -f $sh/conf/tmux.conf'
 alias va='MODE=last nvimrpc.py'
 alias ll='ls -la'
-alias lin='less $sh/rs/1linux'
+alias lin='less $dotfiles/gist/1linux'
 alias gs='git status'
 alias gb='git branch -a'
 alias gl='git log -3 '
@@ -86,7 +86,7 @@ rl() { rp=$(realpath "$*");
     { [[ -d $rp ]] && cd "$rp"; } ||
     { [[ -f $rp ]] && cd $(dirname "$rp"); } ||
         echo "No such file or dir path!"; }
-flin() { cat "$sh"/rs/1linux | fzf; }
+flin() { cat "$dotfiles/gist/1linux" | fzf; }
 # fco() { compgen -c | fzf; }
 x() { xdg-open "$*" &> /dev/null & disown; }
 get_space_used() { df -BMB "$1" --output=used | tail -1 | grep -o '[0-9]*'; }
@@ -173,7 +173,7 @@ function fzfpacrem { pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs
 
 # FZF across lines of some file
 __fzf_1linux__() {
-  input_file="$sh"/rs/1linux
+  input_file="$dotfiles/gist/1linux"
   local output
   output=$(
     cat "$input_file" | fzf
