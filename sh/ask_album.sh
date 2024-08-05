@@ -15,6 +15,7 @@ PLADD_KEY='a'
 PLDEL_KEY='x'
 FAVADD_KEY='s'
 FAVDEL_KEY='d'
+HISTDEL_KEY='h'
 
 # Prefer $1 for TARG
 if [[ -n $1 ]]; then
@@ -65,6 +66,10 @@ else
     else
         INFAVS=0
     fi
+    if [[ $( grep -F -c "$TARG" "$HIST" ) -gt 0 ]]; then
+        echo -- it is in History
+        SHALLOW_HIST=1
+    fi
 fi
 
 if [[ ! -z $TARGREAL ]]; then
@@ -97,6 +102,8 @@ echo
     echo "$FAVADD_KEY - Save to Favourites"
 [[ $INFAVS == 1 ]] && \
     echo "$FAVDEL_KEY - Delete from Favourites"
+[[ $SHALLOW_HIST == 1 ]] && \
+    echo "$HISTDEL_KEY - Delete from History"
 [[ -f $LIST && $INVIFM != 1 ]] && \
     echo "$GOPLIST_KEY - play an album from Playlist"
 [[ $INVIFM != 1 ]] && \
@@ -117,14 +124,19 @@ SELECTOR="fzf --exact --layout=reverse --keep-right --height 99%"
 clear
 
 source $sh/dmenurc
-if [[ $prompt == "q" ]]; then
+if [[ $prompt == "$QUIT_KEY" ]]; then
     exit
-elif [[ $INPLIST != 1 && $prompt == "a" ]]; then
+elif [[ $SHALLOW_HIST == 1 && $prompt == "$HISTDEL_KEY" ]]; then
+    echo deleting  $TARG  from History
+    grep -vF "$TARG" "$HIST" > /tmp/tmplist && mv /tmp/tmplist "$HIST"
+    sleep 1
+    RUNAGAIN=1
+elif [[ $INPLIST != 1 && $prompt == "$PLADD_KEY" ]]; then
     echo "$TARGREAL" >> "$LIST"
     echo $TARGREAL  saved to Playlist.
     sleep .4
     RUNAGAIN=1
-elif [[ $INPLIST == 1 && $prompt == "d" ]]; then
+elif [[ $INPLIST == 1 && $prompt == "$PLDEL_KEY" ]]; then
     # if [[ $( grep -F -c "$TARG" "$FAVS" ) -gt 0 ]]; then
     echo deleting  $TARG  from Playlist
     grep -vF "$TARG" "$LIST" > /tmp/tmplist && mv /tmp/tmplist "$LIST"
@@ -134,7 +146,7 @@ elif [[ $INPLIST == 1 && $prompt == "d" ]]; then
     fi
     sleep 1
     RUNAGAIN=1
-elif [[ $INFAVS == 1 && $prompt == "S" ]]; then
+elif [[ $INFAVS == 1 && $prompt == "$FAVDEL_KEY" ]]; then
     echo deleting  $TARG  from Favourites
     grep -vF "$TARG" "$FAVS" > /tmp/tmplist && mv /tmp/tmplist "$FAVS"
     if [[ $TARG != $TARGREAL ]]; then
@@ -143,12 +155,12 @@ elif [[ $INFAVS == 1 && $prompt == "S" ]]; then
     fi
     sleep 1
     RUNAGAIN=1
-elif [[ $INFAVS == 0 && $prompt == "s" ]]; then
+elif [[ $INFAVS == 0 && $prompt == "$FAVADD_KEY" ]]; then
     echo "$TARGREAL" >> "$FAVS"
     echo $TARGREAL  saved to Favourites.
     sleep .4
     RUNAGAIN=1
-elif [[ $prompt == "c" && $INVIFM != 1 ]]; then
+elif [[ $prompt == "$FM_KEY" && $INVIFM != 1 ]]; then
     vifm "$TARGREAL" -c "wincmd o"
 elif [[ $prompt == "" ]]; then
     PAUSE=0 mpv-album.sh "$TARGREAL"

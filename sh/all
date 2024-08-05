@@ -28,7 +28,7 @@ updatedb
 # Backup vim-session cause I am known for overwriting it by accident
 [ -f $HOME/.vim/session.vim ] && cp $HOME/.vim/session.vim $HOME/.vim/session.vimBAK
 [ -d $NVSD ] &&
-    tar -czf "$NVSD/../sess.tar.gz" -C "$NVSD/../" session
+    tar -czf "$NVSD/sess.tar.gz" -C "$NVSD/" session
 
 echo
 du -sh $HOME
@@ -40,5 +40,6 @@ df -BGB --output=source,fstype,avail,pcent,target -x tmpfs -x devtmpfs
 # $LSBLK -o NAME,LABEL,MOUNTPOINT,SIZE,FSUSE% | grep "sd\|nvme" --color=none ; echo
 
 # Backup something else
-echo; DONTOVERWRITE=1 bak.sh
+echo -- Starting bak.sh --
+DONTOVERWRITE=1 bak.sh
 

@@ -232,6 +232,7 @@ return {
 
   {
     'declancm/cinnamon.nvim', -- works --- Hacky Smooth Scroll
+    enabled = false,
     opts = {
       default_keymaps = false,  -- Create default keymaps.
       extra_keymaps = false,    -- Create extra keymaps.

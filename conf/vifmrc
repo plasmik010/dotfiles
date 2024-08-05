@@ -112,9 +112,10 @@ nnoremap qi :! mediainfo %c | less<cr>
 nnoremap qh :! xxd %c | less<cr>
 nnoremap qfv :! vim %c<CR>
 nnoremap qfa :! if [ %c == ".." ] ; then feha . ; else if [ -d %c ] ; then cd %c; feha . ; else if [ -f %c ] ; then feha %c; fi ; fi ; fi <cr>
-nnoremap qff :!fehf  . &>/dev/null &<cr>
-nnoremap af  :!feha %c &>/dev/null &<cr>
+nnoremap qff :! fehf . &>/dev/null &<cr>
+nnoremap af  :! feha %c &>/dev/null &<cr>
 nnoremap qfm :! nomacs %c &>/dev/null &<cr>
+nnoremap qfi :! gimp %c &>/dev/null &<cr>
 nnoremap qfq :! qview %c &>/dev/null &<cr>
 nnoremap qfe :! eom %c &>/dev/null &<cr>
 " nnoremap qfp :! mpv --fs --keep-open=always *.{mp4,MP4,webm,mkv,mov,MOV} &>/dev/null & <cr>
@@ -144,12 +145,12 @@ nnoremap qg :! echo -ne "\n-- Try to sync @ $(date '+%%Y-%%m-%%d %%H:%%M:%%S') .
 nnoremap z<BS> :! echo -ne "\n-- Try to sync @ $(date '+%%Y-%%m-%%d %%H:%%M:%%S') ...... \n" ; (time sync) 2>&1 | tr '\t' ' ' | tr '\n' '\t' ; echo -ne "\n-- Complete    @ $(date '+%%Y-%%m-%%d %%H:%%M:%%S')\n" <CR>:echo "Sync complete!"<CR>
 
 " Send to vim server "
-nnoremap ,as :! MODE="split"  virpc "%c"  <cr>
-nnoremap ,av :! MODE="vert"   virpc "%c" &>/dev/null & <cr>
-nnoremap ,ac :! MODE="cur"    virpc "%c" &>/dev/null & <cr>
-nnoremap ,an :! MODE="newtab" virpc "%c" &>/dev/null & <cr>
-nnoremap ,ab :! MODE="last"   virpc "%c" &>/dev/null & <cr>
-nnoremap ,aa :! MODE="auto"   virpc "%c" &>/dev/null & <cr>
+nnoremap ,as :! MODE=split  virpc "%c"  <cr>
+nnoremap ,av :! MODE=vert   virpc "%c" &>/dev/null & <cr>
+nnoremap ,ac :! MODE=cur    virpc "%c" &>/dev/null & <cr>
+nnoremap ,an :! MODE=newtab virpc "%c" &>/dev/null & <cr>
+nnoremap ,ab :! MODE=last   virpc "%c" &>/dev/null & <cr>
+nnoremap ,aa :! MODE=auto   virpc "%c" &>/dev/null & <cr>
 nnoremap ,aq :! virpc "%c"<cr>:q<cr>
 nnoremap ,ad :! vim -d %c %D/%c<cr>
 " if (system('echo $EDITOR') == "vim")
@@ -218,7 +219,7 @@ nnoremap g; :cd /ln/mo<cr>
 nnoremap gq :cd /ln/mo/fast/qq<cr>:sort<cr>N
 nnoremap g<space> :cd /ln<cr>
 nnoremap gm :cd /ln/mus/
-nnoremap go :cd /ln/ho/compy<cr>
+nnoremap go :cd /ln/gd/code_misc<cr>
 nnoremap gx :trashes<cr>
 nnoremap gc :cd $HOME/.config<cr>
 nnoremap g1 :cd $HOME/1<cr>
@@ -237,7 +238,7 @@ nnoremap gf :cd /ln/fast<cr>:goto hh<cr>
 " nnoremap gf 'f
 nnoremap gi :cd /ln/hh/imgdl1<cr>
 nnoremap ge :cd /ln/hh/<cr>
-nnoremap gk :cd /ln/torrents/red/KKK<cr>:sort=mtime<cr>hj
+nnoremap gk :cd /ln/torrents/red/KKK<cr>:set sort=mtime<cr>hj
 nnoremap gv :cd ~/.vim<cr>:goto plugged<cr>
 nnoremap gn :cd ~/.config/nvim<cr>:goto bak<cr>
 nnoremap gp :cd /ln/pr/<cr>:goto prwin<cr>

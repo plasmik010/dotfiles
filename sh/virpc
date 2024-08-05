@@ -13,9 +13,9 @@ fi
 
 if [[ $EDITOR == nvim ]]; then
     # echo EDITOR is nvim
-    nvimrpc.py $*
+    nvimrpc.py "$*"
 elif [[ $EDITOR == vim ]]; then
     # echo EDITOR is vim
-    vimrpc $*
+    vimrpc "$*"
 fi
 

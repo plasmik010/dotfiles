@@ -46,7 +46,7 @@ mkdir -p "$DEST_DAYLY"
     cd - 1>/dev/null
 }
 
-echo --bak.hot
+echo --- gonna bak hot
 
 [[ -d $tt ]] && conditional_line="-C $tt/../ tt"
 [[ -n $boomname ]] && conditional_line="$conditional_line -C /tmp $boomname"
@@ -79,7 +79,7 @@ if [[ $DO_WEK == true ]]; then
         echo Warning! Weekly backup failed!
     fi
     if [[ -d $bakcld ]]; then
-        echo --bak.cold
+        echo --- gonna bak cold
         mkdir -p "$bakcld/${space}_$MON"
         cp -rf "$DEST_WEKLY/"*tar* "$bakcld/${space}_$MON"
     else
@@ -109,23 +109,32 @@ devlabel=$( $LSBLK -l -o LABEL | grep "AMV" | sort | head -1 )
 [[ $devlabel != '' ]] && bakdev=$( $LSBLK -l -o NAME,LABEL | grep $devlabel | head -1 | cut -f1 -d ' ' )
 
 if [[ $bakdev != '' ]]; then
-    echo --bak.port
+    echo --- gonna bak port
+    flowctrl=true
     if [[ $( mount | grep $devlabel | grep $bakdev -c ) == 0 ]]; then
-        echo ---mounting $devlabel ..
-        udevil mount /dev/$bakdev /ln/mo/$devlabel &&
-            need_umount=true
+        echo --- mounting $devlabel ..
+        udevil mount /dev/$bakdev /ln/mo/$devlabel || flowctrl=false
+        need_umount=true
     fi
     bakusbdir=$(compgen -G /ln/mo/*AMV/bak)
-    if [[ -d $bakusbdir ]]; then
+    echo bakusbdir $bakusbdir
+    >&2 echo "DEBUGPRINT[4]: bak.sh:119 (after bakusbdir=(compgen -G /ln/mo/*AMV/bak))"
+    if [[ $flowctrl == true && -d $bakusbdir ]]; then
         devlabel=$(echo $bakusbdir | tr / \\n | grep AMV)
         mkdir -p "$bakusbdir/${space}_$MON"
         cp -rf "$DEST_WEKLY/"*tar* "$bakusbdir/${space}_$MON"
     else
         echo Warning! Port backup failed!
     fi
-    sync /ln/mo/$devlabel
-    [[ $need_umount == true ]] && echo ---unmounting $devlabel .. && udevil umount /ln/mo/$devlabel
-    # echo Done!
+    >&2 echo "DEBUGPRINT[5]: bak.sh:127 (after fi)"
+    echo -- gonna sync $devlabel
+    sync /ln/mo/$devlabel || flowctrl=false
+    >&2 echo "DEBUGPRINT[6]: bak.sh:129 (after sync /ln/mo/devlabel)"
+    if [[ $flowctrl == true && $need_umount == true ]]; then
+        echo --- unmounting $devlabel ..
+        udevil umount /ln/mo/$devlabel
+    fi
+    # echo bak port Done!
 fi
 
-
+# vim: sw=4:ts=4:sts=4

@@ -7,7 +7,7 @@ flow=true
 
 [[ -d $git ]] && cd $git || flow=false
 
-if [[ $flow == true && ! -d neovim ]]; then 
+if [[ $flow == true && ! -d neovim ]]; then
     git clone $url || flow=false
 fi
 
@@ -28,3 +28,5 @@ make CMAKE_BUILD_TYPE=Release &&
     echo "Build SUCCESS" &&
     sudo ln -sf  /usr/local/bin/nvim /usr/bin/nvim
 
+
+# vim: sw=4:ts=4:sts=4

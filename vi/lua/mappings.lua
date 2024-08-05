@@ -45,10 +45,10 @@ H.nmap('gD', vim.lsp.buf.declaration)
 
 H.nmap('m;', ":BookmarksListAll<CR>")
 -- H.nmap(',,q', function() b=require'nvim-possession'.update() print(1,b) if b then vim.cmd[[wqa]] end end )
-H.nmap(',po', function() require'nvim-possession'.update() end )
-H.nmap(',pl', function() require'nvim-possession'.list() end)
-H.nmap(',pd', function() require'nvim-possession'.delete() end)
-H.nmap(',pn', function() require'nvim-possession'.new() end)
+H.nmap(',po', function() require'nvim-possession'.update() end, "Session Update")
+H.nmap(',pl', function() require'nvim-possession'.list() end, "Session Open")
+H.nmap(',pd', function() require'nvim-possession'.delete() end, "Session Delete")
+H.nmap(',pn', function() require'nvim-possession'.new() end, "Session New")
 
 
 H.nmap('qn', vim.diagnostic.open_float)
