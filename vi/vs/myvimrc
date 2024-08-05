@@ -625,7 +625,7 @@ endif
 nnoremap ,gt :call FocusBufOrDo('vimrc_themes','e $vi/vs/vimrc_themes')<CR>
 " nnoremap ,gc :call FocusBufOrDo('$vi/lua/init.lua','e $vi/lua/init.lua')<CR>
 " nnoremap ,ga :call FocusBufOrDo('lsp.lua','e $vi/lua/lsp.lua')<CR>
-nnoremap ,g, :call FocusBufOrDo('vimrc_main','e $vi/vs/vimrc_main')<CR>
+nnoremap ,g, :call FocusBufOrDo('vimrc_main','e $vi/vimrc_main')<CR>
 nnoremap ,gb :call FocusBufOrDo('bashrc','e $sh/bashrc')<CR>
 nnoremap ,gB :call FocusBufOrDo('bashrc.local','e $loc/bashrc.local')<CR>
 nnoremap ,g2 :call FocusBufOrDo('bspwmrc','e $sh/bspwmrc')<CR>
@@ -1835,7 +1835,7 @@ command! BufD call fzf#run(fzf#wrap({
   \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
 \ }))
 "
-let $FZF_DEFAULT_OPTS = '--exact --layout=reverse'
+" let $FZF_DEFAULT_OPTS = '--exact --layout=reverse'
 "
 function! Delete_buffers()
   let l:preview_window = get(g:, 'fzf_preview_window', &columns >= 120 ? 'right': '')

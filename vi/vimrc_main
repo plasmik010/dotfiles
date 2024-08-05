@@ -52,6 +52,7 @@ set runtimepath+=$vi
 " echom len(&runtimepath)
 
 if has("nvim")
+    echo "We has nvim."
     SSource $vi/vs/myvimrc
     SSource $vi/lua/init.lua
 else

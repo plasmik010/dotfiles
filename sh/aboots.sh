@@ -27,16 +27,44 @@ cd
 
 mkdir -p $MYGITDIR
 
-sudo pacman -S --needed vifm fzf lsb-release wget ranger fd mlocate \
-  2>&1 | grep -v "skipping"
+# Detect distro
+if type -f pacman &>/dev/null; then
+    DIS_ARCH=true
+    function instal {
+        echo -- Gonna install  "$*"  at this Arch Linux
+        sudo pacman -S --needed "$*" 2>&1 | grep -v "skipping"
+    }
+elif type -f apt &>/dev/null; then
+    DIS_DEB=true
+    function instal {
+        echo -- Gonna install  $*  at this Deb- Linux
+        sudo apt install  $* 2>&1
+    }
+fi
 
-sudo pacman -S --needed fzf cmake unzip ninja curl luarocks npm python-pip python-pynvim ripgrep neovim \
-  2>&1 | grep -v "skipping"
+paclist1="vifm lsb-release wget ranger"
+paclist2="cmake unzip curl luarocks npm ripgrep neovim"
+if [[ $DIS_ARCH == true ]]; then
+    paclist3="mlocate fd ninja pip python-pynvim"
+elif [[ $DIS_DEB == true ]]; then
+    paclist3="plocate fd-find ninja-build python3-pip python3-pynvim"
+    paclist4="build-essential dmenu rofi wmctrl xdotool vim-gtk3 kitty pavucontrol htop btop vifm fdisk gparted nnn thunar bash-completion plocate sxhkd fonts-hack ncdu xclip zathura zathura-djvu gitg mpv xinput feh rsync inxi lshw mediainfo ripgrep silversearcher-ag libnotify-bin imagemagick efibootmgr unrar git make cmake curl zstd zip gparted strace speedcrunch udevil qalc qemu-system fd-find python3-neovim nitrogen lxappearance dunst tmux rfkill ncal cpupower-gui picom scrot cpulimit fonts-firacode redshift python-is-python3 fonts-terminus fonts-liberation earlyoom unzip evince testdisk hardinfo nomacs "
+    paclist5="fonts-terminus fonts-liberation fonts-noto fonts-dejavu fonts-firacode"
+fi
+
+#sudo pacman -S --needed $paclist1 2>&1 | grep -v "skipping"
+#sudo pacman -S --needed $paclist2 2>&1 | grep -v "skipping"
+instal $paclist1
+instal $paclist2
+instal $paclist3
+[[ -n $paclist4 ]] && instal $paclist4
+[[ -n $paclist5 ]] && instal $paclist5
 
 # tree-sitter
 
-sudo pacman -S --needed base-devel  2>&1 | grep -v "skipping"
 if type -f pacman &>/dev/null; then
+    #sudo pacman -S --needed base-devel  2>&1 | grep -v "skipping"
+    instal base-devel
     if ! type -f pakku &>/dev/null ; then
         cd $MYGITDIR && rm -rf pakku
         git clone https://aur.archlinux.org/pakku.git
@@ -55,7 +83,7 @@ fi
 
 (
 echo -e '\n'--Gonna create /ln/ and short links there
-# exit
+
 sudo -- bash -c "mkdir -p /ln && chown $USER:$USER /ln"
 cd /ln
 ln -sfn $HOME ho
@@ -94,13 +122,14 @@ cd
     cat .bashrc >> .bashrc_trash
     rm .bashrc
 }
-# echo 
+
 [[ $NEED_NEW_BASHRC == true ]] && echo -e "git=\""$MYGITDIR"\""\\nexport sh=\"\$git/dotfiles/sh\"\\nsource \"\$sh/bashrc_main\" > .bashrc 
 # ln -sf .sh/bashrc_main .bashrc
 touch -a /ln/lo/cur/bashrc_loc
 touch -a /ln/lo/cur/vifmrc_loc
 # ln -sf .sh/Xresources .Xresources
 # ln -sf .sh/vi/vimrc_main .vimrc
+
 co=$(realpath /ln/co)
 mkdir -p "$co"/nvim; # ln -srf .sh/vi/vimrc_main "$co"/nvim/init.vim
 mkdir -p "$co"/kitty; ln -srf $dots/conf/kitty.conf "$co"/kitty/
@@ -142,7 +171,7 @@ ln -sfr ../kitty-themes/themes themes
 ! [[ -L nox_theme.conf ]] && ln -s themes/gruvbox_dark.conf  nox_theme.conf
 ! [[ -f current-theme.conf ]] && ln -s themes/gruvbox_dark.conf current-theme.conf
 
-[[ -z $sh ]] && export sh=$
+[[ -z $sh ]] && export sh=$dots/sh
 
 cd
 

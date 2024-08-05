@@ -175,7 +175,7 @@ Plug 'jonathanfilip/vim-lucius' "day morning
 Plug 'rose-pine/neovim' "fancy dark
 Plug 'CruizeMissile/Revolution.vim' "cool lowcont
 Plug 'romainl/Apprentice' "nostrain
-Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+""Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'JarrodCTaylor/spartan' " 'spartan,immortals
 Plug 'pbrisbin/vim-colors-off'
 Plug 'bf4/vim-dark_eyes' "NIGHT

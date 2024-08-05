@@ -20,6 +20,7 @@ alias ssc="sudo systemctl "
 alias bb='tty | grep -q /dev/tty && ( terminusfont; [[ -f /usr/bin/tap ]] && sudo /usr/bin/tap & startx $sh/xinitrc bspwm ) || echo This is not tty!'
 alias tf='terminusfont'
 alias v='VIMINIT="source $vi/vimrc_main" nvim'
+alias vv='VIMINIT="source $vi/vimrc_main" vim'
 alias vr='virpc'
 alias fm='vifm'
 #alias tm='cd; tmux new -s defs'
