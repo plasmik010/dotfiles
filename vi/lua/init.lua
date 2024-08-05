@@ -21,10 +21,24 @@ require('set')
 
 require('helpy')
 
-require('init_lazy')
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+vim.opt.rtp:prepend(lazypath)
+require('fetch_lazy')
 
--- is it needed ?
--- vim.api.nvim_command('set runtimepath+=$vi') -- Repair rtp after plugging
+-- Install and configure plugins,
+-- source configs from specified directory
+--
+-- vim.api.nvim_command('set runtimepath+=$vi') -- set rtp once again...
+-- vim.cmd ([[ echom 82  &runtimepath ]])
+--
+require'lazy'.setup(
+    -- {import = "mylazy"},
+    { import = "mylazy" },
+    {
+        root = vim.env.PLUGDIR,
+        change_detection = { enabled = false },
+    }
+)
 
 H.reload('completion')
 

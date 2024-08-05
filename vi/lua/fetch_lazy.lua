@@ -12,15 +12,5 @@ if not vim.loop.fs_stat(lazypath) then
         lazypath,
     }
 end
-vim.opt.rtp:prepend(lazypath)
-
--- Install and configure plugins,
--- source configs from specified directory
-require'lazy'.setup(
-    "mylazy",
-    {
-        root = vim.env.PLUGDIR,
-        change_detection = { enabled = false },
-    }
-)
+-- vim.opt.rtp:prepend(lazypath)
 

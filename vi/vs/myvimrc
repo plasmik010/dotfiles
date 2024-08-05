@@ -119,20 +119,22 @@ set hidden
 set title
 
 " Set location for backups and shada and runtime files
-let workdir = $HOME . "/.vim"
-let bakdir = $HOME . "/.vim/bak"
-if !isdirectory(workdir) | call mkdir(workdir, '', 0700) | endif
-if !isdirectory(bakdir) | call mkdir(bakdir, '', 0700) | endif
-silent exec "!find ".bakdir." -type f -mtime +30 -delete"
-" if !isdirectory($VICONFDIR) | call mkdir($VICONFDIR, '', 0770) | endif
-exec "set backupdir=".bakdir
-exec "set undodir=".bakdir
 set undofile
-exec "set directory=".workdir
 set swapfile
 set sessionoptions+=globals
 set history=2500
-exec "set viminfofile=".workdir."/viminfo"
+if !has("nvim")
+  let workdir = $HOME . "/.vim"
+  let bakdir = $HOME . "/.vim/bak"
+  if !isdirectory(workdir) | call mkdir(workdir, '', 0700) | endif
+  if !isdirectory(bakdir) | call mkdir(bakdir, '', 0700) | endif
+  silent exec "!find ".bakdir." -type f -mtime +30 -delete"
+  " if !isdirectory($VICONFDIR) | call mkdir($VICONFDIR, '', 0770) | endif
+  exec "set backupdir=".bakdir
+  exec "set undodir=".bakdir
+  exec "set directory=".workdir
+  "exec "set viminfofile=".workdir."/viminfo"
+endif
 
 set t_Co=256
 "  if $TERMINAL == 'xterm' | set term=xterm-256color | endif

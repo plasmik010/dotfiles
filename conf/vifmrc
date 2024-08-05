@@ -197,20 +197,20 @@ nnoremap ah :!ln -sr %d/%c %D/%c
 nnoremap ap al
 nnoremap aL :!ln -s  %d/%c %d/%cL
 
-" Compress files "
-nnoremap zu :! upk2dir.sh %c;echo<cr>
+" Compress and Inflate "
+nnoremap zu :! APPEND=1 upk2dir.sh %c;echo<cr>
 nnoremap zU :! upk2dir.sh %c %D;echo<cr>
-nnoremap z<CR> :! APPEND= upk2dir.sh %c /tmp; echo<CR>:cd /tmp/%c<CR>
+nnoremap ze :! upk.sh %c<cr>
+nnoremap zE :! cd %D; upk.sh %d/%c<cr>
+nnoremap z"e :! upk.sh %r<cr>
+nnoremap z"E :! upk2dir.sh %r %d<cr>
+nnoremap z<CR> :! APPEND=1 upk2dir.sh %c /tmp; echo<CR>:cd /tmp/%c<CR>
 nnoremap zp :! 7z a -mx=6 -xr!tags %c.7z %f<cr>
 nnoremap z0 :! 7z a -mx=1 -xr!tags %c.7z %f
 nnoremap zP :! 7z a -mx=6 -xr!tags %D/%c.7z %f<cr>
 let $TAR_IGNOR="--exclude='.git' --exclude='tags' --exclude='debug/*' --exclude='build/*' --exclude='~$*'"
 nnoremap zs :! tar -I 'zstd -10v -T0' -X $sh/zip_exclu -cf    %c.tar.zst %f
 nnoremap zS :! tar -I 'zstd -10v -T0' -X $sh/zip_exclu -cf %D/%c.tar.zst %f
-nnoremap ze :! upk.sh %c<cr>
-nnoremap zE :! cd %D; upk.sh %d/%c<cr>
-nnoremap z"e :! upk.sh %r<cr>
-nnoremap z"E :! upk2dir.sh %r %d<cr>
 
 " Jump to places "
 nnoremap ,h :history<cr>
