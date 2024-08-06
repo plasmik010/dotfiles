@@ -248,7 +248,7 @@ zip -r -1 arc.zip Dir Dir2 #create zip
 
 ==GIT {{{}}}
 git log --tags --pretty="%h %d %s"
-git tag -n --list 
+git tag -n --list
 git config --list --show-origin
 git switch -c newbranch # create new branch
 git checkout -b newbranch # same
@@ -311,7 +311,7 @@ git restore --source=master '*.vcxproj'
 git config color.status always && (git status | less -r)
 
 # Clang: generate config
-clang-format --style Chromium --dump-config > .clang-format 
+clang-format --style Chromium --dump-config > .clang-format
 
 ==NET
 ip link
@@ -328,15 +328,18 @@ wpa_supplicant -B -i $w -c <(wpa_passphrase SSID pass) # unsafe oneliner
 sudo dhcpcd $w
 sudo ip address add 172.1.1.21/24 broadcast + dev enp2s0
 /etc/network/interfaces:
-. auto eth0
-. iface eth0 inet static
-.   address 172.16.1.3
-.   netmask 255.255.255.0
+  auto eth0
+  iface eth0 inet static
+    address 172.16.1.3
+    netmask 255.255.255.0
 curl https://wtfismyip.com/text # check ip
 curl ifconfig.me
 curl -s --head http://opennet.ru # check network and date
 wget http://ya.ru --spider # check network
 proxychains sudo wget -O - http://ya.ru
+/etc/proxychains.conf
+    [ProxyList]
+    socks5 82.165.198.169 11818
 sudo nmap -sP 192.168.1-3.0/24
 nmap -p 80 example.com # "ping" by port
 iptables -t nat -A OUTPUT -p tcp -m tcp --dport 80 -d 195.82.146.120/30 -j DNAT --to-destination 163.172.167.207:3128 ##route rutracker torrenting

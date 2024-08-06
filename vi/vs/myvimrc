@@ -390,6 +390,8 @@ nnoremap c<Up>   :call EditAtEdge('up')<CR>
 " edit at text start/finish of the buffer
 nnoremap a<Up>   gg:call search('^.')\|call EditAtEdge('up')<CR>
 nnoremap a<Down> G$:call search('^.','b')\|call EditAtEdge('down')<CR>
+nnoremap zj zjzt
+nnoremap zk zkzt
 
 " extend line with horiz line -----
 nnoremap q- o<Esc>64A-<Esc>kJ0<Esc>60ld$0<Esc>40l
@@ -515,6 +517,7 @@ nnoremap a- :wincmd v \| e %:p:h<CR>
 " nnoremap a_  :vsplit <bar> exec "normal -"<CR>
 nnoremap as :split #  <bar> call WinSwap(0) <CR>
 nnoremap av :vsplit # <bar> call WinSwap(0) <CR>
+nnoremap an :new<CR>
 nnoremap <C-w>S :vsplit<CR>
 " nnoremap <silent> ,. :if bufexists(bufnr('#')) <bar> b # <bar> echo expand('%') <bar> else <bar> echo 'No prev buffer.' <bar> endif<CR>
 nnoremap <silent> ,. :call PrevBuf()<CR>
