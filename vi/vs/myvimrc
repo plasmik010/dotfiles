@@ -308,7 +308,7 @@ let mapleader = ""
 map q <Nop>
 " map й q
 nnoremap Q q
-nnoremap zm @@
+nnoremap am @@
 nnoremap qm @
 " nnoremap ,m @
 
@@ -452,7 +452,7 @@ nmap q4 400G
 map <c-j> <Plug>(edgemotion-j)
 map <c-k> <Plug>(edgemotion-k)
 " search such //comments//
-nnoremap am /\s*\/\/.*\/\/$<CR>
+nnoremap zv /\s*\/\/.*\/\/$<CR>
 " jump to blank or one-char lines
 nnoremap <silent> gn :call search('^\(.\\|\(\s\)*\)$','W')<CR>
 nnoremap <silent> gp :call search('^\(.\\|\(\s\)*\)$','bW')<CR>
