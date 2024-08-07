@@ -72,6 +72,32 @@ vim.keymap.set('x', 'qp', '\"lp')
 H.Bmap('<C-PageUp>',   ":BufferLineCyclePrev<CR>", { silent = true })
 H.Bmap('<C-PageDown>', ":BufferLineCycleNext<CR>", { silent = true })
 
+vim.keymap.set('n', ',N', function()
+  local filedir = vim.fn.expand('%:p:h')
+  vim.cmd.tcd(filedir)
+  local reveal_file = vim.fn.expand('%:p')
+  if (reveal_file == '') then
+    reveal_file = vim.fn.getcwd()
+  else
+    local f = io.open(reveal_file, "r")
+    if (f) then
+      f.close(f)
+    else
+      reveal_file = vim.fn.getcwd()
+    end
+  end
+  -- print(reveal_file)
+  require('neo-tree.command').execute({
+    -- action = "focus",          -- OPTIONAL, this is the default value
+    source = "filesystem",     -- OPTIONAL, this is the default value
+    position = "left",         -- OPTIONAL, this is the default value
+    reveal_file = reveal_file, -- path to file or folder to reveal
+    -- reveal_force_cwd = true,   -- change cwd without asking if needed
+  })
+end,
+{ desc = "Open neo-tree at current file or working directory" }
+);
+
 H.nmap(',n', ":Neotree reveal toggle<CR>")
 -- H.nmap(',N', ":NTC<CR>")
 H.nmap(',<BS>', ":Neotree reveal_force_cwd<CR>")

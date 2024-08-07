@@ -265,6 +265,7 @@ function! CrispBorders()
   highlight WinSeparator guibg=none
   highlight WinSeparator guifg=#5a5a5a
 endfunction
+command! CrispBorders call CrispBorders()
 
 if has("nvim")
   set winwidth=32
@@ -272,11 +273,6 @@ if has("nvim")
 endif
 
 function! ReloadStyle(force)
-  if has("nvim")
-    set laststatus=1
-    highlight WinSeparator guibg=none
-    highlight WinSeparator guifg=#5a5a5a
-  endif
   " if color is already chosen and force!=true
   if a:force!=1 && ( exists("g:colors_name") && g:colors_name != 'habamax' )
     " load color again to avoid tabline rendering problem
@@ -290,6 +286,11 @@ function! ReloadStyle(force)
   endif
   if has("nvim")
     lua if H.is_available("tint") then H.reset("tint") end
+  endif
+  if has("nvim")
+    " set laststatus=1
+    " highlight WinSeparator guibg=none
+    " highlight WinSeparator guifg=#5a5a5a
   endif
 endfunction
 
@@ -483,7 +484,7 @@ nnoremap ,[ :bprev<CR>
 nnoremap ,d :BufDelAndJump<CR>
 nnoremap ,bi :diffthis \| wincmd w<CR>
 nnoremap ,bo :diffoff  \| wincmd w<CR>
-nnoremap ,, :echo expand ('%') '.@.' getcwd()<CR>
+nnoremap z. :echo expand ('%') '.@.' getcwd()<CR>
 " nnoremap ,c. :exec "lcd! %:p:h" <bar> echo 'lcd2file @' getcwd()<CR>
 nnoremap ,cf :exec "lcd %:p:h"<CR>:echo 'lcd2file @' getcwd()<CR>
 nnoremap ,c. :exec "lcd .."<CR>:echo 'lcd2file @' getcwd()<CR>
@@ -1577,8 +1578,9 @@ function! LoadColor(...)
     echom "phase=" . l:switch . ", color=" . wanted_color . ", linecolor=" . l:llcol
   endif
 endfunction
+"
 command! -nargs=? SaveColor call SetPhase(<f-args>) <bar> call SaveColor(<f-args>)
-command! -nargs=? LoadColor call SetPhase(<f-args>) <bar> call LoadColor(<f-args>) <bar> call CrispBorders()
+command! -nargs=? LoadColor call SetPhase(<f-args>) <bar> call LoadColor(<f-args>)
 
 function! TabeVdiff(...)
   " function! TabeVdiff(file1,file2)

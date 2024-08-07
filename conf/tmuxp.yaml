@@ -6,7 +6,7 @@ windows:
       - cd ~/ # run as a first command in all panes
     panes:
       - shell_command: # pane no. 1
-        - virpc
+        - v
           # - cd /var/log # run multiple commands in this pane
           # - ls -al | grep \.log
       # - echo second pane # pane no. 2

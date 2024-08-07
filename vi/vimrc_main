@@ -14,13 +14,17 @@
 " 4. check if LSP works well
 
 " Set crucial env for this config
-" memorize basic conf dir for later, usually "~/.config/nvim"
+" memorize basic conf dir for later, usually "~/.config/nvim" and "~/.vim"
 let $VICONFDIR=split(&runtimepath, ',')[0]
 if !empty($vi)
     let $MYVIMRC = $vi . "/vimrc_main"
 endif
 if !empty($git)
-    let $PLUGDIR = $git . "/nvpl"
+    if has("nvim")
+        let $PLUGDIR = $git . "/nvpl"
+    else
+        let $PLUGDIR = $git . "/vpl"
+    endif
 "else
 "    if isdirectory($sh . "/../../nvpl")
 "        let $PLUGDIR = resolve($sh . "/../../nvpl")

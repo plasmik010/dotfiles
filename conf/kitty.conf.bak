@@ -6,10 +6,11 @@
 #: individual font faces and even specify special fonts for particular
 #: characters.
 
-# font_family      Fira Code
-font_family      Fira Code Retina
-# font_family      TerminessTTF Nerd Font
-# font_family      Fira Code Retina Nerd Font Complete
+# font_family     Fira Code
+# font_family     Fira Code Retina
+# font_family     TerminessTTF Nerd Font
+# font_family     FiraCode Nerd Font Ret
+font_family     CaskaydiaMono Nerd Font Mono
 
 bold_font        auto
 italic_font      auto
@@ -137,8 +138,8 @@ url_style curly
 #: The color and style for highlighting URLs on mouse-over. url_style
 #: can be one of: none, single, double, curly
 
-open_url_modifiers kitty_mod
-
+# open_url_modifiers kitty_mod
+mouse_map ctrl+left click grabbed,ungrabbed mouse_click_url
 #: The modifier keys to press when clicking with the mouse on URLs to
 #: open the URL
 
@@ -157,7 +158,8 @@ copy_on_select no
 #: programs, including websites open in your browser can read the
 #: contents of the clipboard.
 
-rectangle_select_modifiers ctrl+alt
+# rectangle_select_modifiers ctrl+alt
+mouse_map ctrl+alt+left press ungrabbed mouse_selection rectangle
 
 #: The modifiers to use rectangular selection (i.e. to select text in
 #: a rectangular block with the mouse)
@@ -246,8 +248,8 @@ bell_on_tab yes
 # resize_in_steps no
 
 remember_window_size  no
-initial_window_width  946
-initial_window_height 728
+initial_window_width  1060
+initial_window_height 780
 
 #: If enabled, the window size will be remembered so that new
 #: instances of kitty will have the same size as the previous
@@ -739,7 +741,7 @@ map kitty_mod+,     move_tab_backward
 # map kitty_mod+alt+t set_tab_title
 map kitty_mod+; set_tab_title
 # map kitty_mod+' set_wndow_title
-map kitty_mod+space     set_colors -a $HOME/.config/kitty/current-theme.conf /ln/dots/conf/kitty_extra.conf
+map kitty_mod+space     set_colors -a /ln/co/kitty/current-theme.conf /ln/dots/conf/kitty_extra.conf
 
 #: You can also create shortcuts to go to specific tabs, with 1 being
 #: the first tab, 2 the second tab and -1 being the previously active
@@ -781,9 +783,9 @@ map kitty_mod+l next_layout
 #: You can change the font size for all top-level kitty OS windows at
 #: a time or only the current one.
 
-map kitty_mod+equal     change_font_size all +.2
-map kitty_mod+plus      change_font_size all +.2
-map kitty_mod+minus     change_font_size all -.2
+map kitty_mod+equal     change_font_size all +.4
+map kitty_mod+plus      change_font_size all +.4
+map kitty_mod+minus     change_font_size all -.4
 map kitty_mod+backspace change_font_size all 0
 
 #: To setup shortcuts for specific font sizes::
@@ -906,10 +908,10 @@ map kitty_mod+delete clear_terminal reset active
 
 
 # include theme.conf
-# map kitty_mod+i set_colors $HOME/.config/kitty/theme.conf
+# map kitty_mod+i set_colors /ln/co/kitty/theme.conf
 
 # BEGIN_KITTY_THEME
-# Forest Night
+# Gruvbox Dark
 include current-theme.conf
 # END_KITTY_THEME
 
@@ -918,7 +920,8 @@ cursor_shape block
 # cursor #cc00dd
 # cursor #cc33cc
 # cursor #7e5780
-include $dotfiles/conf/kitty_extra.conf
+include /ln/dots/conf/kitty_extra.conf
+include kitty_local.conf
 
 # Taming wm size
 # placement_strategy top-left

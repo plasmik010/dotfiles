@@ -31,7 +31,19 @@ return {
   'nvimdev/oceanic-material',
   'maxmx03/FluoroMachine.nvim', -- neeooooon
   'felipeagc/fleet-theme-nvim',
-  'uloco/bluloco.nvim', -- have transprent
+
+  {
+    'uloco/bluloco.nvim',
+    dependencies={'rktjmp/lush.nvim'},
+    opts = {
+      style = "light",               -- "auto" | "dark" | "light"
+      transparent = true,
+      italics = false,
+      terminal = vim.fn.has("gui_running") == 1, -- bluoco colors are enabled in gui terminals per default
+      guicursor   = true,
+    }
+  }, -- have transprent
+
   '2nthony/vitesse.nvim',
   'JoosepAlviste/palenightfall.nvim',
   'Yazeed1s/oh-lucy.nvim',

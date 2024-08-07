@@ -251,8 +251,8 @@ return {
 
   {
     'nvim-lualine/lualine.nvim',
-    lazy = true,
     dependencies = { 'kyazdani42/nvim-web-devicons', 'gennaro-tedesco/nvim-possession' },
+    -- lazy = true,
     -- priority = 40,
     opts = {
       sections = {
@@ -277,8 +277,10 @@ return {
       options = {
         -- section_separators = '',
         component_separators = '',
-        theme = 'nord',
+        -- theme = 'auto',
+        -- theme = 'nord',
         -- theme = 'nordic',
+        theme = 'bluloco-dark',
       },
     },
   },
@@ -340,7 +342,7 @@ return {
 
   'folke/which-key.nvim',
 
-  'norcalli/nvim-colorizer.lua',
+  'norcalli/nvim-colorizer.lua', --- highlight color codes
 
   {
     'https://git.sr.ht/~whynothugo/lsp_lines.nvim', -- cool --- multiline lsp hints
@@ -556,7 +558,7 @@ return {
   },
 
   {
-    'zaldih/themery.nvim', -- great
+    'zaldih/themery.nvim', -- great --- colorscheme selector
     -- event = "VeryLazy",
     lazy = true,
     cmd = "Themery",
