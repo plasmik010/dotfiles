@@ -484,7 +484,7 @@ nnoremap ,[ :bprev<CR>
 nnoremap ,d :BufDelAndJump<CR>
 nnoremap ,bi :diffthis \| wincmd w<CR>
 nnoremap ,bo :diffoff  \| wincmd w<CR>
-nnoremap z. :echo expand ('%') '.@.' getcwd()<CR>
+nnoremap c. :echo expand ('%') ' @ ' getcwd()<CR>
 " nnoremap ,c. :exec "lcd! %:p:h" <bar> echo 'lcd2file @' getcwd()<CR>
 nnoremap ,cf :exec "lcd %:p:h"<CR>:echo 'lcd2file @' getcwd()<CR>
 nnoremap ,c. :exec "lcd .."<CR>:echo 'lcd2file @' getcwd()<CR>
@@ -512,8 +512,8 @@ nnoremap a_ :wincmd s \| e %:p:h<CR>
 nnoremap a- :wincmd v \| e %:p:h<CR>
 " nnoremap as  :new<CR>
 " nnoremap av  :vnew<CR>
-" nnoremap as  :new      \| lcd #:p:h \| echo expand ('%') '.@.' getcwd()<CR>
-" nnoremap av  :vnew     \| lcd #:p:h \| echo expand ('%') '.@.' getcwd()<CR>
+" nnoremap as  :new      \| lcd #:p:h \| echo expand ('%') ' @ ' getcwd()<CR>
+" nnoremap av  :vnew     \| lcd #:p:h \| echo expand ('%') ' @ ' getcwd()<CR>
 " nnoremap a-  : split <bar> exec "normal -"<CR>
 " nnoremap a_  :vsplit <bar> exec "normal -"<CR>
 nnoremap as :split #  <bar> call WinSwap(0) <CR>
@@ -541,12 +541,12 @@ nnoremap aE     <C-w>_
 nnoremap aD     <C-w>80-
 " grow big
 nnoremap ab     <C-w>_<C-w>\|
-nnoremap ac     <C-w>p<C-w>_<C-w>\|
 " grow equal
 nnoremap ag     <C-w>=
 nnoremap qq     <C-w>=
 nnoremap aj     <C-w>w<C-w>_
 nnoremap ak     <C-w>W<C-w>_
+nnoremap ac     <C-w>p<C-w>_<C-w>\|
 " focus prev window
 nnoremap g<space> <C-w>p
 nnoremap q<tab> <C-w>p
@@ -676,7 +676,7 @@ map ,,g :call LGsync()<CR>
 
 " Have mappings in terminal mode
 if v:version >= 801
-  tmap oo <C-w>N:set nonumber<CR>
+  tmap tt <C-w>N:set nonumber<CR>
   tmap o<C-o> <C-w>N :e #<CR>
   tmap <C-x> <C-w>N :BufDelAndJump<CR>
   tnoremap <C-PageUp> <C-w>:tabprev<CR>
@@ -686,7 +686,7 @@ if v:version >= 801
   tnoremap <C-\> <C-w>w
 endif
 if has("nvim")
-  tnoremap oo <C-\><C-n>
+  tnoremap tt <C-\><C-n>
   tnoremap o<C-o> <C-\><C-n>:e #<CR>
   tnoremap <C-x> <C-\><C-n>:BufDelAndJump<CR>
   tnoremap <C-PageUp> <C-\><C-n>:tabprev<CR>
@@ -1000,7 +1000,7 @@ menu tagi.git     :call UpdCtagsGit()<CR>
 ""          Macros:           ""
 """"""""""""""""""""""""""""""""
 
-" press ,mgg to write yank reg to tbuf file
+" press ,mgg to write yank reg to $tbuf file
 let @g = ",gsGzk4k\<C-k>jzzao:call DoOnKey(\"103\",\"b #\")\n"
 " put spaces around current char
 let @s = "i \<Esc>ll."

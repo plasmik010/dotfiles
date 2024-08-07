@@ -214,6 +214,10 @@ int *tmp = param; int val = *tmp;
 int some_value = *((int *) some_param
 
 
+// Prefer make_shared over the constructor to save memory allocations.
+auto strBuf = std::make_unique<char[]>(buf_len + 1);
+
+
 How do you initialize a “std::shared_ptr” in C++?
 -------------
 Kurt Guntheroth:

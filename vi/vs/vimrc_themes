@@ -21,14 +21,16 @@ endif
 
 if !exists("g:colors_name") || g:colors_name=='habamax'
     if !has('nvim')
+
         " Colors for Vim for day/night/default
+
         if ( g:phase=='day' )
             colo paper
         elseif ( g:phase=='nox' || g:phase=='dunno' )
             colo tempus_autumn
         endif
-    else
 
+    else
         " Colors for Neovim for day/night/neutral
 
         if    ( g:phase=='day' )
@@ -40,7 +42,8 @@ if !exists("g:colors_name") || g:colors_name=='habamax'
 
         elseif    ( g:phase=='nox' )
             " colo nordic
-            colo catppuccin-macchiato
+            " colo catppuccin-macchiato
+            colo everforest
             " colo oh-lucy-evening
             " colo nightfox | set bg=dark
             " colo melange | set bg=dark
@@ -54,7 +57,7 @@ if !exists("g:colors_name") || g:colors_name=='habamax'
             " elseif ( g:phase=='dunno' )
 
         else    " neutral colors
-            colo catppuccin
+            colo everforest
             " colo lost-shrine | LineColor nord
             " colo frign | LineColor aqua_plasm
             " colo Tomorrow-Night-Blue | LineColor bluewery
