@@ -138,10 +138,10 @@ H.nmap(
 )
 H.nmap(',<space>', Tele_buff_drop)
 -- nnoremap ,<space> :Telescope buffers sort_mru=1 theme=dropdown winblend=9<CR>
-H.nmap(',fh', require("telescope.builtin").help_tags, "Telescope Find Help_tags")
-H.nmap(',fz', require("telescope.builtin").diagnostics, "Telescope Find Diagnostics")
-H.nmap(',fo', require("telescope.builtin").oldfiles, "Telescope Find Old files")
-H.nmap(',fr', require("telescope.builtin").lsp_references, "Telescope Find References")
+H.nmap(',fh', require("telescope.builtin").help_tags, "Telescope help_tags")
+H.nmap(',fz', require("telescope.builtin").diagnostics, "Telescope diagnostics")
+H.nmap(',fo', require("telescope.builtin").oldfiles, "Telescope old files")
+H.nmap(',fr', require("telescope.builtin").lsp_references, "Telescope References")
 H.nmap('qf', "<cmd> call GetProjDir() <bar> exec 'Telescope find_files cwd=' . expand(b:proj_dir)<CR>", "Find cwd poj files")
 
 H.nmap(

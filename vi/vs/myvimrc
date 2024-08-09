@@ -823,7 +823,7 @@ nnoremap ,gy ^y$:call system('yandex.sh ' . "'" . @" . "'")<CR>
 " Appearance
 nnoremap z; :set wrap!<CR>
 nnoremap ,zz :let &scrolloff=28-&scrolloff<CR>
-nnoremap ,zc :let &colorcolumn=100-&colorcolumn<CR>
+nnoremap ,z; :let &colorcolumn=100-&colorcolumn<CR>
 nnoremap ,zn :set number!<CR>
 nnoremap ,ct :set filetype=text<CR>
 nnoremap ,vb :call SwitchBackground()<CR>:echo "background=" &background<CR>
@@ -844,7 +844,8 @@ nnoremap ,zd :call BuildProjectUni("myMakefile","make -f myMakefile distclean")
 nnoremap ,zx :call BuildProjectUni("myMakefile","make -f myMakefile clean")<CR>
 nnoremap ,zm :call BuildProjectUni("myMakefile","make -f myMakefile")<CR>
 nnoremap ,zr :call BuildProjectUni("Makefile","make -f myMakefile run")<CR>
-nnoremap ,zb :call BuildProjectUni("myMakefile","make -f myMakefile bear")<CR>
+nnoremap ,zc :call BuildProjectUni("myMakefile","make -f myMakefile cmak")<CR>
+" nnoremap ,zb :call BuildProjectUni("myMakefile","make -f myMakefile bear")<CR>
 " nnoremap ,XX :call BuildProjectUni("Makefile","make tags") <bar> cwindow<CR>
 " nnoremap ,zm :lcd %:p:h <bar> call BuildProjectUni("Makefile","make -f myMakefile") <bar> redraw! <bar> copen<CR>
 nnoremap ,z/ :copen<CR>/error<CR>
