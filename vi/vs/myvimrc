@@ -484,7 +484,7 @@ nnoremap ,[ :bprev<CR>
 nnoremap ,d :BufDelAndJump<CR>
 nnoremap ,bi :diffthis \| wincmd w<CR>
 nnoremap ,bo :diffoff  \| wincmd w<CR>
-nnoremap c. :echo expand ('%') ' @ ' getcwd()<CR>
+nnoremap cz :echo expand ('%') ' @ ' getcwd()<CR>
 " nnoremap ,c. :exec "lcd! %:p:h" <bar> echo 'lcd2file @' getcwd()<CR>
 nnoremap ,cf :exec "lcd %:p:h"<CR>:echo 'lcd2file @' getcwd()<CR>
 nnoremap ,c. :exec "lcd .."<CR>:echo 'lcd2file @' getcwd()<CR>
@@ -733,10 +733,10 @@ nnoremap ay "+yiW
 " copy Vim copy register to system copy buffers
 nnoremap qg :let @+ = @" <bar> :let @* = @"<CR>
 " nnoremap qy :let @+ = @" <bar> :let @* = @"<CR>
-nnoremap ai :put  *<CR>
-nnoremap aI :put! *<CR>
-nnoremap ap :put  +<CR>
-nnoremap aP :put! +<CR>
+nnoremap ap :put  *<CR>
+nnoremap ai :put! *<CR>
+nnoremap aP :put  +<CR>
+nnoremap aI :put! +<CR>
 " put select system buffer as single paragraph
 nnoremap ao o<Esc>:put! *<CR>`[v`]:g/^$/d<CR>:noh<CR>
 nnoremap aO o<Esc>:put! +<CR>`[v`]:g/^$/d<CR>:noh<CR>
@@ -823,7 +823,7 @@ nnoremap ,gy ^y$:call system('yandex.sh ' . "'" . @" . "'")<CR>
 " Appearance
 nnoremap z; :set wrap!<CR>
 nnoremap ,zz :let &scrolloff=28-&scrolloff<CR>
-nnoremap ,zc :let &colorcolumn=80-&colorcolumn<CR>
+nnoremap ,zc :let &colorcolumn=100-&colorcolumn<CR>
 nnoremap ,zn :set number!<CR>
 nnoremap ,ct :set filetype=text<CR>
 nnoremap ,vb :call SwitchBackground()<CR>:echo "background=" &background<CR>
@@ -1537,12 +1537,12 @@ function! LoadColor(...)
   " endif
   " echo ' '
   if l:switch=='dunno'
-    echom "Will load very default colors." | redraw
+    " echom "Will load very default colors." | redraw
     if exists("g:colors_name") | unlet g:colors_name | endif
     source $vi/vs/vimrc_themes
   elseif l:switch=='day'
     if !exists("g:ColorDayName")
-      echom "NO saved colors for this phase of day! Loading defaults..(day)" | redraw
+      " echom "NO saved colors for this phase of day! Loading defaults..(day)" | redraw
       if exists("g:colors_name") | unlet g:colors_name | endif
       source $vi/vs/vimrc_themes
     else
@@ -1557,7 +1557,7 @@ function! LoadColor(...)
     " echo "phase=" . l:switch . ", color=" . g:ColorDayName . ", linecolor=" . l:llcol
   elseif l:switch=='nox'
     if !exists("g:ColorNoxName")
-      echom "NO saved colors for this phase of day! Loading defaults..(nox)" | redraw
+      " echom "NO saved colors for this phase of day! Loading defaults..(nox)" | redraw
       if exists("g:colors_name") | unlet g:colors_name | endif
       source $vi/vs/vimrc_themes
     else

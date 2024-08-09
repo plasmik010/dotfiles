@@ -90,7 +90,7 @@ rl() { rp=$(realpath "$*");
         echo "No such file or dir path!"; }
 flin() { cat "$dotfiles/gist/1linux" | fzf; }
 # fco() { compgen -c | fzf; }
-x() { xdg-open "$*" &> /dev/null & disown; }
+xo() { xdg-open "$*" &> /dev/null & disown; }
 get_space_used() { df -BMB "$1" --output=used | tail -1 | grep -o '[0-9]*'; }
 hddsum() { d1=$(get_space_used /ln/mo/blink); d2=$(get_space_used /ln/mo/metal); echo Σ= "$(( d1 + d2 ))" Mb; }
 fkill() { ps -ef | sed 1d | fzf -e -m | awk '{print $2}' | xargs kill -${1:-9}; }

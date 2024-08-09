@@ -291,7 +291,7 @@ function H.eval_paragraph()
   vim.cmd[[ silent exec "normal yap" ]]
   vim.cmd.exec(lastpos)
   local code = vim.fn.getreg('"')
-  print("code is", code)
+  -- print("code is", code)
   if filetype == 'lua' then
     assert(load(code))()
     print("Evaluated current paragraph as Lua.")
