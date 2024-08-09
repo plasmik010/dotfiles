@@ -82,6 +82,8 @@ else
 fi
 
 (
+! [[ -L $HOME/.sh ]] && echo -e '\n'--Gonna link $HOME/.sh/ && ln -sn $dots/sh .sh
+
 echo -e '\n'--Gonna create /ln/ and short links there
 
 sudo -- bash -c "mkdir -p /ln && chown $USER:$USER /ln"
@@ -110,8 +112,6 @@ ln -sfn /ln/mo/metal/PRAGS pr
 (
 echo -e '\n'--Gonna link config files
 cd
-! [[ -L .sh ]] && ln -sn $dots/sh .sh
-# ! [[ -L .dots ]] && ln -sn $dots .dots
 
 [[ $(bash -c '(unset BASH_IS_PLASMIFIED; source .bashrc; echo $BASH_IS_PLASMIFIED )') != true ]] && NEED_NEW_BASHRC=true
 # ( [[ -f .bashrc ]] && ! [[ -L .bashrc ]] ) &&
@@ -127,7 +127,7 @@ cd
 # ln -sf .sh/bashrc_main .bashrc
 touch -a /ln/lo/cur/bashrc_loc
 touch -a /ln/lo/cur/vifmrc_loc
-# ln -sf .sh/Xresources .Xresources
+ln -sf .sh/Xresources .Xresources
 # ln -sf .sh/vi/vimrc_main .vimrc
 
 co=$(realpath /ln/co)

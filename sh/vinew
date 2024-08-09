@@ -69,7 +69,11 @@ if [[ $DEBUG == true ]]; then
     tty -s   && echo "shell is interactive"
 fi
 
+[[ -f $vi/vimrc_main ]] && 
+    export VIMINIT="source $vi/vimrc_main"
+
 VCMD="$EDITOR $RPC_OPTION $TEXTFILE"
+# echo $VCMD
 #[[ $VIMINSTASESS == true ]] && VCMD="$VCMD -c SLoad!"
 
 if [[ $USE_CURRENT_TERM == false && $HASG == true && $INTERACTIVE == true ]]; then
@@ -93,11 +97,13 @@ if [[ $gonna_spawn == true ]]; then
     case $TERMINAL in
         kitty*)
             # echo rpc option is $RPC_OPTION;
+            # notify-send 1
             $TERMINAL --start-as maximized bash -c "source $HOME/.bashrc; sleep .1; $VCMD" & ;;
         *)
             xterm -maximized -e "source $HOME/.bashrc; sleep .1; $VCMD" & ;;
     esac
 else
+    # notify-send 3
     $VCMD
 fi
 

@@ -118,7 +118,6 @@ if [[ $bakdev != '' ]]; then
     fi
     bakusbdir=$(compgen -G /ln/mo/*AMV/bak)
     echo bakusbdir $bakusbdir
-    >&2 echo "DEBUGPRINT[4]: bak.sh:119 (after bakusbdir=(compgen -G /ln/mo/*AMV/bak))"
     if [[ $flowctrl == true && -d $bakusbdir ]]; then
         devlabel=$(echo $bakusbdir | tr / \\n | grep AMV)
         mkdir -p "$bakusbdir/${space}_$MON"
@@ -126,10 +125,8 @@ if [[ $bakdev != '' ]]; then
     else
         echo Warning! Port backup failed!
     fi
-    >&2 echo "DEBUGPRINT[5]: bak.sh:127 (after fi)"
     echo -- gonna sync $devlabel
     sync /ln/mo/$devlabel || flowctrl=false
-    >&2 echo "DEBUGPRINT[6]: bak.sh:129 (after sync /ln/mo/devlabel)"
     if [[ $flowctrl == true && $need_umount == true ]]; then
         echo --- unmounting $devlabel ..
         udevil umount /ln/mo/$devlabel

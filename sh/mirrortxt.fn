@@ -1,7 +1,9 @@
 #!/bin/bash
 # vim: ts=2 sw=2
 
-bakport()
+# Mirror files to portable media and back to host
+
+mirror2port()
 {
   # tar -czf $loc/linkdir.tar.gz -C / ln
   startdir="$(pwd)"
@@ -65,7 +67,7 @@ bakport()
   cd "$startdir"
 }
 
-restosh()
+mirror2host()
 {
   magic="AMV"
   devlabel=$($LSBLK -l -o LABEL | grep $magic | sort | head -1)

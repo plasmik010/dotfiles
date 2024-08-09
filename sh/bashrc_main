@@ -19,8 +19,8 @@ fi
 [[ -d $sh ]] || echo "$sh is not valid!!"
 
 # [ -f $HOME/.bashrc_ORIG ] && source $HOME/.bashrc_ORIG
-[[ -f $sh/bashvars ]] &&      source "$sh/bashvars"
-[[ -f $sh/bashrc ]] &&        source "$sh/bashrc"
-[[ -f $sh/bakrestosh.fn ]] && source "$sh/bakrestosh.fn"
-[[ -f $loc/bashrc_loc ]] &&   source "$loc/bashrc_loc"
+[[ -f $sh/bashvars ]] &&     source "$sh/bashvars"
+[[ -f $sh/bashrc ]] &&       source "$sh/bashrc"
+[[ -f $sh/mirrortxt.fn ]] && source "$sh/mirrortxt.fn"
+[[ -f $loc/bashrc_loc ]] &&  source "$loc/bashrc_loc"
 
