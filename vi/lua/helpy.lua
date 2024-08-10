@@ -63,11 +63,9 @@ function H.condMkdir(base,dir)
     -- vim.fn.getftype(os.getenv("VICONFDIR") .. "/sessions_path") == "dir"
     -- vim.fn.getftype(os.getenv('VICONFDIR')) == "dir"
   then
-    -- print'__1'
     return targ
   else
-    -- print'__0'
-    local res =  vim.fn.mkdir(targ)
+    local res =  vim.fn.mkdir(targ, "p")
     if res then
       return targ
     else

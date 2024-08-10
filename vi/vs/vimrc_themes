@@ -27,7 +27,7 @@ if !exists("g:colors_name") || g:colors_name=='habamax'
         if ( g:phase=='day' )
             colo paper
         elseif ( g:phase=='nox' || g:phase=='dunno' )
-            colo tempus_autumn
+            silent! colo tempus_autumn
         endif
 
     else
