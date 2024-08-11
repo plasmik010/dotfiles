@@ -676,23 +676,23 @@ map ,,g :call LGsync()<CR>
 
 " Have mappings in terminal mode
 if v:version >= 801
-  tmap tt <C-w>N:set nonumber<CR>
-  tmap o<C-o> <C-w>N :e #<CR>
+  tmap ;o <C-w>N:set nonumber<CR>
+  tmap ;<C-o> <C-w>N :e #<CR>
   tmap <C-x> <C-w>N :BufDelAndJump<CR>
   tnoremap <C-PageUp> <C-w>:tabprev<CR>
   tnoremap <C-PageDown> <C-w>:tabnext<CR>
-  tnoremap t<tab> <C-w>:exec "tabn ".g:lasttab<CR>
-  tnoremap q<tab> <C-w>p
+  tnoremap ;<tab> <C-w>:exec "tabn ".g:lasttab<CR>
+  tnoremap ;<tab> <C-w>p
   tnoremap <C-\> <C-w>w
 endif
 if has("nvim")
-  tnoremap tt <C-\><C-n>
-  tnoremap o<C-o> <C-\><C-n>:e #<CR>
+  tnoremap ;t <C-\><C-n>
+  tnoremap ;<C-o> <C-\><C-n>:e #<CR>
   tnoremap <C-x> <C-\><C-n>:BufDelAndJump<CR>
   tnoremap <C-PageUp> <C-\><C-n>:tabprev<CR>
   tnoremap <C-PageDown> <C-\><C-n>:tabnext<CR>
-  tnoremap t<tab> <C-\><C-n>:exec "tabn ".g:lasttab<CR>
-  tnoremap q<tab> <C-\><C-n>:wincmd p<CR>
+  tnoremap ;<tab> <C-\><C-n>:exec "tabn ".g:lasttab<CR>
+  tnoremap ;<tab> <C-\><C-n>:wincmd p<CR>
   " tnoremap <A-Left> <C-\><C-N><C-w>h
   tnoremap <C-\> <C-\><C-n><C-w>w
   tnoremap <A-Down> <C-\><C-N><C-w>w

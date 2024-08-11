@@ -42,7 +42,7 @@ if [[ $prompt == "" || $prompt == " " ]] ; then
     #echo "$dirsrc"/"$dir"/ ; read noth
     if [ -d "$final_in"/ ] ; then
       echo "  >>" "$final_in" ">>" "$final_out" ;  # sleep 3;
-      rsync -rt $RSYNC_OPTS "$final_in"/ "$final_out"
+      rsync $RSYNC_OPTS "$final_in"/ "$final_out"
     fi
   done
   echo -e "========== rsync done"
