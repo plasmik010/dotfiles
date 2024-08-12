@@ -41,6 +41,7 @@ alias ram='sudo python "$sh"/mem.py'
 alias sb='source "$HOME"/.bashrc'
 alias xc='echo --Copy X sel to clipboard; xclip -o| xclip -i -selection clipboard'
 alias cx='echo --Copy clipboard to X sel; xclip -o -selection clipboard| xclip -i'
+alias cb="./clean.sh && ./cmbld.sh"
 alias kt='kitty +kitten themes; kitty @ set-colors -a "$HOME"/.config/kitty/current-theme.conf'
 alias kr='kitty @ set-colors -a "$HOME"/.config/kitty/current-theme.conf "$sh"/conf/kitty_extra.conf'
 alias chmodre='find . -type f -exec chmod 644 {} \;'

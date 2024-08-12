@@ -98,15 +98,15 @@ vim.keymap.set('n', ',N', function()
   })
 end,
 { desc = "Open neo-tree at current file or working directory" }
-);
-
-H.nmap(',n', ":Neotree reveal toggle<CR>")
--- H.nmap(',N', ":NTC<CR>")
+)
+H.nmap(',n', ":Neotree reveal<CR>")
 H.nmap(',<BS>', ":Neotree reveal_force_cwd<CR>")
 H.nmap('-', ":Neotree reveal_force_cwd current<CR>")
+
 H.nmap(',,b', ":IndentBlanklineToggle<CR>")
 H.nmap('c<BS>', ":call ReloadStyle(1)<CR>")
 H.nmap(',gp', ":call FocusBufOrDo('mylazy/init.lua','e $vi/lua/mylazy/init.lua')<CR>")
+H.nmap(',gn', ":call FocusBufOrDo('lua/init.lua','e $vi/lua/init.lua')<CR>")
 H.nmap(',gm', ":call FocusBufOrDo('mappings.lua','e $vi/lua/mappings.lua')<CR>")
 H.nmap(
     ',vp',

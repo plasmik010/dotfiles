@@ -173,11 +173,11 @@ augroup END
 " autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)|\
 " autocmd SessionLoadPost * echom "Welcome back"
 autocmd WinNew * set numberwidth=2
-autocmd FileType c setlocal commentstring=//%s
-autocmd FileType cpp setlocal commentstring=//%s
-autocmd FileType text setlocal commentstring=#%s
+autocmd FileType c setlocal     commentstring=//%s ts=4 sts=4 sw=4
+autocmd FileType cpp setlocal   commentstring=//%s ts=4 sts=4 sw=4
+autocmd FileType text setlocal  commentstring=#%s
 autocmd FileType cmake setlocal commentstring=#%s
-autocmd FileType c setlocal colorcolumn=0
+" autocmd FileType c setlocal colorcolumn=0
 " autocmd CursorHold * normal! m'
 
 " " Taming netrw

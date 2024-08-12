@@ -4,10 +4,6 @@
 
 return {
 
-  -- require'mylazy.better-escape',
-  -- require'mylazy',
-  -- { import = "mylazy" },
-
   -------- VIM BASIC ---------------------------{{{}}}------
 
   { 'junegunn/fzf.vim', dependencies = { 'junegunn/fzf' } }, -- fantastic

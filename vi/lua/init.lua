@@ -32,7 +32,6 @@ require('fetch_lazy')
 -- vim.cmd ([[ echom 82  &runtimepath ]])
 --
 require'lazy'.setup(
-    -- {import = "mylazy"},
     { import = "mylazy" },
     {
         root = vim.env.PLUGDIR,
