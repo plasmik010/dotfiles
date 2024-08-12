@@ -686,7 +686,7 @@ if v:version >= 801
   tnoremap <C-\> <C-w>w
 endif
 if has("nvim")
-  tnoremap ;t <C-\><C-n>
+  tnoremap ;; <C-\><C-n>
   tnoremap ;<C-o> <C-\><C-n>:e #<CR>
   tnoremap <C-x> <C-\><C-n>:BufDelAndJump<CR>
   tnoremap <C-PageUp> <C-\><C-n>:tabprev<CR>
