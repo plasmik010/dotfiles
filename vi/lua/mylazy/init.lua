@@ -34,14 +34,16 @@ return {
   -------- NEOVIM ONLY -------------------------{{{}}}------
 
   {
-    'nvim-telescope/telescope.nvim', branch = '0.1.x',
+    'nvim-telescope/telescope.nvim',
+    -- 'nvim-telescope/telescope.nvim', branch = '0.1.x',
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {
       defaults = {
         prompt_prefix = "$ ",
         mappings = {
-          i = {
-            ["<c-a>"] = function() print("tryitout") end,
+          n = {
+            ["h"] = "close",
+            ["l"] = "select_default",
           }
         }
       },

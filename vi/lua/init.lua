@@ -30,6 +30,7 @@ require('fetch_lazy')
 --
 -- vim.api.nvim_command('set runtimepath+=$vi') -- set rtp once again...
 -- vim.cmd ([[ echom 82  &runtimepath ]])
+-- vim.api.nvim_exec2([[:put +| normal 3dd]])
 --
 require'lazy'.setup(
     { import = "mylazy" },
