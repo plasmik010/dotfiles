@@ -175,8 +175,8 @@ augroup END
 autocmd WinNew * set numberwidth=2
 autocmd FileType c setlocal     commentstring=//%s ts=4 sts=4 sw=4
 autocmd FileType cpp setlocal   commentstring=//%s ts=4 sts=4 sw=4
-autocmd FileType text setlocal  commentstring=#%s
-autocmd FileType cmake setlocal commentstring=#%s
+autocmd FileType text setlocal  commentstring=#%s ts=4 sts=4 sw=4
+autocmd FileType cmake setlocal commentstring=#%s ts=4 sts=4 sw=4
 " autocmd FileType c setlocal colorcolumn=0
 " autocmd CursorHold * normal! m'
 
@@ -1780,6 +1780,7 @@ function! AddSpaceSelection()
   " Restore selection
   exec "normal `>V`<"
   normal <Esc>
+  call setpos('.',beg)
 endfunction
 
 function! FoldMotion(type)

@@ -13,11 +13,11 @@ count << "Hello";
 cint >> value;
 exit(0) - выход из цикла
 
-  #define MAX(a,b) (((a) > (b)) ? (a) : (b))
-  #define MIN(a,b) (((a) < (b)) ? (a) : (b))
 // Minimum and maximum macros
 #define __max(a,b) (((a) > (b)) ? (a) : (b))
 #define __min(a,b) (((a) < (b)) ? (a) : (b))
+#define MAX(a,b) (((a) > (b)) ? (a) : (b))
+#define MIN(a,b) (((a) < (b)) ? (a) : (b))
 
 #define EPSI  0.000001 // одна миллионная
 #define MILLION 1000000

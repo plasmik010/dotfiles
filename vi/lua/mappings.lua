@@ -126,17 +126,36 @@ H.nmap(',ve', function()  if vim.o.winbar=='' then vim.o.winbar = "%{%v:lua.requ
 
   -------- Finding -----------------------------{{{}}}------
 
-local tele_drop = require('telescope.themes').get_dropdown{ sort_mru=true, winblend=9, layout_config = { height=21 } }
-function Tele_buff_drop() require('telescope.builtin').buffers( tele_drop ) end
 H.nmap(
     ',fb',
     function()
-        local ivy_tele_theme = require'telescope.themes'.get_ivy{ sort_mru = true, layout_config = { height = vim.opt.lines:get() - 10 } }
+        local ivy_tele_theme = require'telescope.themes'.get_ivy{
+            sort_mru=true,
+            layout_config = { height=vim.opt.lines:get() - 10 },
+            border = true,
+        }
         require('telescope.builtin').buffers( ivy_tele_theme )
     end,
     "Telescope Buffers ivy-themed"
 )
-H.nmap(',<space>', Tele_buff_drop)
+H.nmap(
+    ',<space>',
+    function()
+        local tele_drop = require'telescope.themes'.get_dropdown{
+            sort_mru=true,
+            winblend=9,
+            layout_config = { height=14 },
+            initial_mode = "normal",
+            mappings = {
+                n = {
+                    ["<C-k>"] = "select_default",
+                },
+            }
+        }
+        require'telescope.builtin'.buffers(tele_drop)
+    end,
+    "desc"
+)
 -- nnoremap ,<space> :Telescope buffers sort_mru=1 theme=dropdown winblend=9<CR>
 H.nmap(',fh', require("telescope.builtin").help_tags, "Telescope help_tags")
 H.nmap(',fz', require("telescope.builtin").diagnostics, "Telescope diagnostics")
