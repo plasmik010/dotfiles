@@ -147,7 +147,7 @@ H.nmap('qf', "<cmd> call GetProjDir() <bar> exec 'Telescope find_files cwd=' . e
 H.nmap(
     ',/',
     function() require'telescope.builtin'.find_files({
-        search_dirs={ os.getenv("loc"), os.getenv("dotfiles"), os.getenv("tt") },
+        search_dirs={ "/ln/ho/bb", os.getenv("loc"), os.getenv("dotfiles"), os.getenv("tt") },
     }) end,
     "Find files in Favourite dirs"
 )

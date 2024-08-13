@@ -309,6 +309,8 @@ git restore --source=master '*.vcxproj'
   fetch = +refs/heads/*:refs/remotes/origin/*
 # have colored less listings:
 git config color.status always && (git status | less -r)
+git clone git@gitlab.sitename.org:some_name/proj_name.git 
+
 
 # Clang: generate config
 clang-format --style Chromium --dump-config > .clang-format
