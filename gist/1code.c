@@ -227,7 +227,30 @@ Kurt Guntheroth:
     shared_ptr<Foo>p3(new FOO);  // init to dynamic storage 
     shared_ptr<Foo>p4 = p3;      // share with another shared_ptr 
     auto p5 = make_shared<Foo>();// preferred 
-
+----
 Line 6 is preferred because it allocates both the Foo instance and the shared_ptr’s reference count in the same block, which is faster.
 shared_ptr uses expensive thread-safe increment and decrement to maintain its reference counts.
 Before move semantics in C++11, shared_ptr was the only way to put non-copyable objects in a standard library container. This made shared_ptr relatively common, and some coding standards said every pointer should be a shared_ptr. With move semantics, non-copyable objects can be in containers, and unique_ptr can be used practically all the time. The only time shared_ptr is needed nowadays is in the rare event that the lifetimes of two pointers overlap unpredictably.
+
+
+#pragma pack(push, 1)
+struct TNet_Mfi2Din_Bsk : public RpkbGlobalHeader
+{
+	struct // данные (xxx байта)
+	{
+		RpkbDataFrameHeader headerBsk;
+		unsigned int word_mfi_bsk[sizeMfiBsk];
+	} data;
+	//unsigned char reserve[24]; // дополнение данных до 300 байт
+};
+#pragma pack(pop)
+
+int circCounter;    // Круговой счётчик исправности РУ (обновление каждый раз при обновлении буфера обмена РУ.
+                    // если нет обновления 10 тактов -> ОТКАЗ
+
+
+
+
+
+
+

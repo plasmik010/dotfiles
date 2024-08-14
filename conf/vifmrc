@@ -175,7 +175,7 @@ nnoremap rS :! rsync_matchy.sh  %d %D; read -n 1
 " Operate files "
 nnoremap ai :amou<cr>
 nnoremap ao : aumo <cr>
-nnoremap au :! echo Sync... ; sync -f %f && udevil umount $(findmnt %f -n -o SOURCE | grep dev)<cr>
+nnoremap au :!echo Sync... ; sync -f %f && udevil umount $(findmnt %f -n -o SOURCE | grep dev)<cr>
 nnoremap am ggVG<cr>:copy<cr>
 nnoremap aM ggVG<cr>:move<cr>
 nnoremap cy : !(cp -r %f %D/; notify-send -t 15000 "Copy Done" %f) &<cr>
@@ -263,7 +263,8 @@ set milleroptions=lsize:2,csize:5,rsize:5
 " set vicmd='source $HOME/.bashrc; vim --cmd "set titlestring=VIM\ @\ VIFM"'
 " set vicmd=elvis\ -G\ termcap
 " set vicmd=vile
-set vicmd=$EDITOR
+" set vicmd=$EDITOR
+set vicmd='VIMINIT="source /ln/gd/dotfiles/vi/vimrc_main" vim '
 
 if (system('echo $INVIM') == "1")
     set vicmd='source $HOME/.bashrc; MODE="cur" virpc'
@@ -472,6 +473,11 @@ filextype *.html,*.htm
         \ firefox %f &,
         \ uzbl-browser %f %i &,
 filetype *.html,*.htm links, lynx
+
+" Code
+filextype *.h,*.c,*.cpp
+        \ bash -c 'VIMINIT="source /ln/gd/dotfiles/vi/vimrc_main" vim %c',
+        \ kate %c,
 
 " Object
 filetype *.o nm %f | less
@@ -733,36 +739,41 @@ nnoremap <f8> :delete<cr>
 
 
 command! fzffind : set noquickview
-                \| let $FZF_PICK = term('find | fzf --height 18 2>/dev/tty')
-                \| if $FZF_PICK != ''
-                \|     execute 'goto' fnameescape($FZF_PICK)
-                \| endif
+        \| exec "!clear; echo you run fzf_find"
+        \| let $FZF_PICK = term('find | fzf --height 22 2>/dev/tty')
+        \| if $FZF_PICK != ''
+        \|     execute 'goto' fnameescape($FZF_PICK)
+        \| endif
 
 command! fzflocate : set noquickview
-                  \| let $FZF_PICK = term('locate %a | fzf --height 10 2>/dev/tty')
-                  \| if $FZF_PICK != ''
-                  \|     execute 'goto' fnameescape($FZF_PICK)
-                  \| endif
+        \| exec "!clear; echo you run fzf_locate"
+        \| let $FZF_PICK = term('locate %a | fzf --height 22 2>/dev/tty')
+        \| if $FZF_PICK != ''
+        \|     execute 'goto' fnameescape($FZF_PICK)
+        \| endif
 " variation that automatically enters directories
 " command! fzflocate : set noquickview
-"                   \| let $FZF_PICK = term('locate $HOME | fzf --height 10 2>/dev/tty')
-"                   \| if $FZF_PICK != ''
-"                   \|     execute system('[ -f "$FZF_PICK" ] && echo goto || echo cd') fnameescape($FZF_PICK)
-"                   \| endif
+"         \| let $FZF_PICK = term('locate $HOME | fzf --height 10 2>/dev/tty')
+"         \| if $FZF_PICK != ''
+"         \|     execute system('[ -f "$FZF_PICK" ] && echo goto || echo cd') fnameescape($FZF_PICK)
+"         \| endif
 
 command! fzfmushist : set noquickview
-        \| let $FZF_PICK = term('tac $HOME/.mus-history | fzf --height 10 2>/dev/tty')
+        \| exec "!clear; echo you run fzf_mus_hist"
+        \| let $FZF_PICK = term('tac $HOME/.mus-history | fzf --height 22 2>/dev/tty')
         \| if $FZF_PICK != ''
         \|     exec 'goto' fnameescape($FZF_PICK)
         \| endif
 
 command! fzftmplist : set noquickview
-      \| let $FZF_PICK = term('cat /tmp/filelist | fzf --height 10 2>/dev/tty')
+        \| exec "!clear; echo you run fzf_tmplist"
+        \| let $FZF_PICK = term('cat /tmp/filelist | fzf --height 10 2>/dev/tty')
         \| if $FZF_PICK != ''
         \|     exec 'goto' fnameescape($FZF_PICK)
         \| endif
 
 nnoremap <C-j> :fzffind<cr>
+nnoremap <C-k> :fzflocate<space>
 nnoremap <C-h> :fzfmushist<cr>
 
 source $loc/vifmrc_loc

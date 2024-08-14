@@ -54,36 +54,34 @@ Plug 'tpope/vim-surround' "good
 Plug 'tpope/vim-endwise' "okay
 Plug 'tpope/vim-repeat' "handy
 Plug 'tpope/vim-eunuch' "handy
-" Plug 'tpope/vim-ragtag' "ok
-Plug 'tpope/vim-fugitive' "handy
+Plug 'MattesGroeger/vim-bookmarks' "great
+" Plug 'tpope/vim-fugitive' "handy
 Plug 'mhinz/vim-startify'
-Plug 'sheerun/vim-polyglot' "okay HUGE
-Plug 'airblade/vim-gitgutter'
-Plug 'michaeljsmith/vim-indent-object' "cool
-Plug 'godlygeek/tabular' "okay
+" Plug 'sheerun/vim-polyglot' "okay HUGE
+" Plug 'airblade/vim-gitgutter'
+" Plug 'michaeljsmith/vim-indent-object' "cool
+" Plug 'godlygeek/tabular' "okay
 Plug 'jamessan/vim-gnupg' "good
-Plug 'chrisbra/Colorizer' "good
-Plug 'junegunn/goyo.vim' "usable
+" Plug 'chrisbra/Colorizer' "good
+" Plug 'junegunn/goyo.vim' "usable
 Plug 'haya14busa/vim-edgemotion' "good
 " Plug 'eiginn/netrw' "basic
 Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf' "fantastic
 
 " good for Vim
 if !has("nvim")
-    Plug 'Shougo/unite.vim' | Plug 'Shougo/vimproc'
+    " Plug 'Shougo/unite.vim' | Plug 'Shougo/vimproc'
     " Plug 'Shougo/deoplete.nvim' | Plug 'Shougo/neoinclude.vim'
-    Plug 'majutsushi/tagbar' "okay
+    " Plug 'majutsushi/tagbar' "okay
 endif
 
-" Try out now
+" Try out later
 " Plug 'zefei/vim-colortuner' "fun
 " Plug 'Townk/vim-autoclose' "usable
-Plug 'MattesGroeger/vim-bookmarks'
-Plug 'will133/vim-dirdiff'
-Plug 'tpope/vim-sleuth'
-
-" Try out later
+" Plug 'will133/vim-dirdiff'
+" Plug 'tpope/vim-sleuth'
 " Plug 'tpope/vim-unimpaired'
+" Plug 'tpope/vim-ragtag' "ok
 " Plug 'ZeroKnight/vim-signjump' "buggy
 " Plug 'kien/rainbow_parentheses.vim'
 " Plug 'craigemery/vim-autotag' "errors
@@ -108,55 +106,18 @@ Plug 'tpope/vim-sleuth'
 
 " NeoVim specific
 if has("nvim")
-    Plug 'nvim-telescope/telescope.nvim'
-    Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do':'make'}
-    " Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'mfussenegger/nvim-lint'
-    Plug 'mfussenegger/nvim-dap'
-    Plug 'rcarriga/nvim-dap-ui'
-    Plug 'nvim-telescope/telescope-dap.nvim'
-    Plug 'nvim-treesitter/nvim-treesitter', {'do':':TSUpdate'}
-    Plug 'mrjones2014/nvim-ts-rainbow'
-    Plug 'ziontee113/syntax-tree-surfer'
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'williamboman/mason.nvim'
-    Plug 'williamboman/mason-lspconfig.nvim'
-    Plug 'VonHeikemen/lsp-zero.nvim'
-    " Plug 'glepnir/lspsaga.nvim'
-    Plug 'hrsh7th/nvim-cmp'
-    Plug 'hrsh7th/cmp-buffer'
-    Plug 'hrsh7th/cmp-path'
-    Plug 'hrsh7th/cmp-cmdline'
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'L3MON4D3/LuaSnip'
-    Plug 'saadparwaiz1/cmp_luasnip'
-    Plug 'chentoast/marks.nvim' " okay
-    " Plug 'norcalli/nvim-colorizer.lua'
-    Plug 'hoschi/yode-nvim'
-    Plug 'nvim-neo-tree/neo-tree.nvim'
-    Plug 'nvim-tree/nvim-web-devicons'
-    Plug 'MunifTanjim/nui.nvim'
-    Plug 'lambdalisue/suda.vim'
-    Plug 'numToStr/Comment.nvim'
-    Plug 'karb94/neoscroll.nvim'
-    Plug 'akinsho/toggleterm.nvim'
-    Plug 'windwp/nvim-autopairs'
-    " Plug 'luissimas/eval.nvim'
-    Plug 'booperlv/nvim-gomove'
     " Themes
     Plug 'lukas-reineke/onedark.nvim'
     Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
     Plug 'projekt0n/github-nvim-theme'
     Plug 'savq/melange-nvim'
-
 endif
 
 """"""""""""""""""""""""
 ""    Plug Colors:    ""
 """"""""""""""""""{{{}}}
 
-" gui themes need termguicolors set
+" Hint: gui themes need termguicolors set
 Plug 'morhetz/gruvbox' "best
 Plug 'sainnhe/gruvbox-material' "improved
 Plug '010penetrator/vim-colors-forplasma' "collection
@@ -238,7 +199,7 @@ call plug#end()
 endif
 
 if empty(execute('filter /fugitive.vim$/ scriptnames'))
-    echo "Yet have to install plugins.."
+    " echo "Yet have to install plugins.."
 else
     " echo "Plugins seem to be installed already."
 endif
