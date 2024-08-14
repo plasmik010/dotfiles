@@ -598,20 +598,22 @@ nnoremap <C-h> :BLines<CR>
 nnoremap ,zs :Files $dotfiles<CR>
 nnoremap ,zt :Files $tt<CR>
 nnoremap ,zj :Files $jo<CR>
+
 command! -bang FilesProj call GetProjDir() <bar> call fzf#vim#files(expand(b:proj_dir), fzf#vim#with_preview({'options': ['--layout=reverse','--info=inline']}), <bang>0)
 if has("nvim")
   command! -bang MyTelescopeFilesProj call GetProjDir() <bar> exec 'Telescope find_files cwd=' . expand(b:proj_dir)
   nnoremap qf :MyTelescopeFilesProj<CR>
   nnoremap qF :Telescope find_files search_dirs=%:p:h<CR>
-  nnoremap ,/ :Telescope find_files search_dirs=$dotfiles,$tt,$loc<CR>
-  nnoremap ,,/ :Telescope find_files theme=ivy search_dirs=$dotfiles,$PWD
+  " nnoremap ,/ :Telescope find_files search_dirs=$dotfiles,$tt,$loc<CR>
+  " nnoremap ,,/ :Telescope find_files theme=ivy search_dirs=$dotfiles,$PWD
 else
   nnoremap qf :FilesProj<CR>
   nnoremap qF :Files %:p:h<CR>
   nnoremap ,/ :Files $dotfiles,$tt,$loc<CR>
   nnoremap ,/ :Files $dotfiles<CR>
-  nnoremap ,,/ :Files $dotfiles
+  " nnoremap ,,/ :Files $dotfiles
 endif
+
 " nnoremap ,fg :Telescope live_grep theme=ivy<CR>
 " nnoremap ,fd :Telescope live_grep theme=ivy search_dirs=%<CR>
 " nnoremap ,ff :Telescope find_files theme=ivy<CR>
@@ -655,6 +657,7 @@ nnoremap ,vi :IndentBlanklineToggle<CR>
 nnoremap ,V :source $MYVIMRC<CR>
 nnoremap ,,v :source $MYVIMRC<CR>
 nnoremap ,v<space> :source %<CR>
+nnoremap c, :colo <C-d>
 nnoremap c<BS> :call SetPhase() <bar> call LoadColor() <bar> call CrispBorders()<CR>
 " nnoremap ,,z :source $VICONFDIR/session/hop <bar> silent call AddRpcEar()<CR>
 " nnoremap ,,q :call SaveColor() <bar> SSave! comon <bar> wqa<CR>

@@ -64,6 +64,7 @@ else
     SSource $vi/vs/myvimrc
     " SSource $vi/vimrc_themes
     SSource $loc/vimrc.local
+    SSource /tmp/.hot.vimrc
 endif
 silent call ReloadStyle(0)
 

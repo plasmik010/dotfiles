@@ -2,6 +2,8 @@
 
 -- MOST PLUGINS ARE INVOKED AND CONFIGURED ACCORDING TO THIS FILE --
 
+local noresil = { noremap = true, silent = false }
+
 return {
 
   -------- VIM BASIC ---------------------------{{{}}}------
@@ -719,25 +721,25 @@ return {
     enabled = false,
     dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
     opts = {
-      -- replace_netrw = true,
+      replace_netrw = false,
       sync_cwd = true,
+      show_hidden = false,
     },
-    config = function(_, opts)
-      local traveller = require("nvim-traveller")
-      traveller.setup(opts)
-      vim.keymap.set('n', '_', traveller.open_navigation, {})
-      -- Really fast navigation through directories with traveller compatibility
-      vim.keymap.set('n', '<leader>d', traveller.open_telescope_search, silent_options)
-    end
+    init = function()
+      vim.keymap.set('n', '_', require'nvim-traveller'.open_navigation)
+      -- H.nmap('_', require'nvim-traveller'.open_navigation)
+      -- Opens quick directory search (Tab to display all directories)
+      -- vim.keymap.set('n', ',d', require'nvim-traveller'.last_directories_search)
+      -- vim.keymap.set('n', ',o', require'nvim-traveller'.open_terminal)
+    end,
   },
 
   {
-    'tzachar/highlight-undo.nvim',
-      config = function()
-      require('highlight-undo').setup {
-        duration = 1400,
-      }
-    end
+    'tzachar/highlight-undo.nvim', -- not working
+    -- configure = true,
+    opts = {
+      duration = 900,
+    }
   },
 
   { 'prochri/telescope-all-recent.nvim', dependencies = {'kkharji/sqlite.lua'} },

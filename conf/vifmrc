@@ -92,78 +92,78 @@ nnoremap g. :exec 'cd' system('realpath .')<CR>
 nnoremap yc :!echo -n %f | xclip ; echo -n %f | xclip -selection clipboard <CR>:echo "filename in X buffer"<CR>
 nnoremap yC :!echo -n %f:p | xclip ; echo -n %f:p | xclip -selection clipboard <CR>:echo "full filepath in X buffer"<CR>
 " Yank current directory path into the clipboard
-nnoremap yd :!echo %d | xclip %i<cr>
+nnoremap yd :!echo %d | xclip %i<CR>:echo "dirpath in X buffer"<CR>
 " Yank current file path into the clipboard
-nnoremap yf :!echo %c:p | xclip %i<cr>
+nnoremap yf :!echo %c:p | xclip %i<CR>:echo "filepath in X buffer"<CR>
 " Search current filename in google
-nnoremap yg :!google.sh %c &>/dev/null &<cr>
+nnoremap yg :!google.sh %c &>/dev/null &<CR>
 
-nnoremap ,j :jobs<cr>
-nnoremap ,u :undolist<cr>
+nnoremap ,j :jobs<CR>
+nnoremap ,u :undolist<CR>
 nnoremap <C-n> 6j
 nnoremap <C-p> 6k
 
 " Open current file "
-nnoremap q. :! ./%c &<cr>
+nnoremap q. :! ./%c &<CR>
 " Open file in the background using its default program
-nnoremap qk :file &<cr>
-nnoremap qj :file<cr>
-nnoremap qi :! mediainfo %c | less<cr>
-nnoremap qh :! xxd %c | less<cr>
+nnoremap qk :file &<CR>
+nnoremap qj :file<CR>
+nnoremap qi :! mediainfo %c | less<CR>
+nnoremap qh :! xxd %c | less<CR>
 nnoremap qfv :! vim %c<CR>
-nnoremap qfa :! if [ %c == ".." ] ; then feha . ; else if [ -d %c ] ; then cd %c; feha . ; else if [ -f %c ] ; then feha %c; fi ; fi ; fi <cr>
-nnoremap qff :! fehf . &>/dev/null &<cr>
-nnoremap af  :! feha %c &>/dev/null &<cr>
-nnoremap qfm :! nomacs %c &>/dev/null &<cr>
-nnoremap qfi :! gimp %c &>/dev/null &<cr>
-nnoremap qfq :! qview %c &>/dev/null &<cr>
-nnoremap qfe :! eom %c &>/dev/null &<cr>
-" nnoremap qfp :! mpv --fs --keep-open=always *.{mp4,MP4,webm,mkv,mov,MOV} &>/dev/null & <cr>
-nnoremap qfp :! %i  [[ $TERMINAL=="kitty "* ]] && TERMINAL="$TERMINAL -o initial_window_height=$(expr 450 + $HIDPI \* 200) -o initial_window_width=$(expr 650 + $HIDPI \* 200)"; $TERMINAL -e /bin/bash -c "echo -ne '\033]0;MPV @ $PWD\007'; mpv %c" &>/dev/null &<cr>
-nnoremap qfG :! spek %c &>/dev/null &<cr>
-nnoremap qfg :! specgram.sh %c &<cr>
-nnoremap qfd :! deadbeef --queue %c &>/dev/null &<cr>
+nnoremap qfa :! if [ %c == ".." ] ; then feha . ; else if [ -d %c ] ; then cd %c; feha . ; else if [ -f %c ] ; then feha %c; fi ; fi ; fi <CR>
+nnoremap qff :! fehf . &>/dev/null &<CR>
+nnoremap af  :! feha %c &>/dev/null &<CR>
+nnoremap qfm :! nomacs %c &>/dev/null &<CR>
+nnoremap qfi :! gimp %c &>/dev/null &<CR>
+nnoremap qfq :! qview %c &>/dev/null &<CR>
+nnoremap qfe :! eom %c &>/dev/null &<CR>
+" nnoremap qfp :! mpv --fs --keep-open=always *.{mp4,MP4,webm,mkv,mov,MOV} &>/dev/null & <CR>
+nnoremap qfp :! %i  [[ $TERMINAL=="kitty "* ]] && TERMINAL="$TERMINAL -o initial_window_height=$(expr 450 + $HIDPI \* 200) -o initial_window_width=$(expr 650 + $HIDPI \* 200)"; $TERMINAL -e /bin/bash -c "echo -ne '\033]0;MPV @ $PWD\007'; mpv %c" &>/dev/null &<CR>
+nnoremap qfG :! spek %c &>/dev/null &<CR>
+nnoremap qfg :! specgram.sh %c &<CR>
+nnoremap qfd :! deadbeef --queue %c &>/dev/null &<CR>
 nnoremap qfn :! ncdu --color off -x %c
-nnoremap qf<space> :! ncdu --color off -x %c<cr>
+nnoremap qf<space> :! ncdu --color off -x %c<CR>
 
-nnoremap qfe :! $EDITOR %c<cr>
-nnoremap qft :! $TERMINAL $EDITOR %c<cr>
-nnoremap qfx :! xdg-open %c &>/dev/null &<cr>
-nnoremap qfb :! bash -x xdg-open %c<cr>
+nnoremap qfe :! $EDITOR %c<CR>
+nnoremap qft :! $TERMINAL $EDITOR %c<CR>
+nnoremap qfx :! xdg-open %c &>/dev/null &<CR>
+nnoremap qfb :! bash -x xdg-open %c<CR>
 nnoremap qf/ :! bash -lc "ARG=DMENUSAVE xdgsane %c"
 nnoremap qf/ :! bash -lc "ARG=DMENURUN xdgsane %c"
 
 " Calc space "
-nnoremap ,f :! echo; echo %c: ; file -b %c ; [[ -d %c ]] && tree -ia %c | tail -1 ; du -sh %c | cut -f1 ; ls -dla %c ; df -h --output=source,fstype,avail,pcent %c ; read -rsn1 <cr>
-nnoremap ,<space> :echo "Available space on " . system("df -h --output=source,avail . | tail -1")<cr>
-nnoremap ,F :! watch -n .4 du -sL -BM %f<cr>
-nnoremap ,l :! echo -ne \\n  ls dir :\\n ; ls -la --color=auto . ; read -rsn1 <cr>
-nnoremap ,b :! clear -x; $LSBLK -o NAME,FSTYPE,LABEL,SIZE,MOUNTPOINT ; read -rsn1 <cr>
-nnoremap ,B :! clear -x; watch -n 1 $LSBLK -o NAME,FSTYPE,LABEL,SIZE,MOUNTPOINT<cr>
-nnoremap ,s :! clear -x; df -BMB ; read -rsn1 <cr>
+nnoremap ,f :! echo; echo %c: ; file -b %c ; [[ -d %c ]] && tree -ia %c | tail -1 ; du -sh %c | cut -f1 ; ls -dla %c ; df -h --output=source,fstype,avail,pcent %c ; read -rsn1 <CR>
+nnoremap ,<space> :echo "Available space on " . system("df -h --output=source,avail . | tail -1")<CR>
+nnoremap ,F :! watch -n .4 du -sL -BM %f<CR>
+nnoremap ,l :! echo -ne \\n  ls dir :\\n ; ls -la --color=auto . ; read -rsn1 <CR>
+nnoremap ,b :! clear -x; $LSBLK -o NAME,FSTYPE,LABEL,SIZE,MOUNTPOINT ; read -rsn1 <CR>
+nnoremap ,B :! clear -x; watch -n 1 $LSBLK -o NAME,FSTYPE,LABEL,SIZE,MOUNTPOINT<CR>
+nnoremap ,s :! clear -x; df -BMB ; read -rsn1 <CR>
 nnoremap qg :! echo -ne "\n-- Try to sync @ $(date '+%%Y-%%m-%%d %%H:%%M:%%S') ...... \n" ; (time sync) 2>&1 | tr '\t' ' ' | tr '\n' '\t' ; echo -ne "\n-- Complete    @ $(date '+%%Y-%%m-%%d %%H:%%M:%%S')\n" <CR>:echo "Sync complete!"<CR>
 nnoremap z<BS> :! echo -ne "\n-- Try to sync @ $(date '+%%Y-%%m-%%d %%H:%%M:%%S') ...... \n" ; (time sync) 2>&1 | tr '\t' ' ' | tr '\n' '\t' ; echo -ne "\n-- Complete    @ $(date '+%%Y-%%m-%%d %%H:%%M:%%S')\n" <CR>:echo "Sync complete!"<CR>
 
 " Send to vim server "
-nnoremap ,as :! MODE=split  virpc "%c"  <cr>
-nnoremap ,av :! MODE=vert   virpc "%c" &>/dev/null & <cr>
-nnoremap ,ac :! MODE=cur    virpc "%c" &>/dev/null & <cr>
-nnoremap ,an :! MODE=newtab virpc "%c" &>/dev/null & <cr>
-nnoremap ,ab :! MODE=last   virpc "%c" &>/dev/null & <cr>
-nnoremap ,aa :! MODE=auto   virpc "%c" &>/dev/null & <cr>
-nnoremap ,aq :! virpc "%c"<cr>:q<cr>
-nnoremap ,ad :! vim -d %c %D/%c<cr>
+nnoremap ,as :! MODE=split  virpc "%c"  <CR>
+nnoremap ,av :! MODE=vert   virpc "%c" &>/dev/null & <CR>
+nnoremap ,ac :! MODE=cur    virpc "%c" &>/dev/null & <CR>
+nnoremap ,an :! MODE=newtab virpc "%c" &>/dev/null & <CR>
+nnoremap ,ab :! MODE=last   virpc "%c" &>/dev/null & <CR>
+nnoremap ,aa :! MODE=auto   virpc "%c" &>/dev/null & <CR>
+nnoremap ,aq :! virpc "%c"<CR>:q<CR>
+nnoremap ,ad :! vim -d %c %D/%c<CR>
 " if (system('echo $EDITOR') == "vim")
-"     nnoremap an :! MODE="newtab" vimrpc "%c" &>/dev/null & <cr>
+"     nnoremap an :! MODE="newtab" vimrpc "%c" &>/dev/null & <CR>
 " endif
 
 " Play this dir as an album with mpv
-nnoremap b :! PAUSE=0 INVIFM=1 ASK=1 mpv-album.sh %c VIFM; echo -ne "\033]0;VIFM\007"<cr>
+nnoremap b :! PAUSE=0 INVIFM=1 ASK=1 mpv-album.sh %c VIFM; echo -ne "\033]0;VIFM\007"<CR>
 " nnoremap b :! PAUSE=0 INVIFM=1 ASK=1 mpv-album.sh %c VIFM
 " Play this dir as an album with mpv in new window
-nnoremap B :! %i cd %c; [[ $TERMINAL=="kitty "* ]] && TERMINAL="$TERMINAL -o initial_window_height=$(expr 450 + $HIDPI \* 200) -o initial_window_width=$(expr 650 + $HIDPI \* 200)"; $TERMINAL -e /bin/bash -c "ASK=1 mpv-album.sh ." &>/dev/null &<cr>
+nnoremap B :! %i cd %c; [[ $TERMINAL=="kitty "* ]] && TERMINAL="$TERMINAL -o initial_window_height=$(expr 450 + $HIDPI \* 200) -o initial_window_width=$(expr 650 + $HIDPI \* 200)"; $TERMINAL -e /bin/bash -c "ASK=1 mpv-album.sh ." &>/dev/null &<CR>
 " Play this dir as an album in new kitty split
-nnoremap qb :! kitty @ new-window --new-tab /bin/bash -c "cd %d/ ; ASK=0 mpv-album.sh %c VIFM ; vifm --select %c" <cr>
+nnoremap qb :! kitty @ new-window --new-tab /bin/bash -c "cd %d/ ; ASK=0 mpv-album.sh %c VIFM ; vifm --select %c" <CR>
 nnoremap aa :! ONCE=1 ask_album.sh %c <CR>
 
 " Do rsync "
@@ -241,6 +241,7 @@ nnoremap ge :cd /ln/hh/<cr>
 nnoremap gk :cd /ln/torrents/red/KKK<cr>:set sort=mtime<cr>hj
 nnoremap gv :cd ~/.vim<cr>:goto plugged<cr>
 nnoremap gn :cd ~/.config/nvim<cr>:goto bak<cr>
+nnoremap gr :cd /ln/ho/proj/<CR>
 nnoremap gp :cd /ln/pr/<cr>:goto prwin<cr>
 nnoremap gK :cd /ln/hh/keebs/<cr>
 nnoremap gR :cd /ln/mo/metal/RULEZ/READ/<cr>

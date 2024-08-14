@@ -1,24 +1,28 @@
 -- vim: ts=4 sw=4
 
---------------------------------
---      Update Keymaps        --
---------------------------{{{}}}
+  -------- more mappings -----------------------{{{}}}------
 
 vim.api.nvim_command('nnoremap <silent> gh <cmd>ClangdSwitchSourceHeader<CR>')
-
-H.nmap('<C-h>', H.teles_ff)
 
 H.nmap(',S', vim.lsp.buf.signature_help)
 vim.keymap.set('n','K', vim.lsp.buf.hover, {buffer=0})
 -- H.nmap('gv', function() vim.api.nvim_open_win(true,true,{}) vim.lsp.buf.definition() end)
-H.nmap('gv', function() vim.cmd('vsplit') vim.lsp.buf.definition() end)
+H.nmap(
+    'gv',
+    function() vim.cmd('vsplit') vim.lsp.buf.definition() end,
+    "lsp Definition in vert split"
+)
 -- vim.keymap.set('n', "gl", "<cmd>let bn=bufnr('%') <bar> let pos=getpos('.') <bar> wincmd p <bar> exec 'b' . bn <bar> call setpos('.',pos) <bar> lua vim.lsp.buf.definition()<CR>" )
-H.nmap('gl', function() H.mirror_buf_to_prev_window() vim.lsp.buf.definition() end)
+H.nmap(
+    'gl',
+    function() H.mirror_buf_to_prev_window() vim.lsp.buf.definition() end,
+    "lsp Definition in prev window"
+)
 H.nmap('gs', vim.lsp.buf.document_symbol)
 H.nmap('gr', vim.lsp.buf.references)
-H.nmap('gw', vim.lsp.buf.workspace_symbol)
-H.nmap('gy', vim.lsp.buf.type_definition)
-H.nmap('gI', vim.lsp.buf.implementation)
+-- H.nmap('gw', vim.lsp.buf.workspace_symbol)
+H.nmap('gy', vim.lsp.buf.type_definition, "lsp type definition")
+H.nmap('gI', vim.lsp.buf.implementation, "lsp Implementation")
 
 -- H.nmap('z<Down>', function() vim.lsp.diagnostic.goto_next() end)
 -- H.Bmap('z<Up>', "k<cmd>vim.lsp.diagnostic.goto_prev")
@@ -55,7 +59,7 @@ H.nmap('qb', vim.diagnostic.setloclist)
 
 H.nmap(',"', function() require'nvim-peekup'.peekup_open('p') end )
 
--- Yank and put incremental
+-- Yank / put incremental
 vim.keymap.set('n', 'q;', '<cmd>let @l=""|echo " L reg now empty" <CR>')
 vim.keymap.set('n', 'qy', '\"Lyy<cmd>echo "added to L reg"<CR>')
 vim.keymap.set('v', 'qy', '\"Ly<cmd>echo "added to L reg"<CR>')
@@ -71,41 +75,11 @@ vim.keymap.set('x', 'qp', '\"lp')
 H.Bmap('<C-PageUp>',   ":BufferLineCyclePrev<CR>", { silent = true })
 H.Bmap('<C-PageDown>', ":BufferLineCycleNext<CR>", { silent = true })
 
-vim.keymap.set('n', ',N', function()
-  local filedir = vim.fn.expand('%:p:h')
-  vim.cmd.tcd(filedir)
-  local reveal_file = vim.fn.expand('%:p')
-  if (reveal_file == '') then
-    reveal_file = vim.fn.getcwd()
-  else
-    local f = io.open(reveal_file, "r")
-    if (f) then
-      f.close(f)
-    else
-      reveal_file = vim.fn.getcwd()
-    end
-  end
-  -- print(reveal_file)
-  require('neo-tree.command').execute({
-    -- action = "focus",          -- OPTIONAL, this is the default value
-    source = "filesystem",     -- OPTIONAL, this is the default value
-    position = "left",         -- OPTIONAL, this is the default value
-    reveal_file = reveal_file, -- path to file or folder to reveal
-    -- reveal_force_cwd = true,   -- change cwd without asking if needed
-    toggle = true,
-  })
-end,
-{ desc = "Open neo-tree at current file or working directory" }
-)
-H.nmap(',n', ":Neotree reveal<CR>")
-H.nmap(',<BS>', ":Neotree reveal_force_cwd<CR>")
-H.nmap('-', ":Neotree reveal_force_cwd current<CR>")
-
 H.nmap(',,b', ":IndentBlanklineToggle<CR>")
 H.nmap('c<BS>', ":call ReloadStyle(1)<CR>")
-H.nmap(',gp', ":call FocusBufOrDo('mylazy/init.lua','e $vi/lua/mylazy/init.lua')<CR>")
-H.nmap(',gn', ":call FocusBufOrDo('lua/init.lua','e $vi/lua/init.lua')<CR>")
-H.nmap(',gm', ":call FocusBufOrDo('mappings.lua','e $vi/lua/mappings.lua')<CR>")
+H.nmap(',gp', ":call FocusBufOrDo('mylazy/init.lua','e $vi/lua/mylazy/init.lua')<CR>", "Plugins")
+H.nmap(',gn', ":call FocusBufOrDo('lua/init.lua','e $vi/lua/init.lua')<CR>", "init.lua")
+H.nmap(',gm', ":call FocusBufOrDo('mappings.lua','e $vi/lua/mappings.lua')<CR>", "Mappings")
 H.nmap(
     ',vp',
     function() vim.api.nvim_exec2([[:put +| normal 3df/^v$S}ysi}'A,==]], {}) end,
@@ -122,7 +96,23 @@ H.nmap('d<', "<cmd>diffget //2<CR>")
 H.nmap('d>', "<cmd>diffget //3<CR>")
 H.nmap(',ve', function()  if vim.o.winbar=='' then vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}" else vim.o.winbar='' end end )
 
-  -------- Finding -----------------------------{{{}}}------
+H.nmap(',l', require("lsp_lines").toggle, "Toggle lsp_lines")
+H.nmap(',vg', require("gitsigns").toggle_signs, "Show git highlight column")
+H.nmap('qt', ":HiMyWordsToggle<CR>")
+H.nmap('qT', ":HiMyWordsClear<CR>")
+H.nmap(',r', ":RnvimrToggle<CR>")
+H.nmap(',<Esc>', ":Dashboard<CR>")
+H.nmap(',v,', H.eval_paragraph, "Evaluate code for Neovim")
+
+H.nvmap('qe', ":SnipRun<CR>", "Evaluate code")
+
+H.nmap('s', ":HopWord<CR>")
+-- H.nmap(',vh', ":LocalHighlightToggle<CR>")
+H.nmap(',vh', ":IlluminateToggle<CR>")
+
+  -------- Finding / Telescope -----------------{{{}}}------
+
+H.nmap('<C-h>', H.teles_fuzbuf)
 
 H.nmap(
     ',fb',
@@ -154,7 +144,7 @@ H.nmap(',fh', require("telescope.builtin").help_tags, "Telescope help_tags")
 H.nmap(',fz', require("telescope.builtin").diagnostics, "Telescope diagnostics")
 H.nmap(',fo', require("telescope.builtin").oldfiles, "Telescope old files")
 H.nmap(',fr', require("telescope.builtin").lsp_references, "Telescope References")
-H.nmap('qf', "<cmd> call GetProjDir() <bar> exec 'Telescope find_files cwd=' . expand(b:proj_dir)<CR>", "Find cwd poj files")
+H.nmap('qf', "<cmd> call GetProjDir() <bar> exec 'Telescope find_files cwd=' . expand(b:proj_dir)<CR>", "Find cwd proj files")
 
 H.nmap(
     ',/',
@@ -185,15 +175,6 @@ H.nmap(
     "Telescope Files at git root level for current file"
 )
 
--- H.nmap(',,/', ":Telescope find_files theme=ivy search_dirs=$sh,$PWD")
--- H.nmap(
---     ',,/',
---     function()
---         require'telescope.builtin'.find_files {
---             search_dirs = { os.getenv("sh"), os.getenv("tt"), vim.fn.getcwd() },
---         }
---     end
--- )
 H.nmap(',fa', ":Telescope live_grep theme=ivy<CR>", "Telescope live_grep")
 -- H.nmap(',fd', ":Telescope live_grep theme=ivy search_dirs=%<CR>")
 -- H.nmap(',fd', function() require'telescope.builtin'.live_grep(tele_ivy_dir()) end)
@@ -218,22 +199,41 @@ H.nmap('qr',  ":Telescope lsp_references theme=ivy<CR>")
 H.nmap(',fs', ":Telescope lsp_document_symbols<CR>", "Telescope LSP file symbols")
 H.nmap('qs',  ":Telescope lsp_dynamic_workspace_symbols<CR>", "Telescope dynamic symbols")
 
-H.nmap(',l', require("lsp_lines").toggle, "Toggle lsp_lines")
-H.nmap(',vg', require("gitsigns").toggle_signs, "Show git highlight column")
-H.nmap('qt', ":HiMyWordsToggle<CR>")
-H.nmap('qT', ":HiMyWordsClear<CR>")
-H.nmap(',r', ":RnvimrToggle<CR>")
-H.nmap(',<Esc>', ":Dashboard<CR>")
-H.nmap(',v,', H.eval_paragraph, "Evaluate code for Neovim")
-
-H.nvmap('qe', ":SnipRun<CR>", "Evaluate code")
-
-H.nmap('s', ":HopWord<CR>")
--- H.nmap(',vh', ":LocalHighlightToggle<CR>")
-H.nmap(',vh', ":IlluminateToggle<CR>")
-
 -- nnoremap ,tt :Telescope current_buffer_fuzzy_find sorting_strategy=ascending layout_config={"prompt_position":"top"}<CR>
 -- nnoremap ,tt <cmd>lua require("telescope.builtin").current_buffer_fuzzy_find({sorting_strategy="ascending", theme="ivy"})<CR>
+
+  -------- Neotree -----------------------------{{{}}}------
+vim.keymap.set('n', ',N', function()
+  local filedir = vim.fn.expand('%:p:h')
+  vim.cmd.tcd(filedir)
+  local reveal_file = vim.fn.expand('%:p')
+  if (reveal_file == '') then
+    reveal_file = vim.fn.getcwd()
+  else
+    local f = io.open(reveal_file, "r")
+    if (f) then
+      f.close(f)
+    else
+      reveal_file = vim.fn.getcwd()
+    end
+  end
+  -- print(reveal_file)
+  require('neo-tree.command').execute({
+    -- action = "focus",          -- OPTIONAL, this is the default value
+    source = "filesystem",     -- OPTIONAL, this is the default value
+    position = "left",         -- OPTIONAL, this is the default value
+    reveal_file = reveal_file, -- path to file or folder to reveal
+    -- reveal_force_cwd = true,   -- change cwd without asking if needed
+    toggle = true,
+  })
+end,
+{ desc = "Open neo-tree at current file or working directory" }
+)
+H.nmap(',n', ":Neotree reveal<CR>")
+H.nmap(',<BS>', ":Neotree reveal_force_cwd<CR>")
+H.nmap('-', ":Neotree reveal_force_cwd current<CR>")
+
+  -------- unloaded ----------------------------{{{}}}------
 
 --[[ -- Cinnamon Keymaps --
 if package.loaded['cinnamon'] then
@@ -287,5 +287,5 @@ end ]]
 -- nnoremap <silent><A-;> <Cmd>exe v:count1 . "ToggleTerm"<CR>
 -- nnoremap <silent><A-;> <Cmd>exe "ToggleTerm"<CR>
 -- tnoremap <silent><A-;> <C-\><C-n>:ToggleTermToggleAll<CR>
--- vim.keymap.set('n', keys, func, { desc = desc, noremap = true })
+-- HINT -- vim.keymap.set('n', keys, func, { desc = desc, noremap = true })
 
