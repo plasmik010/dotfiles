@@ -253,9 +253,10 @@ git config --list --show-origin
 git switch -c newbranch # create new branch
 git checkout -b newbranch # same
 git config --global --edit
-git commit --amend --reset-author --no-edit
 git config --global user.email "user@mail"
 git config --global user.name USER
+git commit --amend --reset-author --no-edit
+git rm --cached dumpfile; git commit --amend # delete some file from commit
 git stash show -p # see last stash (add stash@{N} for older stash)
 git diff stash@{N} master # compare any stash against master (may add --name-only, or add -- filename)
 git difftool master origin/master -y

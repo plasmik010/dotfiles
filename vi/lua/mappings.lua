@@ -47,6 +47,8 @@ H.nmap('gd', vim.lsp.buf.definition)
 H.nmap('gD', vim.lsp.buf.declaration)
 
 H.nmap('m;', ":BookmarksListAll<CR>")
+
+H.nmap(',,s', ":Telescope persisted<CR>", "Select Session")
 -- H.nmap(',,q', function() b=require'nvim-possession'.update() print(1,b) if b then vim.cmd[[wqa]] end end )
 -- H.nmap(',po', function() require'nvim-possession'.update() end, "Session Update")
 -- H.nmap(',pl', function() require'nvim-possession'.list() end, "Session Open")

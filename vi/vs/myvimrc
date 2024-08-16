@@ -118,21 +118,21 @@ set hidden
 " set fileformat=unix
 set title
 
-" Set location for backups and shada and runtime files
+" Set location for backups and viminfo and runtime files
 set undofile
 set swapfile
 set sessionoptions+=globals
 set history=2500
 if !has("nvim")
   let workdir = $HOME . "/.vim"
-  let bakdir = $HOME . "/.vim/bak"
   if !isdirectory(workdir) | call mkdir(workdir, '', 0700) | endif
+  let bakdir  = $HOME . "/.vim/bak"
   if !isdirectory(bakdir) | call mkdir(bakdir, '', 0700) | endif
-  silent exec "!find ".bakdir." -type f -mtime +30 -delete"
-  exec "set backupdir=".bakdir
-  exec "set undodir=".bakdir
-  exec "set directory=".workdir
-  "exec "set viminfofile=".workdir."/viminfo"
+  silent exec "!find " . bakdir . " -type f -mtime +30 -delete"
+  exec "set directory=" . workdir
+  exec "set backupdir=" . bakdir
+  exec "set undodir=" . bakdir
+  exec "set viminfofile=" . workdir . "/viminfo"
 endif
 
 set t_Co=256

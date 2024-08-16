@@ -5,7 +5,7 @@
 """"""""""""""""""""""""
 
 let rtp0=split(&runtimepath, ',')[0]
-if !filereadable(rtp0 . "iii/autoload/plug.vim")
+if !filereadable(rtp0 . "/autoload/plug.vim")
     echom "--Will try to download  Plug.vim  to " . rtp0 . "/autoload"
     if !empty(g:bash_forced)
         let l:my_autoload_nix = system('cygpath -u "' . rtp0 . '/autoload" | tr -d "\n"')
