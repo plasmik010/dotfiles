@@ -4,19 +4,20 @@
 ""       Plug:        ""
 """"""""""""""""""""""""
 
-if ! filereadable($MYAUTOLOAD . "/plug.vim")
-    echom "Will try to download Plug.vim"
-    echom "  to " . expand($MYAUTOLOAD)
+let rtp0=split(&runtimepath, ',')[0]
+if !filereadable(rtp0 . "iii/autoload/plug.vim")
+    echom "--Will try to download  Plug.vim  to " . rtp0 . "/autoload"
     if !empty(g:bash_forced)
-        silent call system("curl -fLo \"" . g:my_autoload_nix . "\"/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && echo success with curl!")
+        let l:my_autoload_nix = system('cygpath -u "' . rtp0 . '/autoload" | tr -d "\n"')
+        silent call system("curl -fLo \"" . l:my_autoload_nix . "\"/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && echo success with curl!")
     else
         "silent call system("curl -s --head -m 1 https://github.com 1>/dev/null && OR --output NUL for Windows")
-        echo system("curl -fLo " . $MYAUTOLOAD . "/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && echo success with curl!")
+        echo system("curl -fLo " . rtp0 . "/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && echo success with curl!")
     endif
 endif
 
 let g:vimplug_available=0
-if filereadable($MYAUTOLOAD . "/plug.vim")
+if filereadable(rtp0 . "/autoload/plug.vim")
     let g:vimplug_available=1
 else
     let g:vimplug_available=0
@@ -59,7 +60,7 @@ Plug 'MattesGroeger/vim-bookmarks' "great
 Plug 'mhinz/vim-startify'
 " Plug 'sheerun/vim-polyglot' "okay HUGE
 " Plug 'airblade/vim-gitgutter'
-" Plug 'michaeljsmith/vim-indent-object' "cool
+Plug 'michaeljsmith/vim-indent-object' "cool
 " Plug 'godlygeek/tabular' "okay
 Plug 'jamessan/vim-gnupg' "good
 " Plug 'chrisbra/Colorizer' "good

@@ -54,6 +54,9 @@ return {
         }
       },
       extensions = {
+        persisted = {
+          layout_config = { width = 0.55, height = 0.55 }
+        },
         fzf = {
           fuzzy = false,                   -- false will only do exact matching
           override_generic_sorter = true,  -- override the generic sorter
@@ -65,6 +68,7 @@ return {
     config = function(_,opts)
       require'telescope'.setup(opts)
       require'telescope'.load_extension('fzf')
+      require'telescope'.load_extension('persisted')
     end
   },
   {
@@ -250,7 +254,10 @@ return {
 
   {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'kyazdani42/nvim-web-devicons', 'gennaro-tedesco/nvim-possession' },
+    dependencies = {
+      'kyazdani42/nvim-web-devicons',
+      -- 'gennaro-tedesco/nvim-possession',
+    },
     -- lazy = true,
     -- priority = 40,
     opts = {
@@ -264,13 +271,8 @@ return {
             -- color_correction = 'dynamic',
             -- navic_opts = nil
           },
-          {
-            H.auxfun1,
-            -- function() require'nvim-possession'.status() end,
-            cond = function()
-              return require("nvim-possession").status() ~= nil
-            end,
-          },
+          -- { require("nvim-possession").status,
+          --   cond = function() return require("nvim-possession").status() ~= nil end, },
         }
       },
       options = {
@@ -303,7 +305,7 @@ return {
     'windwp/nvim-autopairs',
     enabled = false,
     config = function()
-      local pl = require('nvim-autopairs')
+      local pl = require'nvim-autopairs'
       pl.setup()
       pl.remove_rule("'")
       pl.remove_rule('"')
@@ -380,7 +382,7 @@ return {
   {
     'ziontee113/syntax-tree-surfer', --- move with TS
     config = function()
-      require("syntax-tree-surfer").setup()
+      require'syntax-tree-surfer'.setup()
       local noresil = { noremap = true, silent = false }
       -- Normal Mode Swapping:
       -- Swap The Master Node relative to the cursor with it's siblings, Dot Repeatable
@@ -442,7 +444,7 @@ return {
     'phaazon/hop.nvim',
     branch = 'v2', -- optional but strongly recommended
     config = function()
-      local hop = require('hop')
+      local hop = require'hop'
       hop.setup { keys = 'etovxqpdygfblzhckisuran' }
       local directions = require('hop.hint').HintDirection
       -- vim.keymap.set('n', 'f', function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true }) end, {remap=true})
@@ -463,7 +465,7 @@ return {
     'trmckay/based.nvim', --- decode hex and octal to decimal
     enabled = false,
     config = function()
-      H.nmap(",cb", require'based'.convert)
+      H.nmap(',cb', require'based'.convert)
     end
   },
 
@@ -489,17 +491,20 @@ return {
       tint = -18,
       saturation = 0.7
     },
-    config = function(_, opts)
-      local tint = require("tint")
-      tint.setup(opts)
-      tint.disable()
+    configure = true,
+    init = function()
+      -- local tint = require("tint")
+      --   tint.setup()
+      -- tint.disable()
+      require'tint'.disable()
+      H.nmap(',vf', require'tint'.toggle, "Tint Focused window")
     end
   },
 
   -- { 'echasnovski/mini.splitjoin', version = '*' },
 
   {
-    'echasnovski/mini.files',
+    'echasnovski/mini.files', -- very handy --- mini FM
     version = false,
     -- config = true,
     config = function()
@@ -587,6 +592,35 @@ return {
   'nullchilly/fsread.nvim', -- funky --- read fast
 
   -------- Tryout ------------------------------{{{}}}------
+
+  {
+    "gennaro-tedesco/nvim-possession", -- works
+    dependencies = { "ibhagwan/fzf-lua" },
+    enabled = false,
+    config = true,
+    opts = {
+      autosave = false,
+      sessions = {
+        sessions_path = H.condMkdir(os.getenv("HOME"),".nvim-session/session/"),
+        sessions_icon = '󰅏 '
+      },
+      save_hook = function() vim.cmd('call SaveColor()') end,
+      post_hook = function() vim.cmd('call LoadColor()') end,
+      fzf_winopts = { width=.5 }
+    },
+    init = function()
+      -- vim.keymap.set("n", ",pl", function() possession.list() end)
+      -- vim.keymap.set("n", ",pn", function() possession.new() end)
+      -- vim.keymap.set("n", ",po", function() possession.update() end)
+      -- vim.keymap.set("n", ",pd", function() possession.delete() end)
+    end,
+  },
+
+  {
+    'olimorris/persisted.nvim',
+    -- lazy = false,
+    config = true,
+  },
 
   {
     'NStefan002/speedtyper.nvim',
@@ -686,7 +720,19 @@ return {
 
   { 'echasnovski/mini.cursorword' },
 
-  -- 'RRethy/vim-illuminate', --- highlight current word
+  {
+    'RRethy/vim-illuminate', --- highlight current word
+    config = function()
+      require'illuminate'.configure {
+        providers = {
+          -- 'lsp',
+          -- 'treesitter',
+          'regex',
+        },
+        delay = 900,
+      }
+    end,
+  },
 
   {
     'dvoytik/hi-my-words.nvim', --- highlight words you wish
@@ -779,29 +825,6 @@ return {
     config = function ()
       require'alpha'.setup(require'alpha.themes.dashboard'.config)
     end
-  },
-
-  {
-    "gennaro-tedesco/nvim-possession", -- works
-    dependencies = { "ibhagwan/fzf-lua" },
-    config = true,
-    opts = {
-      autosave = false,
-      sessions = {
-        sessions_path = H.condMkdir(os.getenv("HOME"),".nvim-session/session/"),
-        sessions_icon = '󰅏 '
-      },
-      save_hook = function() vim.cmd('call SaveColor()') end,
-      post_hook = function() vim.cmd('call LoadColor()') end,
-      fzf_winopts = { width=.5 }
-    },
-    init = function()
-      local possession = require("nvim-possession")
-      -- vim.keymap.set("n", ",pl", function() possession.list() end)
-      -- vim.keymap.set("n", ",pn", function() possession.new() end)
-      -- vim.keymap.set("n", ",po", function() possession.update() end)
-      -- vim.keymap.set("n", ",pd", function() possession.delete() end)
-    end,
   },
 
   'mizlan/iswap.nvim',

@@ -48,10 +48,10 @@ H.nmap('gD', vim.lsp.buf.declaration)
 
 H.nmap('m;', ":BookmarksListAll<CR>")
 -- H.nmap(',,q', function() b=require'nvim-possession'.update() print(1,b) if b then vim.cmd[[wqa]] end end )
-H.nmap(',po', function() require'nvim-possession'.update() end, "Session Update")
-H.nmap(',pl', function() require'nvim-possession'.list() end, "Session Open")
-H.nmap(',pd', function() require'nvim-possession'.delete() end, "Session Delete")
-H.nmap(',pn', function() require'nvim-possession'.new() end, "Session New")
+-- H.nmap(',po', function() require'nvim-possession'.update() end, "Session Update")
+-- H.nmap(',pl', function() require'nvim-possession'.list() end, "Session Open")
+-- H.nmap(',pd', function() require'nvim-possession'.delete() end, "Session Delete")
+-- H.nmap(',pn', function() require'nvim-possession'.new() end, "Session New")
 
 
 H.nmap('qn', vim.diagnostic.open_float)
@@ -75,7 +75,6 @@ vim.keymap.set('x', 'qp', '\"lp')
 H.Bmap('<C-PageUp>',   ":BufferLineCyclePrev<CR>", { silent = true })
 H.Bmap('<C-PageDown>', ":BufferLineCycleNext<CR>", { silent = true })
 
-H.nmap(',,b', ":IndentBlanklineToggle<CR>")
 H.nmap('c<BS>', ":call ReloadStyle(1)<CR>")
 H.nmap(',gp', ":call FocusBufOrDo('mylazy/init.lua','e $vi/lua/mylazy/init.lua')<CR>", "Plugins")
 H.nmap(',gn', ":call FocusBufOrDo('lua/init.lua','e $vi/lua/init.lua')<CR>", "init.lua")
@@ -86,29 +85,33 @@ H.nmap(
     "Put plugin url as new entry"
 )
 
-H.nmap(',vf', require'tint'.toggle, "Tint Focused window")
-H.nmap(',T', "<cmd>SymbolsOutline<CR>", "Tree like view for symbols")
-H.nmap(',j', require'treesj'.toggle)
+H.nmap(',T', "<cmd>SymbolsOutline<CR>", "Tree-like view for symbols")
+H.nmap(',j', require'treesj'.toggle, "Tree Split/Join")
 -- vim.keymap.set('n', ',j', require('treesj').toggle)
 -- H.nmap('q,', ":TSJJoin<CR>")
 -- H.nmap('q.', ":TSJSplit<CR>")
 H.nmap('d<', "<cmd>diffget //2<CR>")
 H.nmap('d>', "<cmd>diffget //3<CR>")
-H.nmap(',ve', function()  if vim.o.winbar=='' then vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}" else vim.o.winbar='' end end )
+H.nmap(
+    ',ve',
+    function() if vim.o.winbar=='' then vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}" else vim.o.winbar='' end end,
+    "Navic"
+)
 
 H.nmap(',l', require("lsp_lines").toggle, "Toggle lsp_lines")
 H.nmap(',vg', require("gitsigns").toggle_signs, "Show git highlight column")
+H.nmap(',vh', ":IlluminateToggle<CR>", "Highlight current word")
+H.nmap(',vi', ":IBLToggle<CR>", "Indent Blank Line")
 H.nmap('qt', ":HiMyWordsToggle<CR>")
 H.nmap('qT', ":HiMyWordsClear<CR>")
-H.nmap(',r', ":RnvimrToggle<CR>")
-H.nmap(',<Esc>', ":Dashboard<CR>")
+
+H.nmap(',r', ":RnvimrToggle<CR>", "Rnvimr")
+H.nmap(',<Esc>', ":Dashboard<CR>", "Dashboard")
 H.nmap(',v,', H.eval_paragraph, "Evaluate code for Neovim")
 
 H.nvmap('qe', ":SnipRun<CR>", "Evaluate code")
 
 H.nmap('s', ":HopWord<CR>")
--- H.nmap(',vh', ":LocalHighlightToggle<CR>")
-H.nmap(',vh', ":IlluminateToggle<CR>")
 
   -------- Finding / Telescope -----------------{{{}}}------
 
@@ -145,6 +148,7 @@ H.nmap(',fz', require("telescope.builtin").diagnostics, "Telescope diagnostics")
 H.nmap(',fo', require("telescope.builtin").oldfiles, "Telescope old files")
 H.nmap(',fr', require("telescope.builtin").lsp_references, "Telescope References")
 H.nmap('qf', "<cmd> call GetProjDir() <bar> exec 'Telescope find_files cwd=' . expand(b:proj_dir)<CR>", "Find cwd proj files")
+H.nmap('q.', "<cmd> Telescope find_files search_dirs=%:p:h<CR>", "Find files in dir with current file")
 
 H.nmap(
     ',/',

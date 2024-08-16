@@ -66,10 +66,10 @@ if !has("nvim")
         \ { 'type': 'commands',  'header': ['   Commands']       },
         \ ]
   " \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-  let g:startify_session_dir = $VICONFDIR . "/session"
-  if !isdirectory(g:startify_session_dir)
-    call mkdir(g:startify_session_dir, '', 0770)
-  endif
+  let g:startify_session_dir = $SESSDIR
+  " if !isdirectory(g:startify_session_dir)
+  "   call mkdir(g:startify_session_dir, '', 0770)
+  " endif
 endif
 
 set encoding=UTF-8
@@ -129,7 +129,6 @@ if !has("nvim")
   if !isdirectory(workdir) | call mkdir(workdir, '', 0700) | endif
   if !isdirectory(bakdir) | call mkdir(bakdir, '', 0700) | endif
   silent exec "!find ".bakdir." -type f -mtime +30 -delete"
-  " if !isdirectory($VICONFDIR) | call mkdir($VICONFDIR, '', 0770) | endif
   exec "set backupdir=".bakdir
   exec "set undodir=".bakdir
   exec "set directory=".workdir
@@ -151,6 +150,7 @@ if !has("nvim")
     autocmd!
     " async call function after few ms
     autocmd SessionLoadPost * call timer_start( 5, {-> ReloadStyle(1)} )
+    " silent call AddRpcEar()
     " call timer_start(100, {-> execute("colo dayfox")})
   augroup END
 endif
@@ -355,6 +355,8 @@ noremap C "_C
 " Editing
 nnoremap ]<space> o<space><C-u><Esc>
 nnoremap [<space> O<space><C-u><Esc>
+nnoremap qo o<space><C-u><Esc>
+nnoremap qi O<space><C-u><Esc>
 nnoremap qu ~
 nnoremap cx s
 " swap two chars
@@ -518,7 +520,8 @@ nnoremap a- :wincmd v \| e %:p:h<CR>
 " nnoremap a_  :vsplit <bar> exec "normal -"<CR>
 nnoremap as :split #  <bar> call WinSwap(0) <CR>
 nnoremap av :vsplit # <bar> call WinSwap(0) <CR>
-nnoremap an :new<CR>
+nnoremap aS :new<CR>
+nnoremap aV :vnew<CR>
 nnoremap <C-w>S :vsplit<CR>
 " nnoremap <silent> ,. :if bufexists(bufnr('#')) <bar> b # <bar> echo expand('%') <bar> else <bar> echo 'No prev buffer.' <bar> endif<CR>
 nnoremap <silent> ,. :call PrevBuf()<CR>
@@ -600,13 +603,7 @@ nnoremap ,zt :Files $tt<CR>
 nnoremap ,zj :Files $jo<CR>
 
 command! -bang FilesProj call GetProjDir() <bar> call fzf#vim#files(expand(b:proj_dir), fzf#vim#with_preview({'options': ['--layout=reverse','--info=inline']}), <bang>0)
-if has("nvim")
-  command! -bang MyTelescopeFilesProj call GetProjDir() <bar> exec 'Telescope find_files cwd=' . expand(b:proj_dir)
-  nnoremap qf :MyTelescopeFilesProj<CR>
-  nnoremap qF :Telescope find_files search_dirs=%:p:h<CR>
-  " nnoremap ,/ :Telescope find_files search_dirs=$dotfiles,$tt,$loc<CR>
-  " nnoremap ,,/ :Telescope find_files theme=ivy search_dirs=$dotfiles,$PWD
-else
+if !has("nvim")
   nnoremap qf :FilesProj<CR>
   nnoremap qF :Files %:p:h<CR>
   nnoremap ,/ :Files $dotfiles,$tt,$loc<CR>
@@ -614,6 +611,11 @@ else
   " nnoremap ,,/ :Files $dotfiles
 endif
 
+" command! -bang MyTelescopeFilesProj call GetProjDir() <bar> exec 'Telescope find_files cwd=' . expand(b:proj_dir)
+" nnoremap qf :MyTelescopeFilesProj<CR>
+" nnoremap qF :Telescope find_files search_dirs=%:p:h<CR>
+" nnoremap ,/ :Telescope find_files search_dirs=$dotfiles,$tt,$loc<CR>
+" nnoremap ,,/ :Telescope find_files theme=ivy search_dirs=$dotfiles,$PWD
 " nnoremap ,fg :Telescope live_grep theme=ivy<CR>
 " nnoremap ,fd :Telescope live_grep theme=ivy search_dirs=%<CR>
 " nnoremap ,ff :Telescope find_files theme=ivy<CR>
@@ -651,7 +653,6 @@ nnoremap ,gw :call FocusBufOrDo('work.txt','e $wbuf')<CR>
 nnoremap ,g; :call FocusBufOrDo('/bb/*.txt','e /ln/ho/bb/*.txt')<CR>
 
 nnoremap ,,<space> :Goyo<CR>
-nnoremap ,vi :IndentBlanklineToggle<CR>
 
 " Start and quit Vim
 nnoremap ,V :source $MYVIMRC<CR>
@@ -659,11 +660,6 @@ nnoremap ,,v :source $MYVIMRC<CR>
 nnoremap ,v<space> :source %<CR>
 nnoremap c, :colo <C-d>
 nnoremap c<BS> :call SetPhase() <bar> call LoadColor() <bar> call CrispBorders()<CR>
-" nnoremap ,,z :source $VICONFDIR/session/hop <bar> silent call AddRpcEar()<CR>
-" nnoremap ,,q :call SaveColor() <bar> SSave! comon <bar> wqa<CR>
-" nnoremap ,,s :call SaveColor() <bar> SSave! comon<CR>
-" nnoremap ,,q :call SaveColor() <bar> mksession! $VICONFDIR/session/comon<bar> wqa<CR>
-" nnoremap ,,s :call SaveColor() <bar> mksession! $VICONFDIR/session/comon<CR>
 nnoremap ,vq :qa!<CR>
 " nnoremap ,<esc> :Startify<CR>
 nnoremap ,zq :wa <bar> qa<CR>
@@ -812,6 +808,7 @@ vnoremap ,b :call RunSelBash()<CR>
 nnoremap ,C :Silent xdg-open %:p:h &<CR>
 " system open current file
 nnoremap ,O :Silent xdg-open %:p &<CR>
+nnoremap ,O :Silent !mousepad %:p &<CR>
 " system open current line (usable for http links)
 nnoremap ,,o ^y$:call system('xdg-open ' . "'" . @" . "'")<CR>
 " system open selected lines
@@ -845,14 +842,14 @@ nnoremap ,vg :GitGutterToggle<CR>
 
 " Make and run project
 nnoremap ,zo :make<bar> copen<CR>
-nnoremap ,zd :call BuildProjectUni("myMakefile","make -f myMakefile distclean")
-nnoremap ,zx :call BuildProjectUni("myMakefile","make -f myMakefile clean")<CR>
-nnoremap ,zm :call BuildProjectUni("myMakefile","make -f myMakefile")<CR>
-nnoremap ,zr :call BuildProjectUni("Makefile","make -f myMakefile run")<CR>
-nnoremap ,zc :call BuildProjectUni("myMakefile","make -f myMakefile cmak")<CR>
-" nnoremap ,zb :call BuildProjectUni("myMakefile","make -f myMakefile bear")<CR>
+nnoremap ,zd :call BuildProjectUni("Makefile","make -f Makefile distclean")
+nnoremap ,zx :call BuildProjectUni("Makefile","make -f Makefile clean")<CR>
+nnoremap ,zm :call BuildProjectUni("Makefile","make -f Makefile")<CR>
+nnoremap ,zr :call BuildProjectUni("Makefile","make -f Makefile run")<CR>
+nnoremap ,zc :call BuildProjectUni("Makefile","make -f Makefile cmak")<CR>
+" nnoremap ,zb :call BuildProjectUni("Makefile","make -f Makefile bear")<CR>
 " nnoremap ,XX :call BuildProjectUni("Makefile","make tags") <bar> cwindow<CR>
-" nnoremap ,zm :lcd %:p:h <bar> call BuildProjectUni("Makefile","make -f myMakefile") <bar> redraw! <bar> copen<CR>
+" nnoremap ,zm :lcd %:p:h <bar> call BuildProjectUni("Makefile","make -f Makefile") <bar> redraw! <bar> copen<CR>
 nnoremap ,z/ :copen<CR>/error<CR>
 
 " Folding
@@ -952,8 +949,16 @@ function! RunSelBash()
   echo system(join(getline(a:firstline,a:lastline), "\n"))
 endfunction
 
-" command! SessWriteA call SaveColor() | call TerminalsFuneral() | mksession! $VICONFDIR/session.vim | SaveSigns! $VICONFDIR/signs.sav
-" command! SessWriteB exec 'SessWriteA' | call BufFocusedThenDo('signs.sav','wq')
+function! SessWrite(name)
+  call SaveColor()
+  call TerminalsFuneral()
+  let l:fullname = $SESSDIR . "/" .  a:name . ".vim"
+  echom l:fullname
+  exec "mksession!".l:fullname
+  " mksession! $SESSDIR/ . a:name . session.vim
+  " SaveSigns! g:rtp0 . /signs.sav
+  " call BufFocusedThenDo('signs.sav','wq')
+endfunction
 
 command! Bash exec 'silent ! bash' | redraw!
 nnoremap qb :Bash<CR>
@@ -1353,6 +1358,7 @@ function! GotoTerm(arg)
   " let g:lasttermid = getbufinfo(expand('%'))[0].windows[0]
 endfunction
 
+" Close terminal windows
 function! TerminalsFuneral()
   let bufmap = map(range(1, bufnr('$')), '[getbufvar((v:val), "&buftype"), v:val]')
   " echo bufmap
@@ -1907,8 +1913,8 @@ endfunction
 "   nnoremap <F8> :exec ":sign place 777 line=" . line(".") ." name=mywarning file=" . expand("%:p")<CR>
 "   nnoremap <F9> :exec ":sign place 666 line=" . line(".") ." name=mybookmark file=" . expand("%:p")<CR>
 "   nnoremap <F10> :sign unplace<CR>
-"   if filereadable("$VICONFDIR/signs.sav")
-"     source $VICONFDIR/signs.sav
+"   if filereadable(g:rtp0 . "/signs.sav")
+"     source g:rtp0 . "/signs.sav"
 "   endif
 " endfunc
 " call MySigns()

@@ -59,7 +59,7 @@ alias nuts='sudo qemu-system-x86_64 -m 1400 -enable-kvm -cpu host -smp 4 -boot m
 # alias qu='sync && echo 3 | sudo tee /proc/sys/vm/drop_caches; sudo qemu-system-x86_64 -m 1400  -enable-kvm -cpu host -smp 4 '
 
 type -f aa &>/dev/null ||
-if  type -f pacman &>/dev/null; then
+if type -f pacman &>/dev/null; then
     alias as='pacman -Ss'
     alias ai='sudo pacman -S'
     alias aa='sudo pacman -Syu'
@@ -332,11 +332,15 @@ fi
 if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
 # END_KITTY_SHELL_INTEGRATION
 
-# Integrate z
-# source $git/z.sh
-[[ -r /usr/share/z/z.sh ]] && source /usr/share/z/z.sh
+# Integrate z.sh by rupa
+type -f z &>/dev/null ||
+    if [[ -r /usr/share/z/z.sh ]]; then
+        source /usr/share/z/z.sh
+    elif [[ -r $git/z/z.sh ]]; then
+        source $git/z/z.sh
+    fi
 
-n ()
+n()
 {
     # Block nesting of nnn in subshells
     [ "${NNNLVL:-0}" -eq 0 ] || {
@@ -363,3 +367,4 @@ n ()
     }
 }
 
+# vim: ts=4 sts=4 sw=4

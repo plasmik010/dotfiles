@@ -28,9 +28,9 @@ function H.logo()
   return output
 end
 
-function H.auxfun1()
+--[[ function H.auxfun1()
   return require("nvim-possession").status()
-end
+end ]]
 
 H.vidir = os.getenv('sh') .. '/vi/'
 
@@ -60,8 +60,6 @@ function H.condMkdir(base,dir)
   -- print('targ is ' , targ)
   if
     vim.fn.getftype(targ) == "dir"
-    -- vim.fn.getftype(os.getenv("VICONFDIR") .. "/sessions_path") == "dir"
-    -- vim.fn.getftype(os.getenv('VICONFDIR')) == "dir"
   then
     return targ
   else
@@ -74,7 +72,7 @@ function H.condMkdir(base,dir)
     end
   end
 end
--- print( H.condMkdir(os.getenv("VICONFDIR"),"sessions_path2"))
+-- print( H.condMkdir(os.getenv("HOME"),"08"))
 
 -- Print table
 function H.Tprint (tbl)

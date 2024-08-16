@@ -13,24 +13,31 @@
 " 3. set up Mason
 " 4. check if LSP works well
 
-" Set crucial env for this config
-" memorize basic conf dir for later, usually "~/.config/nvim" and "~/.vim"
-let $VICONFDIR=split(&runtimepath, ',')[0]
+
+" basic conf dir, usually "~/.config/nvim" or "~/.vim"
+
+" let $VICONFDIR = split(&runtimepath, ',')[0]
+" if !isdirectory($VICONFDIR) | call mkdir($VICONFDIR, '', 0770) | endif
+
+let g:rtp0 = split(&runtimepath, ',')[0]
+
+let $SESSDIR = g:rtp0 . "/session"
+if !isdirectory($SESSDIR) | call mkdir($SESSDIR, '', 0770) | endif
+
 if !empty($vi)
     let $MYVIMRC = $vi . "/vimrc_main"
 endif
+
+" Set path to download plugins to
 if !empty($git)
     if has("nvim")
         let $PLUGDIR = $git . "/nvpl"
     else
         let $PLUGDIR = $git . "/vpl"
     endif
-"else
-"    if isdirectory($sh . "/../../nvpl")
-"        let $PLUGDIR = resolve($sh . "/../../nvpl")
-"    endif
+else
+    let $PLUGDIR = resolve($HOME . "/n_vim_pl")
 endif
-let $MYAUTOLOAD = expand('$VICONFDIR') . "/autoload"
 
 " Probe if we are in MSYS
 let g:bash_forced=0
@@ -40,7 +47,6 @@ if ( !empty($MSYSTEM) && has("nvim") )
     set shell=\msys64/usr/bin/bash
     set shellcmdflag=-c
     set sxq=
-    let g:my_autoload_nix = system('cygpath -u "$MYAUTOLOAD" | tr -d "\n"')
     "let $PLUGDIR = system('cygpath -u "$PLUGDIR" | tr -d "\n"')
     "let $VICONFDIR = system('cygpath "$VICONFDIR"')
 endif
