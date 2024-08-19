@@ -268,8 +268,8 @@ endfunction
 command! CrispBorders call CrispBorders()
 
 if has("nvim")
-  set winwidth=32
-  set winminwidth=32
+  set winwidth=22
+  set winminwidth=22
 endif
 
 function! ReloadStyle(force)

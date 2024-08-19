@@ -50,7 +50,9 @@ def get_cli_input():
             file =  os.path.join( os.getcwd(), plain_args[0] ) + " " + \
                     os.path.join( os.getcwd(), plain_args[1] )
     except getopt.GetoptError:
-        print("Usage: nvimrpc.py -s /tmp/NVRPCSERVER -m newtab /etc/file")
+        print("Usage: MODE=<mode> nvimrpc.py -s /tmp/NVRPCSERVER -m <mode> /etc/file")
+        print("Avilable modes: cur last newtab newtabinsert vert split vdiff")
+
         sys.exit(3)
 
 

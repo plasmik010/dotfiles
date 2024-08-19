@@ -5,7 +5,9 @@
 vim.api.nvim_command('nnoremap <silent> gh <cmd>ClangdSwitchSourceHeader<CR>')
 
 H.nmap(',S', vim.lsp.buf.signature_help)
-vim.keymap.set('n','K', vim.lsp.buf.hover, {buffer=0})
+H.nmap(',k', vim.lsp.buf.hover, "Hover")
+-- vim.keymap.set('n','K', vim.lsp.buf.hover, {buffer=0})
+
 -- H.nmap('gv', function() vim.api.nvim_open_win(true,true,{}) vim.lsp.buf.definition() end)
 H.nmap(
     'gv',
