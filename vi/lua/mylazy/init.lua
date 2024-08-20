@@ -6,7 +6,7 @@ local noresil = { noremap = true, silent = false }
 
 return {
 
-  -------- VIM BASIC ---------------------------{{{}}}------
+---------- VIM BASIC ---------------------------{{{}}}------
 
   { 'junegunn/fzf.vim', dependencies = { 'junegunn/fzf' } }, -- fantastic
   {
@@ -33,7 +33,7 @@ return {
   -- 'vim-scripts/QuickBuf',
   -- 'derekwyatt/vim-fswitch',
 
-  -------- NEOVIM ONLY -------------------------{{{}}}------
+---------- NEOVIM ONLY -------------------------{{{}}}------
 
   {
     'nvim-telescope/telescope.nvim',
@@ -44,6 +44,7 @@ return {
         mappings = {
           n = {
             ["h"] = "close",
+            ["q"] = "close",
             ["l"] = "select_default",
           }
         }
@@ -371,7 +372,7 @@ return {
       keymaps = {
         normal = {
           plain_below = "zp",
-          -- plain_above = "g?P",
+          plain_above = "zP",
         }
       }
     }
@@ -591,7 +592,7 @@ return {
 
   'nullchilly/fsread.nvim', -- funky --- read fast
 
-  -------- Tryout ------------------------------{{{}}}------
+---------- Tryout ------------------------------{{{}}}------
 
   {
     "gennaro-tedesco/nvim-possession", -- works
@@ -853,7 +854,7 @@ return {
   -- 'saadparwaiz1/cmp_luasnip',
 
 
-  -------- Colors/Themes -----------------------{{{}}}------
+---------- Colors/Themes -----------------------{{{}}}------
 
   'AbdelrahmanDwedar/awesome-nvim-colorschemes',
   'gbprod/nord.nvim',

@@ -298,8 +298,10 @@ endfunction
 ""         Mappings:          ""
 """"""""""""""""""""""""""{{{}}}
 
-set timeoutlen=420
-set ttimeoutlen=20 " do not let <esc>x act as <a-x>
+set timeoutlen=300
+" do not let <esc>j act as <A-j>
+set ttimeoutlen=15
+" set nottimeout
 let g:AutoClosePumvisible = {"ENTER": '', "ESC": ''}
 let mapleader = ""
 " nnoremap q\
@@ -402,7 +404,8 @@ nnoremap q= o<Esc>64A=<Esc>kJ0<Esc>60ld$0<Esc>40l
 " add horiz line
 nnoremap z- o<Esc>64A-<Esc>0<Esc>60ld$0<Esc>40l
 " add nice separator line
-nnoremap qc o<Esc>88A-<Esc>$11hR{{{}}}<Esc>$59h"_d0R<Space><Space><C-o>8l<Space>
+" nnoremap qc o<Esc>88A-<Esc>$11hR{{{}}}<Esc>$59h"_d0R<Space><Space><C-o>8l<Space>
+nnoremap qc o<Esc>88A-<Esc>$11hR{{{}}}<Esc>$59h"_d010lR<Space>
 
 " insert one char
 nnoremap ar :exec "normal  i".nr2char(getchar())."\e"<CR>
@@ -598,9 +601,9 @@ nnoremap ,zf :Files<CR>
 nnoremap ,zg :GFiles<CR>
 nnoremap ,zl :Lines<CR>
 nnoremap <C-h> :BLines<CR>
-nnoremap ,zs :Files $dotfiles<CR>
-nnoremap ,zt :Files $tt<CR>
-nnoremap ,zj :Files $jo<CR>
+" nnoremap ,zs :Files $dotfiles<CR>
+" nnoremap ,zt :Files $tt<CR>
+" nnoremap ,zj :Files $jo<CR>
 
 command! -bang FilesProj call GetProjDir() <bar> call fzf#vim#files(expand(b:proj_dir), fzf#vim#with_preview({'options': ['--layout=reverse','--info=inline']}), <bang>0)
 if !has("nvim")
@@ -832,6 +835,7 @@ nnoremap ,vb :call SwitchBackground()<CR>:echo "background=" &background<CR>
 nnoremap ,vc :set termguicolors!<CR>:set termguicolors?<CR>
 nnoremap a/ :set hlsearch!<CR>
 nnoremap ,vg :GitGutterToggle<CR>
+nnoremap ,vt :call TabSetAuto()<CR>
 
 " Tags
 " nnoremap ,ct :TagbarOpen fj<CR>
@@ -1021,6 +1025,23 @@ let @s = "i \<Esc>ll."
 """"""""""""""""""""""""""""""""
 ""         Functions:         ""
 """"""""""""""""""""""""""{{{}}}
+
+function! TabSet(arg)
+  let &tabstop=a:arg
+  let &softtabstop=a:arg
+  let &shiftwidth=a:arg
+endfunction
+
+function! TabSetAuto()
+  let l:oldval = &softtabstop
+  " echom "old is" oldval
+  if l:oldval >= 4
+    call TabSet(2)
+  elseif l:oldval <= 3
+    call TabSet(4)
+  endif
+  " let l:v = 0
+endfunction
 
 function! PrevBuf()
   " With <C-^> we will swap buffers forever, so rather do this:

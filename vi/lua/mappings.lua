@@ -1,12 +1,8 @@
 -- vim: ts=4 sw=4
 
-  -------- more mappings -----------------------{{{}}}------
+---------- more mappings -----------------------{{{}}}------
 
 vim.api.nvim_command('nnoremap <silent> gh <cmd>ClangdSwitchSourceHeader<CR>')
-
-H.nmap(',S', vim.lsp.buf.signature_help)
-H.nmap(',k', vim.lsp.buf.hover, "Hover")
--- vim.keymap.set('n','K', vim.lsp.buf.hover, {buffer=0})
 
 -- H.nmap('gv', function() vim.api.nvim_open_win(true,true,{}) vim.lsp.buf.definition() end)
 H.nmap(
@@ -20,35 +16,39 @@ H.nmap(
     function() H.mirror_buf_to_prev_window() vim.lsp.buf.definition() end,
     "lsp Definition in prev window"
 )
+
 H.nmap('gs', vim.lsp.buf.document_symbol)
+H.nmap('gS', vim.lsp.buf.signature_help)
 H.nmap('gr', vim.lsp.buf.references)
 -- H.nmap('gw', vim.lsp.buf.workspace_symbol)
 H.nmap('gy', vim.lsp.buf.type_definition, "lsp type definition")
 H.nmap('gI', vim.lsp.buf.implementation, "lsp Implementation")
+H.nmap(',k', vim.lsp.buf.hover, "Hover")
 
 -- H.nmap('z<Down>', function() vim.lsp.diagnostic.goto_next() end)
 -- H.Bmap('z<Up>', "k<cmd>vim.lsp.diagnostic.goto_prev")
 do
-  local next_diag, prev_diag
-  -- if vim.version().build <= "gb7782daac" then
-  if vim.version().minor <= 10 then
-    next_diag = vim.diagnostic.goto_next
-    prev_diag = vim.diagnostic.goto_prev
-  else
-    next_diag = {vim.diagnostic.jump, {count=1}}
-    prev_diag = {vim.diagnostic.jump, {count=-1}}
-  end
-  H.nmap('z<Down>', next_diag )
-  H.nmap('z<Up>', prev_diag)
+    local next_diag, prev_diag
+    -- if vim.version().build <= "gb7782daac" then
+    if vim.version().minor <= 10 then
+        next_diag = vim.diagnostic.goto_next
+        prev_diag = vim.diagnostic.goto_prev
+    else
+        next_diag = {vim.diagnostic.jump, {count=1}}
+        prev_diag = {vim.diagnostic.jump, {count=-1}}
+    end
+    H.nmap('z<Down>', next_diag )
+    H.nmap('z<Up>', prev_diag)
 end
 
 -- H.nmap('z<up>', vim.diagnostic.goto_prev)
-H.nmap(',R', vim.lsp.buf.rename)
-H.nmap(',a', vim.lsp.buf.code_action)
+H.nmap(',R', vim.lsp.buf.rename, "LSP Rename")
+H.nmap(',a', vim.lsp.buf.code_action, "LSP Action")
 H.nmap('gd', vim.lsp.buf.definition)
 H.nmap('gD', vim.lsp.buf.declaration)
 
 H.nmap('m;', ":BookmarksListAll<CR>")
+
 
 H.nmap(',,s', ":Telescope persisted<CR>", "Select Session")
 -- H.nmap(',,q', function() b=require'nvim-possession'.update() print(1,b) if b then vim.cmd[[wqa]] end end )
@@ -56,12 +56,12 @@ H.nmap(',,s', ":Telescope persisted<CR>", "Select Session")
 -- H.nmap(',pl', function() require'nvim-possession'.list() end, "Session Open")
 -- H.nmap(',pd', function() require'nvim-possession'.delete() end, "Session Delete")
 -- H.nmap(',pn', function() require'nvim-possession'.new() end, "Session New")
+-- H.nmap(',"', function() require'nvim-peekup'.peekup_open('p') end )
 
 
 H.nmap('qn', vim.diagnostic.open_float)
 H.nmap('qb', vim.diagnostic.setloclist)
 
-H.nmap(',"', function() require'nvim-peekup'.peekup_open('p') end )
 
 -- Yank / put incremental
 vim.keymap.set('n', 'q;', '<cmd>let @l=""|echo " L reg now empty" <CR>')
@@ -117,7 +117,7 @@ H.nvmap('qe', ":SnipRun<CR>", "Evaluate code")
 
 H.nmap('s', ":HopWord<CR>")
 
-  -------- Finding / Telescope -----------------{{{}}}------
+---------- Finding / Telescope -----------------{{{}}}------
 
 H.nmap('<C-h>', H.teles_fuzbuf)
 
@@ -210,38 +210,40 @@ H.nmap('qs',  ":Telescope lsp_dynamic_workspace_symbols<CR>", "Telescope dynamic
 -- nnoremap ,tt :Telescope current_buffer_fuzzy_find sorting_strategy=ascending layout_config={"prompt_position":"top"}<CR>
 -- nnoremap ,tt <cmd>lua require("telescope.builtin").current_buffer_fuzzy_find({sorting_strategy="ascending", theme="ivy"})<CR>
 
-  -------- Neotree -----------------------------{{{}}}------
-vim.keymap.set('n', ',N', function()
-  local filedir = vim.fn.expand('%:p:h')
-  vim.cmd.tcd(filedir)
-  local reveal_file = vim.fn.expand('%:p')
-  if (reveal_file == '') then
-    reveal_file = vim.fn.getcwd()
-  else
-    local f = io.open(reveal_file, "r")
-    if (f) then
-      f.close(f)
-    else
-      reveal_file = vim.fn.getcwd()
-    end
-  end
-  -- print(reveal_file)
-  require('neo-tree.command').execute({
-    -- action = "focus",          -- OPTIONAL, this is the default value
-    source = "filesystem",     -- OPTIONAL, this is the default value
-    position = "left",         -- OPTIONAL, this is the default value
-    reveal_file = reveal_file, -- path to file or folder to reveal
-    -- reveal_force_cwd = true,   -- change cwd without asking if needed
-    toggle = true,
-  })
-end,
-{ desc = "Open neo-tree at current file or working directory" }
+-------- Neotree -----------------------------{{{}}}------
+H.nmap(
+    ',N',
+    function()
+        local filedir = vim.fn.expand('%:p:h')
+        vim.cmd.tcd(filedir)
+        local reveal_file = vim.fn.expand('%:p')
+        if (reveal_file == '') then
+            reveal_file = vim.fn.getcwd()
+        else
+            local f = io.open(reveal_file, "r")
+            if (f) then
+                f.close(f)
+            else
+                reveal_file = vim.fn.getcwd()
+            end
+        end
+        require('neo-tree.command').execute({
+            -- action = "focus",          -- OPTIONAL, this is the default value
+            source = "filesystem",     -- OPTIONAL, this is the default value
+            position = "left",         -- OPTIONAL, this is the default value
+            reveal_file = reveal_file, -- path to file or folder to reveal
+            -- reveal_force_cwd = true,   -- change cwd without asking if needed
+            toggle = true,
+        })
+    end,
+    "Neotree at current file or working directory"
 )
-H.nmap(',n', ":Neotree reveal<CR>")
-H.nmap(',<BS>', ":Neotree reveal_force_cwd<CR>")
-H.nmap('-', ":Neotree reveal_force_cwd current<CR>")
 
-  -------- unloaded ----------------------------{{{}}}------
+H.nmap(',n', ":Neotree reveal<CR>", "Neotree reveal ask")
+H.nmap(',<BS>', ":Neotree reveal_force_cwd<CR>", "Neotree reveal force")
+H.nmap('-', ":Neotree reveal_force_cwd current<CR>", "Neotree current buffer")
+
+---------- unloaded ----------------------------{{{}}}------
 
 --[[ -- Cinnamon Keymaps --
 if package.loaded['cinnamon'] then
