@@ -303,7 +303,7 @@ set timeoutlen=300
 set ttimeoutlen=15
 " set nottimeout
 let g:AutoClosePumvisible = {"ENTER": '', "ESC": ''}
-let mapleader = ""
+let mapleader = ","
 " nnoremap q\
 " nnoremap z' `
 
@@ -398,14 +398,14 @@ nnoremap a<Down> G$:call search('^.','b')\|call EditAtEdge('down')<CR>
 nnoremap zj zjzt
 nnoremap zk zkzt
 
-" extend line with horiz line -----
-nnoremap q- o<Esc>64A-<Esc>kJ0<Esc>60ld$0<Esc>40l
+" extend line with minuses
+nnoremap q+ o<Esc>64A-<Esc>kJ0<Esc>60ld$0<Esc>40l
 nnoremap q= o<Esc>64A=<Esc>kJ0<Esc>60ld$0<Esc>40l
 " add horiz line
-nnoremap z- o<Esc>64A-<Esc>0<Esc>60ld$0<Esc>40l
+nnoremap q- o<Esc>64A-<Esc>0<Esc>60ld$0<Esc>40l
 " add nice separator line
 " nnoremap qc o<Esc>88A-<Esc>$11hR{{{}}}<Esc>$59h"_d0R<Space><Space><C-o>8l<Space>
-nnoremap qc o<Esc>88A-<Esc>$11hR{{{}}}<Esc>$59h"_d010lR<Space>
+nnoremap q_ o<Esc>88A-<Esc>$11hR{{{}}}<Esc>$59h"_d010lR<Space>
 
 " insert one char
 nnoremap ar :exec "normal  i".nr2char(getchar())."\e"<CR>
@@ -484,8 +484,6 @@ nnoremap ,X :tabclose<CR>
 nnoremap ,q :qa<CR>
 nnoremap aq :qa<CR>
 nnoremap ,bd :bd!<CR>
-nnoremap ,] :bnext<CR>
-nnoremap ,[ :bprev<CR>
 nnoremap ,d :BufDelAndJump<CR>
 nnoremap ,bi :diffthis \| wincmd w<CR>
 nnoremap ,bo :diffoff  \| wincmd w<CR>
@@ -571,8 +569,10 @@ nnoremap <C-PageDown> gt
 nnoremap gz gT
 nnoremap q] gt
 nnoremap q[ gT
-nnoremap a] :bnext<CR>
 nnoremap a[ :bprev<CR>
+nnoremap a] :bnext<CR>
+nnoremap <A-i> :bprev<CR>
+nnoremap <A-o> :bnext<CR>
 nnoremap <A-.> gt
 nnoremap <A-,> gT
 nnoremap q{ :tabmove -1<CR>
@@ -608,7 +608,7 @@ nnoremap <C-h> :BLines<CR>
 command! -bang FilesProj call GetProjDir() <bar> call fzf#vim#files(expand(b:proj_dir), fzf#vim#with_preview({'options': ['--layout=reverse','--info=inline']}), <bang>0)
 if !has("nvim")
   nnoremap qf :FilesProj<CR>
-  nnoremap qF :Files %:p:h<CR>
+  nnoremap qc :Files %:p:h<CR>
   nnoremap ,/ :Files $dotfiles,$tt,$loc<CR>
   nnoremap ,/ :Files $dotfiles<CR>
   " nnoremap ,,/ :Files $dotfiles

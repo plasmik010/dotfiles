@@ -440,6 +440,7 @@ return {
   },
 
   'sindrets/diffview.nvim', -- great --- cycle through diffs
+  -- check :DiffviewOpen is useful for MERGE CONFLICT
 
   {
     'phaazon/hop.nvim',
@@ -688,16 +689,27 @@ return {
 
   {
     'NeogitOrg/neogit', -- problem
-    enabled = false,
-    dependencies = 'nvim-lua/plenary.nvim',
+    enabled = true,
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      "sindrets/diffview.nvim",        -- optional - Diff integration
+      -- Only one of these is needed, not both.
+      "nvim-telescope/telescope.nvim", -- optional
+    },
     config = true,
   },
 
   {
     'lewis6991/gitsigns.nvim', -- cool
     config = function()
-      require("gitsigns").setup()
+      local gs = require'gitsigns'
+      gs.setup()
       require("scrollbar.handlers.gitsigns").setup() -- take it to scrollbar
+      H.nmap(',vg', gs.toggle_signs, "Show git highlight column")
+    -- map('v', '<leader>hs', function() gitsigns.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+    -- map('v', '<leader>hr', function() gitsigns.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+      H.nmap('g<Up>', function() gs.nav_hunk('prev') end, "Prev Git hunk")
+      H.nmap('g<Down>', function() gs.nav_hunk('next') end, "Next Git hunk")
     end,
   },
 
@@ -723,6 +735,7 @@ return {
 
   {
     'RRethy/vim-illuminate', --- highlight current word
+    enabled = false,
     config = function()
       require'illuminate'.configure {
         providers = {
@@ -732,6 +745,7 @@ return {
         },
         delay = 900,
       }
+      H.nmap(',vh', ":IlluminateToggle<CR>", "Highlight current word")
     end,
   },
 

@@ -103,8 +103,6 @@ H.nmap(
 )
 
 H.nmap(',l', require("lsp_lines").toggle, "Toggle lsp_lines")
-H.nmap(',vg', require("gitsigns").toggle_signs, "Show git highlight column")
-H.nmap(',vh', ":IlluminateToggle<CR>", "Highlight current word")
 H.nmap(',vi', ":IBLToggle<CR>", "Indent Blank Line")
 H.nmap('qt', ":HiMyWordsToggle<CR>")
 H.nmap('qT', ":HiMyWordsClear<CR>")
@@ -152,7 +150,7 @@ H.nmap(',fz', require("telescope.builtin").diagnostics, "Telescope diagnostics")
 H.nmap(',fo', require("telescope.builtin").oldfiles, "Telescope old files")
 H.nmap(',fr', require("telescope.builtin").lsp_references, "Telescope References")
 H.nmap('qf', "<cmd> call GetProjDir() <bar> exec 'Telescope find_files cwd=' . expand(b:proj_dir)<CR>", "Find cwd proj files")
-H.nmap('q.', "<cmd> Telescope find_files search_dirs=%:p:h<CR>", "Find files in dir with current file")
+H.nmap('qc', "<cmd> Telescope find_files search_dirs=%:p:h<CR>", "Find files in dir with current file")
 
 H.nmap(
     ',/',
