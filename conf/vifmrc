@@ -189,6 +189,7 @@ nnoremap cb :copy | !notify-send COPY Done!<cr>
 nnoremap cm :move<cr>
 nnoremap C :copy<cr>
 nnoremap E :move<cr>
+nnoremap c<Space> :!mv --backup=numbered  %f<space>
 nnoremap ci :move /ln/hh/imgdl1/<cr>
 nnoremap aj :!touch %f --date=now<cr>j
 nnoremap cn :clone<cr>
@@ -383,6 +384,7 @@ set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
 
 command! df df -h %m 2> /dev/null
 command! vimdiff vim -d %f %F
+command! vimdiffHex vim -d <(xxd %f) <(xxd %F)
 command! vimdiffpane vim -d %f
 command! diff ! echo; diff %c %C && echo "files identical"; read -rsn1
 command! diffpane ! echo; diff %f && echo "files identical"; read -rsn1
@@ -488,7 +490,7 @@ filetype *.[1-8] man ./%c
 fileviewer *.[1-8] man ./%c | col -b
 
 " Images
-filextype *.bmp,*.jpg,*.jpeg,*.png,*.xpm,*.webp,*gif
+filextype *.bmp,*.jpg,*.jpeg,*.png,*.xpm,*.webp,*gif,*tif
         \ feha %c &>/dev/null &,
         \ nomacs -f -m frameless %c &>/dev/null &,
         \ eom %c &>/dev/null &,

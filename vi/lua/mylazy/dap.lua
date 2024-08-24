@@ -27,6 +27,17 @@ return {
           end,
         },
       }
+      dap.configurations.python = {
+        {
+          type = 'python',
+          request = 'launch',
+          name = 'Launch file',
+          program = "${file}",
+          -- args = "-l scrub_tmplnmonetALblinktorrents_ready--mus -r scrub_homeplasmiklnmoblinkrecov",
+          pythonPath = 'python',
+          -- cwd = '/',
+        }
+      }
       local dapui = require'dapui'
       dapui.setup()
       dap.listeners.after.event_initialized['dapui_config'] = function()

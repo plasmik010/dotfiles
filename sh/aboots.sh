@@ -32,7 +32,7 @@ if type -f pacman &>/dev/null; then
     DIS_ARCH=true
     function instal {
         echo -- Gonna install  "$*"  at this Arch Linux
-        sudo pacman -S --needed $* 2>&1 | grep -v "skipping"
+        sudo pacman -S --needed --noconfirm $* 2>&1 | grep -v "skipping"
     }
 elif type -f apt &>/dev/null; then
     DIS_DEB=true

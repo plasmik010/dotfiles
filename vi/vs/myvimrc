@@ -519,8 +519,8 @@ nnoremap a- :wincmd v \| e %:p:h<CR>
 " nnoremap av  :vnew     \| lcd #:p:h \| echo expand ('%') ' @ ' getcwd()<CR>
 " nnoremap a-  : split <bar> exec "normal -"<CR>
 " nnoremap a_  :vsplit <bar> exec "normal -"<CR>
-nnoremap as :split #  <bar> call WinSwap(0) <CR>
-nnoremap av :vsplit # <bar> call WinSwap(0) <CR>
+nnoremap as :split #  <bar> wincmd p <CR>
+nnoremap av :vsplit # <bar> wincmd p <CR>
 nnoremap aS :new<CR>
 nnoremap aV :vnew<CR>
 nnoremap <C-w>S :vsplit<CR>
