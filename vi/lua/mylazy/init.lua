@@ -693,14 +693,13 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       "sindrets/diffview.nvim",        -- optional - Diff integration
-      -- Only one of these is needed, not both.
       "nvim-telescope/telescope.nvim", -- optional
     },
     config = true,
   },
 
   {
-    'lewis6991/gitsigns.nvim', -- cool
+    'lewis6991/gitsigns.nvim', -- cool --- edits highlight and more..
     config = function()
       local gs = require'gitsigns'
       gs.setup()
@@ -721,7 +720,7 @@ return {
 
   {
     'tzachar/local-highlight.nvim',
-    enabled = false,
+    enabled = true,
     opts = {
       -- file_types = {'python', 'cpp'}, -- If this is given only attach to this
       -- OR attach to every filetype except:
