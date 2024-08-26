@@ -688,7 +688,7 @@ return {
   },
 
   {
-    'NeogitOrg/neogit', -- problem
+    'NeogitOrg/neogit', --- mighty
     enabled = true,
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -709,6 +709,7 @@ return {
     -- map('v', '<leader>hr', function() gitsigns.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
       H.nmap('g<Up>', function() gs.nav_hunk('prev') end, "Prev Git hunk")
       H.nmap('g<Down>', function() gs.nav_hunk('next') end, "Next Git hunk")
+      H.nmap(',,g', ":Gitsigns change_base ~1", "Highlight older commits")
     end,
   },
 

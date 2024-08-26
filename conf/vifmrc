@@ -229,7 +229,6 @@ nnoremap g3 :cd $HOME/3<cr>
 nnoremap g4 :cd $HOME/4<cr>
 nnoremap gs :cd /ln/dots/sh<cr>
 " nnoremap ge :cd $HOME/stek<cr>
-" nnoremap gw :cd /ln/wo<cr>
 nnoremap gj :cd /ln/ho/gitjob<cr>
 nnoremap gd :cd /ln/dwn<cr>:set sort=-mtime<cr>:16<cr>
 nnoremap gb :cd $bakcld<cr>

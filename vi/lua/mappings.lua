@@ -171,7 +171,6 @@ H.nmap(
     ',fg',
     function()
         local git_root = H.get_git_root()
-        print("gr", git_root)
         if git_root then
             require'telescope.builtin'.find_files{ cwd=git_root, hidden=true }
         else

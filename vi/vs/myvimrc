@@ -641,8 +641,6 @@ nnoremap ,gt :call FocusBufOrDo('vimrc_themes','e $vi/vs/vimrc_themes')<CR>
 " nnoremap ,ga :call FocusBufOrDo('lsp.lua','e $vi/lua/lsp.lua')<CR>
 nnoremap ,g, :call FocusBufOrDo('vimrc_main','e $vi/vimrc_main')<CR>
 nnoremap ,gb :call FocusBufOrDo('bashrc','e $sh/bashrc')<CR>
-nnoremap ,gB :call FocusBufOrDo('bashrc.local','e $loc/bashrc.local')<CR>
-nnoremap ,g2 :call FocusBufOrDo('bspwmrc','e $sh/bspwmrc')<CR>
 nnoremap ,gx :call FocusBufOrDo('sxhkd','e $dotfiles/conf/sxhkdrc')<CR>
 nnoremap ,gk :call FocusBufOrDo('kitty.conf','e $dotfiles/conf/kitty.conf')<CR>
 nnoremap ,gz :call FocusBufOrDo('zzzz','e $tt/zzzzzz')<CR>
@@ -676,7 +674,7 @@ nnoremap qzs :exec '! MODE=split  virpc "%:p"' \| q<CR>
 nnoremap qzv :exec '! MODE=vert   virpc "%:p"' \| q<CR>
 
 " Silly update git repo
-map ,,g :call LGsync()<CR>
+" map ,,g :call LGsync()<CR>
 
 " Have mappings in terminal mode
 if v:version >= 801
