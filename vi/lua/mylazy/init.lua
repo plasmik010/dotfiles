@@ -720,22 +720,29 @@ return {
   },
 
   {
-    'tzachar/local-highlight.nvim',
-    enabled = true,
+    "MaximilianLloyd/lazy-reload.nvim",
     opts = {
-      -- file_types = {'python', 'cpp'}, -- If this is given only attach to this
-      -- OR attach to every filetype except:
-      -- disable_file_types = {'tex'},
-      hlgroup = 'Search',
-      cw_hlgroup = nil,
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
     },
+    keys = {
+      { ",,r", "<cmd>lua require('lazy-reload').feed()<cr>", desc = "Reload a plugin" },
+    }
   },
 
-  { 'echasnovski/mini.cursorword' },
+  {
+    'echasnovski/mini.cursorword',
+    version = '*',
+    enabled = false,
+    opts = {
+      delay = 320,
+    }
+  },
 
   {
     'RRethy/vim-illuminate', --- highlight current word
-    enabled = false,
+    enabled = true,
     config = function()
       require'illuminate'.configure {
         providers = {
@@ -743,9 +750,22 @@ return {
           -- 'treesitter',
           'regex',
         },
-        delay = 900,
+        delay = 620,
       }
+      vim.cmd([[IlluminatePause]])
       H.nmap(',vh', ":IlluminateToggle<CR>", "Highlight current word")
+      H.nmap(
+        ',vh',
+        function()
+          H.highlit_cur = not H.highlit_cur
+          if H.highlit_cur then
+            vim.cmd([[IlluminateResume]])
+          else
+            vim.cmd([[IlluminatePause]])
+          end
+        end,
+        "Toggle Highlight current word"
+      )
     end,
   },
 

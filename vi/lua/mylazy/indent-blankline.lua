@@ -12,14 +12,18 @@ return {
             indent = {
                 -- highlight = { "WildMenu", "WildMenu" },
                 highlight = { "SpecialKey", "SpecialKey" },
+                -- show_start = true,
+                -- show_end = false,
                 -- highlight = lochl,
-                char = "┊",
-                -- ┊ │ ⋮ ⋅ ░ ∷
+                -- char = "┊",
+                char = "▏",
+                -- ┊ │ ⋮ ⋅ ░ ∷ ║
             },
             scope = {
                 -- highlight = lochl,
+                -- enabled = false,
                 highlight = { "SpecialKey", "SpecialKey" },
-                char = "│",
+                char = "∷",
             },
             -- whitespace = { highlight = highlightL, remove_blankline_trail = false },
         }

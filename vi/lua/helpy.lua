@@ -11,6 +11,8 @@ function H.sayhello()
   return '000'
 end
 
+H.highlit_cur = false
+
 function H.get_version()
   -- local major = vim.version().major
   local bild = vim.version().build
