@@ -4,17 +4,26 @@
 muslibrary=$HOME/.mus-library
 rm $muslibrary
 
-PATH_NEW="/ln/torrents /ln/mo/blink/torrents_ready/musREPAIR /ln/dwn /ln/mus/0*"
-PATH_MOST="/ln/mus/*"
+PATH_NEW="/ln/torrents /ln/dwn /ln/mus/0new"
+PATH_FAM="/ln/mus"
 
-find -L $(realpath $PATH_NEW) -type f \( -name "*.flac" -or -name "*.mp3" -or -name "*.ogg" -or -name "*.wv" -or -name "*.ape" -or -name "*.wma" \) -printf '%h\n' | sort -u > $muslibrary
+function find_albums {
+    find -P $(realpath $* | sort | uniq) -type f \( -name "*.flac" -or -name "*.mp3" -or -name "*.ogg" -or -name "*.wv" -or -name "*.ape" -or -name "*.wma" \) -printf "%h\n" | sort -u > $muslibrary
+}
+# realpath $PATH_NEW $PATH_MOST | sort | uniq
+
+find_albums $PATH_NEW
 cnt1=$(wc -l $muslibrary | cut -d " " -f1)
 
-find -L $(realpath $PATH_NEW $PATH_MOST | sort | uniq) -type f \( -name "*.flac" -or -name "*.mp3" -or -name "*.ogg" -or -name "*.wv" -or -name "*.ape" -or -name "*.wma" \) -printf '%h\n' | sort -u > $muslibrary
-cnt2=$(wc -l $muslibrary | cut -d " " -f1)
+find_albums $PATH_NEW $PATH_FAM
+cnt3=$(wc -l $muslibrary | cut -d " " -f1)
 
 HASG=false; pgrep -c Xorg &>/dev/null && HASG=true
 
-[ HASG==true ] && noti echo .:. NEW MUSIC .:. $cnt1 of $cnt2
-echo .:. NEW MUSIC .:. $cnt1 of $cnt2
+# cnt3=$((cnt1+cnt2))
+
+SUMMARY=".:. NEW MUSIC .:. $cnt1 of $cnt3"
+
+[ HASG==true ] && notify-send "$SUMMARY"
+echo "$SUMMARY"
 

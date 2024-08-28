@@ -123,6 +123,18 @@ SELECTOR=dmenuy
 SELECTOR="fzf --exact --layout=reverse --keep-right --height 99%"
 clear
 
+function launch { nohup $1 >/dev/null 2>/dev/null & disown; }
+
+function jump_fzf {
+    SELECT=$( cat -n $1 | sort -n | sort -uk2 | sort -nr | cut -f2- | $SELECTOR )
+    if [[ -n $SELECT ]]; then
+        ASK=1 PAUSE=1 mpv-album.sh "$SELECT"
+    else
+        echo "Please, select something!"; sleep 1
+        ask_album.sh
+    fi
+}
+
 source $sh/dmenurc
 if [[ $prompt == "$QUIT_KEY" ]]; then
     exit
@@ -166,18 +178,14 @@ elif [[ $prompt == "" ]]; then
     PAUSE=0 mpv-album.sh "$TARGREAL"
     # ask_album.sh
 elif [[ -f $LIST ]] && [[ $prompt == "$GOPLIST_KEY" ]]; then
-    SELECT=$( cat -n "$LIST" | sort -n | sort -uk2 | sort -nr | cut -f2- | $SELECTOR )
-    ASK=1 PAUSE=1 mpv-album.sh "$SELECT"
-elif [[ -f $LIST ]] && [[ $prompt == "$GOFAV_KEY" ]]; then
-    SELECT=$( cat -n "$FAVS" | sort -n | sort -uk2 | sort -nr | cut -f2- | $SELECTOR )
-    ASK=1 PAUSE=1 mpv-album.sh "$SELECT"
+    jump_fzf $LIST
+elif [[ -f $FAVS ]] && [[ $prompt == "$GOFAV_KEY" ]]; then
+    jump_fzf $FAVS
 elif [[ -f $LIBRARY ]] && [[ $prompt == "$GOLIB_KEY" ]]; then
-    # notify-send "lib is $LIBRARY"
-    SELECT=$( cat "$LIBRARY" | sort -R | $SELECTOR )
-    ASK=1 PAUSE=1 mpv-album.sh "$SELECT"
+    # SELECT=$( cat "$LIBRARY" | sort -R | $SELECTOR )
+    jump_fzf $LIBRARY
 elif [[ -f $HIST ]] && [[ $prompt == "$GOHIST_KEY" ]]; then
-    SELECT=$( cat -n "$HIST" | sort -n | sort -uk2 | sort -nr | cut -f2- | $SELECTOR )
-    ASK=1 PAUSE=1 mpv-album.sh "$SELECT"
+    jump_fzf $HIST
 else
     clear
     echo pwd is $(pwd)

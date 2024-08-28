@@ -219,7 +219,7 @@ nnoremap gh :cd $HOME<cr>
 nnoremap g; :cd /ln/mo<cr>
 nnoremap gq :cd /ln/mo/fast/qq<cr>:sort<cr>N
 nnoremap g<space> :cd /ln<cr>
-nnoremap gm :cd /ln/mus/
+nnoremap gm :cd /ln/mo/metal/MUSIC/
 nnoremap go :cd /ln/gd/code_misc<cr>
 nnoremap gx :trashes<cr>
 nnoremap gc :cd $HOME/.config<cr>

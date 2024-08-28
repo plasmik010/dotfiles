@@ -185,4 +185,6 @@ if __name__ == '__main__':
         if not eofB and not stayB:
             keyB,valuesB = get_entries(fdB) or [None, None]
 
+    fdA.close()
+    fdB.close()
 

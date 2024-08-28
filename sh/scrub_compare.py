@@ -150,5 +150,7 @@ if __name__ == '__main__':
         # heapA.append(pairA)
         # heapB.append(heapB)
 
+    fdA.close()
+    fdB.close()
 
 
