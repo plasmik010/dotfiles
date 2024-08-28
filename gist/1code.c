@@ -110,8 +110,8 @@ using durUs = std::chrono::duration<long, std::micro>;
 ( std::chrono::duration_cast<Usec>( times[i]-ask_beg ) ).count()
 auto durCastMcs = [](auto x){return std::chrono::duration_cast<std::chrono::microseconds>(x);};
 auto durCastMS = [](auto x){return std::chrono::duration_cast<std::chrono::milliseconds>(x);};
-auto zero_tp = std::chrono::steady_clock::time_point (std::chrono::milliseconds(0)
-)
+auto zero_tp = std::chrono::steady_clock::time_point (std::chrono::milliseconds(0));
+auto now = std::chrono::system_clock::now();
 
 for (auto & element : vec)
 {
