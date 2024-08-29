@@ -118,7 +118,7 @@ H.nmap('s', ":HopWord<CR>")
 H.nmap('<C-h>', H.teles_fuzbuf)
 
 H.nmap(
-    ',fb',
+    'q<space>',
     function()
         local ivy_theme = require'telescope.themes'.get_ivy {
             sort_mru=true,

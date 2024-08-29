@@ -440,7 +440,7 @@ return {
   },
 
   'sindrets/diffview.nvim', -- great --- cycle through diffs
-  -- check :DiffviewOpen is useful for MERGE CONFLICT
+  -- check :DiffviewOpen -- useful for MERGE CONFLICT
 
   {
     'phaazon/hop.nvim',

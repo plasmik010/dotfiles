@@ -366,7 +366,7 @@ nnoremap gx dlp
 " add space char
 nnoremap z<space> i<space><Esc>
 " add space to word
-nnoremap q<space> i <Esc>lwi <Esc>
+" nnoremap q<space> i <Esc>lwi <Esc>
 " add space inside brackets
   nnoremap a<space> ysib<space>
 vnoremap <space> :<C-U>call AddSpaceSelection()<CR>
@@ -480,7 +480,7 @@ nnoremap <C-s> :w<CR>
 nnoremap ,,w :wa<CR>
 nnoremap ax :q<CR>
 nnoremap ,x :q<CR>
-nnoremap ,X :tabclose<CR>
+nnoremap ,cx :tabclose<CR>
 nnoremap ,q :qa<CR>
 nnoremap aq :qa<CR>
 nnoremap ,bd :bd!<CR>
@@ -519,8 +519,8 @@ nnoremap a- :wincmd v \| e %:p:h<CR>
 " nnoremap av  :vnew     \| lcd #:p:h \| echo expand ('%') ' @ ' getcwd()<CR>
 " nnoremap a-  : split <bar> exec "normal -"<CR>
 " nnoremap a_  :vsplit <bar> exec "normal -"<CR>
-nnoremap as :split #  <bar> wincmd p <CR>
-nnoremap av :vsplit # <bar> wincmd p <CR>
+nnoremap as :split #<CR>
+nnoremap av :vsplit #<CR>
 nnoremap aS :new<CR>
 nnoremap aV :vnew<CR>
 nnoremap <C-w>S :vsplit<CR>

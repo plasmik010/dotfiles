@@ -9,6 +9,7 @@ function print_usage_exit {
 # echo 1 is $1
 # echo 2 is $1
 
+# Allow single argument
 if [ -z "$1" ] || [ -n "$2" ]; then
     print_usage_exit
     echo 1
