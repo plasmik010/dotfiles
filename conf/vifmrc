@@ -62,7 +62,7 @@ nnoremap o :sort<CR>
 nnoremap O :invert o<CR>
 nnoremap as :split <CR>
 nnoremap av :vsplit <CR>
-nnoremap ,<BS> :colo <CR>
+" nnoremap ,<BS> :colo <CR>
 nnoremap qw :wincmd o<CR>
 nnoremap qq :wincmd =<CR>
 nnoremap a] 7<c-w><

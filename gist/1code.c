@@ -250,7 +250,20 @@ int circCounter;    // Круговой счётчик исправности Р
 
 
 
-
+class MySingleton {
+public:
+  static MySingleton& Instance()
+  {
+    static MySingleton singleton;
+    return singleton;
+  }
+// Other non-static member functions
+private:
+  MySingleton() {}                                 // Private constructor
+  ~MySingleton() {}
+  MySingleton(const MySingleton&) = delete;                 // Prevent copy-construction
+  MySingleton& operator=(const MySingleton&) = delete;      // Prevent assignment
+};
 
 
 

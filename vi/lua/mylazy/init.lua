@@ -458,7 +458,11 @@ return {
 
   {
     'simrat39/symbols-outline.nvim', -- okay --- symbols tree based on lsp
-    config = true
+    -- config = true
+    config = function()
+      require'symbols-outline'.setup({})
+      H.nmap('g<BS>', "<cmd>SymbolsOutline<CR>", "Tree-like view for symbols")
+    end
   },
 
   'gennaro-tedesco/nvim-peekup', -- so-so --- clipboard history,  usage:""
@@ -574,7 +578,7 @@ return {
       require'themery'.setup {
         themes = themlist,
       }
-      H.nmap(',,t', "<cmd> Themery<CR>", "Themery")
+      H.nmap(',co', "<cmd> Themery<CR>", "Themery")
       -- vim.api.nvim_create_user_command('ThemeryWrapper', ThemeryWrapper, {})
     end
   },
@@ -678,7 +682,6 @@ return {
   },
 
   'cbochs/portal.nvim', -- problem
-  'ziontee113/neo-minimap', -- nice --- cool tags map
   'princejoogie/dir-telescope.nvim',
   'pocco81/true-zen.nvim',
 

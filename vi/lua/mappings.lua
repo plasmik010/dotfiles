@@ -79,7 +79,6 @@ vim.keymap.set('x', 'qp', '\"lp')
 H.Bmap('<C-PageUp>',   ":BufferLineCyclePrev<CR>", { silent = true })
 H.Bmap('<C-PageDown>', ":BufferLineCycleNext<CR>", { silent = true })
 
-H.nmap('c<BS>', ":call ReloadStyle(1)<CR>")
 H.nmap(',gp', ":call FocusBufOrDo('mylazy/init.lua','e $vi/lua/mylazy/init.lua')<CR>", "Plugins")
 H.nmap(',gn', ":call FocusBufOrDo('lua/init.lua','e $vi/lua/init.lua')<CR>", "init.lua")
 H.nmap(',gm', ":call FocusBufOrDo('mappings.lua','e $vi/lua/mappings.lua')<CR>", "Mappings")
@@ -89,7 +88,6 @@ H.nmap(
     "Put plugin url as new entry"
 )
 
-H.nmap(',T', "<cmd>SymbolsOutline<CR>", "Tree-like view for symbols")
 H.nmap(',j', require'treesj'.toggle, "Tree Split/Join")
 -- vim.keymap.set('n', ',j', require('treesj').toggle)
 -- H.nmap('q,', ":TSJJoin<CR>")
@@ -237,7 +235,6 @@ H.nmap(
 )
 
 H.nmap(',n', ":Neotree reveal<CR>", "Neotree reveal ask")
-H.nmap(',<BS>', ":Neotree reveal_force_cwd<CR>", "Neotree reveal force")
 H.nmap('-', ":Neotree reveal_force_cwd current<CR>", "Neotree current buffer")
 
 ---------- unloaded ----------------------------{{{}}}------
