@@ -1,7 +1,11 @@
 #!/bin/bash
 
 # xterm &
-[[ $1 == 'only' ]] || xrc.sh &
+
+if ! [[ $1 == 'only' ]]; then
+    # By default, run more DE stuff via other script
+    xrc.sh &
+fi
 
 bspc monitor -d 1 2 3 4 5
 # bspc monitor HDMI-1 -d 1 2 3
@@ -72,11 +76,12 @@ else
     [[ -z ${FLOATING_DESKTOPS+x} ]] && FLOATING_DESKTOPS=4
 fi
 
-(
-killall bspc bspc_rules & sleep .4
+# (
+# killall bspc bspc_rules & sleep .4
+killall bspc bspc_rules
 export FLOATING_DESKTOPS
 $sh/bspc_rules
-) &
+# ) &
 
 notify-send 'Bspwmrc complete'
 

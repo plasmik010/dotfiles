@@ -111,5 +111,5 @@ picom.sh
 [[ -f /ln/lo/cur/beback.sh ]] && bash /ln/lo/cur/beback.sh
 
 # echo RC done
-notify-send 'RC complete'
+notify-send 'Xrc complete'
 

@@ -18,17 +18,17 @@ echo -e converting text files "cp1251-->UTF-8\n\t" at $(pwd) on $(date +%Y.%m.%d
 cat << 'EOF' > /tmp/bulk.vim
 function! Cpconv()
     let l = expand(&fileencoding)
-    !echo 1
+    !echo 01
     exec '!echo ' . expand(l)
     edit! %
     if &fileencoding == "cp1251"
-        !echo 2
+        !echo 02
         set fileencoding=utf-8
         write
         !echo % | tee -a "$HOME"/bulk.log
         exec '!echo ' . expand('%:p') . " " . expand(l) . " CONVERTED"
     else
-        !echo 3
+        !echo 03
         exec '!echo ' . expand('%:p') . " " . expand(l) . " nochange"
     endif
 endfunction

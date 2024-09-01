@@ -12,7 +12,7 @@ function print_usage_exit {
 # Allow single argument
 if [ -z "$1" ] || [ -n "$2" ]; then
     print_usage_exit
-    echo 1
+    echo 1 is $1
 fi
 
 if [[ $1 == "build" ]] || [[ $1 == "all" ]]; then

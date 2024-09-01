@@ -1,18 +1,18 @@
 #!/bin/bash
+
 # Make Desktop #num all-floating, but ignore sticky or fullscreen windows
-
-echo 111
-
 keep_floating () {
-  FLOATING_DESKTOP_ID=$(bspc query -D -d "^$num")
-  bspc subscribe node | while read -a msg ; do
+  # FLOATING_DESKTOP_ID=$(bspc query -D -d "^$num")
+  echo --- Floating desktops are: $FLDE_IDS
+  bspc subscribe node | while read -a msg; do
     desk_id=${msg[2]}
     wid=${msg[3]}
     # echo ${msg[2]} ':' ${msg[3]} ${msg[2]}
     # echo $(bspc query --tree -n ${wid} | grep sticky..true -c)
     if
       (
-        [ "$FLOATING_DESKTOP_ID" = "$desk_id" ] &&
+        # [ "$FLOATING_DESKTOP_ID" = "$desk_id" ] &&
+        [[ "${FLDE_IDS}" =~ "$desk_id" ]] &&
         [[ ${wid} == $(bspc query -N -n "focused") ]] &&
           # check if bspc message is not garbage
         [ -z $(bspc query -N -n "${wid}.sticky") ] &&
@@ -26,8 +26,18 @@ keep_floating () {
   done
 }
 
-echo Floating desktops are: $FLOATING_DESKTOPS
-for num in $FLOATING_DESKTOPS ; do
-  keep_floating &
+# echo -- Floating desktops are: $FLOATING_DESKTOPS
+
+FLDE_IDS=
+for num in $FLOATING_DESKTOPS; do
+  id=$(bspc query -D -d "^$num") && FLDE_IDS="$FLDE_IDS $id"
+  # echo $id
 done
+
+if [[ -n $FLDE_IDS ]]; then
+  keep_floating &
+else
+  echo --- Floating desktops are: NONE
+fi
+
 
