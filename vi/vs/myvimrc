@@ -601,6 +601,7 @@ nnoremap ,zf :Files<CR>
 nnoremap ,zg :GFiles<CR>
 nnoremap ,zl :Lines<CR>
 nnoremap <C-h> :BLines<CR>
+nnoremap <C-р> :BLines<CR>
 " nnoremap ,zs :Files $dotfiles<CR>
 " nnoremap ,zt :Files $tt<CR>
 " nnoremap ,zj :Files $jo<CR>

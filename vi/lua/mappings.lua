@@ -142,18 +142,45 @@ H.nmap(
     end,
     "desc"
 )
--- nnoremap ,<space> :Telescope buffers sort_mru=1 theme=dropdown winblend=9<CR>
+
 H.nmap(',fh', require("telescope.builtin").help_tags, "Telescope help_tags")
 H.nmap(',fz', require("telescope.builtin").diagnostics, "Telescope diagnostics")
 H.nmap(',fo', require("telescope.builtin").oldfiles, "Telescope old files")
 H.nmap(',fr', require("telescope.builtin").lsp_references, "Telescope References")
-H.nmap('qf', "<cmd> call GetProjDir() <bar> exec 'Telescope find_files cwd=' . expand(b:proj_dir)<CR>", "Find cwd proj files")
-H.nmap('qc', "<cmd> Telescope find_files search_dirs=%:p:h<CR>", "Find files in dir with current file")
+
+H.nmap(
+    'qf',
+    function()
+        vim.cmd[[call GetProjDir()]]
+        require'telescope.builtin'.find_files{
+            cwd = vim.b["proj_dir"],
+            hidden = true,
+        }
+    end,
+    "Find cwd proj files"
+)
+
+H.nmap(
+    'qc',
+    function()
+        require'telescope.builtin'.find_files{
+            cwd = vim.fn.expand("%:p:h"),
+            hidden = true,
+        }
+    end,
+    "Find files in dir with current file"
+)
 
 H.nmap(
     ',/',
     function() require'telescope.builtin'.find_files {
-        search_dirs = { "/ln/ho/bb", os.getenv("loc"), os.getenv("dotfiles"), os.getenv("tt") },
+        search_dirs = {
+            "/ln/ho/bb",
+            "/ln/gd/code_misc",
+            os.getenv("loc"),
+            os.getenv("dotfiles"),
+            os.getenv("tt"),
+        },
     } end,
     "Find files in Favourite dirs"
 )
@@ -179,8 +206,6 @@ H.nmap(
 )
 
 H.nmap(',fa', ":Telescope live_grep theme=ivy<CR>", "Telescope live_grep")
--- H.nmap(',fd', ":Telescope live_grep theme=ivy search_dirs=%<CR>")
--- H.nmap(',fd', function() require'telescope.builtin'.live_grep(tele_ivy_dir()) end)
 H.nmap(
     ',fq',
     function()
@@ -201,9 +226,6 @@ H.nmap(',ff', ":Telescope find_files theme=ivy<CR>", "Telescope Find Files")
 H.nmap('qr',  ":Telescope lsp_references theme=ivy<CR>")
 H.nmap(',fs', ":Telescope lsp_document_symbols<CR>", "Telescope LSP file symbols")
 H.nmap('qs',  ":Telescope lsp_dynamic_workspace_symbols<CR>", "Telescope dynamic symbols")
-
--- nnoremap ,tt :Telescope current_buffer_fuzzy_find sorting_strategy=ascending layout_config={"prompt_position":"top"}<CR>
--- nnoremap ,tt <cmd>lua require("telescope.builtin").current_buffer_fuzzy_find({sorting_strategy="ascending", theme="ivy"})<CR>
 
 -------- Neotree -----------------------------{{{}}}------
 H.nmap(
