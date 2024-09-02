@@ -282,4 +282,5 @@ int permaAssert(bool statement, const char* comment) {
 #endif
 }
 
+std::for_each(stdArray.begin(), stdArray.end(), [](auto x) { std::cout << x <<" "; });
 
