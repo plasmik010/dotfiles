@@ -5,6 +5,7 @@ return {
     config = function()
         -- local lochl = { "CursorColumn", "Whitespace", "WildMenu" }
         local lochl = { "CursorColumn", "CursorColumn", "WildMenu" }
+        H.nmap(',vi', ":IBLToggle<CR>", "Indent Blank Line")
         require'ibl'.setup {
             exclude = { filetypes = {'dashboard'}},
             -- {'lspinfo', 'checkhealth', 'help', 'man', '', 'startify'}

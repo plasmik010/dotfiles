@@ -1007,7 +1007,7 @@ endif
 
 set wildmenu
 set wcm=<tab>
-map ,<tab> :emenu tagi.<tab>
+" map ,<tab> :emenu tagi.<tab>
 " menu tagi.ru :setlocal spell spelllang=ru<CR>
 menu tagi.basic   :silent exec 'UpdCtags' \| redraw! \| echo 'Wrote tags db in' getcwd().'/'<CR>
 menu tagi.dirDeps :call UpdCtagsDirDeps()<CR>

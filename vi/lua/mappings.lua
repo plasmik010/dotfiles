@@ -100,18 +100,11 @@ H.nmap(
     "Navic"
 )
 
-H.nmap(',l', require("lsp_lines").toggle, "Toggle lsp_lines")
-H.nmap(',vi', ":IBLToggle<CR>", "Indent Blank Line")
-H.nmap('qt', ":HiMyWordsToggle<CR>")
-H.nmap('qT', ":HiMyWordsClear<CR>")
-
 H.nmap(',r', ":RnvimrToggle<CR>", "Rnvimr")
-H.nmap(',<Esc>', ":Dashboard<CR>", "Dashboard")
+H.nmap(',<TAB>', ":Dashboard<CR>", "Dashboard")
 H.nmap(',v,', H.eval_paragraph, "Evaluate code for Neovim")
 
 H.nvmap('qe', ":SnipRun<CR>", "Evaluate code")
-
-H.nmap('s', ":HopWord<CR>")
 
 ---------- Finding / Telescope -----------------{{{}}}------
 

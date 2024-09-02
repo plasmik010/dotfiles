@@ -355,6 +355,7 @@ return {
       require'lsp_lines'.setup()
       -- Disable virtual_text since it's redundant due to lsp_lines.
       vim.diagnostic.config({virtual_text = false})
+      H.nmap(',l', require("lsp_lines").toggle, "Toggle lsp_lines")
     end,
     -- keys = ",l",
   },
@@ -440,7 +441,7 @@ return {
   },
 
   'sindrets/diffview.nvim', -- great --- cycle through diffs
-  -- check :DiffviewOpen -- useful for MERGE CONFLICT
+  -- check :DiffviewOpen -- use it to MERGE CONFLICT
 
   {
     'phaazon/hop.nvim',
@@ -449,6 +450,7 @@ return {
       local hop = require'hop'
       hop.setup { keys = 'etovxqpdygfblzhckisuran' }
       local directions = require('hop.hint').HintDirection
+      H.nmap('s', ":HopWord<CR>")
       -- vim.keymap.set('n', 'f', function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true }) end, {remap=true})
       -- vim.keymap.set('n', 'F', function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true }) end, {remap=true})
       -- vim.keymap.set('n', 't', function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 }) end, {remap=true})
@@ -774,7 +776,11 @@ return {
 
   {
     'dvoytik/hi-my-words.nvim', --- highlight words you wish
-    config = true
+    config = function()
+      require'hi-my-words'.setup()
+      H.nmap('qt', ":HiMyWordsToggle<CR>")
+      H.nmap('qT', ":HiMyWordsClear<CR>")
+    end
   },
 
   {

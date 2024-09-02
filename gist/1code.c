@@ -271,4 +271,15 @@ private:
 };
 
 
+int permaAssert(bool statement, const char* comment) {
+    if (statement) return 0;
+    std::cout << "Release-Assertion failed: " << comment << "\n";
+#if NDEBUG
+    exit(1);
+#else
+    // if in Debug mode, do normal assert so user can shoot debugger
+    assert(0);
+#endif
+}
+
 
