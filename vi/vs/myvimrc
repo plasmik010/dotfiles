@@ -364,11 +364,11 @@ nnoremap cx s
 " swap two chars
 nnoremap gx dlp
 " add space char
-nnoremap z<space> i<space><Esc>
+" nnoremap z<space> i<space><Esc>
 " add space to word
-" nnoremap q<space> i <Esc>lwi <Esc>
+nnoremap z<space> ysiw<space>
 " add space inside brackets
-  nnoremap a<space> ysib<space>
+nnoremap a<space> ysib<space>
 vnoremap <space> :<C-U>call AddSpaceSelection()<CR>
 " allows to undo accidental CTRL-U in insert mode
 inoremap <C-U> <C-G>u<C-U>
