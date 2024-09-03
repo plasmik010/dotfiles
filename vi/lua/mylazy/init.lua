@@ -601,6 +601,14 @@ return {
 
 ---------- Tryout ------------------------------{{{}}}------
 
+-- https://github.com/stevearc/overseer.nvim
+
+  {
+      "ThePrimeagen/harpoon",
+      branch = "harpoon2",
+      dependencies = { "nvim-lua/plenary.nvim" }
+  },
+
   {
     "gennaro-tedesco/nvim-possession", -- works
     dependencies = { "ibhagwan/fzf-lua" },
@@ -865,7 +873,7 @@ return {
     -- config = function(_, dashboard)
       -- require('alpha').setup(dashboard.opts)
     -- end,
-    -- try----https://github.com/MiaadTeam/lesvim/blob/main/lua/lazy/settings/alpha.lua
+    -- try -- https://github.com/MiaadTeam/lesvim/blob/main/lua/lazy/settings/alpha.lua
     config = function ()
       require'alpha'.setup(require'alpha.themes.dashboard'.config)
     end

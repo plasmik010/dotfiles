@@ -363,6 +363,7 @@ nnoremap qu ~
 nnoremap cx s
 " swap two chars
 nnoremap gx dlp
+nnoremap ag yyp
 " add space char
 " nnoremap z<space> i<space><Esc>
 " add space to word
@@ -546,7 +547,6 @@ nnoremap aD     <C-w>80-
 " grow big
 nnoremap ab     <C-w>_<C-w>\|
 " grow equal
-nnoremap ag     <C-w>=
 nnoremap qq     <C-w>=
 nnoremap aj     <C-w>w<C-w>_
 nnoremap ak     <C-w>W<C-w>_

@@ -302,7 +302,9 @@ git update-index --assume-unchanged dir/my_specific.h # hide local files from gi
     OR
     git clone git://<serveraddress>/
 git update-index --no-assume-unchanged file.c; git add --force file.c # force add assumed ignored file
-# merge featureB back to master #
+git checkout feature; git merge main # merge main branch into feature
+git merge feature main # merge main branch into feature
+# rebase featureB to master #
 git checkout featureB; git fetch; git rebase origin/master; git checkout master; git pull origin master; git merge featureB; git push origin master
 git restore --source=master '*.vcxproj'
 # to use ssh-url #
