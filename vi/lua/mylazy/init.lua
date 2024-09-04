@@ -263,21 +263,31 @@ return {
     -- priority = 40,
     opts = {
       sections = {
+        -- lualine_c = { "buffers" },
         lualine_c = {
           {
+            -- icon = " 󰾹 ",
+            icon = " ",
+            padding = 2,
             'filename',
-            path = false,
-            color_correction = 'dynamic',
-            -- "navic",
+          --   color = function(section)
+          --      return { fg = vim.bo.modified and '#aa3355' or '#33aa88' }
+          --   end,
+            -- color = { fg = 204 },
+            -- color = nil,
+            -- color = { gui='bold' },
+            -- color = 'WarningMsg',
+            color = 'ModeMsg',
+            -- path = false,
             -- color_correction = 'dynamic',
+            -- "navic",
             -- navic_opts = nil
           },
-          -- { require("nvim-possession").status,
-          --   cond = function() return require("nvim-possession").status() ~= nil end, },
         }
       },
       options = {
         -- section_separators = '',
+        section_separators = { left = '', right = '' },
         component_separators = '',
         theme = 'auto',
         -- theme = 'nord',
@@ -292,7 +302,16 @@ return {
     version='*',
     dependencies='kyazdani42/nvim-web-devicons',
     opts = {
+      highlights = {
+        tab = {
+          -- fg = 235,
+          -- bg = 200,
+          bold = true,
+        },
+      },
       options = {
+        show_tab_indicators = true,
+        separator_style = "slope",
         hover = {
           enabled = true,
           delay = 200,
@@ -300,6 +319,9 @@ return {
         }
       }
     }
+    -- tab_selected = {
+    --   fg = normal_fg,
+    --   bg = normal_bg,
   },
 
   {
@@ -342,7 +364,7 @@ return {
     },
   },
 
-  'folke/which-key.nvim',
+  'folke/which-key.nvim', -- great --- display key mappings interactively
 
   'norcalli/nvim-colorizer.lua', --- highlight color codes
 
@@ -572,7 +594,6 @@ return {
   {
     'zaldih/themery.nvim', -- great --- colorscheme selector
     -- event = "VeryLazy",
-    lazy = true,
     cmd = "Themery",
     config = function()
       local themlist = vim.api.nvim_eval("getcompletion('','color')")
@@ -580,7 +601,6 @@ return {
       require'themery'.setup {
         themes = themlist,
       }
-      H.nmap(',co', "<cmd> Themery<CR>", "Themery")
       -- vim.api.nvim_create_user_command('ThemeryWrapper', ThemeryWrapper, {})
     end
   },
@@ -602,6 +622,14 @@ return {
 ---------- Tryout ------------------------------{{{}}}------
 
 -- https://github.com/stevearc/overseer.nvim
+
+  {
+      "ziontee113/icon-picker.nvim", --- pick Nerd Font symbol
+      opts = { disable_legacy_commands = true }
+          -- vim.keymap.set("n", "<Leader><Leader>i", "<cmd>IconPickerNormal<cr>", opts)
+          -- vim.keymap.set("n", "<Leader><Leader>y", "<cmd>IconPickerYank<cr>", opts) --> Yank the selected icon into register
+          -- vim.keymap.set("i", "<C-i>", "<cmd>IconPickerInsert<cr>", opts)
+  },
 
   {
       "ThePrimeagen/harpoon",
