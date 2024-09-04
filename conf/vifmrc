@@ -112,8 +112,8 @@ nnoremap qi :! mediainfo %c | less<CR>
 nnoremap qh :! xxd %c | less<CR>
 nnoremap qfv :! vim %c<CR>
 nnoremap qfa :! if [ %c == ".." ] ; then feha . ; else if [ -d %c ] ; then cd %c; feha . ; else if [ -f %c ] ; then feha %c; fi ; fi ; fi <CR>
-nnoremap qff :! fehf . &>/dev/null &<CR>
 nnoremap af  :! feha %c &>/dev/null &<CR>
+nnoremap qff :! fehf . &>/dev/null &<CR>
 nnoremap qfm :! nomacs %c &>/dev/null &<CR>
 nnoremap qfi :! gimp %c &>/dev/null &<CR>
 nnoremap qfq :! qview %c &>/dev/null &<CR>
