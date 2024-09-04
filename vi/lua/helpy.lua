@@ -269,14 +269,6 @@ function H.nvmap(keys, func, desc)
   vim.keymap.set({'n','v'}, keys, func, { desc = desc, noremap = true })
 end
 
--- local k_opts = { silent=true, noremap=false }
--- vim.api.nvim_set_keymap("n", "<C-p>", ":lua require('bufjump').backward()<cr>", k_opts)
-
-function H.teles_fuzbuf()
-  local opt = require('telescope.themes').get_ivy({height=10,previewer=false,winblend=16})
-  require('telescope.builtin').current_buffer_fuzzy_find(opt)
-end
-
 -- local hotfun = {}
 -- :lua package.loaded.init = nil
 -- print("init.lua loaded once more")

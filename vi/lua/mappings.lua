@@ -109,7 +109,18 @@ H.nvmap('qe', ":SnipRun<CR>", "Evaluate code")
 
 ---------- Finding / Telescope -----------------{{{}}}------
 
-H.nmap('<C-h>', H.teles_fuzbuf)
+H.nmap(
+    '<C-h>',
+    function ()
+        local opt = require('telescope.themes').get_ivy{
+            height=12,
+            previewer=true,
+            winblend=16,
+        }
+      require('telescope.builtin').current_buffer_fuzzy_find(opt)
+    end,
+    "Telescope current buffer fuzzy"
+)
 
 H.nmap(
     'q<space>',

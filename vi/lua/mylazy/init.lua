@@ -285,10 +285,20 @@ return {
           },
         }
       },
+      inactive_sections = {
+        -- lualine_a = { },
+        lualine_b = {'branch'},
+        lualine_c = {'filename'},
+        lualine_x = {'progress'},
+        lualine_y = {'location'},
+      },
       options = {
         -- section_separators = '',
         section_separators = { left = '', right = '' },
         component_separators = '',
+        disabled_filetypes = {     -- Filetypes to disable lualine for.
+          statusline = { 'dashboard' },       -- only ignores the ft for statusline.
+        },
         theme = 'auto',
         -- theme = 'nord',
         -- theme = 'everforest',
@@ -861,8 +871,8 @@ return {
   },
 
   {
-    'tzachar/highlight-undo.nvim', -- not working
-    -- configure = true,
+    'tzachar/highlight-undo.nvim', -- not working with v0.10.1
+    configure = true,
     opts = {
       duration = 900,
     }
