@@ -311,8 +311,9 @@ let mapleader = ","
 map q <Nop>
 " map й q
 nnoremap Q q
-nnoremap am @@
+nnoremap qn q
 nnoremap qm @
+nnoremap q, @@
 " nnoremap ,m @
 
 " Free <a> key
@@ -362,8 +363,8 @@ nnoremap qi O<space><C-u><Esc>
 nnoremap qu ~
 nnoremap cx s
 " swap two chars
-nnoremap gx dlp
-nnoremap ag yyp
+nnoremap gc dlp
+nnoremap gx dlhP
 " add space char
 " nnoremap z<space> i<space><Esc>
 " add space to word
@@ -647,7 +648,6 @@ nnoremap ,g2 :call FocusBufOrDo('bspwmrc','e $sh/bspwmrc')<CR>
 " nnoremap ,gx :call FocusBufOrDo('sxhkd','e $dotfiles/conf/sxhkdrc')<CR>
 nnoremap ,gk :call FocusBufOrDo('kitty.conf','e $dotfiles/conf/kitty.conf')<CR>
 nnoremap ,gz :call FocusBufOrDo('zzzz','e $tt/zzzzzz')<CR>
-nnoremap ,gu :call FocusBufOrDo('ff','e $tt/u*/ff*')<CR>
 nnoremap ,gh :call FocusBufOrDo('sh_history','e $HOME/.bash_history')<CR>G
 nnoremap ,gl :call FocusBufOrDo('1linux','e $dotfiles/gist/1linux')<CR>
 nnoremap ,ge :call FocusBufOrDo('1code','e $dotfiles/gist/1code.c')<CR>
@@ -759,7 +759,6 @@ nnoremap cO "_ciw<c-r>+<esc>
 
 " Commanding Vim
 nnoremap cr :<up>
-" vnoremap q; :<up>
 nnoremap cc :
 cnoremap <C-a> <Home>
 cnoremap <C-b> <C-Left>
@@ -982,7 +981,7 @@ command! UpdCtagsSudo !sudo ctags -R --exclude=.git --exclude=log --exclude=wuti
 command! Yall %y "
 command! Dall %d _
 command! Call %d _ | put!
-command! SwapContentPrevWin :call SwapContentPrevWin()
+command! SwapContentPrevWin call SwapContentPrevWin()
 
 """"""""""""""""""""""""""""""""
 ""         MS_stuff:          ""
@@ -1214,6 +1213,7 @@ function! AddRpcEar()
     endif
   endif
 endfunction
+command! AddRpcEar call AddRpcEar()
 
 function! BuildProject1()
   let l:starting_directory = getcwd()
@@ -2007,7 +2007,7 @@ function! s:JbzCppMan()
   let &l:iskeyword = old_isk
   execute 'Man ' . str
 endfunction
-command! JbzCppMan :call s:JbzCppMan()
+command! JbzCppMan call s:JbzCppMan()
 autocmd FileType cpp nnoremap <buffer>K :JbzCppMan<CR>
 
 if has("nvim")
@@ -2018,7 +2018,8 @@ if has("nvim")
 endif
 
 
-
 " set completeopt=menuone,noselect
 set completeopt=menu,noselect
+
+" startify_custom_header = 'startify#pad(split(system("bash $vi/nvim-logo -b"),"\n"))'
 

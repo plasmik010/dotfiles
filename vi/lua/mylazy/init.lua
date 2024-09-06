@@ -9,11 +9,7 @@ return {
 ---------- VIM BASIC ---------------------------{{{}}}------
 
   { 'junegunn/fzf.vim', dependencies = { 'junegunn/fzf' } }, -- fantastic
-  {
-    'mhinz/vim-startify', -- great
-    enabled = false,
-    -- vim.g.startify_custom_header = 'startify#pad(split(system("bash $vi/nvim-logo -b"),"\n"))'
-  },
+  -- 'mhinz/vim-startify', -- great
   -- 'justinmk/vim-sneak', -- good!
   -- 'tpope/vim-sensible', -- basic
   -- 'tpope/vim-endwise', -- okay
@@ -629,6 +625,11 @@ return {
 
   'nullchilly/fsread.nvim', -- funky --- read fast
 
+  {
+    'cdelledonne/vim-cmake',
+  },
+  -- { 'Civitasv/cmake-tools.nvim' }, -- error
+
 ---------- Tryout ------------------------------{{{}}}------
 
 -- https://github.com/stevearc/overseer.nvim
@@ -729,7 +730,7 @@ return {
     config = true,
   },
 
-  'cbochs/portal.nvim', -- problem
+  -- 'cbochs/portal.nvim', -- problem
   'princejoogie/dir-telescope.nvim',
   'pocco81/true-zen.nvim',
 
