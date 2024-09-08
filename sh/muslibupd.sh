@@ -7,6 +7,7 @@ rm $muslibrary
 PATH_NEW="/ln/torrents /ln/dwn /ln/mus/0new"
 PATH_FAM="/ln/mus"
 
+# "find -P" ignores symlinks
 function find_albums {
     find -P $(realpath $* | sort | uniq) -type f \( -name "*.flac" -or -name "*.mp3" -or -name "*.ogg" -or -name "*.wv" -or -name "*.ape" -or -name "*.wma" \) -printf "%h\n" | sort -u > $muslibrary
 }
@@ -22,7 +23,7 @@ HASG=false; pgrep -c Xorg &>/dev/null && HASG=true
 
 # cnt3=$((cnt1+cnt2))
 
-SUMMARY=".:. NEW MUSIC .:. $cnt1 of $cnt3"
+SUMMARY=".:. NEW $cnt1 .:. SUM $cnt3 .:."
 
 [ HASG==true ] && notify-send "$SUMMARY"
 echo "$SUMMARY"

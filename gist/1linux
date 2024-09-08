@@ -31,8 +31,14 @@ dmenu rofi wmctrl xdotool vim-gtk kitty pavucontrol htop btop vifm fdisk gparted
 qmake6 cpulimit qtcreator qtcreator-doc qtcreator-data build-essential qtbase5-examples qtbase5-dev gcc-9 g++-9
 
 ==RICE
-Chrome: uBlock Vimium CVim Surfingkeys MidnightLizard SingleFile Stylus Rescroller Browsec Bookmarkie TidyBookmarks NeaterBookmarks RecentBookmarks EmptyNewTabPage CopyTabInfo CopyUrl.rus
-Firefox: Vimium TabStash DarkReader Sidebery Raindrop.io VerticalTabsReloaded NoPlaylistAutoplayForYouTube HLSdownloader HumbleNewTabPage ScrollAnywhere TabSuspender tablist_slymax hide-scrollbars *DefaultZoom FixedZoom Tabliss SimpleCloseTabButton
+MultiBrowser:
+Vimium uBlock Raindrop.io DarkReader SingleFile BrowsecVPN CensorTracker
+Firefox:
+TabStash Sidebery VerticalTabsReloaded TabSessionManager NoPlaylistAutoplayForYouTube HLSdownloader CuteSaveButton HumbleNewTabPage ScrollAnywhere TabSuspender tablist_slymax hide-scrollbars *DefaultZoom FixedZoom Tabliss SimpleCloseTabButton PanoramaTabGroups RunetCensorshipBypass
+FF themes: Catppuccin-Muave by clue
+Chrome:
+CVim Surfingkeys MidnightLizard Stylus Rescroller Bookmarkie TidyBookmarks NeaterBookmarks RecentBookmarks EmptyNewTabPage CopyTabInfo CopyUrl.rus
+
 --see hint on how to copy FF profile at about:support
 Fonts: Cantarell Liberation DejaVu Noto Arimo Tinos Caslon EB-Garamond Euclid-Circular-A
 Fonts Mono: xos4Terminus LiberationMono SFMono Noto Input Fira FiraCode Hack DejaVuSansMono SourceCodePro Tamzen OhSnap industry

@@ -186,6 +186,7 @@ H.nmap(
             os.getenv("dotfiles"),
             os.getenv("tt"),
         },
+        follow = true,
     } end,
     "Find files in Favourite dirs"
 )
