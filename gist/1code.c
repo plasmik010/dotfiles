@@ -118,14 +118,16 @@ const auto zero_tp = std::chrono::system_clock::time_point (std::chrono::millise
 std::chrono::duration_cast<Msec>(now-zero_tp).count(); // get Unix time
 
 
-for (auto & element : vec)
-{
+for (auto & element : vec) {
     cout << element << " ";
 }
 
-for (iter; iter < vec.end(); iter++)
-{
+for (iter; iter < vec.end(); iter++) {
     cout << *iter << " ";
+}
+
+for (const auto& [key, value] : myMap) {
+    std::cout << key << " has value " << value << std::endl;
 }
 
 
