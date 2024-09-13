@@ -449,12 +449,12 @@ if exists("g:loaded_sneak_plugin")
   nmap s <Plug>Sneak_s
   nmap S <Plug>Sneak_S
 endif
-noremap <A-n> 16<c-e>
-noremap <A-p> 16<c-y>
-noremap <A-e> 16<c-e>
-noremap <A-c> 16<c-y>
-noremap <C-n> 6j
-noremap <C-p> 6k
+noremap <A-n> 12gj
+noremap <A-p> 12gk
+noremap <A-e> 15<C-e>15gj
+noremap <A-c> 15<C-y>15gk
+noremap <C-n> 10<C-e>10gj
+noremap <C-p> 10<C-y>10gk
 nmap q1 100G
 nmap q2 200G
 nmap q3 300G
@@ -715,7 +715,7 @@ if has("nvim")
 endif
 
 " Scroll fraction of the screen
-let scrollpart=70
+let scrollpart=56
 let key4=""
 let key15=""
 nnoremap <silent> <Space>   :exec 'normal! '.float2nr(round(winheight(0)*(exists("b:scrollpart") ? b:scrollpart : g:scrollpart)*0.01))."<C-d>"<CR>
@@ -757,6 +757,8 @@ nnoremap yd :let @" = expand('%:p:h')<CR>
 nnoremap cp "_ciw<c-r>"<esc>
 nnoremap co "_ciw<c-r>*<esc>
 nnoremap cO "_ciw<c-r>+<esc>
+" Replace in brackets
+nnoremap zib "_dibP
 
 " Commanding Vim
 nnoremap cr :<up>
@@ -830,12 +832,12 @@ nnoremap ,gy ^y$:call system('yandex.sh ' . "'" . @" . "'")<CR>
 nnoremap z; :set wrap!<CR>
 nnoremap ,zz :let &scrolloff=28-&scrolloff<CR>
 nnoremap ,z; :let &colorcolumn=100-&colorcolumn<CR>
-nnoremap ,zn :set number!<CR>
+nnoremap ,vn :set number!<CR>
 nnoremap ,ct :set filetype=text<CR>
 nnoremap ,vb :call SwitchBackground()<CR>:echo "background=" &background<CR>
 nnoremap ,vc :set termguicolors!<CR>:set termguicolors?<CR>
 nnoremap a/ :set hlsearch!<CR>
-nnoremap ,vg :GitGutterToggle<CR>
+" nnoremap ,vg :GitGutterToggle<CR>
 nnoremap ,vt :call TabSetAuto()<CR>
 
 " Tags

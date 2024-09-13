@@ -533,7 +533,7 @@ return {
       --   tint.setup()
       -- tint.disable()
       require'tint'.disable()
-      H.nmap(',vf', require'tint'.toggle, "Tint Focused window")
+      H.nmap(',vw', require'tint'.toggle, "Tint Focused window")
     end
   },
 
@@ -829,7 +829,7 @@ return {
         delay = 620,
       }
       vim.cmd([[IlluminatePause]])
-      H.nmap(',vh', ":IlluminateToggle<CR>", "Highlight current word")
+      -- H.nmap(',vh', ":IlluminateToggle<CR>", "Highlight current word")
       H.nmap(
         ',vh',
         function()

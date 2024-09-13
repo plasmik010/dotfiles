@@ -32,6 +32,7 @@ export "GPG_TTY=$(tty)"
 export PAGER=less
 export BROWSER=firefox
 export tt=$HOME/tt
+export wd1=/ln/ho/proj
 export bakhot=$HOME/bak
 export bakusbdir=$(compgen -G /ln/mo/*AMV/bak)
 export MANWIDTH=80

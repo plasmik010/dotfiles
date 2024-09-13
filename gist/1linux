@@ -13,7 +13,7 @@ TED: vim kakoune cudatext sublime-text geany mousepad scribes gedit xed tea-edit
 GUI: thunar nemo gvfs-mtp blueberry gittyup gitahead tig gitg gitfiend gitkraken ulauncher fsearch file-roller xarchiver speedcrunch abiword keepassx2 Bitwarden hardinfo brasero *xfburn filelight baobab synapse *screengrab *wicd-gtk *ezame xfce4-appfinder whiskermemu gnome-character-map
 MEDIA: mpv vlc youtube-viewer mediainfo ffmpeg audacity kwave ocenaudio sox mkvtoolnix-gui spek shntool cuetools wavpack mac vorbis-tools *soundkonverter *flacon rubyripper *whipper puddletag easytag picard *kid3 *hrizopea *pitivi shotcut *vidiot *kdenlive
 IMG: exiftool nomacs gpicview qview ristretto imv vimiv photoqt phototonic gthumb eog viewnior imagemagick feh qimgv eom imv sxiv pqiv darktable digikam shotwell gcolor3 findimagedupes
-DRAW: pinta kolourpaint mypaint mtpaint krita blender
+DRAW: pinta kolourpaint mypaint mtpaint krita blender 
 LISTEN: deadbeef qomp nulloy clementine exaile musique yarock qmmp audacious gmusicbrowser cantata tomahawk mocp *ncmpc cmus
 READ: zathura atril qpdfview mupdf djview fbreader koreader fbless evince okular *calibr
 HDD: gparted cfdisk testdisk f3probe photorec extundelete smartcontrol wipefreespace mondorescue grub-customizer woeusb windows2usb hdparam
@@ -25,6 +25,7 @@ STUDIO-BASE: jack2 qjackctl vmpk alsa-utils gtklick gtick fluidsynth soundfont-f
 CHAT: weechat irssi *jitsi pidgin hexchat ring retroshare sylpheed
 SCIENT: gnuplot kst2 scipy scilab mathmod
 DEB-only: xinput psmisc
+DIAGRAM: draw.io Mermaid kroki.io Excalidraw miro dia staruml PlantUML 
 
 --Debian pkgs
 dmenu rofi wmctrl xdotool vim-gtk kitty pavucontrol htop btop vifm fdisk gparted nnn thunar bash-completion mlocate sxhkd fonts-hack ncdu xclip zathura zathura-djvu gitg mpv remmina xinput feh rsync inxi lshw mediainfo ripgrep silversearcher-ag libnotify-bin imagemagick efibootmgr unrar sox git make cmake curl zstd zip gparted strace speedcrunch exuberant-ctags udevil qalc fzf qemu-system fd-find python3-neovim nitrogen lxappearance dunst virtualbox fonts-firacode redshift python-is-python3 fonts-terminus fonts-liberation earlyoom unzip evince testdisk hardinfo audacity sox shntool cuetools wavpack vorbis-tools nomacs telegram-desktop tmux rfkill testdisk abiword ncal linux-cpupower picom scrot

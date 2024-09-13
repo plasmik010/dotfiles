@@ -59,8 +59,8 @@ H.nmap(',,s', ":Telescope persisted<CR>", "Select Session")
 -- H.nmap(',"', function() require'nvim-peekup'.peekup_open('p') end )
 
 
-H.nmap('qn', vim.diagnostic.open_float)
-H.nmap('qzw', vim.diagnostic.setloclist)
+H.nmap(',zn', vim.diagnostic.open_float)
+H.nmap(',zb', vim.diagnostic.setloclist)
 
 
 -- Yank / put incremental
