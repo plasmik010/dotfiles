@@ -123,7 +123,7 @@ cd
     rm .bashrc
 }
 
-[[ $NEED_NEW_BASHRC == true ]] && echo -e "git=\""$MYGITDIR"\""\\nexport sh=\"\$git/dotfiles/sh\"\\nsource \"\$sh/bashrc_main\" > .bashrc 
+[[ $NEED_NEW_BASHRC == true ]] && echo -e "export git=\""$MYGITDIR"\""\\nexport sh=\"\$git/dotfiles/sh\"\\nsource \"\$sh/bashrc_main\" > .bashrc 
 # ln -sf .sh/bashrc_main .bashrc
 touch -a /ln/lo/cur/bashrc_loc
 touch -a /ln/lo/cur/vifmrc_loc
