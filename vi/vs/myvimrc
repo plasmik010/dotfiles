@@ -449,12 +449,12 @@ if exists("g:loaded_sneak_plugin")
   nmap s <Plug>Sneak_s
   nmap S <Plug>Sneak_S
 endif
-noremap <A-n> 12gj
-noremap <A-p> 12gk
-noremap <A-e> 15<C-e>15gj
-noremap <A-c> 15<C-y>15gk
-noremap <C-n> 10<C-e>10gj
-noremap <C-p> 10<C-y>10gk
+noremap <A-n> 12<C-e>L
+noremap <A-p> 12<C-y>H
+noremap <A-e> 16<C-e>M
+noremap <A-c> 16<C-y>M
+noremap <C-n> 12gj
+noremap <C-p> 12gk
 nmap q1 100G
 nmap q2 200G
 nmap q3 300G
@@ -715,14 +715,14 @@ if has("nvim")
 endif
 
 " Scroll fraction of the screen
-let scrollpart=56
+let scrollratio=56
 let key4=""
 let key15=""
-nnoremap <silent> <Space>   :exec 'normal! '.float2nr(round(winheight(0)*(exists("b:scrollpart") ? b:scrollpart : g:scrollpart)*0.01))."<C-d>"<CR>
-nnoremap <silent> <BS>      :exec 'normal! '.float2nr(round(winheight(0)*(exists("b:scrollpart") ? b:scrollpart : g:scrollpart)*0.01)).key15<CR>
-nnoremap <silent> <a-space> :exec 'normal! '.float2nr(round(winheight(0)*(exists("b:scrollpart") ? b:scrollpart : g:scrollpart)*0.01)).key15<CR>
-" nnoremap <silent><CR>    :exec 'normal! '.float2nr(round(winheight(0)*(exists("b:scrollpart") ? b:scrollpart : g:scrollpart)*0.01))."<C-d>"<CR>
-" nnoremap <silent> <tab>   :exec 'normal! '.float2nr(round(winheight(0)*(exists("b:scrollpart") ? b:scrollpart : g:scrollpart)*0.01)).key15<CR>
+nnoremap <silent> <Space>   :exec 'normal! '.float2nr(round(winheight(0)*(exists("b:scrollratio") ? b:scrollratio : g:scrollratio)*0.01))."<C-d>"<CR>
+nnoremap <silent> <BS>      :exec 'normal! '.float2nr(round(winheight(0)*(exists("b:scrollratio") ? b:scrollratio : g:scrollratio)*0.01)).key15<CR>
+nnoremap <silent> <a-space> :exec 'normal! '.float2nr(round(winheight(0)*(exists("b:scrollratio") ? b:scrollratio : g:scrollratio)*0.01)).key15<CR>
+" nnoremap <silent><CR>    :exec 'normal! '.float2nr(round(winheight(0)*(exists("b:scrollratio") ? b:scrollratio : g:scrollratio)*0.01))."<C-d>"<CR>
+" nnoremap <silent> <tab>   :exec 'normal! '.float2nr(round(winheight(0)*(exists("b:scrollratio") ? b:scrollratio : g:scrollratio)*0.01)).key15<CR>
 
 " Preserve jumplist
 nnoremap <silent> H :<C-u>execute "keepjumps norm! " . v:count1 . "H"<CR>
