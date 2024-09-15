@@ -325,6 +325,7 @@ return {
         }
       }
     }
+    -- edit in /bufferline.nvim/lua/bufferline/config.lua
     -- tab_selected = {
     --   fg = normal_fg,
     --   bg = normal_bg,
@@ -779,6 +780,7 @@ return {
     config = function()
       local gs = require'gitsigns'
       gs.setup()
+      gs.toggle_signs(false) -- switch off on start
       require("scrollbar.handlers.gitsigns").setup() -- take it to scrollbar
       H.nmap(',vg', gs.toggle_signs, "Show git highlight column")
     -- map('v', '<leader>hs', function() gitsigns.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)

@@ -1,7 +1,7 @@
 # vim: ts=4 sw=4 ft=text
 # some Bash oneliners AND pieces of general Linux wise
 
-==Install
+== Install
 BASE: base-devel inetutils earlyoom kbd plocate mlocate udevil cylon inxi
 ARCHIE: pacli pakku yay baph
 TUI: qalc networkmanager nmtui sshfs mc clex lfm ranger vifm z nnn fff exa eza fd lftp fzf ripgrep silversearcher-ag ncdu tree p7zip hyperfine htop btop ytop bashtop bpytop glances dmenu keratin screenfetch lolcat bat tmux bc tty-clock
@@ -31,7 +31,7 @@ DIAGRAM: draw.io Mermaid kroki.io Excalidraw miro dia staruml PlantUML
 dmenu rofi wmctrl xdotool vim-gtk kitty pavucontrol htop btop vifm fdisk gparted nnn thunar bash-completion mlocate sxhkd fonts-hack ncdu xclip zathura zathura-djvu gitg mpv remmina xinput feh rsync inxi lshw mediainfo ripgrep silversearcher-ag libnotify-bin imagemagick efibootmgr unrar sox git make cmake curl zstd zip gparted strace speedcrunch exuberant-ctags udevil qalc fzf qemu-system fd-find python3-neovim nitrogen lxappearance dunst virtualbox fonts-firacode redshift python-is-python3 fonts-terminus fonts-liberation earlyoom unzip evince testdisk hardinfo audacity sox shntool cuetools wavpack vorbis-tools nomacs telegram-desktop tmux rfkill testdisk abiword ncal linux-cpupower picom scrot
 qmake6 cpulimit qtcreator qtcreator-doc qtcreator-data build-essential qtbase5-examples qtbase5-dev gcc-9 g++-9
 
-==RICE
+== RICE
 MultiBrowser:
 Vimium uBlock Raindrop.io DarkReader SingleFile BrowsecVPN CensorTracker
 Firefox:
@@ -39,6 +39,9 @@ TabStash Sidebery VerticalTabsReloaded TabSessionManager NoPlaylistAutoplayForYo
 FF themes: Catppuccin-Muave by clue
 Chrome:
 CVim Surfingkeys MidnightLizard Stylus Rescroller Bookmarkie TidyBookmarks NeaterBookmarks RecentBookmarks EmptyNewTabPage CopyTabInfo CopyUrl.rus
+
+== Arch
+bluetoothctl
 
 --see hint on how to copy FF profile at about:support
 Fonts: Cantarell Liberation DejaVu Noto Arimo Tinos Caslon EB-Garamond Euclid-Circular-A
@@ -62,7 +65,7 @@ Cinnamon: Moka dark-glass2
 https://github.com/bhilburn/powerlevel9k
 https://github.com/powerline/fonts/tree/master/LiberationMono
 
-==CONF
+== CONF
 /etc/default/grub
 /boot/grub/grub.cfg
 /etc/systemd/system.conf
@@ -71,7 +74,7 @@ Put userfonts @ ~/.local/share/fonts/
 Put themes/ and styles/ @ ~/.config/QtProject/qtcreator/
 systemctl enable NetworkManager dhcpcd # enable systemd services
 
-==UNIX
+== UNIX
 /etc/passwd
 /etc/group
 showconsolefont ; ls /usr/share/kbd/consolefonts/ ; setfont ter-218b # set tty font
@@ -148,7 +151,7 @@ cat ~/.ssh/zz_rsa.pub | ssh user@192.168.1.78 "mkdir -p ~/.ssh && cat >> ~/.ssh/
 sshfs  myphone@192.168.X.X:/storage/emulated/0/  /mnt/  -p 2222
 PAGER=most  or man or ls
 
-==GRUB {{{}}}
+== GRUB {{{}}}
 --GRUB update config:
 grub-mkconfig -o /boot/grub/grub.cfg
 --GRUB install for BIOS:
@@ -191,7 +194,7 @@ menuentry "Local Linux installation" {
   boot
 }
 
-==X
+== X
 setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle,grp_led:scroll' # подключить смену языка
 xset s 1800 1800 ; xset -dpms # screen-off timer
 echo -ne "\e]0;xterm\a" # set terminal title
@@ -222,7 +225,7 @@ ps -u $(id -u) -o pid= | while read pid; do
         cat /proc/$pid/environ 2>/dev/null | tr '\0' '\n' | grep '^DISPLAY=:'
     done | grep -o ':[0-9]*' | sort -u # return current display id
 
-==FS
+== FS
 mkfs.vfat -F32 /dev/sdxN # create FAT32 fs
 sync -f . ; time ( dd if=/dev/zero of=zeroes.file bs=100M count=30; sync -f . ); rm zeroes.file  # test drive write speed
 dd bs=4M if=~/image.img of=/dev/sdb && sync # restore partition from file
@@ -253,7 +256,7 @@ sudo sh -c "zstd -v -10 -T0 </dev/nvmeXX >/path/bak/part.zst" # backup some part
 zstdcat root.zst >/dev/nvme0n1p6 # restore zst archived image
 zip -r -1 arc.zip Dir Dir2 #create zip
 
-==GIT {{{}}}
+== GIT {{{}}}
 git log --tags --pretty="%h %d %s"
 git tag -n --list
 git config --list --show-origin
@@ -326,7 +329,7 @@ git clone git@gitlab.sitename.org:some_name/proj_name.git
 # Clang: generate config
 clang-format --style Chromium --dump-config > .clang-format
 
-==NET
+== NET
 ip link
 w=$(ip link | grep wlp | cut -f 2 -d : | cut -b 2-) # get wireless adapter name
 ip addr show
@@ -368,7 +371,7 @@ curl --socks5 localhost:1234 ifconfig.me # check socks5 proxy
 systemctl restart privoxy ; http_proxy=127.0.0.1:8118 curl ifconfig.me --head # get tor as http proxy
 https_proxy="localhost:8118" wget -q --spider https://ya.ru && echo 1 # check proxy
 
-==HW
+== HW
 xset r rate 220 30 # set keyboard repeat rate
 sudo modprobe pcspkr ; echo -e '\a' ; rmmod pcspkr ; xset -b # STOP BELL BEEP!
 sudo sh -c "sync && echo 3 > /proc/sys/vm/drop_caches" # drop caches
@@ -393,11 +396,11 @@ tune2fs -U $(uuidgen) /dev/sdX # change partition's UUID
 hwinfo --gfxcard
 inxi -v7 # system info
 
-==MCU
+== MCU
 avrdude -c avrisp -p atmega32u4 -U flash:w:planck_rev4_plasmik.hex:i
 sleep 3 && sudo dfu-programmer atmega32u4 erase && sudo dfu-programmer atmega32u4 flash /ln/mo/GLIM/planck_rev4_plasmik.hex
 
-==QMK
+== QMK
 --install qmk:
 cd $git && git clone --depth=1 --recurse-submodules https://github.com/qmk/qmk_firmware
 python -m pip install --user qmk; cd qmk_firmware; util/qmk_install.sh
@@ -409,7 +412,7 @@ make planck/rev6:plasmik:dfu-util
 cd $git/qmk_firmware/ && cp $dotfiles/qmk/qmk_planckR6keymap.c $git/qmk_firmware/keyboards/planck/keymaps/plasmik/keymap.c && make planck/rev6_drop:plasmik:dfu-util
 cd $git/qmk_firmware/ && cp $dotfiles/qmk/qmk_planckR4keymap.c $git/qmk_firmware/keyboards/planck/keymaps/plasmik/keymap.c && make planck/rev4:plasmik:dfu
 
-==TMux
+== TMux
 tmux new -s defs # start tmux with named session
 tmux -L SERVERNAME attach # start tmux and try to attach to the server
 server -> session -> window -> pane
@@ -419,14 +422,14 @@ tmux copy-mode
 tmux switch-client -t SESSNAME
 capture-pane, save-buffer
 
-==Vim
+== Vim
 cd $git && git clone https://github.com/neovim/neovim; cd neovim && sudo pacman -S --needed base-devel cmake unzip ninja tree-sitter curl && make CMAKE_BUILD_TYPE=Release && sudo make install && sudo ln -sf  /usr/local/bin/nvim /usr/bin/nvim
 vi -c ":set nobomb" -c ":wq" text.xml # remove BOM non-interactively
 ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen # for building Neovim
 ninja-build python3-venv # for building Neovim  at Debian
 mercurial julia luarocks tree-sitter-cli composer go php cargo jre-openjdk npm # Neovim env
 
-==PKG
+== PKG
 apt-cache policy libgtk2.0-0 libgtk-3-0 # check pkg origin
 sudo apt-get --purge autoremove packagename # remove pkg completely
 gnome-shell --version
@@ -451,7 +454,7 @@ sudo pacman -U https://archive.archlinux.org/packages/n/nim/nim-1.0.6-1-x86_64.p
 -- If you do not want to compile yay yourself you can use the builds generated by GitHub Actions:
 pacman -S --needed git base-devel ; cd ; git clone https://aur.archlinux.org/yay-bin.git ; cd yay-bin ; makepkg -si
 
-==ALSO
+== ALSO
 vboxmanage extpack install /Corporalass_VM_VirtualBox_Extension_Pack-6.1.34.vbox-extpack
 VBoxManage internalcommands sethduuid NewVirtualDisk.vdi
 cp -a /source/. /target # add source/ contents to target/
@@ -492,12 +495,12 @@ echo firstt $(($(date +%s%N)/1000000)) && sleep 1 && echo second $(($(date +%s%N
 du -a . | awk '{print $2}' | fzf | xargs -r $EDITOR # search and edit multiple files
 # jdownloader outputs blank screen under bspwm? ==> $ wmname LG3D; java -jar path/JDownloader.jar
 
-==SSL
+== SSL
 npm config set strict-ssl false # ignore SSL certif
 pip.conf // [global] / trusted-host = pypi.python.org pypi.org files.pythonhosted.org
 git config --global http.sslVerify false # ignore SSL certif (VERY SILLY!)
 
-==SOUND
+== SOUND
 amixer -c 0 # list ALSA controls for card 0
 amixer -c USB controls
 aplay -l # list devices

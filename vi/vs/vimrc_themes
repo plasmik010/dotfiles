@@ -35,7 +35,8 @@ if !exists("g:colors_name") || g:colors_name=='habamax'
 
         if    ( g:phase=='day' )
             " colo frign
-            colo snow | set bg=light
+            colo rose-pine
+            " colo snow | set bg=light
             " colo catppuccin-latte
             " colo Tomorrow
             " colo stellarized | set bg=light
@@ -57,7 +58,8 @@ if !exists("g:colors_name") || g:colors_name=='habamax'
             " elseif ( g:phase=='dunno' )
 
         else    " neutral colors
-            colo everforest
+            " colo everforest
+            colo onenord
             " colo lost-shrine | LineColor nord
             " colo frign | LineColor aqua_plasm
             " colo Tomorrow-Night-Blue | LineColor bluewery

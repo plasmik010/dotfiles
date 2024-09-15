@@ -298,8 +298,8 @@ endfunction
 ""         Mappings:          ""
 """"""""""""""""""""""""""{{{}}}
 
-set timeoutlen=300
-" do not let <esc>j act as <A-j>
+set timeoutlen=390
+" prevent <esc>j acting as <A-j>
 set ttimeoutlen=15
 " set nottimeout
 let g:AutoClosePumvisible = {"ENTER": '', "ESC": ''}
@@ -363,7 +363,6 @@ nnoremap qi O<space><C-u><Esc>
 nnoremap qu ~
 nnoremap cx s
 " swap two chars
-nnoremap gc dlp
 nnoremap gx dlhP
 " add space char
 " nnoremap z<space> i<space><Esc>
