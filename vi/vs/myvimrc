@@ -265,7 +265,8 @@ function! CrispBorders()
   highlight WinSeparator guibg=none
   highlight WinSeparator guifg=#5a5a5a
 endfunction
-command! CrispBorders call CrispBorders()
+command! CrispBorders call CrispBorders() <bar> echo "color is  ".g:colors_name."  with *Crisp* borders"
+nnoremap ,cb :CrispBorders<CR>
 
 if has("nvim")
   set winwidth=22
@@ -667,7 +668,7 @@ nnoremap c<BS> :call SetPhase() <bar> call LoadColor() <bar> call CrispBorders()
 nnoremap ,vq :qa!<CR>
 " nnoremap ,<esc> :Startify<CR>
 nnoremap ,zq :wa <bar> qa<CR>
-nnoremap ,,a :call AddRpcEar()<CR>
+nnoremap ,va :call AddRpcEar()<CR>
 " Open current file at vimserver session via my "vimrpc" shell script
 nnoremap qza :silent exec '! virpc "%:p"'<CR>
 nnoremap qzz :exec '! virpc "%:p"' \| q<CR>
