@@ -133,6 +133,8 @@ for (const auto& [key, value] : myMap) {
     std::cout << key << " has value " << value << std::endl;
 }
 
+std::for_each(stdArray.begin(), stdArray.end(), [](auto x) { std::cout << x <<" "; });
+
 
 for (unsigned char* p = &buf[0]; *p; ++p)
     printf("%02x ", *p);
@@ -286,6 +288,4 @@ int permaAssert(bool statement, const char* comment) {
     assert(0);
 #endif
 }
-
-std::for_each(stdArray.begin(), stdArray.end(), [](auto x) { std::cout << x <<" "; });
 
