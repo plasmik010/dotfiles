@@ -449,12 +449,12 @@ if exists("g:loaded_sneak_plugin")
   nmap s <Plug>Sneak_s
   nmap S <Plug>Sneak_S
 endif
-noremap <A-n> 12<C-e>L
-noremap <A-p> 12<C-y>H
-noremap <A-e> 16<C-e>M
-noremap <A-c> 16<C-y>M
-noremap <C-n> 12gj
-noremap <C-p> 12gk
+noremap <C-n> 10gj
+noremap <C-p> 10gk
+noremap <A-n> 50j
+noremap <A-p> 50k
+noremap <A-e> 15<C-e>M
+noremap <A-c> 15<C-y>M
 nmap q1 100G
 nmap q2 200G
 nmap q3 300G

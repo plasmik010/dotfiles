@@ -79,7 +79,7 @@ vim.keymap.set('x', 'qp', '\"lp')
 H.Bmap('<C-PageUp>',   ":BufferLineCyclePrev<CR>", { silent = true })
 H.Bmap('<C-PageDown>', ":BufferLineCycleNext<CR>", { silent = true })
 
-H.nmap(',gg', ":call FocusBufOrDo('mylazy/init.lua','e $vi/lua/mylazy/init.lua')<CR>", "Plugins")
+H.nmap(',G', ":call FocusBufOrDo('mylazy/init.lua','e $vi/lua/mylazy/init.lua')<CR>", "Plugins")
 H.nmap(',gn', ":call FocusBufOrDo('lua/init.lua','e $vi/lua/init.lua')<CR>", "init.lua")
 H.nmap(',gm', ":call FocusBufOrDo('mappings.lua','e $vi/lua/mappings.lua')<CR>", "Mappings")
 H.nmap(
@@ -234,6 +234,7 @@ H.nmap(',fs', ":Telescope lsp_document_symbols<CR>", "Telescope LSP file symbols
 H.nmap('qs',  ":Telescope lsp_dynamic_workspace_symbols<CR>", "Telescope dynamic symbols")
 
 -------- Neotree -----------------------------{{{}}}------
+
 H.nmap(
     ',N',
     function()

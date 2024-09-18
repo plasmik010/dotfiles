@@ -371,7 +371,23 @@ return {
     },
   },
 
-  'folke/which-key.nvim', -- great --- display key mappings interactively
+  {
+    'folke/which-key.nvim', -- good/problem --- display key mappings interactively
+    -- lazy = false,
+    -- priority = 1000,
+    opts = {
+      preset = "modern",
+      plugins = {
+        marks = false,
+      },
+      triggers = {
+      --   { ",", mode = {"n","v"} },
+      --   { "<Leader>", mode = {"n","v"} },
+      --   { "<auto>", mode = "nxso" },
+        { "<auto>", mode = "nxsotc" },
+      }
+    }
+  },
 
   'norcalli/nvim-colorizer.lua', --- highlight color codes
 
@@ -944,6 +960,7 @@ return {
     end
   },
 
+  'mrjones2014/legendary.nvim',
   'mizlan/iswap.nvim',
   -- 'lewis6991/satellite.nvim', --- add scrollbar
   -- 'Dax89/ide.nvim', -- maybe
@@ -954,7 +971,6 @@ return {
   'Wansmer/sibling-swap.nvim',
   -- 'smzm/hydrovim', --- eval python
   'luukvbaal/statuscol.nvim', -- ambitious
-  'mrjones2014/legendary.nvim',
   'RaafatTurki/hex.nvim',
   'danielfalk/smart-open.nvim', --- funky telescope mode
   'tsakirist/telescope-lazy.nvim',
