@@ -47,7 +47,10 @@ return {
       },
       pickers = {
         colorscheme = {
-          enable_preview = true
+          enable_preview = true,
+          show_preview = false,
+          previewer = false,
+          layout_config = { width = 0.35, height = 0.55 }
         }
       },
       extensions = {
@@ -1063,7 +1066,6 @@ return {
   'KimNorgaard/vim-frign', -- borland_style
   'KKPMW/sacredforest-vim', -- lowcont
   'logico-dev/typewriter', -- good!
-  'wimstefan/vim-artesanal', -- good lowcon gray
   'beigebrucewayne/min_solo', -- grey bg subtle__
   'lithammer/vim-eighties', -- trueeeee
   'arzg/vim-substrata', -- cold neon
