@@ -10,6 +10,9 @@
 --   vimscript here
 -- ]])
 
+-- vim.api.call_function("funame", {args})
+-- vim.fn.funame({args})
+
 -- package.loaded['name'] = nil
 -- P = require('name')
 
@@ -49,4 +52,8 @@ H.reload('mapps')
 local lazy_config_avail, lazy_config = pcall(require, "lazy.core.config")
 PL = lazy_config.plugins
 
+-- have to load this plugin via command..
+vim.cmd[[IBLDisable]]
+
+-- vim.fn.CrispBorders()
 

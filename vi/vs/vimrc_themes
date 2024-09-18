@@ -76,11 +76,14 @@ if !exists("g:colors_name") || g:colors_name=='habamax'
     endif
 endif
 
-        " if !exists("g:vimplug_available")
-        " Fallback Colors
-        if ( !exists("g:colors_name") || g:colors_name == 'default' )
-            colo delek
-        endif
+" if !exists("g:vimplug_available")
+" Fallback Colors
+if ( !exists("g:colors_name") || g:colors_name == 'default' )
+    colo delek
+endif
+
+CrispBorders
+
 " " " {{{}}} " " "
 " colo snow | set bg=light | LineColor ayu_light
 " colo vadelma | set bg=light | LineColor one

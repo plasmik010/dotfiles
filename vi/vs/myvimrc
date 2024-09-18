@@ -451,8 +451,8 @@ if exists("g:loaded_sneak_plugin")
 endif
 noremap <C-n> 10gj
 noremap <C-p> 10gk
-noremap <A-n> 50j
-noremap <A-p> 50k
+noremap <A-n> 50jM
+noremap <A-p> 50kM
 noremap <A-e> 15<C-e>M
 noremap <A-c> 15<C-y>M
 nmap q1 100G
@@ -1506,6 +1506,10 @@ function! WinSwap(...)
   let thisbuf = bufnr("%")
   let lastwin = winnr("#")
   let lastbuf = winbufnr(lastwin)
+  if (thisbuf == lastbuf)
+    echom "Wait, prev window is the same buffer!"
+    return
+  endif
   exec lastwin . " wincmd w" ."|".
         \ "buffer ". thisbuf ."|".
         \ thiswin ." wincmd w" ."|".
@@ -1653,8 +1657,8 @@ command! -nargs=+ TabeVdiff call TabeVdiff(<f-args>)
 
 function! SwitchCE()
   if mapcheck("<C-e>") == ''
-    noremap <C-e> 6<C-e>
-    noremap <C-y> 6<C-y>
+    noremap <C-e> 8<C-e>
+    noremap <C-y> 8<C-y>
     echo "Now scrolling is faster."
   else
     unmap <C-e>

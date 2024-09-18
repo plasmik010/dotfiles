@@ -103,9 +103,8 @@ H.nmap(
 H.nmap(',vr', ":RnvimrToggle<CR>", "Rnvimr")
 H.nmap(',<TAB>', ":Dashboard<CR>", "Dashboard")
 H.nmap(',v,', H.eval_paragraph, "Evaluate code for Neovim")
-
-H.nmap(',co', "<cmd> Themery<CR>", "Themery")
-H.nvmap('qe', ":SnipRun<CR>", "Evaluate code")
+H.nmap(',co', require'telescope.builtin'.colorscheme, "Select colorscheme")
+-- H.nvmap('qe', ":SnipRun<CR>", "Evaluate code")
 
 ---------- Finding / Telescope -----------------{{{}}}------
 

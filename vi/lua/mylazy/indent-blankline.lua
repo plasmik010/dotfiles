@@ -1,6 +1,7 @@
 return {
     'lukas-reineke/indent-blankline.nvim', -- broken
     main = "ibl",
+    cmd = "IBLDisable",
     enabled = true,
     config = function()
         -- local lochl = { "CursorColumn", "Whitespace", "WildMenu" }
@@ -27,6 +28,7 @@ return {
                 char = "∷",
             },
             -- whitespace = { highlight = highlightL, remove_blankline_trail = false },
+        -- vim.cmd([[IBLToggle]])
         }
     end,
 }

@@ -77,6 +77,11 @@ void echo(const T& arg = nullptr) {
     }
 }
 
+template <typename T>
+void echo(const T& arg) {
+    std::cout << "arg type is " << typeid(T).name() << std::endl;
+}
+
 void foo()
 {
     static bool once = [](){

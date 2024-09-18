@@ -100,8 +100,8 @@ nnoremap yg :!google.sh %c &>/dev/null &<CR>
 
 nnoremap ,j :jobs<CR>
 nnoremap ,u :undolist<CR>
-nnoremap <C-n> 6j
-nnoremap <C-p> 6k
+nnoremap <C-n> 7j
+nnoremap <C-p> 7k
 
 " Open current file "
 nnoremap q. :! ./%c &<CR>

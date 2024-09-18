@@ -618,20 +618,6 @@ return {
   },
 
   {
-    'zaldih/themery.nvim', -- great --- colorscheme selector
-    -- event = "VeryLazy",
-    cmd = "Themery",
-    config = function()
-      local themlist = vim.api.nvim_eval("getcompletion('','color')")
-      -- print(vim.inspect(opts.themes))
-      require'themery'.setup {
-        themes = themlist,
-      }
-      -- vim.api.nvim_create_user_command('ThemeryWrapper', ThemeryWrapper, {})
-    end
-  },
-
-  {
     'gorbit99/codewindow.nvim', -- good --- fat minimap
     opts = {
       minimap_width = 16,
@@ -849,16 +835,16 @@ return {
         },
         delay = 620,
       }
-      vim.cmd([[IlluminatePause]])
+      vim.cmd[[IlluminatePause]]
       -- H.nmap(',vh', ":IlluminateToggle<CR>", "Highlight current word")
       H.nmap(
         ',vh',
         function()
           H.highlit_cur = not H.highlit_cur
           if H.highlit_cur then
-            vim.cmd([[IlluminateResume]])
+            vim.cmd[[IlluminateResume]]
           else
-            vim.cmd([[IlluminatePause]])
+            vim.cmd[[IlluminatePause]]
           end
         end,
         "Toggle Highlight current word"
@@ -963,6 +949,16 @@ return {
     end
   },
 
+  -- {
+  --   'zaldih/themery.nvim', -- great --- colorscheme selector
+  --   cmd = "Themery",
+  --   config = function()
+  --     local themelist = vim.api.nvim_eval("getcompletion('','color')")
+  --     -- print(vim.inspect(opts.themes))
+  --     require'themery'.setup { themes = themelist, }
+  --   end
+  -- },
+
   'mrjones2014/legendary.nvim',
   'mizlan/iswap.nvim',
   -- 'lewis6991/satellite.nvim', --- add scrollbar
@@ -1039,7 +1035,7 @@ return {
   'rebelot/kanagawa.nvim',
   'lukas-reineke/onedark.nvim',
   'projekt0n/github-nvim-theme',
-  'AstroNvim/astrotheme',
+  -- 'AstroNvim/astrotheme', -- problems
   'savq/melange-nvim',
   'Yazeed1s/minimal.nvim',
 
@@ -1058,7 +1054,6 @@ return {
   'romainl/Apprentice', -- nostrain
   'JarrodCTaylor/spartan', -- 'spartan,immortals
   'pbrisbin/vim-colors-off',
-  -- 'jakwings/vim-colors', -- 'moody,garden,messy
   'bf4/vim-dark_eyes', -- NIGHT
   'beigebrucewayne/Turtles', -- funky
   'vim-scripts/C64.vim', -- joke
@@ -1079,28 +1074,29 @@ return {
   'stillwwater/vim-nebula', -- cold dark
   'franbach/miramare', -- coffee dark
   'mhartington/oceanic-next', -- soft nice
-  -- 'nanotech/jellybeans.vim', -- good4html
-  -- 'HenryNewcomer/vim-theme-underflow', -- consbroken
-  -- 'jacoborus/tender.vim', -- sane soft dark
-  -- 'AlessandroYorba/Sierra', -- softgray
-  -- 'AlessandroYorba/Despacio', -- softdarkgrey
-  -- 'dracula/vim', -- funky
   'vim-scripts/Spacegray.vim', -- darker
-  -- 'jlund3/colorschemer', -- semibroken 'lucid
-  -- 'srcery-colors/srcery-vim', -- fresh-dark consbroken HUGE
-  -- 'dfrunza/vim', -- borland,muratori,pencil,vc6
-  -- 'zefei/cake16', -- cool medium
-  -- 'machakann/vim-colorscheme-tatami', -- fun green
-  -- 'RussellBradley/vim-knicks' -- great blue 404
-  -- 'aradunovic/perun.vim', -- consbroken 404
-  -- 'the31k/vim-colors-tayra', -- Nice gray 404
-  -- 'koirand/tokyo-metro.vim', -- pretty dark
-  -- 'nightsense/rusticated', -- morning
-  -- 'ajmwagar/vim-dues', -- soft coffee 'deus
-  -- 'nightsense/snow', -- soft)
-  -- 'nightsense/stellarized', -- nice! light+dark
-  -- 'arzg/vim-mayanfog', -- light bone
-  -- 'arzg/vim-plan9', -- trueeeee
+  'nanotech/jellybeans.vim', -- good4html
+  'HenryNewcomer/vim-theme-underflow', -- consbroken
+  'jacoborus/tender.vim', -- sane soft dark
+  'AlessandroYorba/Sierra', -- softgray
+  'AlessandroYorba/Despacio', -- softdarkgrey
+  'dracula/vim', -- funky
+  'jlund3/colorschemer', -- semibroken 'lucid
+  'srcery-colors/srcery-vim', -- fresh-dark consbroken HUGE
+  'dfrunza/vim', -- borland,muratori,pencil,vc6
+  'zefei/cake16', -- cool medium
+  'machakann/vim-colorscheme-tatami', -- fun green
+  -- 'jakwings/vim-colors', -- 'moody,garden,messy  404
+  -- 'RussellBradley/vim-knicks', -- great blue  404
+  -- 'aradunovic/perun.vim', -- consbroken  404
+  -- 'the31k/vim-colors-tayra', -- Nice gray  404
+  'koirand/tokyo-metro.vim', -- pretty dark
+  'nightsense/rusticated', -- morning
+  'ajmwagar/vim-dues', -- soft coffee 'deus
+  'nightsense/snow', -- soft)
+  'nightsense/stellarized', -- nice! light+dark
+  'arzg/vim-mayanfog', -- light bone
+  'arzg/vim-plan9', -- trueeeee
 
   ---- Pretty but not useful -------------------------------
   -- 'sainnhe/sonokai', -- dark gui&nogui
