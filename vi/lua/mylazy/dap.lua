@@ -16,11 +16,13 @@ return {
           type = 'codelldb',
           request = 'launch',
           name = 'Launch file',
+          -- cwd = vim.fn.system("dirname $(realpath build/binary)"),
+          cwd = "build",
           -- program = "${file}",
           program = function()
             local path = vim.fn.input({
               prompt = 'Path to executable: ',
-              default = vim.fn.getcwd() .. '/build/binar',
+              default = vim.fn.getcwd() .. '/build/binary',
               completion = "file",
             })
             return (path and path ~= "") and path or dap.ABORT
