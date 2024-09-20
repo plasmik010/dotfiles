@@ -1055,7 +1055,6 @@ return {
   'JarrodCTaylor/spartan', -- 'spartan,immortals
   'pbrisbin/vim-colors-off',
   'bf4/vim-dark_eyes', -- NIGHT
-  'beigebrucewayne/Turtles', -- funky
   'vim-scripts/C64.vim', -- joke
   'szorfein/fantasy.vim', -- dull
   'KimNorgaard/vim-frign', -- borland_style
@@ -1099,6 +1098,7 @@ return {
   'arzg/vim-plan9', -- trueeeee
 
   ---- Pretty but not useful -------------------------------
+  -- 'beigebrucewayne/Turtles', -- funky
   -- 'sainnhe/sonokai', -- dark gui&nogui
   -- 'szorfein/fromthehell.vim', -- dark satur earth
   -- 'whatyouhide/vim-gotham', -- neon/green

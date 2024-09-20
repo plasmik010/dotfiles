@@ -20,7 +20,7 @@ return {
           program = function()
             local path = vim.fn.input({
               prompt = 'Path to executable: ',
-              default = vim.fn.getcwd() .. '/bin/baza.bin',
+              default = vim.fn.getcwd() .. '/build/binar',
               completion = "file",
             })
             return (path and path ~= "") and path or dap.ABORT
@@ -49,9 +49,10 @@ return {
 
       H.nmap("zb",     "<cmd> DapToggleBreakpoint <CR>", "Add Breakpoint at line" )
       H.nmap("zn",     "<cmd> DapContinue <CR>", "Start or continue debugger" )
-      H.nmap("<C-BS>", "<cmd> DapContinue <CR>", "Start or continue debugger" )
+      H.nmap(",<BS>",  "<cmd> DapContinue <CR>", "Start or continue debugger" )
       H.nmap("<F5>",   "<cmd> DapContinue <CR>", "Start or continue debugger" )
       H.nmap("<F8>",   "<cmd> DapStepOver <CR>", "Debugger step-over" )
+      H.nmap("<F10>",   "<cmd> DapTerminate <CR>", "Debugger step-over" )
 
     end
   },
