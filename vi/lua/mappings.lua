@@ -12,8 +12,12 @@ H.nmap(
 )
 -- vim.keymap.set('n', "gl", "<cmd>let bn=bufnr('%') <bar> let pos=getpos('.') <bar> wincmd p <bar> exec 'b' . bn <bar> call setpos('.',pos) <bar> lua vim.lsp.buf.definition()<CR>" )
 H.nmap(
-    'gl',
-    function() H.mirror_buf_to_prev_window() vim.lsp.buf.definition() end,
+    'g,',
+    function()
+        print(0)
+        H.mirror_buf_to_prev_window()
+        vim.lsp.buf.definition()
+    end,
     "lsp Definition in prev window"
 )
 

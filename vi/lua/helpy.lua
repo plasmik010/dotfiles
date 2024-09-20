@@ -297,14 +297,18 @@ vim.cmd[[ @" ]]
 
 function H.mirror_buf_to_prev_window()
   local bufnr = vim.api.nvim_get_current_buf()
+  local winnr = vim.api.nvim_get_current_win()
   local pos = vim.fn.getpos('.')
-  if vim.fn.winnr() == vim.fn.winnr('#') then
-    -- only current window is present; add second window
-    vim.cmd('vnew')
+  vim.cmd('wincmd p') -- go to prev window
+  local winnr2 = vim.api.nvim_get_current_win()
+  -- if vim.fn.winnr() == vim.fn.winnr('#') then
+  if winnr == winnr2 then
+    print(1)
+    -- only current window is present
+    vim.cmd('vnew') -- add second window
     -- vim.api.nvim_open_win(true,true,{})
   else
-    -- go to prev window
-    vim.cmd('wincmd p')
+    print(2)
   end
   vim.api.nvim_set_current_buf(bufnr)
   vim.fn.setpos('.',pos)

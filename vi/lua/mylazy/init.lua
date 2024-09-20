@@ -50,7 +50,7 @@ return {
           enable_preview = true,
           show_preview = false,
           previewer = false,
-          layout_config = { width = 0.35, height = 0.55 }
+          layout_config = { width = 0.4, height = 0.6 }
         }
       },
       extensions = {
@@ -1081,9 +1081,9 @@ return {
   'AlessandroYorba/Sierra', -- softgray
   'AlessandroYorba/Despacio', -- softdarkgrey
   'dracula/vim', -- funky
+  -- 'dfrunza/vim', -- borland,muratori,pencil,vc6
   'jlund3/colorschemer', -- semibroken 'lucid
   'srcery-colors/srcery-vim', -- fresh-dark consbroken HUGE
-  'dfrunza/vim', -- borland,muratori,pencil,vc6
   'zefei/cake16', -- cool medium
   'machakann/vim-colorscheme-tatami', -- fun green
   -- 'jakwings/vim-colors', -- 'moody,garden,messy  404

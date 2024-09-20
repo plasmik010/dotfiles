@@ -42,7 +42,7 @@ function conv {
 
 cat /ln/ho/.mus-favourites | while read podgon; do
 let $[progres++];
-notify-send "prog is $progres in $counter" -t 400
+notify-send "progr is $progres in $counter" -t 600
 if [ $counter -lt $Nthr ]; then # we are under the limit
     # { $CONV "$podgon" "$DEST"; echo 'done' > $TMPF; } &
     { conv "$podgon"; } &
