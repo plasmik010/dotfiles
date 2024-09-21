@@ -423,7 +423,7 @@ tmux switch-client -t SESSNAME
 capture-pane, save-buffer
 
 == Vim
-cd $git && git clone https://github.com/neovim/neovim; cd neovim && sudo pacman -S --needed base-devel cmake unzip ninja tree-sitter curl && make CMAKE_BUILD_TYPE=Release && sudo make install && sudo ln -sf  /usr/local/bin/nvim /usr/bin/nvim
+cd $git && git clone https://github.com/neovim/neovim; cd neovim && git pull && sudo pacman -S --needed base-devel cmake unzip ninja tree-sitter curl && make CMAKE_BUILD_TYPE=Release && sudo make install && sudo ln -sf  /usr/local/bin/nvim /usr/bin/nvim
 vi -c ":set nobomb" -c ":wq" text.xml # remove BOM non-interactively
 ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen # for building Neovim
 ninja-build python3-venv # for building Neovim  at Debian
