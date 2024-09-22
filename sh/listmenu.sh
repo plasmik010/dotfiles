@@ -8,7 +8,7 @@ Zathura:listzathura.sh\n\
 FBReader:listfictionbook.sh\n\
 Abiword:listabiword.sh\n\
 Downloads:listdwn.sh\n\
-mpv Favs:SHFL=1 listalbums.sh /ln/ho/.mpv-favourites\n\
+mpv Favs:listalbums.sh /ln/ho/.mus-favourites\n\
 mpv Playlist:listalbums.sh /ln/ho/.mus-playlist\n\
 mpv Library:listalbums.sh\n\
 mpv History:listalbums.sh /ln/ho/.mus-history\n\

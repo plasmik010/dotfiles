@@ -301,7 +301,7 @@ endfunction
 
 set timeoutlen=390
 " prevent <esc>j acting as <A-j>
-set ttimeoutlen=15
+set ttimeoutlen=135
 " set nottimeout
 let g:AutoClosePumvisible = {"ENTER": '', "ESC": ''}
 let mapleader = ","
@@ -759,6 +759,9 @@ nnoremap co "_ciw<c-r>*<esc>
 nnoremap cO "_ciw<c-r>+<esc>
 " Replace in brackets
 nnoremap zib "_dibP
+" duplicate and comment line (requires commenting plugin)
+nmap cd yygccp
+nmap c. gccj
 
 " Commanding Vim
 nnoremap cr :<up>
