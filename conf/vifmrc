@@ -223,6 +223,7 @@ nnoremap gh :cd $HOME<cr>
 nnoremap g; :cd /ln/mo<cr>
 nnoremap gq :cd /ln/mo/fast/qq<cr>:sort<cr>N
 nnoremap g<space> :cd /ln<cr>
+nnoremap g<bs> :cd /ln/mo/metal/MUSIC/0new<cr>
 nnoremap gm :cd /ln/mo/metal/MUSIC/
 nnoremap go :cd /ln/gd/code_misc<cr>
 nnoremap gx :trashes<cr>
