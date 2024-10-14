@@ -40,7 +40,7 @@ return {
                     desc = 'Sess',
                     group = 'Number',
                     -- desc_hl = 'String',
-                    action = "require'nvim-possession'.list()",
+                    action = "Telescope persisted",
                     key = 's',
                 },
                 {

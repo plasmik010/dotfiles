@@ -573,7 +573,7 @@ return {
           use_as_default_explorer = false,
         },
       }
-      H.nmap(",h", function() MiniFiles.open(vim.api.nvim_buf_get_name(0),false) end) -- open at current file
+      H.nmap(",h", function() MiniFiles.open(vim.api.nvim_buf_get_name(0), "mini.files") end) -- open at current file
       -- H.nmap(",h", MiniFiles.open)
     end
   },
@@ -632,11 +632,6 @@ return {
   'nullchilly/fsread.nvim', -- funky --- read fast
 
   {
-    'cdelledonne/vim-cmake',
-  },
-  -- { 'Civitasv/cmake-tools.nvim' }, -- error
-
-  {
     'epwalsh/obsidian.nvim',
     version = "*",  -- recommended, use latest release instead of latest commit
     lazy = true,
@@ -678,28 +673,28 @@ return {
       dependencies = { "nvim-lua/plenary.nvim" }
   },
 
-  {
-    "gennaro-tedesco/nvim-possession", -- works
-    dependencies = { "ibhagwan/fzf-lua" },
-    enabled = false,
-    config = true,
-    opts = {
-      autosave = false,
-      sessions = {
-        sessions_path = H.condMkdir(os.getenv("HOME"),".nvim-session/session/"),
-        sessions_icon = '󰅏 '
-      },
-      save_hook = function() vim.cmd('call SaveColor()') end,
-      post_hook = function() vim.cmd('call LoadColor()') end,
-      fzf_winopts = { width=.5 }
-    },
-    init = function()
-      -- vim.keymap.set("n", ",pl", function() possession.list() end)
-      -- vim.keymap.set("n", ",pn", function() possession.new() end)
-      -- vim.keymap.set("n", ",po", function() possession.update() end)
-      -- vim.keymap.set("n", ",pd", function() possession.delete() end)
-    end,
-  },
+  -- {
+  --   "gennaro-tedesco/nvim-possession", -- works
+  --   dependencies = { "ibhagwan/fzf-lua" },
+  --   enabled = false,
+  --   config = true,
+  --   opts = {
+  --     autosave = false,
+  --     sessions = {
+  --       sessions_path = H.condMkdir(os.getenv("HOME"),".nvim-session/session/"),
+  --       sessions_icon = '󰅏 '
+  --     },
+  --     save_hook = function() vim.cmd('call SaveColor()') end,
+  --     post_hook = function() vim.cmd('call LoadColor()') end,
+  --     fzf_winopts = { width=.5 }
+  --   },
+  --   init = function()
+  --     -- vim.keymap.set("n", ",pl", function() possession.list() end)
+  --     -- vim.keymap.set("n", ",pn", function() possession.new() end)
+  --     -- vim.keymap.set("n", ",po", function() possession.update() end)
+  --     -- vim.keymap.set("n", ",pd", function() possession.delete() end)
+  --   end,
+  -- },
 
   {
     'olimorris/persisted.nvim',
