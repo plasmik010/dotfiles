@@ -852,14 +852,14 @@ nnoremap ,vt :call TabSetAuto()<CR>
 
 " Make and run project
 nnoremap ,zo :make<bar>copen<CR>
-nnoremap ,zd :call BuildProjectUni("Makefile","make -f Makefile distclean")
-nnoremap ,zx :call BuildProjectUni("Makefile","make -f Makefile clean")<CR>
-nnoremap ,zm :call BuildProjectUni("Makefile","make -f Makefile")<CR>
-nnoremap ,zr :call BuildProjectUni("Makefile","make -f Makefile run")<CR>
-nnoremap ,zc :call BuildProjectUni("Makefile","make -f Makefile cmak")<CR>
-" nnoremap ,zb :call BuildProjectUni("Makefile","make -f Makefile bear")<CR>
-" nnoremap ,XX :call BuildProjectUni("Makefile","make tags") <bar> cwindow<CR>
-" nnoremap ,zm :lcd %:p:h <bar> call BuildProjectUni("Makefile","make -f Makefile") <bar> redraw! <bar> copen<CR>
+nnoremap ,zd :call BuildProjectUni("Makefile", "make -f Makefile distclean")
+nnoremap ,zx :call BuildProjectUni("Makefile", "make -f Makefile clean")<CR>
+nnoremap ,zm :call BuildProjectUni("Makefile", "make -f Makefile")<CR>
+nnoremap ,zr :call BuildProjectUni("Makefile", "make -f Makefile run")<CR>
+nnoremap ,zc :call BuildProjectUni("Makefile", "make -f Makefile cmak")<CR>
+" nnoremap ,zb :call BuildProjectUni("Makefile", "make -f Makefile bear")<CR>
+" nnoremap ,XX :call BuildProjectUni("Makefile", "make tags") <bar> cwindow<CR>
+" nnoremap ,zm :lcd %:p:h <bar> call BuildProjectUni("Makefile", "make -f Makefile") <bar> redraw! <bar> copen<CR>
 nnoremap ,z/ :copen<CR>/error<CR>
 
 " Folding
@@ -1239,7 +1239,7 @@ endfunction
 "   redraw!
 " endfunction
 
-function! BuildProjectUni(Makefile,Makecommand)
+function! BuildProjectUni(Makefile, Makecommand)
   " exec "!echo " . a:Makecommand . ":"
   " memorize stuff
   let makeprg_bak = &makeprg
@@ -1249,15 +1249,13 @@ function! BuildProjectUni(Makefile,Makecommand)
   " change directory
   exec "lcd! " . curr_directory
   let proj_dir = ClimbToDirWhere(a:Makefile, 1)
-  " " !!! ignore dirs with this marker file to avoid cmake-generated Makefile
   while filereadable("vim_make_ignore")
+    " Ignore dirs with this marker file to avoid cmake-generated Makefile
     cd ../
     let proj_dir = ClimbToDirWhere(a:Makefile, 1)
   endwhile
   if ( proj_dir != "-1" )
     if has("nvim")
-      " echo system("echo -e \"\\n\\n\"--" . a:Makecommand . " @ " . proj_dir . ":")
-      " echo system("echo ------------------------------------------------")
       make
     else
       silent exec "!echo -e \"\\n\\n\"--" . a:Makecommand . " @ " . proj_dir . ":"

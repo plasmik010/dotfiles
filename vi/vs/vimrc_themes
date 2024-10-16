@@ -41,10 +41,11 @@ if !exists("g:colors_name") || g:colors_name=='habamax'
             " colo Tomorrow
             " colo stellarized | set bg=light
 
-        elseif    ( g:phase=='nox' )
+        elseif  ( g:phase=='nox' )
             " colo nordic
             " colo catppuccin-macchiato
-            colo everforest
+            colo nordfox
+            " colo everforest
             " colo oh-lucy-evening
             " colo nightfox | set bg=dark
             " colo melange | set bg=dark
@@ -59,7 +60,7 @@ if !exists("g:colors_name") || g:colors_name=='habamax'
 
         else    " neutral colors
             " colo everforest
-            colo onenord
+            colo nordfox
             " colo lost-shrine | LineColor nord
             " colo frign | LineColor aqua_plasm
             " colo Tomorrow-Night-Blue | LineColor bluewery
