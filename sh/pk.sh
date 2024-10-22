@@ -27,7 +27,7 @@ if [ $1 ]; then
     zip)     zip -r "$outfile".zip "$inpfile" ;;
     7z)      7z a "$outfile".7z "$inpfile" ;;
     zst)     tar -I 'zstd -10v -T0' -cf  "$outfile".tar.zst "$inpfile" ;;
-    zst-exc) tar -I 'zstd -10v -T0' -X $sh/zip_exclu -cf "$outfile".tar.zst "$inpfile" ;;
+    zst-ex)  tar -I 'zstd -10v -T0' -X $sh/zip_exclu -cf "$outfile".tar.zst "$inpfile" ;;
     *)       echo "'$1' не может быть упакован с помощью pk()"; exit 1 ;;
   esac
 else
@@ -35,5 +35,5 @@ else
 fi
 
 # ls -ldath "$inpfile".*
-[[ $? -eq 0 ]] && du -sh "$inpfile"* "$inpfile"
+[[ $? -eq 0 ]] && du -sh "$inpfile" && ls -lath "$inpfile"*
 
