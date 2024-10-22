@@ -312,8 +312,8 @@ let mapleader = ","
 map q <Nop>
 " map й q
 nnoremap Q q
-nnoremap qn q
-nnoremap qm @
+nnoremap qm q
+nnoremap q. @
 nnoremap q, @@
 " nnoremap ,m @
 
@@ -701,8 +701,9 @@ if has("nvim")
   tnoremap ;<tab> <C-\><C-n>:wincmd p<CR>
   " tnoremap <A-Left> <C-\><C-N><C-w>h
   tnoremap <C-\> <C-\><C-n><C-w>w
-  tnoremap <A-Down> <C-\><C-N><C-w>w
-  tnoremap <A-Up> <C-\><C-N><C-w>W
+  " Focus next/prev buffer
+  " tnoremap <A-Down> <C-\><C-N><C-w>w
+  " tnoremap <A-Up> <C-\><C-N><C-w>W
   " tnoremap <A-Right> <C-\><C-N><C-w>l
   " inoremap <A-Left> <C-\><C-N><C-w>h
   inoremap <A-Down> <C-\><C-N><C-w>j

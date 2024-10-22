@@ -22,8 +22,8 @@ return {
   'haya14busa/vim-edgemotion', -- great --- Use with <C-j>
   'will133/vim-dirdiff', -- handy
   'jamessan/vim-gnupg', -- good --- vim-only
-  -- 'chrisbra/Colorizer', -- good
   -- 'michaeljsmith/vim-indent-object', -- cool
+  -- 'chrisbra/Colorizer', -- good
   -- 'godlygeek/tabular', -- okay
   -- 'junegunn/vim-easy-align', -- usable
   -- 'vim-scripts/QuickBuf',
@@ -481,8 +481,8 @@ return {
     enabled = false,
     config = function()
       require'bufjump'.setup {
-        forward = "<A-i>",
-        backward = "<A-o>",
+        forward = "<A-Down>",
+        backward = "<A-Up>",
         on_success = nil
       }
     end
