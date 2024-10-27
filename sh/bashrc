@@ -95,7 +95,12 @@ flin() { cat "$dotfiles/gist/1linux" | fzf; }
 # fco() { compgen -c | fzf; }
 xo() { xdg-open "$*" &> /dev/null & disown; }
 get_space_used() { df -BMB "$1" --output=used | tail -1 | grep -o '[0-9]*'; }
-hddsum() { d1=$(get_space_used /ln/mo/blink); d2=$(get_space_used /ln/mo/metal); echo Σ= "$(( d1 + d2 ))" Mb; }
+hddsum() {
+    d1=$(get_space_used /ln/mo/blink)
+    d2=$(get_space_used /ln/mo/metal)
+    d2=$(get_space_used /ln/mo/fast)
+    echo Σ= "$(( d1 + d2 + d3 ))" Mb
+}
 fkill() { ps -ef | sed 1d | fzf -e -m | awk '{print $2}' | xargs kill -${1:-9}; }
 vol() { pactl set-sink-volume 0 "$1"%; }
 glog() { git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'; }
