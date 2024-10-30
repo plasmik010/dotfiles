@@ -401,10 +401,10 @@ nnoremap zj zjzt
 nnoremap zk zkzt
 
 " extend line with minuses
-nnoremap q+ o<Esc>64A-<Esc>kJ0<Esc>60ld$0<Esc>40l
-nnoremap q= o<Esc>64A=<Esc>kJ0<Esc>60ld$0<Esc>40l
+nnoremap q+ o<Esc>64A-<Esc>kJ0<Esc>60ld$0<Esc>10l
+nnoremap q= o<Esc>64A=<Esc>kJ0<Esc>60ld$0<Esc>10l
 " add horiz line
-nnoremap q- o<Esc>64A-<Esc>0<Esc>60ld$0<Esc>40l
+nnoremap q- o<Esc>64A-<Esc>0<Esc>60ld$0<Esc>10l
 " add nice separator line
 " nnoremap qc o<Esc>88A-<Esc>$11hR{{{}}}<Esc>$59h"_d0R<Space><Space><C-o>8l<Space>
 nnoremap q_ o<Esc>88A-<Esc>$11hR{{{}}}<Esc>$59h"_d010lR<Space>

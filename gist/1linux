@@ -128,8 +128,9 @@ exec $SHELL -l # re-login
 su - user1 -c uname # run command as user1
 sudo -H -u user2 echo $HOME # check his home dir
 who -r # show run-level
-systemctl get-default # check default target
+systemctl list-unit-files
 systemctl list-units --type target # list targets
+systemctl get-default # check default target
 BINDIR=$(dirname "$(readlink -fn "$0")") # where are binaries?
 ps aux | grep mydaemon # is mydaemon running?
 gpg --no-default-keyring --keyring /usr/share/keyrings/debian-role-keys.gpg --verify MD5SUMS.sign.txt MD5SUMS.txt
@@ -163,6 +164,7 @@ grub-install --target=x86_64-efi --efi-directory=/media/GLIM --boot-directory=/m
 --restore Grub2:
 mount -t ext4 /dev/sdXN /mnt
 mount -t proc /proc /mnt/proc ; mount --bind /dev /mnt/dev ; mount --bind /sys /mnt/sys
+    mount --bind /sys/firmware/efi/efivars /mnt/sys/firmware/efi/efivars
 chroot /mnt #OR# arch-chroot /mnt
 grub-mkconfig -o /boot/grub/grub.cfg ; grub-install /dev/sdX
 --manual grub boot:
@@ -180,7 +182,8 @@ qemu-system-x86_64 -hda /dev/sdc # check bootloader
 grub2> echo $grub_platform # check efi/bios in grub manual
 ls /sys/firmware/efi # check efi mode
 bootlace.com /dev/sdb
-sync && echo 3 | sudo tee /proc/sys/vm/drop_caches ; sudo qemu-system-x86_64 -m 1024  -enable-kvm -hda /dev/sdc # going nuts
+# going nuts with qemu #
+sync && echo 3 | sudo tee /proc/sys/vm/drop_caches ; sudo qemu-system-x86_64 -m 1024  -enable-kvm -hda /dev/sdc
 sudo qemu-system-x86_64 -m 1024 -enable-kvm -boot d -cdrom new_distro.iso
 sync && echo 3 | sudo tee /proc/sys/vm/drop_caches ; sudo qemu-system-x86_64 -m 1400  -enable-kvm -cpu host -smp 4
 sync && echo 3 | sudo tee /proc/sys/vm/drop_caches ; sudo qemu-system-x86_64 -m 1400  -enable-kvm -cpu host -smp 4  -bios $OVMF -boot menu=on  -drive file=/dev/sdb,format=raw

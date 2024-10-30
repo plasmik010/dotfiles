@@ -79,6 +79,7 @@ return {
                 -- },
                 {
                     icon = ' ',
+                    icon_hl = '@variable',
                     desc = 'New',
                     group = 'Number',
                     action = 'vim.cmd.enew()',
