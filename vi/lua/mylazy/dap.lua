@@ -53,7 +53,9 @@ return {
       H.nmap("zn",     "<cmd> DapContinue <CR>", "Start or continue debugger" )
       H.nmap(",<BS>",  "<cmd> DapContinue <CR>", "Start or continue debugger" )
       H.nmap("<F5>",   "<cmd> DapContinue <CR>", "Start or continue debugger" )
-      H.nmap("<F8>",   "<cmd> DapStepOver <CR>", "Debugger step over" )
+      H.nmap("<F6>",   "<cmd> DapStepInto <CR>", "Debugger step Into" )
+      H.nmap("<F7>",   "<cmd> DapStepOut  <CR>", "Debugger step Out" )
+      H.nmap("<F8>",   "<cmd> DapStepOver <CR>", "Debugger step Over" )
       H.nmap("<F10>",   "<cmd> DapTerminate <CR>", "Debugger exit" )
 
     end
