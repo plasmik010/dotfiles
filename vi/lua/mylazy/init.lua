@@ -526,14 +526,6 @@ return {
   },
 
   {
-    'petertriho/nvim-scrollbar', -- okay
-    config = function()
-      require("scrollbar").setup()
-      H.nmap(',vs', ":ScrollbarToggle<CR>")
-    end
-  },
-
-  {
     'Wansmer/treesj', -- great --- split/join
     opts = {
       use_default_keymaps = false,
@@ -618,6 +610,14 @@ return {
   },
 
   {
+    'petertriho/nvim-scrollbar', -- okay
+    config = function()
+      require("scrollbar").setup()
+      H.nmap(',vs', ":ScrollbarToggle<CR>", "Toggle Scrollbar")
+    end
+  },
+
+  {
     'gorbit99/codewindow.nvim', -- good --- fat minimap
     opts = {
       minimap_width = 16,
@@ -625,7 +625,7 @@ return {
     },
     config = function(_, opts)
       require'codewindow'.setup(opts)
-      H.nmap(',vm', require'codewindow'.toggle_minimap)
+      H.nmap(',vm', require'codewindow'.toggle_minimap, "Toggle side Map")
     end
   },
 

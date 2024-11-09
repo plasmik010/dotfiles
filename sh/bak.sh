@@ -109,7 +109,7 @@ devlabel=$( $LSBLK -l -o LABEL | grep "AMV" | sort | head -1 )
 [[ $devlabel != '' ]] && bakdev=$( $LSBLK -l -o NAME,LABEL | grep $devlabel | head -1 | cut -f1 -d ' ' )
 
 if [[ $bakdev != '' ]]; then
-    echo --- gonna bak port
+    echo --- gonna bak to $devlabel
     flowctrl=true
     if [[ $( mount | grep $devlabel | grep $bakdev -c ) == 0 ]]; then
         echo --- mounting $devlabel ..
@@ -125,7 +125,7 @@ if [[ $bakdev != '' ]]; then
     else
         echo Warning! Port backup failed!
     fi
-    echo -- gonna sync $devlabel
+    echo --- wait $devlabel for to sync
     sync /ln/mo/$devlabel || flowctrl=false
     if [[ $flowctrl == true && $need_umount == true ]]; then
         echo --- unmounting $devlabel ..
