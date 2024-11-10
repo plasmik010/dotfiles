@@ -13,6 +13,7 @@ mkdir -p respic
 
 if [ $1 == "100%" ]; then
     res_opt=""
+    echo "Not gonna resize."
 else
     res_opt="-resize $1"
 fi

@@ -47,6 +47,7 @@ end
 
 -- H.nmap('z<up>', vim.diagnostic.goto_prev)
 H.nmap(',R', vim.lsp.buf.rename, "LSP Rename")
+H.nmap(',r', vim.lsp.buf.rename, "LSP Rename")
 H.nmap(',A', vim.lsp.buf.code_action, "LSP Action")
 H.nmap('gd', vim.lsp.buf.definition)
 H.nmap('gD', vim.lsp.buf.declaration)

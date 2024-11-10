@@ -48,7 +48,7 @@ alias kr='kitty @ set-colors -a "$HOME"/.config/kitty/current-theme.conf "$sh"/c
 alias chmodre='find . -type f -exec chmod 644 {} \;'
 alias ncdu='ncdu --color off'
 # alias ncdu='ncdu --color off --graph-style hash'
-alias lm='df -h --output=source,fstype,avail,pcent,target -x tmpfs -x devtmpfs'
+alias lm='df -h --output=source,fstype,avail,pcent,target -x tmpfs -x devtmpfs | grep -v squashfs'
 alias wlm='watch -n 1 df -BMB --output=source,avail,pcent,target'
 alias lb='$LSBLK -o NAME,FSTYPE,LABEL,SIZE,MOUNTPOINT,FSUSE% | grep "sd\|nvme" --color=none'
 alias wlb='watch -n .4 $LSBLK -o NAME,FSTYPE,LABEL,SIZE,MOUNTPOINT'

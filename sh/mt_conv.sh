@@ -3,7 +3,7 @@
 
 [ -z $Nthr ] && Nthr=8
 [ -z $CODEC ] && CODEC=flac
-TMPF=/ln/ho/tmpfifo
+TMPF=/tmp/tmpfifo__mt_conv
 DEST=/ln/fast/_dont_care_/enc
 DEST_2=/ln/fast/_dont_care_/enc_$CODEC
 ERRLOG=/tmp/enc.$CODEC.errors.log
