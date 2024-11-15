@@ -1,7 +1,7 @@
 #!/bin/bash
 # Turn current system into handy environment for me!
 
-[[ -z $MYGITDIR ]] && export MYGITDIR=$HOME/gd
+[[ -z $MYGITDIR ]] && export MYGITDIR=$HOME/g
 echo gitdir $MYGITDIR
 dots=$MYGITDIR/dotfiles
 echo local dots $dots
@@ -95,7 +95,7 @@ mkdir -p /ln/ho/.lo/cur
 ln -sfn /ln/ho/.lo lo
 [ -d mo ] || ln -sn  /mnt mo
 ln -sfn /ln/ho/.config co
-ln -sfn $git gd
+ln -sfn $git /ln/ho/g
 ln -sfn /ln/gd/dotfiles dots
 ln -sfn /ln/gd/dotfiles/vi vi
 ln -sfn /ln/mo/blink bl

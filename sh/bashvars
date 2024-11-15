@@ -2,7 +2,7 @@
 
 # Crucial locations #
 # Note: $sh and $dotfiles should by now be sourced at $HOME/.bashrc
-export git=$HOME/gd
+export git=$HOME/g
 [[ ! -d $git ]] && [[ -d $sh ]] && [[ -d $(realpath "$sh/../../dotfiles") ]] &&
     export git=$(realpath "$sh/../..") && echo "$"git is a guess at $git
 ( [[ -z $dotfiles ]] || [[ ! -d $dotfiles ]] ) && [[ -d $git ]] && [[ -d $(realpath "$git/dotfiles") ]] &&
