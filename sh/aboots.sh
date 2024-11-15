@@ -47,8 +47,8 @@ paclist2="cmake unzip curl luarocks npm ripgrep neovim"
 if [[ $DIS_ARCH == true ]]; then
     paclist3="mlocate fd ninja python-pip python-pynvim"
 elif [[ $DIS_DEB == true ]]; then
-    paclist3="plocate fd-find ninja-build python3-pip python3-pynvim ruby-dev"
-    paclist4="build-essential dmenu rofi wmctrl xdotool vim-gtk3 kitty pavucontrol htop btop vifm fdisk gparted nnn thunar bash-completion plocate sxhkd fonts-hack ncdu xclip zathura zathura-djvu gitg mpv xinput feh rsync inxi lshw mediainfo ripgrep silversearcher-ag libnotify-bin imagemagick efibootmgr unrar git make cmake curl zstd zip gparted strace speedcrunch udevil qalc qemu-system fd-find python3-neovim nitrogen lxappearance dunst tmux rfkill ncal cpupower-gui picom scrot cpulimit fonts-firacode redshift python-is-python3 fonts-terminus fonts-liberation earlyoom unzip evince testdisk hardinfo nomacs "
+    paclist3="plocate fd-find ninja-build pipx python3-pip python3-pynvim ruby-dev"
+    paclist4="build-essential dmenu rofi wmctrl xdotool vim-gtk3 kitty pavucontrol htop btop vifm fdisk gparted nnn thunar bash-completion plocate sxhkd fonts-hack ncdu xclip zathura zathura-djvu gitg mpv xinput feh rsync inxi lshw mediainfo ripgrep silversearcher-ag libnotify-bin imagemagick efibootmgr unrar git make cmake curl zstd zip gparted strace speedcrunch udevil qalc qemu-system fd-find python3-neovim nitrogen lxappearance dunst tmux tmuxp rfkill ncal cpupower-gui picom scrot cpulimit fonts-firacode redshift python-is-python3 fonts-terminus fonts-liberation earlyoom unzip evince testdisk hardinfo nomacs "
     paclist5="fonts-terminus fonts-liberation fonts-noto fonts-dejavu fonts-firacode"
 fi
 
@@ -94,6 +94,7 @@ mkdir -p /ln/ho/.lo
 mkdir -p /ln/ho/.lo/cur
 ln -sfn /ln/ho/.lo lo
 [ -d mo ] || ln -sn  /mnt mo
+[ -d gd ] || ln -sn $git gd
 ln -sfn /ln/ho/.config co
 ln -sfn /ln/gd/dotfiles dots
 ln -sfn /ln/gd/dotfiles/vi vi
