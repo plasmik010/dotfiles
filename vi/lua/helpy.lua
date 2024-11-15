@@ -251,22 +251,24 @@ function H.mapfuncwrap(input)
 end
 
 function H.nmap(keys, func, desc)
-  desc = desc or " "
-  -- print'omg'
-  vim.keymap.set('n', keys, H.mapfuncwrap(func), { desc = desc, noremap = true })
+  vim.keymap.set('n', keys, H.mapfuncwrap(func), { desc = desc or " ", noremap = true })
+end
+
+function H.tmap(keys, func, desc)
+  vim.keymap.set('t', keys, H.mapfuncwrap(func), { desc = desc or " ", noremap = true })
 end
 
 function H.snmap(keys, func, desc)
-  vim.keymap.set('n', keys, func, { desc = desc, noremap = true, silent = true })
+  vim.keymap.set('n', keys, func, { desc = desc or " ", noremap = true, silent = true })
 end
 function H.xnmap(keys, func, desc)
-  vim.keymap.set({'n','x'}, keys, func, { desc = desc, noremap = true })
+  vim.keymap.set({'n','x'}, keys, func, { desc = desc or " ", noremap = true })
 end
 function H.vmap(keys, func, desc)
-  vim.keymap.set({'v'}, keys, func, { desc = desc, noremap = true })
+  vim.keymap.set({'v'}, keys, func, { desc = desc or " ", noremap = true })
 end
 function H.nvmap(keys, func, desc)
-  vim.keymap.set({'n','v'}, keys, func, { desc = desc, noremap = true })
+  vim.keymap.set({'n','v'}, keys, func, { desc = desc or " ", noremap = true })
 end
 
 -- local hotfun = {}

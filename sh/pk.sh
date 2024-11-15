@@ -14,7 +14,7 @@ outfile_mask="$outfile"
 
 if [[ $PK_ADDTS == 1 ]]; then
   outfile="$outfile-"$(date +%Y-%m%d-%H%M%S)
-  outfile_mask="$outfile-"
+  outfile_mask="$outfile"
 fi
 
 echo "Gonna pack $inpfile --> $outfile.$1"
@@ -37,5 +37,5 @@ else
 fi
 
 # ls -ldath "$inpfile".*
-[[ $? -eq 0 ]] && du -sh "$inpfile" && ls -sath1 "$outfile_mask"
+[[ $? -eq 0 ]] && du -sh "$inpfile" && ls -sath1 "$outfile_mask"*
 

@@ -192,7 +192,7 @@ return {
     'chentoast/marks.nvim', -- great --- better marks and more
     opts = {
       default_mappings = false,
-      builtin_marks = { "^" }, -- which builtin marks to show
+      -- builtin_marks = { "^" }, -- which builtin marks to show
       cyclic = true,
       force_write_shada = true, -- whether the shada file is updated after modifying uppercase marks
       refresh_interval = 250,
@@ -514,8 +514,6 @@ return {
       H.nmap('g<BS>', "<cmd>SymbolsOutline<CR>", "Tree-like view for symbols")
     end
   },
-
-  'gennaro-tedesco/nvim-peekup', -- so-so --- clipboard history,  usage:""
 
   {
     'trmckay/based.nvim', --- decode hex and octal to decimal
@@ -908,9 +906,20 @@ return {
   { 'prochri/telescope-all-recent.nvim', dependencies = {'kkharji/sqlite.lua'} },
 
   {
-    'AckslD/nvim-neoclip.lua', -- problem
+    'AckslD/nvim-neoclip.lua', -- dead
     dependencies = {'nvim-telescope/telescope.nvim'},
     config = true,
+  },
+
+  {
+      "ptdewey/yankbank-nvim", -- usage: press <">
+      dependencies = "kkharji/sqlite.lua",
+      config = true,
+      -- config = function()
+      --     require('yankbank').setup({
+          --     persist_type = "sqlite",
+          -- })
+      -- end,
   },
 
   {
@@ -978,6 +987,8 @@ return {
 
   -- 'L3MON4D3/LuaSnip', -- problems
   -- 'saadparwaiz1/cmp_luasnip',
+
+  -- "gbprod/yanky.nvim",
 
 
 ---------- Colors/Themes -----------------------{{{}}}------

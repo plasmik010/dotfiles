@@ -294,3 +294,16 @@ int permaAssert(bool statement, const char* comment) {
 #endif
 }
 
+int* dyn_array = (int*)malloc(100*sizeof(int));
+free(dyn_array);
+dyn_array[5] = 0; // clang warning
+                  //
+std::vector<int> vv {1,2,3,4,5};
+vv[1] = 0;
+
+int arr[10] = {};
+arr[1] = 0;
+
+std::array<int,10> cpparr{};
+cpparr[1] = 0;
+

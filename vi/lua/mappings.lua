@@ -48,7 +48,7 @@ end
 -- H.nmap('z<up>', vim.diagnostic.goto_prev)
 H.nmap(',R', vim.lsp.buf.rename, "LSP Rename")
 H.nmap(',r', vim.lsp.buf.rename, "LSP Rename")
-H.nmap(',A', vim.lsp.buf.code_action, "LSP Action")
+H.nmap(',a', vim.lsp.buf.code_action, "LSP Action")
 H.nmap('gd', vim.lsp.buf.definition)
 H.nmap('gD', vim.lsp.buf.declaration)
 
@@ -110,6 +110,11 @@ H.nmap(',<TAB>', ":Dashboard<CR>", "Dashboard")
 H.nmap(',v,', H.eval_paragraph, "Evaluate code for Neovim")
 H.nmap(',co', require'telescope.builtin'.colorscheme, "Select colorscheme")
 -- H.nvmap('qe', ":SnipRun<CR>", "Evaluate code")
+
+H.tmap(',ta', "<cmd>ToggleTermToggleAll<CR>", "ToggleTerm All")
+H.nmap(',ta', "<cmd>ToggleTermToggleAll<CR>", "ToggleTerm All")
+H.nmap(',tv', "<cmd>ToggleTerm direction=vertical<CR>", "ToggleTerm Vertical")
+vim.cmd[[ nnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>  ]]
 
 ---------- Finding / Telescope -----------------{{{}}}------
 
@@ -319,10 +324,4 @@ if package.loaded['cinnamon'] then
   vim.keymap.set('n', 'gd', "<Cmd>lua Scroll('definition')<CR>")
   vim.keymap.set('n', 'gD', "<Cmd>lua Scroll('declaration')<CR>")
 end ]]
-
--- vim.keymap.set('n', 'A-;', "<Cmd>exe Toggleterm<CR>")
--- nnoremap <silent><A-;> <Cmd>exe v:count1 . "ToggleTerm"<CR>
--- nnoremap <silent><A-;> <Cmd>exe "ToggleTerm"<CR>
--- tnoremap <silent><A-;> <C-\><C-n>:ToggleTermToggleAll<CR>
--- HINT -- vim.keymap.set('n', keys, func, { desc = desc, noremap = true })
 
