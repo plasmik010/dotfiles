@@ -7,7 +7,7 @@ export git=$HOME/g
     export git=$(realpath "$sh/../..") && echo "$"git is a guess at $git
 ( [[ -z $dotfiles ]] || [[ ! -d $dotfiles ]] ) && [[ -d $git ]] && [[ -d $(realpath "$git/dotfiles") ]] &&
     export dotfiles=$(realpath "$git/dotfiles") &&
-    echo "$"dotfiles were located at $dotfiles
+    echo NOTICE: "$"dotfiles were located at $dotfiles
 [[ -d $dotfiles ]] || echo  WARNING! CANT FIND DOTFILES!
 [ -d /ln/lo/cur ] && export loc=/ln/lo/cur || export loc=$HOME/.lo/cur
 export vi=$dotfiles/vi
