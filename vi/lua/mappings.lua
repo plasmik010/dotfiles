@@ -55,7 +55,8 @@ H.nmap('gD', vim.lsp.buf.declaration)
 H.nmap('m;', ":BookmarksListAll<CR>")
 
 
-H.nmap(',,s', ":Telescope persisted<CR>", "Select Session")
+H.nmap(',,s', "<cmd>Telescope persisted<CR>", "Select Session")
+H.nmap(',S', "<cmd>SessionStop<CR><cmd>echo 'Will_not_save_session'<CR>", "Stop Session Saving")
 -- H.nmap(',,q', function() b=require'nvim-possession'.update() print(1,b) if b then vim.cmd[[wqa]] end end )
 -- H.nmap(',po', function() require'nvim-possession'.update() end, "Session Update")
 -- H.nmap(',pl', function() require'nvim-possession'.list() end, "Session Open")
