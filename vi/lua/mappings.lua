@@ -12,13 +12,13 @@ H.nmap(
 )
 -- vim.keymap.set('n', "gl", "<cmd>let bn=bufnr('%') <bar> let pos=getpos('.') <bar> wincmd p <bar> exec 'b' . bn <bar> call setpos('.',pos) <bar> lua vim.lsp.buf.definition()<CR>" )
 H.nmap(
-    'g,',
+    'g<Bslash>',
     function()
         print(0)
         H.mirror_buf_to_prev_window()
         vim.lsp.buf.definition()
     end,
-    "lsp Definition in prev window"
+    "Go to Definition in prev window"
 )
 
 H.nmap('gs', vim.lsp.buf.document_symbol)
@@ -192,6 +192,7 @@ H.nmap(
         search_dirs = {
             "/ln/ho/bb",
             "/ln/gd/code_misc",
+            "/ln/mo/hot/t",
             os.getenv("loc"),
             os.getenv("dotfiles"),
             os.getenv("tt"),

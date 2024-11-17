@@ -40,6 +40,6 @@ df -BGB --output=source,fstype,avail,pcent,target -x tmpfs -x devtmpfs
 # $LSBLK -o NAME,LABEL,MOUNTPOINT,SIZE,FSUSE% | grep "sd\|nvme" --color=none ; echo
 
 # Backup something else
-echo -- Starting bak.sh --
+echo -e "\n-- Starting bak.sh --"
 DONTOVERWRITE=1 bak.sh
 

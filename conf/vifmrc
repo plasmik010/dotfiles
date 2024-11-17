@@ -43,7 +43,7 @@ command! amou : let $NEW_MP = term('a=$(SELECTOR="fzf -e --height 14" amount.sh 
             \| exec system('[[ -d $NEW_MP ]] && echo cd || echo echo') fnameescape($NEW_MP)
 
 command! ownSEL :!sudo chown 1000:100 %f
-command! chmodautoSEL :! find %f -type f -exec chmod 644 {} \;
+command! chmodAutoSel :! find %f -type f -exec chmod 644 {} \;
 
 """"""""""""""""""""""""
 ""     Mappings:      ""
@@ -193,6 +193,7 @@ nnoremap c<Space> :!mv --backup=numbered  %f<space>
 nnoremap ci :move /ln/hh/imgdl1/<cr>
 nnoremap aj :!touch %f --date=now<cr>j
 nnoremap cn :clone<cr>
+nnoremap c. :chmodAutoSel<CR>
 nnoremap al :!ln -s  %d/%c %D/%c<cr>
 nnoremap ah :!ln -sr %d/%c %D/%c
 nnoremap ap al

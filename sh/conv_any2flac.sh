@@ -17,9 +17,14 @@ c=$(ls | grep -c '\.cue$')
 w=$(ls | grep -c '\.wav$')
 m=$(ls | grep -c '\.mp3$')
 v=$(ls | grep -c '\.ogg$')
+a=$(ls | grep -c '\.ape$')
 # echo f c m w $f $c $m $w
 
 echo "--now @ $src"
+
+if [ $a -gt 0 ]; then
+    echo "Warning! Ape format is not supported."
+fi
 
 if [ $m -gt 0 ]; then
     echo "  --Copy all mp3's"

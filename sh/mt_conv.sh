@@ -1,8 +1,9 @@
 #!/bin/bash
 # Convert music files. Multithreaded to N threads!
 
-[ -z $Nthr ] && Nthr=8
+[ -z $NT ] && NT=$(nproc)
 [ -z $CODEC ] && CODEC=flac
+
 TMPF=/tmp/tmpfifo__mt_conv
 DEST=/ln/fast/_dont_care_/enc
 DEST_2=/ln/fast/_dont_care_/enc_$CODEC
@@ -43,7 +44,7 @@ function conv {
 cat /ln/ho/.mus-favourites | while read podgon; do
 let $[progres++];
 notify-send "progr is $progres in $counter" -t 600
-if [ $counter -lt $Nthr ]; then # we are under the limit
+if [ $counter -lt $NT ]; then # we are under the limit
     # { $CONV "$podgon" "$DEST"; echo 'done' > $TMPF; } &
     { conv "$podgon"; } &
     let $[counter++];
@@ -53,7 +54,7 @@ else
     # { $CONV "$podgon" "$DEST"; echo 'done' > $TMPF; } &
 fi
 done
-# i=i%${Nthr}; ((i++==0)) && wait -n
+# i=i%${NT}; ((i++==0)) && wait -n
 
 cat $TMPF > /dev/null # let all the background processes end
 rm $TMPF # remove fifo
