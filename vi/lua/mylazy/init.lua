@@ -985,8 +985,8 @@ return {
   -- 'altermo/ultimate-autopair.nvim',
   -- 'nyngwang/murmur.lua', -- problem
 
-  -- 'L3MON4D3/LuaSnip', -- problems
-  -- 'saadparwaiz1/cmp_luasnip',
+  'L3MON4D3/LuaSnip', -- problems
+  'saadparwaiz1/cmp_luasnip',
 
   -- "gbprod/yanky.nvim",
 

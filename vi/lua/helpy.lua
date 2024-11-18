@@ -250,6 +250,7 @@ function H.mapfuncwrap(input)
   end
 end
 
+
 function H.nmap(keys, func, desc)
   vim.keymap.set('n', keys, H.mapfuncwrap(func), { desc = desc or " ", noremap = true })
 end
