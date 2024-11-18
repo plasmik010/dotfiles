@@ -340,8 +340,14 @@ fi
 if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
 # END_KITTY_SHELL_INTEGRATION
 
+# Integrate zoxide
+type -f zoxide &>/dev/null &&
+    # zoxide is present, so setup it
+    eval "$(zoxide init bash)"
+
 # Integrate z.sh by rupa
 type -f z &>/dev/null ||
+    # z is not active, so try activate it
     if [[ -r /usr/share/z/z.sh ]]; then
         source /usr/share/z/z.sh
     elif [[ -r $git/z/z.sh ]]; then
