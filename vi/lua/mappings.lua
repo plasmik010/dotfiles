@@ -8,11 +8,11 @@ vim.api.nvim_command('nnoremap <silent> gh <cmd>ClangdSwitchSourceHeader<CR>')
 H.nmap(
     'gv',
     function() vim.cmd('vsplit') vim.lsp.buf.definition() end,
-    "lsp Definition in vert split"
+    "Go to definition in vert split"
 )
 -- vim.keymap.set('n', "gl", "<cmd>let bn=bufnr('%') <bar> let pos=getpos('.') <bar> wincmd p <bar> exec 'b' . bn <bar> call setpos('.',pos) <bar> lua vim.lsp.buf.definition()<CR>" )
 H.nmap(
-    'g<Bslash>',
+    'gl',
     function()
         print(0)
         H.mirror_buf_to_prev_window()
@@ -25,8 +25,8 @@ H.nmap('gs', vim.lsp.buf.document_symbol)
 H.nmap('gS', vim.lsp.buf.signature_help)
 H.nmap('gr', vim.lsp.buf.references)
 -- H.nmap('gw', vim.lsp.buf.workspace_symbol)
-H.nmap('gy', vim.lsp.buf.type_definition, "lsp type definition")
-H.nmap('gI', vim.lsp.buf.implementation, "lsp Implementation")
+H.nmap('gy', vim.lsp.buf.type_definition, "Go to type definition")
+H.nmap('gI', vim.lsp.buf.implementation, "Go to Implementation")
 H.nmap(',k', vim.lsp.buf.hover, "Hover")
 
 -- H.nmap('z<Down>', function() vim.lsp.diagnostic.goto_next() end)
@@ -46,7 +46,7 @@ do
 end
 
 -- H.nmap('z<up>', vim.diagnostic.goto_prev)
-H.nmap(',R', vim.lsp.buf.rename, "LSP Rename")
+-- H.nmap(',R', vim.lsp.buf.rename, "LSP Rename")
 H.nmap(',r', vim.lsp.buf.rename, "LSP Rename")
 H.nmap(',a', vim.lsp.buf.code_action, "LSP Action")
 H.nmap('gd', vim.lsp.buf.definition)

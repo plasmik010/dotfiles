@@ -397,7 +397,7 @@ return {
   },
 
   {
-    'folke/which-key.nvim', -- good/problem --- display key mappings interactively
+    'folke/which-key.nvim', -- good --- display key mappings interactively
     -- lazy = false,
     -- priority = 1000,
     opts = {
@@ -806,7 +806,7 @@ return {
       local gs = require'gitsigns'
       gs.setup()
       gs.toggle_signs(false) -- switch off on start
-      require("scrollbar.handlers.gitsigns").setup() -- take it to scrollbar
+      -- require("scrollbar.handlers.gitsigns").setup() -- take it to scrollbar
       H.nmap(',vg', gs.toggle_signs, "Show git highlight column")
     -- map('v', '<leader>hs', function() gitsigns.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
     -- map('v', '<leader>hr', function() gitsigns.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
