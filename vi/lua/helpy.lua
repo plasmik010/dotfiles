@@ -327,5 +327,6 @@ function H.is_available(plugin)
   return lazy_config_avail and lazy_config.plugins[plugin] ~= nil
 end
 
+
 -- return H
 

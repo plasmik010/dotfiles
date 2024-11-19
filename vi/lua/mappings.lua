@@ -238,11 +238,12 @@ H.nmap(
     "Telescope live_grep git root"
 )
 
-H.nmap(',fc', ":Telescope current_buffer_fuzzy_find theme=ivy<CR>", "Telescope Current buffer")
-H.nmap(',ff', ":Telescope find_files theme=ivy<CR>", "Telescope Find Files")
-H.nmap('qr',  ":Telescope lsp_references theme=ivy<CR>")
-H.nmap(',fs', ":Telescope lsp_document_symbols<CR>", "Telescope LSP file symbols")
-H.nmap('qs',  ":Telescope lsp_dynamic_workspace_symbols<CR>", "Telescope dynamic symbols")
+H.nmap(",fc", ":Telescope current_buffer_fuzzy_find theme=ivy<CR>", "Telescope Current buffer")
+H.nmap(",ff", ":Telescope find_files theme=ivy<CR>", "Telescope Find Files")
+H.nmap(",fd", ":Telescope zoxide list<CR>", "Telescope Zoxide")
+H.nmap("qr",  ":Telescope lsp_references theme=ivy<CR>")
+H.nmap(",fs", ":Telescope lsp_document_symbols<CR>", "Telescope LSP file symbols")
+H.nmap("qs",  ":Telescope lsp_dynamic_workspace_symbols<CR>", "Telescope dynamic symbols")
 
 -------- Neotree -----------------------------{{{}}}------
 

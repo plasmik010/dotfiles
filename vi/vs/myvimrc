@@ -1020,7 +1020,8 @@ menu tagi.dirDeps :call UpdCtagsDirDeps()<CR>
 menu tagi.gitDeps :call UpdCtagsGitDeps()<CR>
 menu tagi.git     :call UpdCtagsGit()<CR>
 menu make.one  :set makeprg=./onemake.sh\ build<CR>
-map z<tab> :emenu make.<tab>
+nnoremap ,m :emenu make.one
+" map z<tab> :emenu make.<tab>
 
 """"""""""""""""""""""""""""""""
 ""          Macros:           ""

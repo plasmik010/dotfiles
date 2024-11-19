@@ -54,6 +54,27 @@ return {
         }
       },
       extensions = {
+
+        zoxide = {
+          prompt_title = "[ Walking on the shoulders of TJ ]",
+          mappings = {
+            default = {
+              after_action = function(selection)
+                print("Update to (" .. selection.z_score .. ") " .. selection.path)
+              end
+            },
+            ["<C-s>"] = {
+              before_action = function(selection) print("before C-s") end,
+              action = function(selection)
+                vim.cmd.edit(selection.path)
+              end
+            },
+            -- Opens the selected entry in a new split
+            -- ["<C-q>"] = { action = z_utils.create_basic_command("split") },
+            -- z_utils = require("telescope._extensions.zoxide.utils")
+          },
+        },
+
         persisted = {
           layout_config = { width = 0.55, height = 0.55 }
         },
@@ -69,6 +90,7 @@ return {
       require'telescope'.setup(opts)
       require'telescope'.load_extension('fzf')
       require'telescope'.load_extension('persisted')
+      require'telescope'.load_extension('zoxide')
     end
   },
   {
@@ -609,6 +631,7 @@ return {
 
   {
     'petertriho/nvim-scrollbar', -- okay
+    enabled = false,
     config = function()
       require("scrollbar").setup()
       H.nmap(',vs', ":ScrollbarToggle<CR>", "Toggle Scrollbar")
@@ -698,6 +721,10 @@ return {
     'olimorris/persisted.nvim',
     -- lazy = false,
     config = true,
+  },
+
+  {
+    "jvgrootveld/telescope-zoxide"
   },
 
   {
