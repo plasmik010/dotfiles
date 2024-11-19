@@ -88,7 +88,7 @@ zz() { du -csh $*; arcname=$(echo "$*" | tr / _); tar -I 'zstd -10 -T0' -cf "$ar
 z7() { du -csh $*; arcname=$(echo "$*" | tr / _); 7z a -mx=3 "$arcname".7z "$*"; echo; du -sh "$arcname".7z; }
 # local IFS="_";
 c() { a=wd${1}; cd ${!a}; }
-cl() { rp=$(realpath "$*");
+cl() { arg="$*"; rp=$(realpath ${!arg}); # echo arg is "$*" ; echo rp is _ $rp _
     { [[ -d $rp ]] && cd "$rp"; } ||
     { [[ -f $rp ]] && cd $(dirname "$rp"); } ||
         echo "No such file or dir path!"; }
