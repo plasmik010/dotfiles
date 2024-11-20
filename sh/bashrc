@@ -343,8 +343,11 @@ if type -f zoxide &>/dev/null; then
     eval "$(zoxide init bash)"
 else
     # Integrate z.sh by rupa
-    [[ -r /usr/share/z/z.sh ]] && source /usr/share/z/z.sh
-    [[ -r $git/z/z.sh ]] && source $git/z/z.sh
+    if [[ -r /usr/share/z/z.sh ]]; then
+        source /usr/share/z/z.sh
+    elif [[ -r $git/z/z.sh ]]; then
+        source $git/z/z.sh
+    fi
 fi
 
 n()
