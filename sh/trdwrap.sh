@@ -1,9 +1,12 @@
-# Make Transmission spam journal less
+#!/bin/bash
+# Launch Transmission. But prevent it from spam journalctl
 
 # killall -v transmission-daemon 2> /dev/null
-  pgrep transmission-daemon | grep . || transmission-remote 9090 --exit
+pgrep transmission-daemon | grep . || transmission-remote 9090 --exit
 sleep 1
+
 notify-send "(re-)Starting transmission-daemon…"
+
 transmission-daemon --foreground --log-info 2>&1 | while read line; do
 	echo $line |
 		grep -v "announcer.c:\|platform.c:\|announce done (tr-dht.c:" |

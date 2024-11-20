@@ -1,18 +1,18 @@
 #!/bin/bash
 
-[[ -z $MSYSTEM_PREFIX ]] &&
-{
-#PS1='[\u@\h \W]\$ '
-#PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\]'
-#PS1="\[$(tput bold)\]\[$(tput setaf 7)\]┌[\d][\t][\u@\h][\W]\n└\$ \[$(tput sgr0)\]"
-#PS1='\[\033[01;32m\]☿\[\e[38m\]\[\033[00m\] \w\[\e[m\] \[\033[01;34m\]\$\[\033[00m\] '
-#PS1=$'\[$(tput bold)\]\[$(tput setaf 2)\]\xe2\x98\xbf[\W]\$ \[$(tput sgr0)\]'
-#PS1=$'\[$(tput bold)\]\[$(tput setaf 46)\]\u \W \$ \[$(tput sgr0)\]'
-#PS1=$'\[$(tput bold)\]\[$(tput setaf 113)\]\u\[$(tput setaf 2)\] \W \$ \[$(tput sgr0)\]'
-#PS1='\[\e]0;\w\a\]\n\[\e[32m\]\u@\h \[\e[33m\]\w\[\e[0m\]\n\$'
-#PS1="\[\e]0;\h: \a\]$PS1"
-PS1=$'\[$(tput bold)\]\[$(tput setaf 34)\]\u@\h\[$(tput setaf 78)\] \W \[$(tput setaf 34)\]\$ \[$(tput sgr0)\]'
-}
+# Are we outside msys? Set terminal prompt then.
+if [[ -z $MSYSTEM_PREFIX ]]; then
+    #PS1='[\u@\h \W]\$ '
+    #PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\]'
+    #PS1="\[$(tput bold)\]\[$(tput setaf 7)\]┌[\d][\t][\u@\h][\W]\n└\$ \[$(tput sgr0)\]"
+    #PS1='\[\033[01;32m\]☿\[\e[38m\]\[\033[00m\] \w\[\e[m\] \[\033[01;34m\]\$\[\033[00m\] '
+    #PS1=$'\[$(tput bold)\]\[$(tput setaf 2)\]\xe2\x98\xbf[\W]\$ \[$(tput sgr0)\]'
+    #PS1=$'\[$(tput bold)\]\[$(tput setaf 46)\]\u \W \$ \[$(tput sgr0)\]'
+    #PS1=$'\[$(tput bold)\]\[$(tput setaf 113)\]\u\[$(tput setaf 2)\] \W \$ \[$(tput sgr0)\]'
+    #PS1='\[\e]0;\w\a\]\n\[\e[32m\]\u@\h \[\e[33m\]\w\[\e[0m\]\n\$'
+    #PS1="\[\e]0;\h: \a\]$PS1"
+    PS1=$'\[$(tput bold)\]\[$(tput setaf 34)\]\u@\h\[$(tput setaf 78)\] \W \[$(tput setaf 34)\]\$ \[$(tput sgr0)\]'
+fi
 
 # Aliases #
 alias sc="systemctl "
@@ -23,7 +23,6 @@ alias v='VIMINIT="source $vi/vimrc_main" nvim'
 alias vv='VIMINIT="source $vi/vimrc_main" vim'
 alias vr='virpc'
 alias fm='vifm'
-#alias tm='cd; tmux new -s defs'
 alias tm='cd; tmux -Lrandom attach || tmuxp load $dotfiles/conf/tmuxp.yaml -Lrandom -f $dotfiles/conf/tmux.conf'
 alias va='MODE=last nvimrpc.py'
 alias ll='ls -la'
@@ -86,7 +85,6 @@ title() { echo -ne "\033]0;$*\007"; }
 # Functions #
 zz() { du -csh $*; arcname=$(echo "$*" | tr / _); tar -I 'zstd -10 -T0' -cf "$arcname".tar.zst --exclude='.git' --exclude='tags' $*; du -sh "$arcname".tar.zst; }
 z7() { du -csh $*; arcname=$(echo "$*" | tr / _); 7z a -mx=3 "$arcname".7z "$*"; echo; du -sh "$arcname".7z; }
-# local IFS="_";
 c() { a=wd${1}; cd ${!a}; }
 cl() { arg="$*"; rp=$(realpath ${!arg}); # echo arg is "$*" ; echo rp is _ $rp _
     { [[ -d $rp ]] && cd "$rp"; } ||
@@ -340,19 +338,14 @@ fi
 if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
 # END_KITTY_SHELL_INTEGRATION
 
-# Integrate zoxide
-type -f zoxide &>/dev/null &&
-    # zoxide is present, so setup it
+if type -f zoxide &>/dev/null; then
+    # Integrate zoxide
     eval "$(zoxide init bash)"
-
-# Integrate z.sh by rupa
-type -f z &>/dev/null ||
-    # z is not active, so try activate it
-    if [[ -r /usr/share/z/z.sh ]]; then
-        source /usr/share/z/z.sh
-    elif [[ -r $git/z/z.sh ]]; then
-        source $git/z/z.sh
-    fi
+else
+    # Integrate z.sh by rupa
+    [[ -r /usr/share/z/z.sh ]] && source /usr/share/z/z.sh
+    [[ -r $git/z/z.sh ]] && source $git/z/z.sh
+fi
 
 n()
 {
