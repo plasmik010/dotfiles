@@ -16,7 +16,7 @@ return {
   -- 'tpope/vim-sleuth',
   'tpope/vim-repeat', -- handy
   'tpope/vim-eunuch', -- handy
-  'tpope/vim-fugitive', -- handy
+  -- 'tpope/vim-fugitive', -- handy
   'jlanzarotta/bufexplorer', -- based
   'MattesGroeger/vim-bookmarks', -- great
   'haya14busa/vim-edgemotion', -- great --- Use with <C-j>
@@ -785,7 +785,7 @@ return {
   'pocco81/true-zen.nvim',
 
   {
-    'rbong/vim-flog', --- provides git graph
+    'rbong/vim-flog', --- provides git graph -- weird
     dependencies = 'tpope/vim-fugitive',
   },
 

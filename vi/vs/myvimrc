@@ -522,7 +522,8 @@ nnoremap a- :wincmd v \| e %:p:h<CR>
 " nnoremap a-  : split <bar> exec "normal -"<CR>
 " nnoremap a_  :vsplit <bar> exec "normal -"<CR>
 nnoremap as :split #<CR>
-nnoremap av :vsplit #<CR>
+" nnoremap av :if bufexists(bufnr('#')) <or> 1 <bar> vsplit # <bar> else <bar> new <bar> endif<CR>
+nnoremap av :if bufexists(bufnr('#')) && !empty(expand('#')) <bar> vsplit # <bar> else <bar> new <bar> endif<CR>
 nnoremap aS :new<CR>
 nnoremap aV :vnew<CR>
 nnoremap <C-w>S :vsplit<CR>
