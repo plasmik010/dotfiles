@@ -1,0 +1,3 @@
+#!/bin/bash
+xset r rate 220 33 # set keyboard repeat rate
+

@@ -3,8 +3,7 @@
 
 cd
 
-desk_height=$( xdpyinfo | grep dimensions | cut -d ' ' -f 7 | cut -d x -f 2 )
-[[ desk_height -gt 1200 ]] && export HIDPI=1 || export HIDPI=0
+source $sh/get_hidpi.sh
 
 source ~/.bashrc
 
@@ -21,7 +20,7 @@ source ~/.bashrc
 xset dpms 1200 0 0
 xset s 0 0
 xset -b
-xset r rate 220 33 # set keyboard repeat rate
+source $sh/set_kb_rate
 
 sxd.sh &
 # killall sxhkd; sxhkd -c ~/.sh/sxhkdrc &

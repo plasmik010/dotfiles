@@ -5,7 +5,7 @@
 
 #dmenu_cmd="dmenu $DMENU_OPTIONS"
 terminal="$TERMINAL_CMD"
-max_recent=199 # Number of recent commands to track
+max_recent=499 # Number of recent commands to track
 
 cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/dmenu-recent"
 recent_cache="$cache_dir/recent"

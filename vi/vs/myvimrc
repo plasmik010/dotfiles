@@ -654,7 +654,7 @@ nnoremap ,gh :call FocusBufOrDo('sh_history','e $HOME/.bash_history')<CR>G
 nnoremap ,gl :call FocusBufOrDo('1linux','e $dotfiles/gist/1linux')<CR>
 nnoremap ,ge :call FocusBufOrDo('1code','e $dotfiles/gist/1code.c')<CR>
 " nnoremap q/  :call FocusWindowOrDo('silly.txt','1tabn \| wincmd b \| e $tbuf')<CR>
-nnoremap ,gs :call FocusBufOrDo('silly.txt','e $tbuf')<CR>
+nnoremap ,gs :call FocusBufOrDo('silly.txt','e $git/silly/silly.txt')<CR>
 nnoremap ,gw :call FocusBufOrDo('work.txt','e $wbuf')<CR>
 nnoremap ,g; :call FocusBufOrDo('/bb/*.txt','e /ln/ho/bb/*.txt')<CR>
 
@@ -1052,21 +1052,22 @@ function! TabSetAuto()
     call TabSet(4)
   endif
   " let l:v = 0
+  echo "Now tab is " . &tabstop
 endfunction
 
 function! PrevBuf()
   " With <C-^> we will swap buffers forever, so rather do this:
   let prevbufnr = bufnr('#')
-  if bufexists(prevbufnr) 
-    " if bufname(bufnum) 
+  if bufexists(prevbufnr)
+    " if bufname(bufnum)
     if buflisted(prevbufnr)
       b #
-      echo expand('%') 
+      echo expand('%')
     else
       echom "#" . prevbufnr . " is not listed. Use ':b N' to load it."
     endif
-  else 
-    echo 'No prev buffer.' 
+  else
+    echo 'No prev buffer.'
   endif
 endfunction
 
@@ -1519,7 +1520,7 @@ function! WinSwap(...)
         \ thiswin ." wincmd w" ."|".
         \ "buffer ". lastbuf
   if ( a:0 > 0 )
-    let retcursor = a:1 
+    let retcursor = a:1
     if ( retcursor > 0 )
       wincmd p
     endif
