@@ -212,9 +212,7 @@ nnoremap z0 :! 7z a -mx=1 -xr!tags %c.7z %f
 nnoremap zP :! 7z a -mx=6 -xr!tags %D/%c.7z %f<cr>
 " let $TAR_IGNOR="--exclude='.git' --exclude='tags' --exclude='debug/*' --exclude='build/*' --exclude='~$*'"
 nnoremap zs :! pk.sh zst-exc %c<cr>
-nnoremap zS :! pk.sh zst-exc %D/%c<cr>
 nnoremap zd :! PK_ADDTS=1 pk.sh zst-exc %c<cr>
-nnoremap zD :! PK_ADDTS=1 pk.sh zst-exc %D/%c<cr>
 " nnoremap zs :! tar -I 'zstd -10v -T0' -X $sh/zip_exclu -cf    %c.tar.zst %f
 " nnoremap zS :! tar -I 'zstd -10v -T0' -X $sh/zip_exclu -cf %D/%c.tar.zst %f
 
