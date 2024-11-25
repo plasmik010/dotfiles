@@ -238,12 +238,12 @@ auto strBuf = std::make_unique<char[]>(buf_len + 1);
 How do you initialize a “std::shared_ptr” in C++?
 -------------
 Kurt Guntheroth:
-    using namespace std; 
-    shared_ptr<Foo>p1;           // default init to nullptr 
-    shared_ptr<Foo>p2 = nullptr; // init to nullptr 
-    shared_ptr<Foo>p3(new FOO);  // init to dynamic storage 
-    shared_ptr<Foo>p4 = p3;      // share with another shared_ptr 
-    auto p5 = make_shared<Foo>();// preferred 
+    using namespace std;
+    shared_ptr<Foo>p1;           // default init to nullptr
+    shared_ptr<Foo>p2 = nullptr; // init to nullptr
+    shared_ptr<Foo>p3(new FOO);  // init to dynamic storage
+    shared_ptr<Foo>p4 = p3;      // share with another shared_ptr
+    auto p5 = make_shared<Foo>();// preferred
 ----
 Line 6 is preferred because it allocates both the Foo instance and the shared_ptr’s reference count in the same block, which is faster.
 shared_ptr uses expensive thread-safe increment and decrement to maintain its reference counts.
@@ -306,4 +306,59 @@ arr[1] = 0;
 
 std::array<int,10> cpparr{};
 cpparr[1] = 0;
+
+
+#include <iostream>
+#include <string>
+template <typename T> class Counter {
+public:
+    Counter() {
+        std::cout << ++x;
+    }
+    static int x;
+};
+template <typename T> int Counter<T>::x;
+int main() {
+    Counter<int> a;
+    Counter<double> b;
+    Counter<Counter<double>> c;
+    Counter<std::string> d;
+    return 0;
+}
+
+#include <iostream>
+using namespace std;
+class ExceptionA {
+public:
+    ExceptionA(int code) : codeA(code) { };
+    int codeA;
+};
+class ExceptionB : public ExceptionA {
+public:
+    ExceptionB(int code) : codeB(code), ExceptionA(1) { };
+    int codeB;
+};
+int main() {
+    try {
+        throw(ExceptionB(2));
+    }
+    catch(ExceptionA e) {
+        cout << "Exception A: " << e.codeA << endl;
+    }
+    catch(ExceptionB e) {
+        cout << "Exception B: " << e.codeB << endl;
+    }
+    catch(...) {
+        cout << "Exception" << endl;
+    }
+    return 0;
+}
+
+#include <random>
+float getRandomFloat(float min = 1.0, float max = 3.0) {
+    std::random_device rd;  // Источник энтропии
+    std::mt19937 gen(rd()); // Генератор случайных чисел
+    std::uniform_real_distribution<float> dis(min, max); // Равномерное распределение
+    return dis(gen); // Генерация случайного числа
+}
 
