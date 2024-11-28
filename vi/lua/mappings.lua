@@ -10,9 +10,9 @@ H.nmap(
     function() vim.cmd('vsplit') vim.lsp.buf.definition() end,
     "Go to definition in vert split"
 )
--- vim.keymap.set('n', "gl", "<cmd>let bn=bufnr('%') <bar> let pos=getpos('.') <bar> wincmd p <bar> exec 'b' . bn <bar> call setpos('.',pos) <bar> lua vim.lsp.buf.definition()<CR>" )
+
 H.nmap(
-    'gl',
+    'gk',
     function()
         print(0)
         H.mirror_buf_to_prev_window()

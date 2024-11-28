@@ -778,9 +778,19 @@ command! fzftmplist : set noquickview
         \|     exec 'goto' fnameescape($FZF_PICK)
         \| endif
 
+command! fzfzoxide : set noquickview
+        \| exec "!clear; echo you run fzf_zoxide"
+        \| let $FZF_PICK = term('zoxide query --list | fzf --height 12 2>/dev/tty')
+        \| if $FZF_PICK != ''
+        \|     exec 'cd' fnameescape($FZF_PICK)
+        \| endif
+
 nnoremap <C-j> :fzffind<cr>
 nnoremap <C-k> :fzflocate<space>
 nnoremap <C-h> :fzfmushist<cr>
+nnoremap <C-l> :fzfzoxide<cr>
+
+autocmd DirEnter * !zoxide add %d %i
 
 source $loc/vifmrc_loc
 if (system(' [[ ! $(tty | grep -q /dev/tty) ]] && [[ $(pgrep Xorg) ]] && [[ $(echo $TERMINAL) == "kitty" ]] && echo 1'))

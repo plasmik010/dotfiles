@@ -493,7 +493,7 @@ nnoremap cz :echo expand ('%') ' @ ' getcwd()<CR>
 " nnoremap ,c. :exec "lcd! %:p:h" <bar> echo 'lcd2file @' getcwd()<CR>
 nnoremap ,cf :exec "lcd %:p:h"<CR>:echo 'lcd2file @' getcwd()<CR>
 nnoremap ,c. :exec "lcd .."<CR>:echo 'lcd2file @' getcwd()<CR>
-nnoremap ,cp :call GetProjDir() <bar> exec "lcd " . b:proj_dir <bar> echo 'lcd2proj @' getcwd()<CR>
+nnoremap ,c<space> :call GetProjDir() <bar> exec "lcd " . b:proj_dir <bar> echo 'lcd2proj @' getcwd()<CR>
 nnoremap ,cg :call ClimbToDirWhere(".git/index",1) \| pwd<CR>
 nnoremap ,cm :call ClimbToDirWhere("Makefile",1) \| pwd<CR>
 nnoremap a<BS> :checktime<cr>
