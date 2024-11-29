@@ -239,7 +239,7 @@ H.nmap(
 )
 
 H.nmap(",fc", ":Telescope current_buffer_fuzzy_find theme=ivy<CR>", "Telescope Current buffer")
-H.nmap(",ff", ":Telescope find_files theme=ivy<CR>", "Telescope Find Files")
+H.nmap(",ff", ":Telescope find_files hidden=true theme=ivy<CR>", "Telescope Find Files")
 H.nmap(",fd", ":Telescope zoxide list<CR>", "Telescope Zoxide")
 H.nmap("qr",  ":Telescope lsp_references theme=ivy<CR>")
 H.nmap(",fs", ":Telescope lsp_document_symbols<CR>", "Telescope LSP file symbols")
