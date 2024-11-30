@@ -285,7 +285,7 @@ git log -p
 git fetch origin master:master # update master while staying on your branch
 git show <commithash>:main.cpp > another.cpp # restore file under new name
 git show branch:dir/file.ex # cat file from another branch
-git checkout feature-branch -- src/somedir/
+git checkout featureBr -- src/somedir/
 git config --global core.autocrlf input # change eol only when checkout
 git config core.filemode false
 git config credential.helper cache 8h # remember git passwd for 8 hours
@@ -318,8 +318,7 @@ git update-index --assume-unchanged dir/my_specific.h # hide local files from gi
 git update-index --no-assume-unchanged file.c; git add --force file.c # force add assumed ignored file
 git checkout feature; git merge main # merge main branch into feature
 git merge feature main # merge main branch into feature
-# rebase featureB to master #
-git checkout featureB; git fetch; git rebase origin/master; git checkout master; git pull origin master; git merge featureB; git push origin master
+git checkout featureBr; git fetch origin; git rebase origin/master; git checkout master; git pull origin master; git merge featureBr; git push origin master  # rebase featureBr to master #
 git restore --source=master '*.vcxproj'
 # to use ssh-url #
 [remote "origin"]
@@ -327,7 +326,7 @@ git restore --source=master '*.vcxproj'
   fetch = +refs/heads/*:refs/remotes/origin/*
 # have colored less listings:
 git config color.status always && (git status | less -r)
-git clone git@gitlab.sitename.org:some_name/proj_name.git 
+git clone git@gitlab.sitename.org:some_name/proj_name.git
 
 
 # Clang: generate config

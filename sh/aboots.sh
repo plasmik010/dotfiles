@@ -101,7 +101,7 @@ ln -sfn /ln/gd/dotfiles/vi vi
 ln -sfn /ln/mo/blink bl
 ln -sfn /ln/mo/fast fast
 ln -sfn /ln/fast/hh hh
-ln -sfn /ln/fast/torrents torrents
+# ln -sfn /ln/fast/torrents torrents
 # ln -sfn /ln/mo/metal/MUSIC mus
 ln -sfn /ln/mo/metal/PRAGS pr
 # ln -sfn /ln/mo/blink/dwn dwn

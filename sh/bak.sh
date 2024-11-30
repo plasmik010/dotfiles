@@ -12,6 +12,8 @@ DEST_WEKLY="$bakhot/weekly/$WEEK"
 DEST_DAYLY="$bakhot/daily/$DAY"
 DO_WEK=true
 DO_DAY=true
+PORT_MAGIC="ice"
+# PORT_MAGIC="AMV"
 
 if [[ -d $DEST_WEKLY ]]; then
     if [[ $DONTOVERWRITE -ge 1 ]]; then
@@ -105,7 +107,7 @@ if [[ $DO_WEK == true ]]; then
     }
 fi
 
-devlabel=$( $LSBLK -l -o LABEL | grep "AMV" | sort | head -1 )
+devlabel=$( $LSBLK -l -o LABEL | grep "$PORT_MAGIC" | sort | head -1 )
 [[ $devlabel != '' ]] && bakdev=$( $LSBLK -l -o NAME,LABEL | grep $devlabel | head -1 | cut -f1 -d ' ' )
 
 if [[ $bakdev != '' ]]; then
@@ -116,20 +118,22 @@ if [[ $bakdev != '' ]]; then
         udevil mount /dev/$bakdev /ln/mo/$devlabel || flowctrl=false
         need_umount=true
     fi
-    bakusbdir=$(compgen -G /ln/mo/*AMV/bak)
-    echo bakusbdir $bakusbdir
+    bakusbdir=$(compgen -G /ln/mo/*$PORT_MAGIC/bak)
+    echo bakusbdir is $bakusbdir
     if [[ $flowctrl == true && -d $bakusbdir ]]; then
-        devlabel=$(echo $bakusbdir | tr / \\n | grep AMV)
+        devlabel=$(echo $bakusbdir | tr / \\n | grep $PORT_MAGIC)
         mkdir -p "$bakusbdir/${space}_$MON"
         cp -rf "$DEST_WEKLY/"*tar* "$bakusbdir/${space}_$MON"
     else
         echo Warning! Port backup failed!
     fi
-    echo --- wait $devlabel for to sync
+    echo --- wait for $devlabel to sync..
     sync /ln/mo/$devlabel || flowctrl=false
     if [[ $flowctrl == true && $need_umount == true ]]; then
         echo --- unmounting $devlabel ..
         udevil umount /ln/mo/$devlabel
+    else
+        echo USB is still mounted
     fi
     # echo bak port Done!
 fi

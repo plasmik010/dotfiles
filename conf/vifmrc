@@ -746,7 +746,7 @@ nnoremap <f8> :delete<cr>
 
 command! fzffind : set noquickview
         \| exec "!clear; echo you run fzf_find"
-        \| let $FZF_PICK = term('find | fzf --height 22 2>/dev/tty')
+        \| let $FZF_PICK = term('find -L | fzf --height 22 2>/dev/tty')
         \| if $FZF_PICK != ''
         \|     execute 'goto' fnameescape($FZF_PICK)
         \| endif

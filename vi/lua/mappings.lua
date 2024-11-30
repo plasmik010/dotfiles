@@ -82,8 +82,10 @@ vim.keymap.set('x', 'qp', '\"lp')
 -- vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 -- vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
-H.Bmap('<C-PageUp>',   ":BufferLineCyclePrev<CR>", { silent = true })
-H.Bmap('<C-PageDown>', ":BufferLineCycleNext<CR>", { silent = true })
+-- H.Bmap('<C-PageUp>',   ":BufferLineCyclePrev<CR>", { silent = true })
+-- H.Bmap('<C-PageDown>', ":BufferLineCycleNext<CR>", { silent = true })
+H.Bmap('<C-PageUp>',   "<cmd>tabnext<CR>", { silent = true })
+H.Bmap('<C-PageDown>', "<cmd>tabprev<CR>", { silent = true })
 
 H.nmap(',G', ":call FocusBufOrDo('mylazy/init.lua','e $vi/lua/mylazy/init.lua')<CR>", "Plugins")
 H.nmap(',gn', ":call FocusBufOrDo('lua/init.lua','e $vi/lua/init.lua')<CR>", "init.lua")

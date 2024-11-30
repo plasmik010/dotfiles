@@ -50,8 +50,7 @@ return {
       end
 
       H.nmap("zb",     "<cmd> DapToggleBreakpoint <CR>", "Add Breakpoint at line" )
-      H.nmap("zn",     "<cmd> DapContinue <CR>", "Start or continue debugger" )
-      H.nmap(",<BS>",  "<cmd> DapContinue <CR>", "Start or continue debugger" )
+      H.nmap("zB",     "<cmd> DapContinue <CR>", "Start or continue debugger" )
       H.nmap("<F5>",   "<cmd> DapContinue <CR>", "Start or continue debugger" )
       H.nmap("<F6>",   "<cmd> DapStepInto <CR>", "Debugger step Into" )
       H.nmap("<F7>",   "<cmd> DapStepOut  <CR>", "Debugger step Out" )
