@@ -664,9 +664,7 @@ return {
     --   "BufNewFile path/to/my-vault/*.md",
     -- },
     dependencies = {
-      -- Required.
       "nvim-lua/plenary.nvim",
-      -- see below for full list of optional dependencies 👇
     },
     opts = {
       workspaces = {
@@ -906,7 +904,7 @@ return {
   },
 
   {
-    'norlock/nvim-traveller',
+    'norlock/nvim-traveller', -- hijacks VimEnter event --- another fm tool
     enabled = false,
     dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
     opts = {
@@ -914,6 +912,7 @@ return {
       sync_cwd = true,
       show_hidden = false,
     },
+    -- config = false,
     init = function()
       vim.keymap.set('n', '_', require'nvim-traveller'.open_navigation)
       -- H.nmap('_', require'nvim-traveller'.open_navigation)
@@ -924,14 +923,17 @@ return {
   },
 
   {
-    'tzachar/highlight-undo.nvim', -- not working with v0.10.1
+    'tzachar/highlight-undo.nvim', -- okay
     configure = true,
     opts = {
-      duration = 900,
+      duration = 750,
     }
   },
 
-  { 'prochri/telescope-all-recent.nvim', dependencies = {'kkharji/sqlite.lua'} },
+  {
+    'prochri/telescope-all-recent.nvim',
+    dependencies = {'kkharji/sqlite.lua'},
+  },
 
   {
     'AckslD/nvim-neoclip.lua', -- dead

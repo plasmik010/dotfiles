@@ -36,6 +36,14 @@ end ]]
 
 H.vidir = os.getenv('sh') .. '/vi/'
 
+function H.tele_ivy_theme_arg(dir)
+    return require'telescope.themes'.get_ivy {
+        sort_mru = true,
+        layout_config = { height = vim.opt.lines:get() - 10 },
+        cwd = dir or require'telescope.utils'.buffer_dir(),
+    }
+end
+
 function H.is_git_repo()
   local is_repo = vim.fn.system("git rev-parse --is-inside-work-tree")
   return vim.v.shell_error == 0
@@ -306,12 +314,12 @@ function H.mirror_buf_to_prev_window()
   local winnr2 = vim.api.nvim_get_current_win()
   -- if vim.fn.winnr() == vim.fn.winnr('#') then
   if winnr == winnr2 then
-    print(1)
+    -- print(1)
     -- only current window is present
     vim.cmd('vnew') -- add second window
     -- vim.api.nvim_open_win(true,true,{})
   else
-    print(2)
+    -- print(2)
   end
   vim.api.nvim_set_current_buf(bufnr)
   vim.fn.setpos('.',pos)

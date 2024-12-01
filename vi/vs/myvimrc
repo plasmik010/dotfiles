@@ -73,7 +73,8 @@ if !has("nvim")
 endif
 
 set encoding=UTF-8
-set fileencodings=ucs-bom,utf-8,default,cp1251,latin1
+" set fileencodings=ucs-bom,utf-8,default,cp1251,latin1
+set fileencodings=ucs-bom,utf-8,default,cp1251
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 " set keymap=russian-jcukenwin
 set colorcolumn=
@@ -601,7 +602,7 @@ nnoremap ,be :BufExplorer<CR>
 nnoremap ,,e :BufExplorer<CR>
 nnoremap ,zf :Files<CR>
 nnoremap ,zg :GFiles<CR>
-nnoremap ,zl :Lines<CR>
+" nnoremap ,zl :Lines<CR>
 nnoremap <C-h> :BLines<CR>
 nnoremap <C-р> :BLines<CR>
 " nnoremap ,zs :Files $dotfiles<CR>

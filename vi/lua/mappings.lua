@@ -12,9 +12,8 @@ H.nmap(
 )
 
 H.nmap(
-    'gk',
+    'g[',
     function()
-        print(0)
         H.mirror_buf_to_prev_window()
         vim.lsp.buf.definition()
     end,
@@ -63,11 +62,6 @@ H.nmap(',S', "<cmd>SessionStop<CR><cmd>echo 'Will_not_save_session'<CR>", "Stop 
 -- H.nmap(',pd', function() require'nvim-possession'.delete() end, "Session Delete")
 -- H.nmap(',pn', function() require'nvim-possession'.new() end, "Session New")
 -- H.nmap(',"', function() require'nvim-peekup'.peekup_open('p') end )
-
-
-H.nmap(',zn', vim.diagnostic.open_float)
-H.nmap(',zb', vim.diagnostic.setloclist)
-
 
 -- Yank / put incremental
 vim.keymap.set('n', 'q;', '<cmd>let @l=""|echo " L reg now empty" <CR>')
@@ -226,7 +220,7 @@ H.nmap(
 
 H.nmap(',fa', ":Telescope live_grep theme=ivy<CR>", "Telescope live_grep")
 H.nmap(
-    ',fq',
+    ',ft',
     function()
         local function ivy_theme_arg(dir)
             return require'telescope.themes'.get_ivy {
@@ -237,7 +231,18 @@ H.nmap(
         end
         require'telescope.builtin'.live_grep(ivy_theme_arg(H.get_git_root()))
     end,
-    "Telescope live_grep git root"
+    "Telescope live_grep git_root"
+)
+H.nmap(
+    ',fy',
+    function()
+        require'telescope.builtin'.live_grep(
+            H.tele_ivy_theme_arg(
+                vim.fn.expand("%:p:h")
+            )
+        )
+    end,
+    "Telescope live_grep current file dir"
 )
 
 H.nmap(",fc", ":Telescope current_buffer_fuzzy_find theme=ivy<CR>", "Telescope Current buffer")
