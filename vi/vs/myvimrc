@@ -855,7 +855,7 @@ nnoremap ,vt :call TabSetAuto()<CR>
 
 " Make and run project
 nnoremap ,zo :make<bar>copen<CR>
-nnoremap ,zd :call BuildProjectUni("Makefile", "make -f Makefile distclean")
+nnoremap ,zt :call BuildProjectUni("onemake.sh", "bash onemake.sh test")
 nnoremap ,zx :call BuildProjectUni("Makefile", "make -f Makefile clean")<CR>
 nnoremap ,zm :call BuildProjectUni("Makefile", "make -f Makefile")<CR>
 nnoremap ,zr :call BuildProjectUni("Makefile", "make -f Makefile run")<CR>
@@ -1244,7 +1244,7 @@ endfunction
 "   redraw!
 " endfunction
 
-function! BuildProjectUni(Makefile, Makecommand)
+function! BuildProjectUni(RootMarker, Makecommand)
   " exec "!echo " . a:Makecommand . ":"
   " memorize stuff
   let makeprg_bak = &makeprg
@@ -1253,11 +1253,11 @@ function! BuildProjectUni(Makefile, Makecommand)
   let curr_directory = expand('%:p:h')
   " change directory
   exec "lcd! " . curr_directory
-  let proj_dir = ClimbToDirWhere(a:Makefile, 1)
+  let proj_dir = ClimbToDirWhere(a:RootMarker, 1)
   while filereadable("vim_make_ignore")
     " Ignore dirs with this marker file to avoid cmake-generated Makefile
     cd ../
-    let proj_dir = ClimbToDirWhere(a:Makefile, 1)
+    let proj_dir = ClimbToDirWhere(a:RootMarker, 1)
   endwhile
   if ( proj_dir != "-1" )
     if has("nvim")
