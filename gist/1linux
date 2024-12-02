@@ -29,7 +29,7 @@ DEB-only: xinput psmisc
 DIAGRAM: draw.io Mermaid kroki.io Excalidraw miro dia staruml PlantUML
 
 --Debian pkgs
-dmenu rofi wmctrl xdotool kitty pavucontrol htop btop vifm fdisk gparted nnn thunar bash-completion sxhkd fonts-hack ncdu xclip zathura zathura-djvu gitg mpv remmina xinput feh rsync inxi lshw mediainfo ripgrep silversearcher-ag libnotify-bin imagemagick efibootmgr unrar sox sox-fmt-all git make cmake curl zstd zip gparted strace speedcrunch exuberant-ctags udevil qalc fzf qemu-system fd-find python3-neovim nitrogen lxappearance dunst virtualbox fonts-firacode redshift python-is-python3 fonts-terminus fonts-liberation earlyoom unzip evince testdisk hardinfo audacity sox shntool cuetools wavpack vorbis-tools nomacs tmux rfkill testdisk abiword ncal linux-cpupower picom scrot vim-gtk mlocate
+dmenu rofi wmctrl xdotool kitty pavucontrol htop btop vifm fdisk gparted nnn thunar bash-completion sxhkd fonts-hack ncdu xclip zathura zathura-djvu gitg mpv remmina xinput feh rsync inxi lshw mediainfo ripgrep silversearcher-ag libnotify-bin imagemagick efibootmgr unrar sox sox-fmt-all git make cmake curl zstd zip gparted strace speedcrunch exuberant-ctags udevil qalc fzf qemu-system fd-find python3-neovim nitrogen lxappearance dunst virtualbox fonts-firacode redshift python-is-python3 fonts-terminus fonts-liberation earlyoom unzip evince testdisk hardinfo audacity sox shntool cuetools wavpack vorbis-tools nomacs tmux rfkill testdisk abiword ncal linux-cpupower picom scrot vim-gtk mlocate clang-format
 qmake6 cpulimit qtcreator qtcreator-doc qtcreator-data build-essential qtbase5-examples qtbase5-dev gcc-9 g++-9
 
 == RICE

@@ -28,12 +28,24 @@ if [[ $flow == true ]]; then
     fi
 fi
 
-if !($flow); then echo "Preps FAILED"; exit 1; fi
+if !($flow); then
+    echo "Preps FAILED"
+    exit 1
+fi
 
-# exit
 make CMAKE_BUILD_TYPE=Release &&
     sudo make install &&
     echo "Build SUCCESS" &&
     sudo ln -sf  /usr/local/bin/nvim /usr/bin/nvim
+
+if true; then
+    if type -f pacman &>/dev/null; then
+        sudo pacman -S --needed  clang-format tree-sitter-cli
+    elif type -f apt &>/dev/null; then
+        sudo apt install  clang-format tree-sitter-cli
+    fi
+    sudo npm install -g neovim
+    sudo gem install neovim
+fi
 
 # vim: sw=4:ts=4:sts=4
