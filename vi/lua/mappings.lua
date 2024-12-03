@@ -72,6 +72,8 @@ vim.keymap.set('v', 'qd', '\"Ld<cmd>echo "cut to L reg"<CR>')
 vim.keymap.set('n', 'qp', '\"lp')
 vim.keymap.set('x', 'qp', '\"lp')
 
+H.nmap(',cr', H.rot_line, "decipher line to + buf")
+
 -- Move selection
 -- vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 -- vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")

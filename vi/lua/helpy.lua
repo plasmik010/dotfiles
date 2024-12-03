@@ -285,6 +285,13 @@ end
 -- print("init.lua loaded once more")
 -- return hotfun
 
+function H.rot_line()
+  vim.cmd[[ silent exec "normal yy" ]]
+  local line = vim.fn.getreg('"')
+  line = require'rot13'.decipher(line)
+  vim.fn.setreg('+', line)
+end
+
 function H.eval_paragraph()
   local filetype = vim.bo.filetype
   local lastpos = vim.api.nvim_win_get_cursor(0)[1]
@@ -303,8 +310,6 @@ function H.eval_paragraph()
   end
   -- print('lol')
 end
-
-vim.cmd[[ @" ]]
 
 function H.mirror_buf_to_prev_window()
   local bufnr = vim.api.nvim_get_current_buf()
