@@ -362,3 +362,5 @@ float getRandomFloat(float min = 1.0, float max = 3.0) {
     return dis(gen); // Генерация случайного числа
 }
 
+std::cout << "Current path is " << std::filesystem::current_path() << '\n';
+

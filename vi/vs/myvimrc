@@ -452,10 +452,10 @@ if exists("g:loaded_sneak_plugin")
 endif
 noremap <C-n> 10gj
 noremap <C-p> 10gk
-noremap <A-n> 50jM
-noremap <A-p> 50kM
-noremap <A-e> 15<C-e>M
-noremap <A-c> 15<C-y>M
+noremap <A-n> 20j
+noremap <A-p> 20k
+noremap <A-e> 42<C-e>
+noremap <A-c> 42<C-y>
 nmap q1 100G
 nmap q2 200G
 nmap q3 300G
@@ -539,8 +539,8 @@ nnoremap qj     <C-w>j
 nnoremap qk     <C-w>k
 nnoremap ql     <C-w>l
 nnoremap <C-\>  <C-w>w
-nnoremap a,     <C-w>6<
-nnoremap a.     <C-w>6>
+nnoremap a,     <C-w>8<
+nnoremap a.     <C-w>8>
 nnoremap ae     <C-w>4+
 nnoremap ad     <C-w>4-
 " grow tall
