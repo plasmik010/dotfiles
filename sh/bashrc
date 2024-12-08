@@ -1,18 +1,20 @@
 #!/bin/bash
 
-# Are we outside msys? Set terminal prompt then.
-if [[ -z $MSYSTEM_PREFIX ]]; then
-    #PS1='[\u@\h \W]\$ '
-    #PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\]'
-    #PS1="\[$(tput bold)\]\[$(tput setaf 7)\]┌[\d][\t][\u@\h][\W]\n└\$ \[$(tput sgr0)\]"
-    #PS1='\[\033[01;32m\]☿\[\e[38m\]\[\033[00m\] \w\[\e[m\] \[\033[01;34m\]\$\[\033[00m\] '
-    #PS1=$'\[$(tput bold)\]\[$(tput setaf 2)\]\xe2\x98\xbf[\W]\$ \[$(tput sgr0)\]'
-    #PS1=$'\[$(tput bold)\]\[$(tput setaf 46)\]\u \W \$ \[$(tput sgr0)\]'
-    #PS1=$'\[$(tput bold)\]\[$(tput setaf 113)\]\u\[$(tput setaf 2)\] \W \$ \[$(tput sgr0)\]'
-    #PS1='\[\e]0;\w\a\]\n\[\e[32m\]\u@\h \[\e[33m\]\w\[\e[0m\]\n\$'
-    #PS1="\[\e]0;\h: \a\]$PS1"
-    PS1=$'\[$(tput bold)\]\[$(tput setaf 34)\]\u@\h\[$(tput setaf 78)\] \W \[$(tput setaf 34)\]\$ \[$(tput sgr0)\]'
-fi
+# Set terminal prompt #
+#PS1='[\u@\h \W]\$ '
+#PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\]'
+#PS1="\[$(tput bold)\]\[$(tput setaf 7)\]┌[\d][\t][\u@\h][\W]\n└\$ \[$(tput sgr0)\]"
+#PS1='\[\033[01;32m\]☿\[\e[38m\]\[\033[00m\] \w\[\e[m\] \[\033[01;34m\]\$\[\033[00m\] '
+#PS1=$'\[$(tput bold)\]\[$(tput setaf 2)\]\xe2\x98\xbf[\W]\$ \[$(tput sgr0)\]'
+#PS1=$'\[$(tput bold)\]\[$(tput setaf 46)\]\u \W \$ \[$(tput sgr0)\]'
+#PS1=$'\[$(tput bold)\]\[$(tput setaf 113)\]\u\[$(tput setaf 2)\] \W \$ \[$(tput sgr0)\]'
+#PS1='\[\e]0;\w\a\]\n\[\e[32m\]\u@\h \[\e[33m\]\w\[\e[0m\]\n\$'
+#PS1="\[\e]0;\h: \a\]$PS1"
+# PS1=$'\[$(tput bold)\]\[$(tput setaf 34)\]\u@\h\[$(tput setaf 78)\] \W \[$(tput setaf 34)\]\$ \[$(tput sgr0)\]'
+PS1=$'\[$(tput bold)\]\[$(tput setaf 41)\]┌- ☿\[$(tput setaf 74)\] \u@\h \[$(tput setaf 41)\]--┼-- \[$(tput setaf 3)\]\w \[$(tput setaf 41)\]--┼-- \[$(tput setaf 183)\A \[$(tput setaf 41)---┐\n└- \[$(tput sgr0)\]$ '
+
+# Are we outside msys?
+# if [[ -z $MSYSTEM_PREFIX ]]; then unset $PS1; fi
 
 # Aliases #
 alias sc="systemctl "
