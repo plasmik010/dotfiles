@@ -4,7 +4,8 @@
 source $sh/get_hidpi.sh
 
 if [[ $HIDPI == "1" ]] ; then
-    DMENU_FN="Liberation Mono:size=17.5"
+    # DMENU_FN="Liberation Mono:size=17.5"
+    DMENU_FN="Liberation Mono:size=14.8"
 else
     DMENU_FN="Liberation Mono:size=14.8"
 fi

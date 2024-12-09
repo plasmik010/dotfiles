@@ -1,5 +1,5 @@
 #!/bin/bash
-# rc script for my desktop environment
+# rc-script to run with desktop environment
 
 cd
 

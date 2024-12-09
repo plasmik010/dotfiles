@@ -364,3 +364,10 @@ float getRandomFloat(float min = 1.0, float max = 3.0) {
 
 std::cout << "Current path is " << std::filesystem::current_path() << '\n';
 
+// read text from file
+std::ifstream ifs("../../resources/response_255.json");
+std::stringstream ss;
+ss << ifs.rdbuf();
+std::string s = ss.str();
+
+

@@ -438,6 +438,8 @@ nnoremap ]v `>
 " navigate quickfix list
 nnoremap q<Up>   :cprev<CR>
 nnoremap q<Down> :cnext<CR>
+nnoremap <A-Up>   :cprev<CR>
+nnoremap <A-Down> :cnext<CR>
 " navigate location list
 nnoremap <C-Up>   :lprev<CR>
 nnoremap <C-Down> :lnext<CR>
@@ -708,13 +710,10 @@ if has("nvim")
   " tnoremap <A-Up> <C-\><C-N><C-w>W
   " tnoremap <A-Right> <C-\><C-N><C-w>l
   " inoremap <A-Left> <C-\><C-N><C-w>h
-  inoremap <A-Down> <C-\><C-N><C-w>j
-  inoremap <A-Up> <C-\><C-N><C-w>k
+  " inoremap <A-Right> <C-\><C-N><C-w>j
+  " inoremap <A-Up> <C-\><C-N><C-w>k
   " inoremap <A-Right> <C-\><C-N><C-w>l
   " nnoremap <A-Left> <C-w>h
-  nnoremap <A-Down> <C-w>w
-  nnoremap <A-Up> <C-w>W
-  " nnoremap <A-Right> <C-w>l
 endif
 
 " Scroll fraction of the screen
