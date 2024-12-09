@@ -44,7 +44,7 @@ if !exists("g:colors_name") || g:colors_name=='habamax'
         elseif  ( g:phase=='nox' )
             " colo nordic
             " colo catppuccin-macchiato
-            colo nordfox
+            colo nightfox
             " colo everforest
             " colo oh-lucy-evening
             " colo nightfox | set bg=dark

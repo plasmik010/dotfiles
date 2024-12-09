@@ -24,19 +24,20 @@ rm /tmp/now_is_* &> /dev/null
 touch /tmp/now_is_"$1"
 echo "$1" > /tmp/nowis
 
-[[ $HASG == true ]] &&
-{
-if [[ $1 == 'nox' ]]; then
-    nitrogen --set-zoom-fill  $git/wlp/twisted_by_zy0rg_d5sdf8q.png
-    sed -i 's/=Pop$/=Pop-dark/' /ln/co/gtk-3.0/settings.ini
-    # Dim and warm screen if already nox and no nodim key
-    type redshift &>/dev/null && [[ $cur == 'nox' && $2 != '-nodim' ]] && { ga=.96; redshift -o -m randr -O 5600 -g $ga:$ga:$ga; }
-elif [[ $1 == 'day' ]]; then
-    nitrogen --set-zoom-fill  $git/wlp/blues_by_tatasz_d8snwfz.png
-    sed -i 's/=Pop-dark$/=Pop/' /ln/co/gtk-3.0/settings.ini
-    # Undo nighttime screen dimming
-    type redshift &>/dev/null && redshift -x -m randr
+if [[ false == true ]] && [[ $HASG == true ]]; then
+    if [[ $1 == 'nox' ]]; then
+        nitrogen --set-zoom-fill  $git/wlp/twisted_by_zy0rg_d5sdf8q.png
+        sed -i 's/=Pop$/=Pop-dark/' /ln/co/gtk-3.0/settings.ini
+        # Dim and warm screen if already nox and no nodim key
+        type redshift &>/dev/null && [[ $cur == 'nox' && $2 != '-nodim' ]] && { ga=.96; redshift -o -m randr -O 5600 -g $ga:$ga:$ga; }
+    elif [[ $1 == 'day' ]]; then
+        nitrogen --set-zoom-fill  $git/wlp/blues_by_tatasz_d8snwfz.png
+        sed -i 's/=Pop-dark$/=Pop/' /ln/co/gtk-3.0/settings.ini
+        # Undo nighttime screen dimming
+        type redshift &>/dev/null && redshift -x -m randr
+    fi
 fi
+
 
 {
     cd /ln/co/kitty/
@@ -52,6 +53,5 @@ fi
     elif [[ $1 == 'day' ]]; then
         [[ -f $DT ]] && rm $CT && cp -f $DT $CT
     fi
-}
 }
 
