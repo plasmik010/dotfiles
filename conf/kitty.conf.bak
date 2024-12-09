@@ -248,8 +248,8 @@ bell_on_tab yes
 # resize_in_steps no
 
 remember_window_size  no
-initial_window_width  1060
-initial_window_height 780
+initial_window_width  1078
+initial_window_height 904
 
 #: If enabled, the window size will be remembered so that new
 #: instances of kitty will have the same size as the previous
@@ -328,6 +328,8 @@ hide_window_decorations no
 #: }}}
 
 #: Tab bar {{{
+
+tab_bar_min_tabs 2
 
 tab_bar_edge bottom
 
@@ -911,7 +913,7 @@ map kitty_mod+delete clear_terminal reset active
 # map kitty_mod+i set_colors /ln/co/kitty/theme.conf
 
 # BEGIN_KITTY_THEME
-# Gruvbox Dark
+# ANSI 1987
 include current-theme.conf
 # END_KITTY_THEME
 
@@ -921,7 +923,7 @@ cursor_shape block
 # cursor #cc33cc
 # cursor #7e5780
 include /ln/dots/conf/kitty_extra.conf
-include kitty_local.conf
+include /ln/dots/conf/kitty_local.conf
 
 # Taming wm size
 # placement_strategy top-left
