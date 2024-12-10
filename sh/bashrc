@@ -11,7 +11,7 @@
 #PS1='\[\e]0;\w\a\]\n\[\e[32m\]\u@\h \[\e[33m\]\w\[\e[0m\]\n\$'
 #PS1="\[\e]0;\h: \a\]$PS1"
 # PS1=$'\[$(tput bold)\]\[$(tput setaf 34)\]\u@\h\[$(tput setaf 78)\] \W \[$(tput setaf 34)\]\$ \[$(tput sgr0)\]'
-PS1=$'\[$(tput bold)\]\[$(tput setaf 41)\]┌- ☿\[$(tput setaf 74)\] \u@\h \[$(tput setaf 41)\]--┼-- \[$(tput setaf 3)\]\w \[$(tput setaf 41)\]--┼-- \[$(tput setaf 183)\A \[$(tput setaf 41)---┐\n└- \[$(tput sgr0)\]$ '
+PS1=$'\[$(tput bold)\]\[$(tput setaf 41)\]┌- ☿\[$(tput setaf 74)\] \u@\h \[$(tput setaf 41)\]--┼-- \[$(tput setaf 3)\]\w \[$(tput setaf 41)\]--┼-- \[$(tput setaf 183)\A \[$(tput setaf 41)---┐\n└- $ \[$(tput sgr0)\]'
 
 # Are we outside msys?
 # if [[ -z $MSYSTEM_PREFIX ]]; then unset $PS1; fi

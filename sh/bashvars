@@ -39,7 +39,7 @@ export MANWIDTH=80
 export LSBLK=lsblk
 export OVMF=/usr/share/edk2-ovmf/x64/OVMF_CODE.fd
 export TERMINAL=xterm
-command -v kitty &>/dev/null && export TERMINAL=kitty && export TERMINAL_BIGER="kitty -o initial_window_width=1330 -o initial_window_height=1055"
+command -v kitty &>/dev/null && export TERMINAL=kitty && export TERMINAL_BIGER="kitty -o initial_window_width=1330 -o initial_window_height=1060"
 # [[ "$TERMINAL" == "kitty" ]] && [[ $HIDPI == "1" ]] && export TERMINAL="kitty -o font_size=14.2 -o initial_window_width=1140 -o initial_window_height=900"
 [[ -z "$TERMINAL_BIGER" ]] && export TERMINAL_BIGER="$TERMINAL"
 
