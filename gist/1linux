@@ -107,6 +107,7 @@ find /media/  -type f -size +10G -name '\.abc*-*' # find big files
 find . -maxdepth 2 -type d -name "*Getac*"
 find . -type f \( -name  "*mp3" -or -name "*.flac" -or -name "*.ogg" -or -name "*.wv" -or -name "*.ape" \) -printf '%h\n' | sort -u | wc -l # count music folders
 find . \( -name "Makefile" -or -name "CMakeCache.txt" -or -name "CMakeFiles" -or -name "cmake_install.cmake" \) -exec rm -rf {} \; # clean cmake
+rm -rf CMakeFiles/ CMakeCache.txt CMakeUserPresets.json .cache
 ls -lath ~/Downloads/ | head -6 # show recent downloads
 fc -ln -1 # show last command
 fc -ln -1 | cut -c 3- | xclip # yank last command
