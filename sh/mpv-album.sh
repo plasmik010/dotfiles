@@ -12,8 +12,8 @@ clear
 
 export TARG="$1"
 # Check if target (directory) is readable
-if [[ -n $TARG ]] ; then
-    if [[ -e $TARG ]] ; then
+if [[ -n $TARG ]]; then
+    if [[ -e $TARG ]]; then
         [[ -f $TARG ]] && TARG=$(dirname "$TARG") # assign directory, not file
         TARGREAL=$(realpath "$TARG")
         echo "$TARG" @ $(realpath .)
@@ -45,13 +45,13 @@ if [[ $TARGREAL != $HOME ]]; then
 fi
 
 # set terminal title
-if [[ -n $2 ]] ; then
+if [[ -n $2 ]]; then
     echo -ne "\033]0;MPV @ $PWD @ $2\007"
 else
     echo -ne "\033]0;MPV @ $PWD\007"
 fi
 
-if [[ $PAUSE == 0 ]] ; then
+if [[ $PAUSE == 0 ]]; then
     PAUSE=''
 else
     PAUSE='--pause'
@@ -60,10 +60,24 @@ fi
 shopt -s nullglob
 shopt -s nocaseglob
 
-if [[ $(ls "$TARG" | grep -ic '\.ape$\|\.flac$\|\.wv$') == $(ls "$TARG" | grep -ic '\.cue$') && \
-            $(ls "$TARG" | grep -ic '\.cue$') > 0 ]] ; then
+valid_cues=() # array
+for cuefile in "$TARG/"*.cue; do
+    targfile="$(grep "FILE " "$cuefile")"
+    # echo "$cuefile      $targfile"
+    targfile=${targfile#FILE \"}
+    targfile=${targfile%\" WAVE*}
+    # echo $targfile
+    if [[ -f "$TARG/$targfile" ]]; then
+        valid_cues+=("$cuefile")
+        # valid_cues="$valid_cues \"$cuefile\""
+    fi
+done
+# for elem in "${valid_cues[@]}"; do echo $elem; done
+
+if [ -n "$valid_cues" ]; then
     echo ==play cue with mpv==
-    mpv $PAUSE --no-video "$TARG"/*.cue
+    # mpv $PAUSE --no-video "$TARG"/*.cue
+    mpv $PAUSE --no-video "${valid_cues[@]}"
 else
     echo ==play audio files==
     mpv $PAUSE --no-video "$TARG"/*.{flac,mp3,ogg,ape,wv}
