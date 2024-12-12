@@ -286,10 +286,12 @@ end
 -- return hotfun
 
 function H.rot_line()
-  vim.cmd[[ silent exec "normal yy" ]]
+  vim.cmd[[ silent exec "normal 0y$" ]]
   local line = vim.fn.getreg('"')
   line = require'rot13'.decipher(line)
   vim.fn.setreg('+', line)
+  vim.fn.setreg('*', line)
+  print("rrr")
 end
 
 function H.eval_paragraph()

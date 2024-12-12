@@ -14,7 +14,7 @@ GUI: thunar nemo gvfs-mtp blueberry ulauncher fsearch file-roller xarchiver spee
 DEVEL: bear compiledb gittyup gitahead tig gitg gitfiend gitkraken
 MEDIA: mpv vlc youtube-viewer mediainfo ffmpeg audacity kwave ocenaudio sox mkvtoolnix-gui spek shntool cuetools wavpack mac vorbis-tools *soundkonverter *flacon rubyripper *whipper puddletag easytag picard *kid3 *hrizopea *pitivi shotcut *vidiot *kdenlive
 IMG: exiftool nomacs gpicview qview ristretto imv vimiv photoqt phototonic gthumb eog viewnior imagemagick feh qimgv eom imv sxiv pqiv darktable digikam shotwell gcolor3 findimagedupes
-DRAW: pinta kolourpaint mypaint mtpaint krita blender 
+DRAW: pinta kolourpaint mypaint mtpaint krita blender
 LISTEN: deadbeef qomp nulloy clementine exaile musique yarock qmmp audacious gmusicbrowser cantata tomahawk mocp *ncmpc cmus
 READ: zathura atril qpdfview mupdf djview fbreader koreader fbless evince okular *calibr
 HDD: gparted cfdisk testdisk f3probe photorec extundelete smartcontrol wipefreespace mondorescue grub-customizer woeusb windows2usb hdparam
@@ -321,7 +321,8 @@ git update-index --assume-unchanged dir/my_specific.h # hide local files from gi
 git update-index --no-assume-unchanged file.c; git add --force file.c # force add assumed ignored file
 git checkout feature; git merge main # merge main branch into feature
 git merge feature main # merge main branch into feature
-git checkout featureBr; git fetch origin; git rebase origin/master; git checkout master; git pull origin master; git merge featureBr; git push origin master  # rebase featureBr to master #
+git branch --sort=-committerdate -vv -a
+git checkout Feature; git fetch origin; git rebase origin/master; git checkout master; git pull origin master; git merge Feature; git push origin master  # rebase Feature on master and merge into master
 git restore --source=master '*.vcxproj'
 # to use ssh-url #
 [remote "origin"]

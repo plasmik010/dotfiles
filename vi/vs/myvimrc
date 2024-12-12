@@ -746,8 +746,8 @@ nnoremap ai :put! *<CR>
 nnoremap aP :put  +<CR>
 nnoremap aI :put! +<CR>
 " put select system buffer as single paragraph
-nnoremap ao o<Esc>:put! *<CR>`[v`]:g/^$/d<CR>:noh<CR>
-nnoremap aO o<Esc>:put! +<CR>`[v`]:g/^$/d<CR>:noh<CR>
+nnoremap ao o<Esc>:put! *<CR>`[v`]:g/^$/d<CR>:noh<CR>j
+nnoremap aO o<Esc>:put! +<CR>`[v`]:g/^$/d<CR>:noh<CR>j
 " shrink selection into single paragraph
 vnoremap <C-l> :g/^$/d<CR>:noh<CR>
 " yank inline
