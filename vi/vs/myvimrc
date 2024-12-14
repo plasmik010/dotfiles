@@ -83,6 +83,7 @@ set updatetime=8000
 set noequalalways
 set winheight=7
 set guicursor=n-v-c:block,i-ci:ver100,r-cr-o:hor20
+" set guicursor=n-v-c:hor80,i-ci:ver100,r-cr-o:hor20
 " set iminsert=0
 " set imsearch=0
 " set nofoldenable    " disable folding

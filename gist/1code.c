@@ -19,8 +19,8 @@ exit(0) - выход из цикла
 #define MAX(a,b) (((a) > (b)) ? (a) : (b))
 #define MIN(a,b) (((a) < (b)) ? (a) : (b))
 
-#define LOG(msg) \
-{ std::cout << "LOG: -- " << msg << " --" << std::endl; }
+#define NOOLINE { std::cout << std::endl; }
+inline void LOG(std::string msg) { std::cout << "LOG: -- " << msg << " --" << std::endl; }
 
 #define EPSI  0.000001 // одна миллионная
 #define MILLION 1000000
