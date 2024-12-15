@@ -88,11 +88,15 @@ username hostname=(ALL) NOPASSWD:/bin/lsblk # sudo command without password for 
 # sudo takes long time? ==> add $HOSTNAME to /etc/hosts
 %sudo	ALL=(ALL) ALL, NOPASSWD:/usr/bin/lsblk # combo!
 su - # may provide better PATH
+groupadd docker; usermod -aG docker ${USER}; newgrp docker
 ncal -b3M
 printf "%x\n" \'"$somevar" # print char as hex
 reset # reset terminal
 compgen -ac | sort -u # list available commands
-read -n 1 -s -r -p "Press any key to continue" # wait for a hit
+read -n 1 -p "Press any key to continue" # wait for a hit
+read -s -r -p "Enter some value" val; echo "value is $val"
+  # -r Disable backslashes to escape characters.
+  # -s Does not echo the user's input.
 xterm -fa xft:Monospace:size=12:style=Regular:antialias=true
 xterm -geometry 96x36+300+250 -e "vim -S $HOME/.vim/session.vim" &> /dev/null & disown
 urxvt -fn "Hack:size=12:style=Regular:antialias=true"

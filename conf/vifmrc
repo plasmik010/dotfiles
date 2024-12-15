@@ -29,6 +29,7 @@ command! mpiii :! ffmpeg -i %c -qscale:a 2 %D/%c.mp3 &>/dev/null &
 command! respic :! echo $PWD ; respic.sh %a
 command! rescol :! magick %c -quality 95%%  -sampling-factor '2x2,1x1,1x1' %c.jpg
 """""""" command! md5 :! bash -c "md5sum %f; echo hit.any.key; read -rsn1"
+command! sameToDir :! mkdir sames; for f in *.*; do if [[ -f %D/$f ]]; then mv "${f}" "sames/"; fi; done
 command! respng :! mkdir res ; for f in *.png; do d=${f%%%%.*} ; magick "$f" -quality 95%%%% -sampling-factor 4:4:4  jpg:res/"$d"".jpg" ; done # png to jpg
 map re :! for f in %f; do d=${f%%.*} ; magick "$f" -resize 50%% -sampling-factor 4:4:4 -quality 95%% jpg:"$d"".R.jpg" ; done
 command! resmusAll :! mkdir resampled orig ; for flac in *.flac; do sox -S "${flac}" -G -b 16 ./resampled/"${flac}" rate -v -L 44100 dither ; mv "${flac}" orig/ ; done
@@ -134,7 +135,8 @@ nnoremap qf/ :! bash -lc "ARG=DMENUSAVE xdgsane %c"
 nnoremap qf/ :! bash -lc "ARG=DMENURUN xdgsane %c"
 
 " Calc space "
-nnoremap ,f :! echo; echo %c: ; file -b %c ; [[ -d %c ]] && tree -ia %c | tail -1 ; du -sh %c | cut -f1 ; ls -dla %c ; df -h --output=source,fstype,avail,pcent %c ; read -rsn1 <CR>
+nnoremap ,f :! echo; echo %c: ; file -b %c ; [[ -d %c ]] && tree -ia %c | tail -1 ; du -sh %c | cut -f1 ; ls -dla %c ; df -h --output=source,fstype,avail,pcent %c ; read -rsn1<CR>
+nnoremap ,a :!echo; tree -ia %f | tail -1; read -rsn1<CR>
 nnoremap ,<space> :echo "Available space on " . system("df -h --output=source,avail . | tail -1")<CR>
 nnoremap ,F :! watch -n .4 du -sL -BM %f<CR>
 nnoremap ,l :! echo -ne \\n  ls dir :\\n ; ls -la --color=auto . ; read -rsn1 <CR>
@@ -180,6 +182,7 @@ nnoremap am ggVG<cr>:copy<cr>
 nnoremap aM ggVG<cr>:move<cr>
 nnoremap cy : !(cp -r %f %D/; notify-send -t 15000 "Copy Done" %f) &<cr>
 nnoremap del :!echo You try to delete %f; sudo rm -r %f<cr>
+command! sudocop :!sudo cp %f %D/
 nnoremap qU ggVG: !mv --backup=numbered %f ../<cr>
 nnoremap qu :!mv --backup=numbered %f ../<cr>
 nnoremap ctok :tok<cr>
@@ -242,7 +245,8 @@ nnoremap gf :cd /ln/fast<cr>:goto hh<cr>
 " nnoremap gf 'f
 nnoremap gi :cd /ln/hh/imgdl1<cr>
 nnoremap ge :cd /ln/hh/<cr>
-nnoremap gk :cd /ln/torrents/red/KKK<cr>:set sort=mtime<cr>hj
+" nnoremap gk :cd /ln/torrents/red/KKK<cr>:set sort=mtime<cr>hj
+nnoremap gk :cd /ln/torrents/red<cr>
 nnoremap gv :cd ~/.vim<cr>:goto plugged<cr>
 nnoremap gn :cd ~/.config/nvim<cr>:goto bak<cr>
 nnoremap gr :cd /ln/ho/proj/<CR>
