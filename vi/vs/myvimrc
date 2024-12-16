@@ -87,7 +87,7 @@ set guicursor=n-v-c:block,i-ci:ver100,r-cr-o:hor20
 " set iminsert=0
 " set imsearch=0
 " set nofoldenable    " disable folding
-set tabstop=2 softtabstop=2 shiftwidth=2
+set tabstop=4 softtabstop=4 shiftwidth=4
 set expandtab smarttab smartindent noautoindent
 set textwidth=0 wrapmargin=0
 " set invlinebreak
