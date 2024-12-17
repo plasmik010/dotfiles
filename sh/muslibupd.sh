@@ -25,6 +25,6 @@ HASG=false; pgrep -c Xorg &>/dev/null && HASG=true
 
 SUMMARY=".:. NEW $cnt1 .:. SUM $cnt3 .:."
 
-[ HASG==true ] && notify-send "$SUMMARY"
+[ $HASG == true ] && notify-send "$SUMMARY"
 echo "$SUMMARY"
 
