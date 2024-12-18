@@ -20,7 +20,9 @@ exit(0) - выход из цикла
 #define MIN(a,b) (((a) < (b)) ? (a) : (b))
 
 #define NOOLINE { std::cout << std::endl; }
-inline void LOG(std::string msg) { std::cout << "LOG: -- " << msg << " --" << std::endl; }
+inline void LOG(const std::string& msg) { std::cout << "LOG: -- " << msg << " --" << std::endl; }
+inline void LOG(std::string_view msg) { std::cout << "LOG: -- " << msg << " --" << std::endl; }
+inline void LOG(long long int num) { std::cout << "LOG: -- " << num << " --" << std::endl; }
 
 #define EPSI  0.000001 // одна миллионная
 #define MILLION 1000000
@@ -45,6 +47,12 @@ std::atomic_bool liveon{ true };
 std::cout << "foo @ th_" << std::this_thread::get_id() << std::endl;
 
 
+int arr[5];
+void foo(int (&arr)[5]) {
+    arr[0] = 0;
+}
+
+
 std::string ZeroPadNumber(unsigned long int num, unsigned int N) {
   std::stringstream ss;
   std::string pad;
@@ -57,6 +65,16 @@ std::string ZeroPadNumber(unsigned long int num, unsigned int N) {
   for (int i = 0; i < int(N - str_length); i++)
     pad += "0";
   return pad + ret;
+}
+
+void zero_pad_right(std::string& s, uint N) {
+    uint str_length = (uint) s.length();
+    if (str_length == N) { return; }
+    uint missing = N - str_length;
+    s.reserve(str_length+missing);
+    for (int i = 0; i < missing; i++) {
+        s.append("0");
+    }
 }
 
 

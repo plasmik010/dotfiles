@@ -1,30 +1,26 @@
 {
-  "settingsVersion": "1.67.4",
-  "exclusionRules": [
-    {
-      "pattern": "https?://mail.google.com/*",
-      "passKeys": ""
-    },
-    {
-      "pattern": "https?://www.youtube.com/*",
-      "passKeys": "fmcijkl1234567890"
-    }
-  ],
-  "filterLinkHints": false,
-  "waitForEnterForFilteredHints": true,
-  "hideHud": false,
   "keyMappings": "map gr previousTab\nmap gz previousTab\nmap q Vomnibar.activateInNewTab\nmap O Vomnibar.activateEditUrlInNewTab\nmap go Vomnibar.activateEditUrl\nmap gb Vomnibar.activateBookmarks\nmap e scrollFullPageUp\nmap d scrollFullPageDown\nmap b scrollFullPageUp\nmap u restoreTab\nmap D scrollFullPageDown\nmap E scrollFullPageUp\nmap s scrollDown\nmap w scrollUp\nmap , previousTab\nmap . nextTab\nmap ga goBack\nmap gf goForward\nmap a enterInsertMode\nmap > moveTabRight\nmap < moveTabLeft\nmap zf LinkHints.activateMode\nmap <backspace> scrollFullPageUp",
   "linkHintCharacters": "qwertyuiopasdfghjklzxcvbnm,./;",
-  "linkHintNumbers": "0123456789",
-  "newTabUrl": "about:newtab",
-  "nextPatterns": "next,more,newer,>,›,→,»,≫,>>",
-  "previousPatterns": "prev,previous,back,older,<,‹,←,«,≪,<<",
-  "regexFindMode": false,
-  "ignoreKeyboardLayout": false,
   "scrollStepSize": 120,
-  "smoothScroll": true,
-  "grabBackFocus": false,
-  "searchEngines": "wiki: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia\nm: https://www.multitran.com/m.exe?s=%s&l1=1&l2=2 Multitran\ng: https://www.google.com/search?q=%s Google\ny: https://yandex.ru/search?text=%s Yandex\ns: https://www.startpage.com/search?q=%s StartPage\nu: https://www.youtube.com/results?search_query=%s Youtube\nd: https://duckduckgo.com/?q=%s DuckDuckGo\nq: https://www.qwant.com/?q=%s Qwant\nco: https://context.reverso.net/translation/english-russian/%s Reverso Context\nred: https://redacted.ch/torrents.php?searchstr=%s Reda\nc: https://en.cppreference.com/mwiki/index.php?search=%s\nurban: https://www.urbandictionary.com/define.php?term=%s Urban dict\nru: https://rutracker.org/forum/tracker.php?nm=%s RuTracker",
-  "searchUrl": "https://www.google.com/search?q=",
-  "userDefinedLinkHintCss": "div > .vimiumHintMarker {\n/* linkhint boxes */\nbackground: azure;\nborder: none;\npadding: 3px 2px 0px 2px;\n}\ndiv > .vimiumHintMarker span {\n/* linkhint text */\ncolor: #087518;\nfont-weight: bold;\nfont-size: 13px;\n}\ndiv > .vimiumHintMarker > .matchingCharacter {\n}"
+  "searchEngines": "wiki: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia\nm: https://www.multitran.com/m.exe?s=%s&l1=1&l2=2 Multitran\ng: https://www.google.com/search?q=%s Google\ny: https://yandex.ru/search?text=%s Yandex\ns: https://www.startpage.com/search?q=%s StartPage\nu: https://www.youtube.com/results?search_query=%s Youtube\nd: https://duckduckgo.com/?q=%s DuckDuckGo\nq: https://www.qwant.com/?q=%s Qwant\nco: https://context.reverso.net/translation/english-russian/%s Reverso Context\nred: https://redacted.ch/torrents.php?searchstr=%s Reda\nc: https://cplusplus.com/search.do?q=%s\nurban: https://www.urbandictionary.com/define.php?term=%s Urban dict\nru: https://rutracker.org/forum/tracker.php?nm=%s RuTracker",
+  "settingsVersion": "2.1.2",
+  "userDefinedLinkHintCss": "div > .vimiumHintMarker {\n/* linkhint boxes */\nbackground: azure;\nborder: none;\npadding: 3px 2px 0px 2px;\n}\ndiv > .vimiumHintMarker span {\n/* linkhint text */\ncolor: #087518;\nfont-weight: bold;\nfont-size: 13px;\n}\ndiv > .vimiumHintMarker > .matchingCharacter {\n}",
+  "exclusionRules": [
+    {
+      "passKeys": "",
+      "pattern": "https?://mail.google.com/*"
+    },
+    {
+      "passKeys": "u",
+      "pattern": "https?://monkeytype.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://monkeytype.com/*"
+    },
+    {
+      "passKeys": "fmcijkl1234567890",
+      "pattern": "https?://www.youtube.com/*"
+    }
+  ]
 }
