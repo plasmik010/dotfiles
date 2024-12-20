@@ -742,13 +742,15 @@ nnoremap ay "+yiW
 " copy Vim copy register to system copy buffers
 nnoremap qg :let @+ = @" <bar> :let @* = @"<CR>
 " nnoremap qy :let @+ = @" <bar> :let @* = @"<CR>
-nnoremap ap :put  *<CR>
-nnoremap ai :put! *<CR>
-nnoremap aP :put  +<CR>
+nnoremap aO :put! *<CR>
+nnoremap ao :put  *<CR>
 nnoremap aI :put! +<CR>
+nnoremap ai :put  +<CR>
+nnoremap ,i :put  +<CR>
+nnoremap ,o :put  *<CR>
 " put select system buffer as single paragraph
-nnoremap ao o<Esc>:put! *<CR>`[v`]:g/^$/d<CR>:noh<CR>j
-nnoremap aO o<Esc>:put! +<CR>`[v`]:g/^$/d<CR>:noh<CR>j
+nnoremap ap o<Esc>:put! *<CR>`[v`]:g/^$/d<CR>:noh<CR>j
+nnoremap aP o<Esc>:put! +<CR>`[v`]:g/^$/d<CR>:noh<CR>j
 " shrink selection into single paragraph
 vnoremap <C-l> :g/^$/d<CR>:noh<CR>
 " yank inline
