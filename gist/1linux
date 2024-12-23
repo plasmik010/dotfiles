@@ -276,6 +276,7 @@ git checkout -b newbranch # same
 git config --global --edit
 git config --global user.email "user@mail"
 git config --global user.name USER
+git config --get user.name 
 git commit --amend --reset-author --no-edit
 git commit --amend --no-edit --date=now
 git rm --cached dumpfile; git commit --amend # delete some file from commit
@@ -295,6 +296,9 @@ git submodule update --init --recursive  --remote
     git commit
     rm -rf .git/modules/<path-to-submodule>, and
     git config --remove-section submodule.<path-to-submodule>.
+    #
+    git submodule deinit <submodule>
+    git rm <submodule>
 git fetch origin master:master # update master while staying on your branch
 git show <commithash>:main.cpp > another.cpp # restore file under new name
 git show branch:dir/file.ex # cat file from another branch
@@ -334,6 +338,7 @@ git merge feature main # merge main branch into feature
 git branch --sort=-committerdate -vv -a
 git checkout Feature; git fetch origin; git rebase origin/master; git checkout master; git pull origin master; git merge Feature; git push origin master  # rebase Feature on master and merge into master
 git restore --source=master '*.vcxproj'
+git config --add --local core.sshCommand 'ssh -i <PATH_TO_SSH_KEY>'
 # to use ssh-url #
 [remote "origin"]
   url = git@github.com:ACCOUNT/PROJECT.git
