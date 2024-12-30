@@ -1,7 +1,6 @@
 #!/bin/bash
 
-[ -z "$APPEND" ] ||
-    APPEND="_D"
+[ -z "$APPEND" ] && APPEND="_D"
 
 echo upk2dir:
 echo args are $*

@@ -390,9 +390,9 @@ set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
 " %m run the command in a menu window
 
 command! df df -h %m 2> /dev/null
-command! vimdiff vim -d %f %F
-command! vimdiffHex vim -d <(xxd %f) <(xxd %F)
-command! vimdiffpane vim -d %f
+command! vimdiff VIMINIT="source /ln/gd/dotfiles/vi/vimrc_main" vim -d %f %F
+command! vimdiffHex VIMINIT="source /ln/gd/dotfiles/vi/vimrc_main" vim -d <(xxd %f) <(xxd %F)
+command! vimdiffpane VIMINIT="source /ln/gd/dotfiles/vi/vimrc_main" vim -d %f
 command! diff ! echo; diff %c %C && echo "files identical"; read -rsn1
 command! diffpane ! echo; diff %f && echo "files identical"; read -rsn1
 " command! zip zip -r %f.zip %f
