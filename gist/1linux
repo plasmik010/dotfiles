@@ -270,6 +270,7 @@ zip -r -1 arc.zip Dir Dir2 #create zip
 == GIT {{{}}}
 git log --tags --pretty="%h %d %s"
 git tag -n --list
+git push --delete origin tag004 tag003 tag001 
 git config --list --show-origin
 git switch -c newbranch # create new branch
 git checkout -b newbranch # same
