@@ -24,6 +24,7 @@ fi
 #$UTIL --no-mtime -f "bestvideo[height<=1080]+bestaudio" $url
 
 $UTIL --no-mtime -f "bestvideo[height<=$qual]+bestaudio" $url
+EXCOD=$?
 sleep .1
 
 # outnamewild="$PWD"/*"$(echo "$url" | cut -d = -f2)"*
@@ -33,14 +34,15 @@ sleep .1
 outname=$(ls -ath  /ln/dwn/*\[*\].* | head -1)
 
 
-echo .
-echo 'output is:'
-echo \"$outname\"
-# ls -lh "$outname"
-du -h "$outname" | cut -f1
-
-echo .
-mediainfo "$outname" | grep 'pixels\|bits\|Video\|Audio\|Format  \|rate'
+if [[ $EXCOD -eq 0 ]]; then
+    # Print info about file
+    echo .
+    echo -e "'output is:'\n echo \"$outname\""
+    # ls -lh "$outname"
+    du -h "$outname" | cut -f1
+    echo .
+    mediainfo "$outname" | grep 'pixels\|bits\|Video\|Audio\|Format  \|rate'
+fi
 
 cd - &>/dev/null
 
