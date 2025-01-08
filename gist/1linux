@@ -251,6 +251,7 @@ sudo udevadm control --reload-rules && sudo udevadm trigger # reload udev rules
 fuser -uvm /somedir # show processes accessing a particular directory
 lsof /mnt/disk # list open files
 sudo f3probe --destructive --time-ops /dev/sdX # test fake usb disk
+ssh -i path_to_private_key_file -vT git@gitserv.com # Test ssh connection
 rsync -rt --progress --delete /media/src/abba/ /media/dest/abba # mirror copy
 rsync -e ssh -av --progress --no-perms --no-times --delete --size-only /path/dir/ user@192.168.1.180:/path/dir/ # mirror copy over ssh
 rsync -e ssh -rln -vK --progress --delete --checksum --stats --no-perms --no-times /ln/dir/ servak@192.162.1.99
