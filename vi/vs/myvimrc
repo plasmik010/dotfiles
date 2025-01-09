@@ -673,14 +673,14 @@ nnoremap c<BS> :call SetPhase() <bar> call LoadColor() <bar> call CrispBorders()
 nnoremap ,vq :qa!<CR>
 " nnoremap ,<esc> :Startify<CR>
 nnoremap ,zq :wa <bar> qa<CR>
-nnoremap ,va :call AddRpcEar()<CR>
+nnoremap ,vv :call AddRpcEar()<CR>
 " Open current file at vimserver session via my "vimrpc" shell script
-nnoremap qza :silent exec '! virpc "%:p"'<CR>
-nnoremap qzz :exec '! virpc "%:p"' \| q<CR>
-nnoremap qzc :exec '! MODE=cur    virpc "%:p"' \| q<CR>
-nnoremap qzn :exec '! MODE=newtab virpc "%:p"' \| q<CR>
-nnoremap qzs :exec '! MODE=split  virpc "%:p"' \| q<CR>
-nnoremap qzv :exec '! MODE=vert   virpc "%:p"' \| q<CR>
+nnoremap ,za :silent exec '! virpc "%:p"' \| redraw!<CR>
+nnoremap ,zw :exec '! virpc "%:p"' \| q<CR>
+nnoremap ,z<Space> :exec '! MODE=cur    virpc "%:p"' \| q<CR>
+nnoremap ,zn :exec '! MODE=newtab virpc "%:p"' \| q<CR>
+nnoremap ,zs :exec '! MODE=split  virpc "%:p"' \| q<CR>
+nnoremap ,zv :exec '! MODE=vert   virpc "%:p"' \| q<CR>
 
 " Silly update git repo
 " map ,,g :call LGsync()<CR>
