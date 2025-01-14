@@ -303,6 +303,10 @@ git submodule update --init --recursive  --remote
     # Modern method #
     git submodule deinit <submodule-path>
     git rm <submodule-path>
+# Reset submodules:
+    git submodule deinit -f .
+    git submodule update --init
+        # (maybe add) --recursive --checkout
 git fetch origin master:master # update master while staying on your branch
 git show <commithash>:main.cpp > another.cpp # restore file under new name
 git show branch:dir/file.ex # cat file from another branch
