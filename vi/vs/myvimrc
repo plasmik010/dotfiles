@@ -781,7 +781,7 @@ nnoremap yq :@"<CR>
 " Add Plug entry
 nnoremap ,vp :put + <bar> exec "normal dfmxIPlug 'A'"<CR>==
 " Evaluate one line as Vimscript
-nnoremap ,v. yy:@"<CR>
+nnoremap ,v: yy:@"<CR>
 " Evaluate a paragraph as Vimscript and re-run last command
 " nnoremap ,v<CR> yap:@"<CR>:<up><CR>
 nnoremap ,v; :EvalParagraphVims<CR>

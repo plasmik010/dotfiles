@@ -293,6 +293,7 @@ git diff --cached # show the changes that have been staged (i.e. changes in the 
 git log --stat
 git log -p
 git submodule update --init --recursive  --remote
+git submodule sync # update urls from .gitmodules
 # Add submodule:
     git submodule add <submodule-url> <submodule-path>
 # Remove submodule and its blobs:
@@ -530,6 +531,7 @@ du -a . | awk '{print $2}' | fzf | xargs -r $EDITOR # search and edit multiple f
 npm config set strict-ssl false # ignore SSL certif
 pip.conf // [global] / trusted-host = pypi.python.org pypi.org files.pythonhosted.org
 git config --global http.sslVerify false # ignore SSL certif (VERY SILLY!)
+export GIT_SSL_NO_VERIFY=1
 
 == SOUND
 amixer -c 0 # list ALSA controls for card 0
