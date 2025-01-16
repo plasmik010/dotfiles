@@ -311,6 +311,9 @@ git submodule sync # update urls from .gitmodules
 git fetch origin master:master # update master while staying on your branch
 git show <commithash>:main.cpp > another.cpp # restore file under new name
 git show branch:dir/file.ex # cat file from another branch
+# Checkout file from another branch
+    git checkout <other-branch-name> -- path/to/your/folder
+    git restore --source feature/B -- file.xt
 git checkout featureBr -- src/somedir/
 git config --global core.autocrlf input # change eol only when checkout
 git config core.filemode false
