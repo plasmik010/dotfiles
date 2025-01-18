@@ -2,37 +2,86 @@
 # Download a video from youtube
 
 if [ -z $1 ] ; then
-  echo "Usage: tube [720] https://youtube......"
+  echo "Usage example: tube -l https://youtube...... -q 720 -c youtube-cookies.txt -o outDir -e mp4 "
   exit
 fi
 
-UTIL=youtube-dl
+# UTIL=youtube-dl
 UTIL=yt-dlp
-qual=1080
 
-cd /ln/hh/yt 2>/dev/null || cd /ln/dwn
-if ! [ -z $2 ]
-then
-  qual=$1
-  url=$2
-elif ! [ -z $1 ]
-then
-  url=$1
+qual=1080
+output="/ln/dwn/ytdl"
+cookies="$HOME/.cookies.txt"
+
+cd $(dirname $output)
+
+# cd /ln/hh/yt 2>/dev/null || cd /ln/dwn
+
+# if ! [ -z $2 ]
+# then
+#   qual=$1
+#   url=$2
+# elif ! [ -z $1 ]
+# then
+#   url=$1
+# fi
+
+while getopts ":l:q:c:o:e:" opt; do
+    case $opt in
+        l) url="$OPTARG"
+            ;;
+        c) cookies="$OPTARG"
+            ;;
+        q) qual="$OPTARG"
+            ;;
+        o) output="$OPTARG"
+            ;;
+        e) ext="$OPTARG"
+            ;;
+        \?) echo "Invalid option -$OPTARG" >&2
+            exit 1
+            ;;
+    esac
+    if [[ -z $OPTARG ]]; then
+        echo "Option $opt needs a valid argument"
+        exit 1
+    fi
+done
+
+if [[ -z $url ]]; then 
+    echo "Please provide url as \" -l https://...... \""
 fi
 
 #$UTIL --no-mtime -f "bestvideo[height<=$1]+bestaudio" $url
 #$UTIL --no-mtime -f "bestvideo[height<=1080]+bestaudio" $url
 
-$UTIL --no-mtime -f "bestvideo[height<=$qual]+bestaudio" $url
+maybMerge=""
+if [[ -n $ext ]]; then maybMerge="--merge-output-format $ext"; fi
+
+maybCookies=""
+if [[ -n $cookies ]]; then maybCookies="--cookies $cookies"; fi
+
+format="bestvideo[height<=$qual]+bestaudio" 
+
+echo url is url
+echo qual is $qual
+echo maybMerge is \"$maybMerge\"
+echo maybCookies is \"$maybCookies\"
+echo format is \"$format\"
+
+CMD="$UTIL --no-mtime $url -f $format --paths $output $maybMerge $maybCookies"
+echo "CMD is $CMD"
+$CMD
+
 EXCOD=$?
+echo "EXCODE is $EXCOD"
 sleep .1
 
 # outnamewild="$PWD"/*"$(echo "$url" | cut -d = -f2)"*
 # outname=$(ls $utnamewild)
 
 # ls -at /ln/dwn  | grep "\[...........\]\."
-outname=$(ls -ath  /ln/dwn/*\[*\].* | head -1)
-
+outname=$(ls -ath  *\[*\].* | head -1)
 
 echo .
 if [[ $EXCOD -eq 0 ]]; then
@@ -40,10 +89,10 @@ if [[ $EXCOD -eq 0 ]]; then
     echo -e "'output is:'\n echo \"$outname\""
     # ls -lh "$outname"
     du -h "$outname" | cut -f1
-    echo .
-    mediainfo "$outname" | grep 'pixels\|bits\|Video\|Audio\|Format  \|rate'
-else
-    echo "EXCODE is $EXCOD"
+    # echo .
+    # mediainfo "$outname" | grep 'pixels\|bits\|Video\|Audio\|Format  \|rate'
+# else
+#     echo "EXCODE is $EXCOD"
 fi
 
 cd - &>/dev/null
