@@ -147,7 +147,8 @@ free -m # any free ram?
 smem -tw # ram info
 stress --cpu 4 # stress test 4 CPU cores
 yes > /dev/null & # fully load one CPU core
-youtube-dl -f "bestvideo[height<=720]+bestaudio" https://... # fetch youtube
+youtube-dl -f "bestvideo[height<=720]+bestaudio" https://www.youtube.com/watch?v=XXXXXXXXXXX # fetch youtube
+yt-dlp 'https://www.youtube.com/watch?v=XXXXXXXXXXX' -f "bestvideo[height<=720]+bestaudio" --cookies $HOME/.yt-cookies.txt --merge-output-format mp4
 mpv --ytdl-format='bestvideo[height<=480]+bestaudio' https://... # fetch youtube
 ffmpeg -r 30 -f image2 -i /media/Blink/rr/rma.1%05d.png -vf format=yuv420p,lutyuv="y=negval:u=128:v=128" -vcodec libx264 -crf 20 -pix_fmt yuv420p -preset veryslow /media/fast/pol-r60-s_360.mkv # movie from png
 ffmpeg  -i Videos/MVI_4460.AVI  -vcodec libx264 -crf 21 -pix_fmt yuv420p -profile:v main preset medium output.mp4 # video for phone

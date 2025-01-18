@@ -2,7 +2,7 @@
 # Download a video from youtube
 
 if [ -z $1 ] ; then
-  echo "Usage: tube [720] https://youtube......video"
+  echo "Usage: tube [720] https://youtube......"
   exit
 fi
 
@@ -34,14 +34,16 @@ sleep .1
 outname=$(ls -ath  /ln/dwn/*\[*\].* | head -1)
 
 
+echo .
 if [[ $EXCOD -eq 0 ]]; then
     # Print info about file
-    echo .
     echo -e "'output is:'\n echo \"$outname\""
     # ls -lh "$outname"
     du -h "$outname" | cut -f1
     echo .
     mediainfo "$outname" | grep 'pixels\|bits\|Video\|Audio\|Format  \|rate'
+else
+    echo "EXCODE is $EXCOD"
 fi
 
 cd - &>/dev/null
