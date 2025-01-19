@@ -44,11 +44,13 @@ if [[ $TARGREAL != $HOME ]]; then
     esac
 fi
 
+CURDIRNAME=${TARGREAL##*/}
+
 # set terminal title
 if [[ -n $2 ]]; then
-    echo -ne "\033]0;MPV @ $PWD @ $2\007"
+    echo -ne "\033]0;MPV @ $CURDIRNAME @ $2\007"
 else
-    echo -ne "\033]0;MPV @ $PWD\007"
+    echo -ne "\033]0;MPV @ $CURDIRNAME\007"
 fi
 
 if [[ $PAUSE == 0 ]]; then
