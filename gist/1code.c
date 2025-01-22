@@ -100,8 +100,7 @@ void echo(const T& arg) {
     std::cout << "arg type is " << typeid(T).name() << std::endl;
 }
 
-void foo()
-{
+void foo() {
     static bool once = [](){
         cout << "once" << endl;
         return true;
@@ -115,8 +114,7 @@ std::atomic_bool work_on{true};
 typedef unsigned char uchar;
 quint32 === unsigned 32bit integer
 
-uint32_t EndianConverse(uint32_t arg)
-{
+uint32_t EndianConverse(uint32_t arg) {
    return ((arg>>24)&0x000000FF) | ((arg>> 8)&0x0000FF00) |
           ((arg<< 8)&0x00FF0000) | ((arg<<24)&0xFF000000);
 }

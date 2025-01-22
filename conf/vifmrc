@@ -237,7 +237,7 @@ nnoremap g4 :cd $HOME/4<cr>
 nnoremap gs :cd /ln/dots/sh<cr>
 " nnoremap ge :cd $HOME/stek<cr>
 nnoremap gj :cd /ln/ho/gitjob<cr>
-nnoremap gd :cd /ln/dwn<cr>:set sort=-mtime<cr>:16<cr>
+nnoremap gd :cd /ln/dwn<cr>:set sort=-mtime<cr>:12<cr>
 nnoremap gb :cd $bakcld<cr>
 nnoremap gB :cd $bakhot<cr>
 nnoremap gS :exec 'cd' system("compgen -G /ln/mo/*AMV/bak")<cr>
