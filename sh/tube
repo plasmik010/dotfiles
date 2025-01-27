@@ -8,12 +8,11 @@ fi
 
 # UTIL=youtube-dl
 UTIL=yt-dlp
+UTIL=$HOME/.yt-dlp
 
 qual=1080
-output="/ln/dwn/ytdl"
+outdir="/ln/dwn/ytdl"
 cookies="$HOME/.cookies.txt"
-
-cd $(dirname $output)
 
 # cd /ln/hh/yt 2>/dev/null || cd /ln/dwn
 
@@ -34,7 +33,7 @@ while getopts ":l:q:c:o:e:" opt; do
             ;;
         q) qual="$OPTARG"
             ;;
-        o) output="$OPTARG"
+        o) outdir="$OPTARG"
             ;;
         e) ext="$OPTARG"
             ;;
@@ -48,7 +47,7 @@ while getopts ":l:q:c:o:e:" opt; do
     fi
 done
 
-if [[ -z $url ]]; then 
+if [[ -z $url ]]; then
     echo "Please provide url as \" -l https://...... \""
 fi
 
@@ -61,38 +60,36 @@ if [[ -n $ext ]]; then maybMerge="--merge-output-format $ext"; fi
 maybCookies=""
 if [[ -n $cookies ]]; then maybCookies="--cookies $cookies"; fi
 
-format="bestvideo[height<=$qual]+bestaudio" 
+format="bestvideo[height<=$qual]+bestaudio"
 
 echo url is url
 echo qual is $qual
 echo maybMerge is \"$maybMerge\"
 echo maybCookies is \"$maybCookies\"
 echo format is \"$format\"
+echo outdir is \"$outdir\"
 
-CMD="$UTIL --no-mtime $url -f $format --paths $output $maybMerge $maybCookies"
+CMD="$UTIL -4 --no-mtime $url -f $format --paths $outdir $maybMerge $maybCookies"
 echo "CMD is $CMD"
 $CMD
 
 EXCOD=$?
 echo "EXCODE is $EXCOD"
 sleep .1
+echo .
 
+cd $outdir
+# ls -at /ln/dwn  | grep "\[...........\]\."
+outname=$(ls -ath  *\[*\].* | head -1)
+# outname=$(realpath $outname)
 # outnamewild="$PWD"/*"$(echo "$url" | cut -d = -f2)"*
 # outname=$(ls $utnamewild)
 
-# ls -at /ln/dwn  | grep "\[...........\]\."
-outname=$(ls -ath  *\[*\].* | head -1)
-
-echo .
 if [[ $EXCOD -eq 0 ]]; then
     # Print info about file
-    echo -e "'output is:'\n echo \"$outname\""
-    # ls -lh "$outname"
     du -h "$outname" | cut -f1
-    # echo .
-    # mediainfo "$outname" | grep 'pixels\|bits\|Video\|Audio\|Format  \|rate'
-# else
-#     echo "EXCODE is $EXCOD"
+    echo .
+    mediainfo "$outname" | grep 'pixels\|bits\|Video\|Audio\|Format  \|rate'
 fi
 
 cd - &>/dev/null
