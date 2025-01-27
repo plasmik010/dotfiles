@@ -165,7 +165,8 @@ nnoremap b :! PAUSE=0 INVIFM=1 ASK=1 mpv-album.sh %c VIFM; echo -ne "\033]0;VIFM
 " Play this dir as an album with mpv in new window
 nnoremap B :! %i cd %c; [[ $TERMINAL=="kitty "* ]] && TERMINAL="$TERMINAL -o initial_window_height=$(expr 450 + $HIDPI \* 200) -o initial_window_width=$(expr 650 + $HIDPI \* 200)"; $TERMINAL -e /bin/bash -c "ASK=1 mpv-album.sh ." &>/dev/null &<CR>
 " Play this dir as an album in new kitty split
-nnoremap qb :! kitty @ new-window --new-tab /bin/bash -c "cd %d/ ; ASK=0 mpv-album.sh %c VIFM ; vifm --select %c" <CR>
+" nnoremap qb :! kitty @ new-window --new-tab /bin/bash -c "cd %d/ ; ASK=0 mpv-album.sh %c VIFM ; vifm --select %c" <CR>
+nnoremap qb :! mpv %c &>/dev/null &<CR>
 nnoremap aa :! ONCE=1 ask_album.sh %c <CR>
 
 " Do rsync "
