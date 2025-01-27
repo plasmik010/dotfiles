@@ -511,7 +511,7 @@ return {
   },
 
   'sindrets/diffview.nvim', -- great --- cycle through diffs
-  -- check :DiffviewOpen -- use it to MERGE CONFLICT
+  -- check :DiffviewOpen -- use it to MERGE GIT CONFLICTs
 
   {
     'phaazon/hop.nvim',
