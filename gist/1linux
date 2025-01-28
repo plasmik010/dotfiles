@@ -282,6 +282,7 @@ git config --global user.name USER
 git config --get user.name 
 git commit --amend --no-edit --date=now
 git commit --amend --reset-author --no-edit
+git commit --fixup HEAD 
 git rm --cached dumpfile; git commit --amend # delete some file from commit
 git stash show -p # see last stash (add stash@{N} for older stash)
 git diff stash@{N} master # compare any stash against master (may add --name-only, or add -- filename)
