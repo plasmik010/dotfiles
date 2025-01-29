@@ -40,6 +40,16 @@ bool debug = false;
 assert(a == b && "A is not equal to B");
 assert(("A must be equal to B", a==b));
 
+int permaAssert(bool statement, std::string msg) {
+    if (statement) return 0;
+    std::cout << "Assertion failed: " << msg << "\n";
+#if NDEBUG
+    exit(1);
+#else
+    // if in Debug mode, do normal assert so user can shoot debugger
+    assert(0 && "permaAssert");
+#endif
+}
 
 std::atomic_bool liveon{ true };
 
@@ -392,5 +402,11 @@ inline void strip_newline(std::string& s) {
         s.erase(s.length()-1);
     }
 }
+
+
+std::string s = "a_b_c";
+std::string::difference_type n = std::count(s.begin(), s.end(), '_');
+// alternatively, in C++20
+auto count = std::ranges::count(s, '_');
 
 
