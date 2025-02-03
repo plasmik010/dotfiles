@@ -409,7 +409,7 @@ return {
       --   { ",", mode = {"n","v"} },
       --   { "<Leader>", mode = {"n","v"} },
       --   { "<auto>", mode = "nxso" },
-        { "<auto>", mode = "nxsotc" },
+        { "<auto>", mode = "nxsoc" },
       }
     }
   },
