@@ -674,7 +674,7 @@ nnoremap c<BS> :call SetPhase() <bar> call LoadColor() <bar> call CrispBorders()
 nnoremap ,vq :qa!<CR>
 " nnoremap ,<esc> :Startify<CR>
 nnoremap ,zq :wa <bar> qa<CR>
-nnoremap ,vv :call AddRpcEar()<CR>
+nnoremap ,,a :call AddRpcEar()<CR>
 " Open current file at vimserver session via my "vimrpc" shell script
 nnoremap ,za :silent exec '! virpc "%:p"' \| redraw!<CR>
 nnoremap ,zw :exec '! virpc "%:p"' \| q<CR>
