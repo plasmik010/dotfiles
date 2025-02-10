@@ -719,7 +719,7 @@ if has("nvim")
 endif
 
 " Scroll fraction of the screen
-let scrollratio=56
+let scrollratio=42
 let key4=""
 let key15=""
 nnoremap <silent> <Space>   :exec 'normal! '.float2nr(round(winheight(0)*(exists("b:scrollratio") ? b:scrollratio : g:scrollratio)*0.01))."<C-d>"<CR>
