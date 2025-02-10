@@ -167,7 +167,7 @@ nnoremap B :! %i cd %c; [[ $TERMINAL=="kitty "* ]] && TERMINAL="$TERMINAL -o ini
 " Play this dir as an album in new kitty split
 " nnoremap qb :! kitty @ new-window --new-tab /bin/bash -c "cd %d/ ; ASK=0 mpv-album.sh %c VIFM ; vifm --select %c" <CR>
 " nnoremap qb :! mpv %c &>/dev/null &<CR>
-nnoremap qb :! mpv --player-operation-mode=pseudo-gui --script-opts-append=osc-visibility=always %c &>/dev/null &<CR>
+nnoremap qb :! mpv --player-operation-mode=pseudo-gui --script-opts-append=osc-visibility=always --keep-open=yes %c &>/dev/null &<CR>
 nnoremap aa :! ONCE=1 ask_album.sh %c <CR>
 
 " Do rsync "
