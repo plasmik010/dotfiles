@@ -693,7 +693,8 @@ if v:version >= 801
   tmap <C-x> <C-w>N :BufDelAndJump<CR>
   tnoremap <C-PageUp> <C-w>:tabprev<CR>
   tnoremap <C-PageDown> <C-w>:tabnext<CR>
-  tnoremap ;<tab> <C-w>:exec "tabn ".g:lasttab<CR>
+  tnoremap t<tab> <C-w>:exec "tabn ".g:lasttab<CR>
+  tnoremap <A-b> <C-w>:exec "tabn ".g:lasttab<CR>
   tnoremap ;<tab> <C-w>p
   tnoremap <C-\> <C-w>w
 endif
@@ -703,7 +704,8 @@ if has("nvim")
   tnoremap <C-x> <C-\><C-n>:BufDelAndJump<CR>
   tnoremap <C-PageUp> <C-\><C-n>:tabprev<CR>
   tnoremap <C-PageDown> <C-\><C-n>:tabnext<CR>
-  tnoremap ;<tab> <C-\><C-n>:exec "tabn ".g:lasttab<CR>
+  tnoremap t<tab> <C-\><C-n>:exec "tabn ".g:lasttab<CR>
+  tnoremap <A-b> <C-\><C-n>:exec "tabn ".g:lasttab<CR>
   tnoremap ;<tab> <C-\><C-n>:wincmd p<CR>
   " tnoremap <A-Left> <C-\><C-N><C-w>h
   tnoremap <C-\> <C-\><C-n><C-w>w
