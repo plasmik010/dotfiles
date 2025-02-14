@@ -807,7 +807,7 @@ if !has('nvim')
 endif
 
 " Spawn a terminal outside vim
-nnoremap ,tn :NewTermHere<CR>
+nnoremap ,,t :NewTermHere<CR>
 " Spawn vifm in terminal outside vim
 nnoremap ,,c :NewVifmHere<CR>
 
