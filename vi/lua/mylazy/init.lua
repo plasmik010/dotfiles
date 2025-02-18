@@ -387,7 +387,7 @@ return {
     opts = {
       -- direction = 'vertical' | 'horizontal' | 'window' | 'float',
       direction = 'float',
-      start_in_insert = true,
+      -- start_in_insert = true,
       autochdir = true,
       size = 24,
       persist_size = true,

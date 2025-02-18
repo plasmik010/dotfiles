@@ -292,20 +292,31 @@ int circCounter;    // Круговой счётчик исправности Р
                     // если нет обновления 10 тактов -> ОТКАЗ
 
 
+// We have to actually define the static class members, else get linker error!
+// Topol Topol::instance;
+
+//  * @brief создать сиглтон класс Topol
+// void Topol::init() {
+//     if (init_ok) {
+//         TP_LOG_ERROR("You try to init Topol twice!");
+//     } else {
+//         // Constructing may be here..
+//         init_ok = true;
+//     }
+// }
 
 class MySingleton {
 public:
-  static MySingleton& Instance()
-  {
-    static MySingleton singleton;
-    return singleton;
-  }
+    static MySingleton* Instance() {
+        static MySingleton singleton;
+        return &singleton;
+    }
 // Other non-static member functions
 private:
-  MySingleton() {}                                 // Private constructor
-  ~MySingleton() {}
-  MySingleton(const MySingleton&) = delete;                 // Prevent copy-construction
-  MySingleton& operator=(const MySingleton&) = delete;      // Prevent assignment
+    MySingleton() {};                                 // Private constructor
+    ~MySingleton() {};
+    MySingleton(const MySingleton&) = delete;                 // Prevent copy-construction
+    MySingleton& operator=(const MySingleton&) = delete;      // Prevent assignment
 };
 
 
