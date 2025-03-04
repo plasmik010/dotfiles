@@ -561,6 +561,7 @@ nnoremap ac     <C-w>p<C-w>_<C-w>\|
 " focus prev window
 nnoremap g<space> <C-w>p
 nnoremap q<tab> <C-w>p
+nnoremap ;<tab> <C-\><C-n>:wincmd p<CR>
 " swap current and previous window
 silent nnoremap c<tab> :call WinSwap(1)<CR>
 
@@ -2043,4 +2044,25 @@ endif
 set completeopt=menu,noselect
 
 " startify_custom_header = 'startify#pad(split(system("bash $vi/nvim-logo -b"),"\n"))'
+
+" nmap <c-w><c-l> :set scrollback=1 \| sleep 100m \| set scrollback=10000<cr>
+" tmap <c-w><c-l> <c-\><c-n><c-w><c-l>i<c-l>
+tnoremap :: <C-\><C-n>:
+
+function! ClearTerminal()
+  set scrollback=1
+  let &g:scrollback=1
+  echo &scrollback
+  call feedkeys("\i")
+  call feedkeys("\<C-u>")
+  call feedkeys("clear\<CR>")
+  " call feedkeys("\<C-\>\<C-n>")
+  " call feedkeys("\i")
+  " normal hh
+  sleep 100m
+  let &scrollback=120000
+endfunction
+command! ClearTerminal call ClearTerminal()
+
+
 
