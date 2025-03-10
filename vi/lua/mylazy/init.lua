@@ -358,7 +358,7 @@ return {
 
   {
     'windwp/nvim-autopairs',
-    enabled = false,
+    enabled = true,
     config = function()
       local pl = require'nvim-autopairs'
       pl.setup()
