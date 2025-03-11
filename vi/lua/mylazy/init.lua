@@ -924,6 +924,7 @@ return {
 
   {
     'tzachar/highlight-undo.nvim', -- okay
+    enabled = false,
     configure = true,
     opts = {
       duration = 750,
