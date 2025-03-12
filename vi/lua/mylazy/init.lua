@@ -1039,7 +1039,12 @@ return {
 
   { "2nthony/vitesse.nvim", dependencies = { "tjdevries/colorbuddy.nvim" }, }, -- foresty
   { 'AlexvZyl/nordic.nvim', lazy = false, priority = 1000 }, -- beautiful
-  { 'folke/tokyonight.nvim', branch = 'main' },
+  {
+    'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
+    -- branch = 'main',
+  },
   { 'sonph/onehalf', config = function(plugin) vim.opt.rtp:append(plugin.dir .. "/vim") end }, -- Nice good tone HUGE
 
   'glepnir/porcelain.nvim',
