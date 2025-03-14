@@ -273,12 +273,12 @@ zip -r -1 arc.zip Dir Dir2 #create zip
 git log --tags --pretty="%h %d %s"
 git tag -n --list
 git push --delete origin tag004 tag003 tag001 
+git tag <newTagname>; git push origin tag <newTagname>
 git config --list --show-origin
 git switch -c newbranch # create new branch
 git checkout -b newbranch # same
 git config --global --edit
-git config --global user.email "user@mail"
-git config --global user.name USER
+git config --global user.email USERMAIL; git config --global user.name USERNAME
 git config --get user.name 
 git commit --amend --no-edit --date=now
 git commit --amend --reset-author --no-edit

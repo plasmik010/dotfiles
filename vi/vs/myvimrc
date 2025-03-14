@@ -880,8 +880,12 @@ command! -nargs=1 LastToMacro exec "let @" . <q-args> . " = \"i\" . @. . \"<Esc>
 nnoremap ,L :LastToMacro l<CR>
 
 " Show current dir & current file stats
-nnoremap ,z, : silent exec '!clear; echo -e "$(pwd):"; ls -la . ; echo \ ; ls -la %:p ; read -n 1 -s -r -p $''\n//hit.anykey'' ; echo -ne "\n" ' \| redraw!<CR>
-" Hint: '' is iscaped into '
+if has("nvim")
+  nnoremap ,z, : exec '! echo -e "$(pwd)"; ls -la %:p '<CR>
+else
+  nnoremap ,z, : silent exec '!clear; echo -e "$(pwd):"; ls -la . ; echo \ ; ls -la %:p ; read -n 1 -s -r -p $''\n//hit.anykey'' ; echo -ne "\n" ' \| redraw!<CR>
+endif
+" Tip: '' is iscaped into '
 
 """"""""""""""""""""""""""""""""
 ""         Commands:          ""

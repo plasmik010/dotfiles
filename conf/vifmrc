@@ -247,8 +247,8 @@ nnoremap gf :cd /ln/fast<cr>:goto hh<cr>
 " nnoremap gf 'f
 nnoremap gi :cd /ln/hh/imgdl1<cr>
 nnoremap ge :cd /ln/hh/<cr>
-" nnoremap gk :cd /ln/torrents/red/KKK<cr>:set sort=mtime<cr>hj
-nnoremap gk :cd /ln/torrents/red<cr>
+nnoremap gk :cd /ln/torrents/red/new<cr>:set sort=mtime<cr>G
+" nnoremap gk :cd /ln/torrents/red<cr>
 nnoremap gv :cd ~/.vim<cr>:goto plugged<cr>
 nnoremap gn :cd ~/.config/nvim<cr>:goto bak<cr>
 nnoremap gr :cd /ln/ho/proj/<CR>
